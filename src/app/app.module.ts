@@ -4,17 +4,25 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FooterComponent } from './Components/footer/footer.component';
-import { HomeComponent } from './Components/home/home.component';
 import { HeaderComponent } from './Components/header/header.component';
-import { SidenavComponent } from './Components/sidenav/sidenav.component';
+import { BienvenidoComponent } from './Modules/bienvenido/bienvenido.component';
+import { WelcomeComponent } from './Modules/Visitante/welcome/welcome.component';
+import { ListMascotasComponent } from './Modules/Visitante/list-mascotas/list-mascotas.component';
+import { ListFundacionesComponent } from './Modules/Visitante/list-fundaciones/list-fundaciones.component';
+import { LoginComponent } from './Modules/Visitante/login/login.component';
+import { RegisterComponent } from './Modules/Visitante/register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FooterComponent,
-    HomeComponent,
     HeaderComponent,
-    SidenavComponent
+    BienvenidoComponent,
+    WelcomeComponent,
+    ListMascotasComponent,
+    ListFundacionesComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

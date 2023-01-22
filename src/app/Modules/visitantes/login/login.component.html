@@ -21,12 +21,14 @@
                             [(ngModel)]="usuario.username" [pKeyFilter]="'alphanum'" maxlength="30" minlength="3"
                             pInputText />
                         <small id="username-help">Ingresa tu nombre de usuario</small>
+                        
                     </div>
-                    <div class="mb-4">
+                    <div class="mb-4 input-wrapper">
                         <label for="password" class="form-label"> Password <i class="uil uil-lock icon"></i></label>
                         <input id="password" class="form-control" name="password" type="password"
                             [(ngModel)]="usuario.password" [pKeyFilter]="'alphanum'" maxlength="15" minlength="6" />
-                        <small id="username-help">Ingresa tu password</small>
+                            <i class="input-icon uil uil-eye-slash showHidePw"></i>
+                        <small id="password-help">Ingresa tu password</small>
                     </div>
                     <div class="mb-4 form-check">
                         <input type="checkbox" name="connected" class="form-check-input" id="">

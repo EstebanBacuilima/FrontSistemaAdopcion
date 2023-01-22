@@ -24,13 +24,13 @@ export class LoginComponent implements OnInit{
 
   
   constructor(
-    //private _CargarScript: CargarScrpitsService,
+    private _CargarScript: CargarScrpitsService,
     private toastr:ToastrService, 
     private usuarioService: UsuarioService, 
     private router: Router,
     
   ){
-    //_CargarScript.Cargar(["loginFunciones"]);
+    _CargarScript.Cargar(["loginFunciones"]);
   }
 
   ngOnInit(): void {

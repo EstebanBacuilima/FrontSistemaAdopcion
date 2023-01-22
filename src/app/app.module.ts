@@ -8,6 +8,9 @@ import { HeaderComponent } from './Components/header/header.component';
 import { LoginComponent } from './Modules/visitantes/login/login.component';
 import { WelcomeComponent } from './Modules/visitantes/welcome/welcome.component';
 
+// CARGAR EL JS
+import { CargarScrpitsService } from './cargar-scrpits.service';
+
 
 @NgModule({
   declarations: [
@@ -21,7 +24,9 @@ import { WelcomeComponent } from './Modules/visitantes/welcome/welcome.component
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    CargarScrpitsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

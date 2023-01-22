@@ -1,35 +1,144 @@
 <body>
-    
-    <div class="container">
-        <div class="row">
-            <div class="col">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+    <div class="container w-75 mt-10 me-25 bg-primary mt-5 rounded shadown">
+        <div class="row align-items-strech">
+            <div class="col bg d-none d-lg-block col-md-5 col-lg-5 col-xl-6 rounded">
 
             </div>
-            <div class="col">
+            <div class="col bg-white mt-30 p-20 rounded-end">
                 <div class="text-end">
-                    <img src="./assets/Imagenes/logo.png" width="48"  alt="logo">
+                    <img src="./assets/Imagenes/logo.png" width="95" alt="logo">
+                </div>
+                <h2 class="fw-bold text-center py-1"> Bienvenido</h2>
+
+                <!-- LOGIN -->
+
+                <form action="#">
+                    <div class="mb-4">
+                        <label for="username" class="form-label"> Username <i class="uil uil-user"></i></label>
+                        <input id="username" class="form-control" name="username" type="username"
+                            [(ngModel)]="usuario.username" [pKeyFilter]="'alphanum'" maxlength="30" minlength="3"
+                            pInputText />
+                        <small id="username-help">Ingresa tu nombre de usuario</small>
+                    </div>
+                    <div class="mb-4">
+                        <label for="password" class="form-label"> Password <i class="uil uil-lock icon"></i></label>
+                        <input id="password" class="form-control" name="password" type="password"
+                            [(ngModel)]="usuario.password" [pKeyFilter]="'alphanum'" maxlength="15" minlength="6" />
+                        <small id="username-help">Ingresa tu password</small>
+                    </div>
+                    <div class="mb-4 form-check">
+                        <input type="checkbox" name="connected" class="form-check-input" id="">
+                        <label for="connected" class="form-check-label"> Mantenerme conectado</label>
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary p-button-rounded" (click)="login()"> Iniciar
+                            Sesión</button>
+                    </div>
+                    <div class="my3 text-center p-1">
+                        <span>Aun no tienes cuenta? <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                Registrate aqui</a></span><br>
+                    </div>
+                    <div class="my3">
+                        <br>
+                        <br>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Modal -->
+    <div class="modal " id="exampleModal" tabindex="-5" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Registrate</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="container w-75 mt-25 me-25 mt-5 shadown">
+                    <div class="row align-items-strech">
+                        <div class="col bg-white mt-25 p-25 ">
+
+                            <form class="row g-2">
+                                <div class="col-md-6">
+                                    <label for="cedula" class="form-label-p"> Cedula</label>
+                                    <input type="text" class="form-control" name="cedula">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="nombres" class="form-label-p"> Nombres</label>
+                                    <input type="text" class="form-control" name="nombres">
+                                </div>
+                                <div class="col-12">
+                                    <label for="apellidos" class="form-label-p"> Apellidos</label>
+                                    <input type="text" class="form-control" name="apellidos">
+                                </div>
+                                <div class="col-12">
+                                    <label for="fechaNacimiento" class="form-label-p"> Fecha De Nacimiento</label>
+                                    <input type="date" class="form-control" name="fechaNacimiento">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="direccion" class="form-label-p"> Direccion</label>
+                                    <input type="text" class="form-control" name="direccion">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="genero" class="form-label-p"> Genero</label>
+                                    <select id="genero" class="form-control" name="genero" >
+                                        <option value="" disabled selected>Selecciona un género</option>
+                                        <option value="masculino">Masculino</option>
+                                        <option value="famenino">Femenino</option>
+                                        <option value="otro">Otro</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="telefono" class="form-label-p"> Telefono</label>
+                                    <input type="text" class="form-control" name="telefono">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="celular" class="form-label-p"> Celular</label>
+                                    <input type="text" class="form-control" name="celular">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="correo" class="form-label-p"> Correo</label>
+                                    <input type="email" class="form-control" name="correo">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="username" class="form-label-p"> Username</label>
+                                    <input type="text" class="form-control" name="username">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="password" class="form-label-p"> Contraseña</label>
+                                    <input type="password" class="form-control" name="password">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="password" class="form-label-p"> Repita su Contraseña</label>
+                                    <input type="password" class="form-control" name="password">
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="fotoPerfil" class="form-label-p"> Foto de Perfil</label>
+                                        <span class="p-float-label">
+                                            <input (change)="imageSelected($event)" name="logo" type="file" class="form-control"
+                                                id="float-input" required />
+                                            <label for="float-input"></label>
+                                        </span>
+                                        <div *ngIf="file" class="mt-3 text-center">
+                                            <img [src]="file" class="rounded" alt="..." style="max-width: 50%;" />
+                                        </div>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary">Registrarse</button>
                 </div>
             </div>
-
-            <h2 class="fw-bold text-center py-5"> Bienvenido</h2>
-        
-            <!-- LOGIN -->
-
-            <form action="#">
-                <div class="mb-4">
-                    <label for="email" class="form-label"> Username</label>
-                    <input type="email" class="form-control" name="email" >
-                </div>
-                <div class="mb-4">
-                    <label for="password" class="form-label"> Password</label>
-                    <input type="password" class="form-control" name="password" >
-                </div>
-                <div class="mb-4">
-
-                </div>
-            </form>
-
-
         </div>
     </div>
 

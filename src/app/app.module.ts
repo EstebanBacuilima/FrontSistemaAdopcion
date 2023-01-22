@@ -7,9 +7,15 @@ import { FooterComponent } from './Components/footer/footer.component';
 import { HeaderComponent } from './Components/header/header.component';
 import { LoginComponent } from './Modules/visitantes/login/login.component';
 import { WelcomeComponent } from './Modules/visitantes/welcome/welcome.component';
+import { KeyFilterModule } from 'primeng/keyfilter';
+import { PasswordModule } from 'primeng/password';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 
 // CARGAR EL JS
 import { CargarScrpitsService } from './cargar-scrpits.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -22,7 +28,15 @@ import { CargarScrpitsService } from './cargar-scrpits.service';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ToastrModule.forRoot(),
+    KeyFilterModule,
+    PasswordModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule
   ],
   providers: [
     CargarScrpitsService

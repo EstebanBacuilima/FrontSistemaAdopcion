@@ -1,0 +1,18 @@
+
+body{
+    background: rgb(163, 226, 255);
+    padding: 35px;
+    
+}
+.bg {
+    background-image: url('/assets/Imagenes/moscota-login.jpg');
+    background-position: center center;
+
+}
+.modal-dialog { 
+    max-width: 1350px!important
+}
+
+.form-label-p {
+    padding: 5px;
+}

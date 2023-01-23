@@ -1,0 +1,109 @@
+body{
+    background: rgb(163, 226, 255);
+    padding: 35px;
+    
+}
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.text{
+    position: absolute;
+    top: 20%;
+    right: 20%;
+}
+
+.containers{
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container{
+    position: absolute;
+    top: 50%;
+    right: 5%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.texts2{
+    position: absolute;
+    top: 20%;
+    left: 18%;
+}
+.container-text{
+    position: absolute;
+    top: 50%;
+    right: 20%;
+}
+
+.container2{
+    position: absolute;
+    top: 50%;
+    left: 15%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.container-text2{
+    position: absolute;
+    top: 50%;
+    left: 20%;
+}
+
+#hero{
+    background-image: url('/assets/Imagenes/mascotas.png');
+    background-position: top center;
+    background-size: cover;
+    position: relative;
+    z-index: 1;
+}
+#hero::after{
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    z-index: -1;
+}
+
+#second{
+    background-image: url('/assets/Imagenes/fundacion.png');
+    background-position: top center;
+    background-size: cover;
+    position: relative;
+    z-index: 1;
+}
+#second::after{
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    z-index: -1;
+}
+
+
+#third{
+    background-image: url('/assets/Imagenes/pets.png');
+    background-position: top center;
+    background-size: cover;
+    position: relative;
+    z-index: 1;
+}
+#third::after{
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+}

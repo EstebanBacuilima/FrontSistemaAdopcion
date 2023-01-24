@@ -8,6 +8,9 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'welcome', component: WelcomeComponent },
   { path: 'list_mascotas', component: ListadoMascotasComponent },
+  {path : '', redirectTo: 'welcome', pathMatch:'full'}
+
+
 ];
 
 @NgModule({
@@ -17,3 +20,4 @@ const routes: Routes = [
 export class AppRoutingModule { 
 
 }
+

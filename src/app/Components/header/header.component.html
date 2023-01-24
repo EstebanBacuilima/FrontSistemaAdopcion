@@ -1,115 +1,59 @@
-
-<header class="p-3  text-white">
-
+<header class="p-3 text-white">
   <div class="container">
-    
-      <div class="
-      d-flex
-      flex-wrap
-      align-items-center
-      justify-content-center justify-content-lg-start
-    ">
-          <a href="/" class="
-        d-flex
-        align-items-center
-        mb-2 mb-lg-0
-        text-white text-decoration-none
-      ">  <div [hidden]="" style="margin-right: 20px;">
-        <img class="circular--square" src="./assets/Imagenes/xcc.png" style="margin: 0 auto;"  >
-      </div>
-              <i class="bi bi-house" ></i>
-          </a>
-
-          <ul class="
-        nav
-        col-12 col-lg-auto
-        me-lg-auto
-        mb-2
-        justify-content-center
-        mb-md-0
-      "
+    <div
+      class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
     >
-      <li>
-        
-        <a href="#" class="nav-link  px-2 text-white" routerLink="welcome">HOME</a></li>
+      <a
+        href="/"
+        class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none"
+      >
+        <div [hidden]="" style="margin-right: 20px">
+          <img
+            class="circular--square"
+            src="./assets/Imagenes/xcc.png"
+            style="margin: 0 auto"
+          />
+        </div>
+        <i class="bi bi-house"></i>
+      </a>
+      <ul
+      class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
+    >
       <li>
         <a
           href="#"
-          class="nav-link text_1"
-          routerLink="/catalogo"
-          routerLinkActive="active"
-           >MASCOTAS</a
+          class="nav-link text_0 px-2 text-white"
+          routerLink="welcome"
+          >HOME</a
         >
       </li>
       <li>
+        <a href="#second" class="nav-link text_2 px-2">FUNDACIONES</a>
+      </li>
+      <li>
         <a
-          href="#"
-          class="nav-link text_2 px-2 "
-          routerLink="/catalogo-productos"
-          routerLinkActive="active"
-           >FUNDACIONES</a
-        >
+          href="#third"
+          class="nav-link text_1">MASCOTAS</a>
       </li>
       <li>
         <a
           href="#"
           class="nav-link text_3 px-2"
-          routerLink="/client-pedidos"
+          routerLink="/"
           routerLinkActive="active"
           >PROCESO DE ADOPCION</a
         >
       </li>
-      <li>
-       
-    
-     
     </ul>
-
-          <div class="text-center" [hidden]="">
-           
-              <!-- <button type="button" class="btn btn-outline-light me-2" >
-                  Login
-              </button> -->
-              <button type="button" class="btn btn-outline-primary" routerLink="login">Login</button>
-
-              
-              <!-- <button type="button" class="btn btn-warning" >
-                  Sign-up
-              </button> -->
-          </div>
-
-<!--             
-          <div  [hidden]="">
-
-            
-              <div class="row">
-                  <div class="col">
-                      <button type="button" class="btn btn-outline-light me-2" >
-                          Sign-out
-                      </button>
-                  </div>
-                  <div class="col">
-                      <div class="dropdown">
-                          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                              data-bs-toggle="dropdown" aria-expanded="true"><div  class="text-left">
-                                <img class="circular--square" >
-                              </div>
-                            
-                          </button>
-                          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                              <li><a class="dropdown-item" href="#">Perfil</a></li>
-                              <li><a class="dropdown-item" href="#">Another action</a></li>
-                              <li>
-                                  <a class="dropdown-item" href="#">Something else here</a>
-                              </li>
-                          </ul>
-                      </div>
-                  </div>
-              </div>
-        
-          </div> -->
-
-
+    <div class="text-center" [hidden]="">
+      <button
+      type="button"
+      class="btn btn-outline-primary"
+      routerLink="login"
+    >
+      Login
+    </button>
         </div>
       </div>
-</header>
+    </div>
+  </header>

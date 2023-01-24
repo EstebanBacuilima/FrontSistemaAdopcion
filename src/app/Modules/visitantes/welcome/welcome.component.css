@@ -8,13 +8,22 @@ body{
     margin: 0;
     box-sizing: border-box;
 }
-.text{
-    position: absolute;
-    top: 20%;
-    right: 20%;
+.title{
+    text-align: center;
+    
 }
 
+.text{
+   margin-left:48vh;
+}
 .containers{
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.containeres{
     min-height: 100vh;
     width: 100%;
     display: flex;
@@ -30,11 +39,7 @@ body{
     display: flex;
 }
 
-.texts2{
-    position: absolute;
-    top: 20%;
-    left: 18%;
-}
+
 .container-text{
     position: absolute;
     top: 50%;
@@ -63,15 +68,16 @@ body{
     position: relative;
     z-index: 1;
 }
-#hero::after{
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    background-color: black;
-    z-index: -1;
+
+
+#heros{
+    background-image: url('/assets/Imagenes/objetivo.png');
+    background-position: top center;
+    background-size: cover;
+    position: relative;
+    z-index: 1;
 }
+
 
 #second{
     background-image: url('/assets/Imagenes/fundacion.png');
@@ -117,6 +123,13 @@ body{
     width: 40ex;
     position: relative;
     display: flex;
-    padding: 1.7ex;
+    padding: 1.7ex
+}
 
+.carousel{
+    margin: 1ex, 1ex, 1ex,  1ex;
+    width: 100%;
+    position: relative;
+    display: flex;
+    padding: 20ex
 }

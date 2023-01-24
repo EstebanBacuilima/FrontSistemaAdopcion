@@ -19,7 +19,6 @@ body{
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
 }
 
 .container{
@@ -94,6 +93,7 @@ body{
 
 #third{
     background-image: url('/assets/Imagenes/pets.png');
+    background-color: #c9e265;
     background-position: top center;
     background-size: cover;
     position: relative;
@@ -106,4 +106,17 @@ body{
     height: 100%;
     width: 100%;
     z-index: -1;
+}
+.card-link{
+    margin-left: 65%;
+}
+
+.card{
+    margin-top: 1ex;
+    margin-left: 5ex;
+    width: 40ex;
+    position: relative;
+    display: flex;
+    padding: 1.7ex;
+
 }

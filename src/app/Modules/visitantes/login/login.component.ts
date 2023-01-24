@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CargarScrpitsService } from 'src/app/cargar-scrpits.service';
+import { Persona } from 'src/app/Models/Persona';
 import { Usuario } from 'src/app/Models/Usuario';
+import { PersonaService } from 'src/app/Services/persona.service';
 import { UsuarioService } from 'src/app/Services/usuario.service';
 import Swal from 'sweetalert2';
 
@@ -18,15 +20,12 @@ export class LoginComponent implements OnInit{
   user: any;
   fundacion:any;
   nombreUsuario:any;
+  persona: Persona = new Persona;
 
-  files: any = [];
-  image!: any;
-
-  
   constructor(
     private _CargarScript: CargarScrpitsService,
-    private toastr:ToastrService, 
     private usuarioService: UsuarioService, 
+    private personaService: PersonaService,
     private router: Router,
     
   ){
@@ -35,10 +34,14 @@ export class LoginComponent implements OnInit{
 
   ngOnInit(): void {
     localStorage.removeItem('idUsuario');
-    this.selectedGenero = 'nulo'
+    this.persona.nombres = '';
+    this.persona.apellidos = '';
+    this.persona.correo = '';
+    this.usuario.username = '';
+    this.usuario.password = '';
+    localStorage.removeItem('idUsuario');
   }
 
-  selectedGenero?: string;
 
   login(){
     this.usuarioService.login(this.usuario.username, this.usuario.password).subscribe(
@@ -103,14 +106,75 @@ export class LoginComponent implements OnInit{
     reader.onload = () => {
       this.file = reader.result;
     };
-    console.log("Seleciono una imagen: " + event.target.value);
     this.cap_nombre_archivo_u = event.target.value;
-    console.log("Numero de datos del nombre del archivo => " + this.cap_nombre_archivo_u.length)
     this.nombre_orignal_u = this.cap_nombre_archivo_u.slice(12);
     console.log("Nombre imagen original => " + this.nombre_orignal_u);
-    console.log(this.nombre_orignal_u);
     this.usuario.foto_perfil= this.nombre_orignal_u;
   }
 
+  // REGISTRARSE //
+
+  verficarPassword: any;
+
+
+  registrarUsuario(){
+
+    if (this.verficarPassword == this.usuario.password) {
+      
+      if(this.persona.nombres === '' || this.persona.apellidos === '' || this.persona.correo === '' || this.usuario.username === '' || this.usuario.password === ''
+      || this.persona.nombres === null || this.persona.apellidos === null || this.persona.correo === null || this.usuario.username === null || this.usuario.password === null){
+        Swal.fire({
+          icon: 'error',
+          title: 'Verifique los Campos!'
+        })
+    }else{
+      this.usuarioService.verfUsername(this.usuario.username).subscribe(
+        data => {
+          if (!data){
+            this.personaService.postPersona(this.persona).subscribe(
+              data => {
+                console.log(data);
+                this.persona.idPersona = data.idPersona;
+                this.usuario.persona = this.persona;
+                this.usuario.fundacion = this.fundacion;
+                this.usuario.estado = true;
+                this.usuario.rol = "CLIENTE";
+                    this.usuarioService.postUsuario(this.usuario).subscribe(
+                      result => {
+                        console.log(result);
+                        this.usuario = result;  
+                        //localStorage.setItem('idUsuario', String(this.usuario.idUsuario));
+                        Swal.fire({
+                          position: 'top-end',
+                          icon: 'success',
+                          title: 'Registrado Exitosamente',
+                          showConfirmButton: false,
+                          timer: 1500
+                        })       
+                        //location.replace('/home');
+                      }
+                    )               
+              }
+            )
+          } else{
+            Swal.fire({
+              icon: 'error',
+              title: 'El username que eligio ya está en uso!',
+              text: 'Cambie su username'
+            })
+            this.usuario.username = '';
+          }   
+        }     
+      )      
+    }    
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Contraseñas son distintas!',
+        text: 'Verifique su contraseña'
+      })
+    }
+    
+  }
 
 }

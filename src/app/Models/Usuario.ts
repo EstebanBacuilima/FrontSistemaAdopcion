@@ -6,6 +6,7 @@ export class Usuario{
     username!: string;
     password!: string;
     estado!: boolean;
+    rol!: string;
     foto_perfil?: string;
 
     persona?: Persona;

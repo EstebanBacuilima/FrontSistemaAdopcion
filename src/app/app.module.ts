@@ -16,8 +16,14 @@ import { CargarScrpitsService } from './cargar-scrpits.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
-import { BienvenidoComponent } from './Modules/admin-fundacion/bienvenido/bienvenido.component';
-import { RegFundacionComponent } from './Modules/admin-fundacion/reg-fundacion/reg-fundacion.component';
+import { RegFundacionComponent } from './Modules/admin-super/reg-fundacion/reg-fundacion.component';
+import { BienvenidoComponent } from './Modules/admin-super/bienvenido/bienvenido.component';
+import { RegMascotaComponent } from './Modules/admin-fundacion/mascotas/reg-mascota/reg-mascota.component';
+import { ListMascotaComponent } from './Modules/admin-fundacion/mascotas/list-mascota/list-mascota.component';
+import { RegVoluntarioComponent } from './Modules/admin-fundacion/voluntario/reg-voluntario/reg-voluntario.component';
+import { ListVoluntarioComponent } from './Modules/admin-fundacion/voluntario/list-voluntario/list-voluntario.component';
+
+
 
 
 @NgModule({
@@ -28,7 +34,11 @@ import { RegFundacionComponent } from './Modules/admin-fundacion/reg-fundacion/r
     LoginComponent,
     WelcomeComponent,
     BienvenidoComponent,
-    RegFundacionComponent
+    RegFundacionComponent,
+    RegMascotaComponent,
+    ListMascotaComponent,
+    RegVoluntarioComponent,
+    ListVoluntarioComponent,
   ],
   imports: [
     BrowserModule,

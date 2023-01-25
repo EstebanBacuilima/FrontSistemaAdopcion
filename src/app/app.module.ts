@@ -16,6 +16,8 @@ import { CargarScrpitsService } from './cargar-scrpits.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
+import { BienvenidoComponent } from './Modules/admin-fundacion/bienvenido/bienvenido.component';
+import { RegFundacionComponent } from './Modules/admin-fundacion/reg-fundacion/reg-fundacion.component';
 
 
 @NgModule({
@@ -24,7 +26,9 @@ import { HttpClientModule } from '@angular/common/http';
     FooterComponent,
     HeaderComponent,
     LoginComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    BienvenidoComponent,
+    RegFundacionComponent
   ],
   imports: [
     BrowserModule,

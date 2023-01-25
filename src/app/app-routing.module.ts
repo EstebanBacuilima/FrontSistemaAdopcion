@@ -8,7 +8,6 @@ import { WelcomeComponent } from './Modules/visitantes/welcome/welcome.component
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'welcome', component: WelcomeComponent },
-  { path: 'register-fundacion', component: RegFundacionComponent },
 ];
 
 @NgModule({

@@ -12,11 +12,11 @@ export class FundacionService {
   constructor(private http: HttpClient) { }
 
   getFundacion(){
-    return this.http.get<Fundacion[]>(this.URL+'/listar');
+    return this.http.get<Fundacion[]>(this.URL+'listar');
   }
 
   getPorId(idFundacion: number){
-    return this.http.get<Fundacion>(this.URL+ idFundacion);
+    return this.http.get<Fundacion>(this.URL+'porId/'+ idFundacion);
   }
 
   postFundacion(fundacion: Fundacion){

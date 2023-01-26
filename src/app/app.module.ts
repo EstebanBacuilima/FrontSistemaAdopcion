@@ -10,9 +10,6 @@ import { WelcomeComponent } from './Modules/visitantes/welcome/welcome.component
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { PasswordModule } from 'primeng/password';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
-
-// CARGAR EL JS
-import { CargarScrpitsService } from './cargar-scrpits.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
@@ -22,7 +19,11 @@ import { RegMascotaComponent } from './Modules/admin-fundacion/mascotas/reg-masc
 import { ListMascotaComponent } from './Modules/admin-fundacion/mascotas/list-mascota/list-mascota.component';
 import { RegVoluntarioComponent } from './Modules/admin-fundacion/voluntario/reg-voluntario/reg-voluntario.component';
 import { ListVoluntarioComponent } from './Modules/admin-fundacion/voluntario/list-voluntario/list-voluntario.component';
-
+// CARGAR EL JS
+import { CargarScrpitsService } from './cargar-scrpits.service';
+// PAGINACION
+import {NgxPaginationModule} from 'ngx-pagination';
+import { ListFundacioComponent } from './Modules/admin-super/list-fundacio/list-fundacio.component';
 
 
 
@@ -39,6 +40,8 @@ import { ListVoluntarioComponent } from './Modules/admin-fundacion/voluntario/li
     ListMascotaComponent,
     RegVoluntarioComponent,
     ListVoluntarioComponent,
+    ListFundacioComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -50,7 +53,8 @@ import { ListVoluntarioComponent } from './Modules/admin-fundacion/voluntario/li
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgxPaginationModule
   ],
   providers: [
     CargarScrpitsService

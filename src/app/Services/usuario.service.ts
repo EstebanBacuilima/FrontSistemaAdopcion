@@ -20,7 +20,7 @@ export class UsuarioService {
   }
 
   getPorId(idUsuario: any){
-    return this.http.get<Usuario>(this.URL+idUsuario);
+    return this.http.get<Usuario>(this.URL+'porId/'+idUsuario);
   }
 
   postUsuario(usuario: Usuario){

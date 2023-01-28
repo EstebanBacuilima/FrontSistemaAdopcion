@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./reg-voluntario.component.css']
 })
 export class RegVoluntarioComponent {
-
+  persona: any;
+  voluntario: any;
+  usuario: any;
+  verficarPassword:any;
 }

@@ -1,1 +1,156 @@
-<p>list-voluntario works!</p>
+<div class="container px-1 py-5 mx-auto p-8 rounded border-gray-200">
+
+    <ul class="nav justify-content-center">
+        <li class="nav-item">
+            <button class="btn btn-primary m-1" type="button" routerLink="/reg-voluntario">Registrar Voluntario</button>
+            <button class="btn btn-primary m-1" type="button">Listar Voluntarios</button>
+        </li>
+    </ul>
+
+    <div class="row mt-6">
+        <div class="col">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">N</th>
+                        <th scope="col">Cédula</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Teléfono</th>
+                        <th scope="col">Género</th>
+                        <th scope="col">Área de Trabajo</th>
+                        <th scope="col">Cargo</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">&nbsp;</th>
+                        <th scope="col">&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr
+                    *ngFor="let voluntario of listaVoluntarios | paginate: {itemsPerPage: 10, currentPage: pageActual}; index as i">
+                        <th scope="row">{{i+1}}</th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><input type="checkbox" id="cbox1" value="first_checkbox" >
+                        </td>
+                        <td>
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalUpdate" >Actualizar</button>
+                        </td>
+                        <td>
+                            <a href="" class="btn btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+ <!-- Modal -->
+ <div class="modal " id="modalUpdate" tabindex="-5" aria-labelledby="modalUpdateLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Actualizar</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="container w-75 mt-25 me-25 mt-5 shadown">
+                <div class="rows align-items-strech">
+                    <div class="col bg-white mt-25 p-25 ">
+
+                        <form class="row g-2 d-flex justify-content-center">
+
+                            <h2 class="form text-center">Datos del Voluntario</h2>
+                            <div class="col-12">
+                                <label for="cedula" class="form-label-p"> Cedula</label>
+                                <input type="text" class="form-control" name="cedula" [(ngModel)]="persona.cedula"> 
+                            </div>
+                            <div class="col-6">
+                                <label for="nombres" class="form-label-p"> Nombres</label>
+                                <input type="text" class="form-control" name="nombres" [(ngModel)]="persona.nombres">
+                            </div>
+                            <div class="col-6">
+                                <label for="apellidos" class="form-label-p"> Apellidos</label>
+                                <input type="text" class="form-control" name="apellidos" [(ngModel)]="persona.apellidos">
+                            </div>
+                            <div class="col-6">
+                                <label for="fechaNacimiento" class="form-label-p"> Fecha De Nacimiento</label>
+                                <input type="date" class="form-control" name="fechaNacimiento" [(ngModel)]="persona.fechaNacimiento">
+                            </div>
+                            <div class="col-6">
+                                <label for="genero" class="form-label-p"> Genero</label>
+                                <select id="genero" class="form-control" name="genero" [(ngModel)]="persona.genero">
+                                    <option value="" disabled selected>Selecciona un género</option>
+                                    <option value="masculino">Masculino</option>
+                                    <option value="famenino">Femenino</option>
+                                    <option value="otro">Otro</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label for="direccion" class="form-label-p"> Direccion</label>
+                                <input type="text" class="form-control" name="direccion" [(ngModel)]="persona.direccion">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="telefono" class="form-label-p"> Telefono</label>
+                                <input type="text" class="form-control" name="telefono" [(ngModel)]="persona.telefono">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="celular" class="form-label-p"> Celular</label>
+                                <input type="text" class="form-control" name="celular" [(ngModel)]="persona.celular">
+                            </div>
+                            <div class="col-12">
+                                <label for="correo" class="form-label-p"> Correo</label>
+                                <input type="email" class="form-control" name="correo" [(ngModel)]="persona.correo">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="areatrabajo" class="form-label-p">Área de Trabajo</label>
+                                <select id="areatrabajo" class="form-control" name="areatrabajo" [(ngModel)]="voluntario.area_trabajo">
+                                    <option value="" disabled selected>Selecciona área de trabajo</option>
+                                    <option value="masculino">Masculino</option>
+                                    <option value="famenino">Femenino</option>
+                                    <option value="otro">Otro</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="cargo" class="form-label-p"> Cargo</label>
+                                <select id="cargo" class="form-control" name="cargo" [(ngModel)]="voluntario.cargo">
+                                    <option value="" disabled selected>Selecciona un cargo</option>
+                                    <option value="masculino">Masculino</option>
+                                    <option value="famenino">Femenino</option>
+                                    <option value="otro">Otro</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label for="username" class="form-label-p"> Username</label>
+                                <input type="text" class="form-control" name="username" [(ngModel)]="usuario.username">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="password" class="form-label-p"> Contraseña <i class="uil uil-eye-slash showHidePw"></i></label>
+                                <input type="password" class="password form-control" name="password" [(ngModel)]="usuario.password">
+                            </div>
+                            <div class="col-md-12">
+                                <label for="fotoPerfil" class="form-label-p"> Foto de Perfil</label>
+                                <span class="p-float-label">
+                                    <input name="logo" type="file" class="form-control" id="float-input"
+                                        required />
+                                    <label for="float-input"></label>
+                                </span>
+                                <div class="mt-3 text-center">
+                                    <img class="rounded" alt="..." style="max-width: 10%;" />
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary">Actualizar</button>
+            </div>
+        </div>
+    </div>
+</div>

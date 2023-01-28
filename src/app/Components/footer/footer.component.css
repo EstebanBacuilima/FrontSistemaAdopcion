@@ -1,20 +1,7 @@
 
 .footer{
     color: black;
-    background-color: #0B173B;
+    background-color: #a9b7e2;
     text-align: center;
 }
     
-
-
-/* text-muted */
-.fa{
-
-    margin: 250px;
-    /* margin: 250px; */
-}
-span{
-    position: relative;
-    left: 170px;
-    /* text-align: center; */
-}

@@ -19,6 +19,10 @@ export class UsuarioService {
     return this.http.get<Usuario[]>(this.URL+'listar');
   }
 
+  getPorIdPersona(idPersona: number){
+    return this.http.get<Usuario>(this.URL+'porPersona/'+idPersona);
+  }
+
   getPorId(idUsuario: any){
     return this.http.get<Usuario>(this.URL+'porId/'+idUsuario);
   }

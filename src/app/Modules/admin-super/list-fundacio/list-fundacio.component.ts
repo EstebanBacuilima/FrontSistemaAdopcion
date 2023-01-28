@@ -7,6 +7,7 @@ import { FundacionService } from 'src/app/Services/fundacion.service';
 import { FotoService } from 'src/app/Services/imagen.service';
 import { PersonaService } from 'src/app/Services/persona.service';
 import { UsuarioService } from 'src/app/Services/usuario.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-list-fundacio',
@@ -62,10 +63,13 @@ export class ListFundacioComponent implements OnInit {
     this.optenerDatos();
   }
 
+  idPersonaCap: any;
+  idUsuarioCap: any;
+
   optenerDatos() {
     this.fundacionService.getPorId(this.datainicialPersonal).subscribe(data => {
       this.fundacion = data
-      this.persona.idPersona = this.fundacion.persona?.idPersona
+      this.persona.idPersona = this.fundacion.persona.idPersona
       this.persona.cedula = this.fundacion.persona?.cedula
       this.persona.nombres = this.fundacion.persona?.nombres
       this.persona.apellidos = this.fundacion.persona?.apellidos
@@ -75,15 +79,35 @@ export class ListFundacioComponent implements OnInit {
       this.persona.direccion = this.fundacion.persona?.direccion
       this.persona.genero = this.fundacion.persona?.genero
       this.persona.fechaNacimiento = this.fundacion.persona?.fechaNacimiento
-
-      this.usuarioService.getPorId(this.fundacion.persona.idPersona).subscribe(dataUSER => {
-        this.usuario = dataUSER
+      // CAPTURAR PERSONA
+      this.idPersonaCap = this.fundacion.persona.idPersona;
+      this.personaService.getPorId(this.idPersonaCap).subscribe(dataP => {
+        this.persona = dataP
+        this.idUsuarioCap = dataP.idPersona
+        this.usuarioService.getPorIdPersona(this.idUsuarioCap).subscribe(dataU => {
+          this.usuario = dataU
+        })
       })
     })
   }
 
   actualizarFundacion() {
-
+    this.personaService.updatePersona(this.persona, this.persona.idPersona).subscribe(data => {
+      console.log(data)
+      this.usuarioService.updateUsuario(this.usuario, this.usuario.idUsuario).subscribe(data => {
+        console.log(data)
+        this.fundacionService.updateFundacion(this.fundacion, this.fundacion.idFundacion).subscribe(data => {
+          console.log(data)
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Actualizado Correctamente',
+            showConfirmButton: false,
+            timer: 1500
+          })
+        })
+      })
+    })
   }
 
   // IMAGEN

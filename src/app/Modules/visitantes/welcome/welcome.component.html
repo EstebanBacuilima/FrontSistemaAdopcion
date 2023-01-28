@@ -10,21 +10,67 @@
 <section id="heros" href="#proceso">
   <div class="card_container">
     <div class="card" data-label="Cuenca">
-        <div class="card-container">
-            <h4>PROCESO PARA ADOPTAR UNA MASCOTA</h4>
-              <P>1). Revisar los requisitos para adoptar una mascota en este sistema, como la edad del adoptante, la disponibilidad de un hogar seguro, y las restricciones geográficas.</P>
-             <br>
-              <p>2). Llenar una solicitud de adopción en línea o en persona, en la cual se proporcionará información personal y se realizarán preguntas sobre el hogar y el estilo de vida del solicitante.</p>
-              <br>
-              <h6>Finalizas con un nuevo amiguitos :)</h6>
-            </div>
+      <div class="card-container">
+        <h4>PROCESO PARA ADOPTAR UNA MASCOTA</h4>
+        <P>1). Revisar los requisitos para adoptar una mascota en este sistema, como la edad del adoptante, la
+          disponibilidad de un hogar seguro, y las restricciones geográficas.</P>
+        <br>
+        <p>2). Llenar una solicitud de adopción en línea o en persona, en la cual se proporcionará información personal
+          y se realizarán preguntas sobre el hogar y el estilo de vida del solicitante.</p>
+        <br>
+        <h6>Finalizas con un nuevo amiguitos :)</h6>
+      </div>
     </div>
-</div>
+  </div>
 </section>
 <!--End Section-->
 <hr style="color: blueviolet; height: 10px;">
 
 <!---Section--->
+<!-- <section id="second" href="#fundacion">
+  <div class="second containers">
+    <section id="testimonios" class="testimonios seccion-clara">
+      <h2 class="seccion-titulo">Fundaciones</h2>
+      <h3 class="seccion-descripcion">
+        Estas son la fundaciones de la ciudad de Cuenca
+      </h3>
+      <div id="testimonios-carrusel" class="carousel carousel-dark slides" data-bs-ride="carousel">
+
+        <div class="carousel-item" *ngFor="let fundaciones of listaFundaciones">
+          <div class="container">
+            <img
+              class="testimonio-imagen rounded-circle"
+              src="/assets/Imagenes/angora.jpg"
+              alt="Foto de Gino"
+            />
+            <p class="testimonio-texto">{{fundaciones.nombre_fundacion}}</p>
+            <p class="testimonio-texto">
+              {{fundaciones.acronimo}}
+            </p>
+            <p class="testimonio-texto">
+              {{fundaciones.mision}}
+            </p>
+            <p class="testimonio-texto">{{fundaciones.correo}}</p>
+            <p class="testimonio-texto">{{fundaciones.telefono}}</p>
+            <div class="testimonio-info">
+              <p class="cargo">{{fundaciones.direccion}}</p>
+            </div>
+          </div>
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#testimonios-carrusel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Anterior</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#testimonios-carrusel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Siguiente</span>
+        </button>
+      </div>
+    </section>
+  </div>
+</section> -->
+
 <section id="second" href="#fundacion">
   <div class="second containers">
     <section id="testimonios" class="testimonios seccion-clara">
@@ -32,58 +78,37 @@
       <h3 class="seccion-descripcion">
         Estas son la fundaciones de la ciudad de Cuenca
       </h3>
+
+      
+      
       <div
         id="testimonios-carrusel"
         class="carousel carousel-dark slides"
         data-bs-ride="carousel"
       >
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <div class="container">
-              <img
-                class="testimonio-imagen rounded-circle"
-                src="/assets/Imagenes/pastor-aleman.jpg"
-                alt="Foto de Gino"
-              />
-              <p class="testimonio-texto">Peluditos de Cuenca</p>
-              <p class="testimonio-texto">
-                Asociación Protectora de Animales de Cuencaa
-              </p>
-              <p class="testimonio-texto">
-                hogar temporal y cuidado para las mascotas abandonadas o
-                maltratadas
-              </p>
-              <p class="testimonio-texto">peluditos@gmail.com</p>
-              <p class="testimonio-texto">0967565454</p>
-              <div class="testimonio-info">
-                <p class="cargo">Ubillas y babacos</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="carousel-item">
-            <div class="container">
-              <img
-                class="testimonio-imagen rounded-circle"
-                src="/assets/Imagenes/angora.jpg"
-                alt="Foto de Gino"
-              />
-              <p class="testimonio-texto">ARCA</p>
-              <p class="testimonio-texto">
-                Asociación Protectora de Animales de Cuencaa
-              </p>
-              <p class="testimonio-texto">
-                hogar temporal y cuidado para las mascotas abandonadas o
-                maltratadas
-              </p>
-              <p class="testimonio-texto">peluditos@gmail.com</p>
-              <p class="testimonio-texto">0967565454</p>
-              <div class="testimonio-info">
-                <p class="cargo">Ubillas y babacos</p>
-              </div>
+      <div class="carousel-inner">
+        <div *ngFor="let fundacion of listaFundaciones; let first = first" class="carousel-item" [ngClass]="{'active': first}">
+          <div class="container">
+            <img
+              class="testimonio-imagen rounded-circle"
+              [src]="'http://localhost:5000/imagen/images/' + fundacion.logo" 
+              alt="Foto de Gino"
+            />
+            <p class="testimonio-texto">{{fundacion.nombre_fundacion}} </p>
+            <p class="testimonio-texto">
+              {{fundacion.acronimo}}
+            </p>
+            <p class="testimonio-texto">
+              {{fundacion.mision}}
+            </p>
+            <p class="testimonio-texto">{{fundacion.correo}}</p>
+            <p class="testimonio-texto">{{fundacion.telefono}}</p>
+            <div class="testimonio-info">
+              <p class="cargo">{{fundacion.direccion}}</p>
             </div>
           </div>
         </div>
+      </div>
 
         <button
           class="carousel-control-prev"
@@ -112,26 +137,29 @@
 <!---Section--->
 <section id="third" href="#mascota">
   <h1 class="titulo-mascota">MASCOTAS EN ADOPCION</h1>
+
   <div class="container-fluid">
-      <div class="px-lg-5">
-          <div class="row">   
-              <div class="carta col-xl-3 col-lg-4 col-md-6 mb-4 p-25">
-                  <div class="container-mascota rounded ">
-                      <div class="box">
-                        <img src="/assets/Imagenes/hamster-ruso.jpeg" />
-                        <div class="content p-4">
-                          <h3>Booster</h3>
-                          <p>Conejito de india</p>
-                          <p>Macho</p>
-                          <p>India</p>
-                          <p>Vacunado</p>
-                          <a class="details" href="login" routerLink="/login">Detalles</a>
-                        </div>
-                      </div>
-                  </div>
-              </div>   
+    <div class="px-lg-5">
+      <div class="row">
+        <div class="carta col-xl-3 col-lg-4 col-md-6 mb-4 p-25" *ngFor="let mascotas of listaMascotas">
+          <div class="container-mascota rounded ">
+            <div class="box">
+              <img [src]="'http://localhost:5000/imagen/images/' + mascotas.foto" [alt]="mascotas.foto" class="mascotas_foto"/>
+              <div class="content p-4">
+                <h3>{{mascotas.nombre_mascota}}</h3>
+                <p>{{mascotas.sexo}}</p>
+                <p>{{mascotas.especie}}</p>
+                <p>{{mascotas.raza}}</p>
+                <p>{{mascotas.descripcion}}</p>
+                <a class="details" href="login" routerLink="/login">ADOPTAR</a>
+              </div>
+            </div>
           </div>
+        </div>
       </div>
+    </div>
   </div>
 </section>
+
+
 <!--End Section-->

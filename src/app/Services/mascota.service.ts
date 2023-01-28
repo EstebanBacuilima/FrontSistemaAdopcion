@@ -14,6 +14,10 @@ export class MascotaService {
     return this.http.get<Mascota[]>(this.URL+'listar');
   }
 
+  getMascotaDisonibles(){
+    return this.http.get<Mascota[]>(this.URL+'listarDisponibles');
+  }
+
   getMascotaFundacion(idFundacion: any){
     return this.http.get<Mascota[]>(this.URL+'listarMacotasPorFundacion/' + idFundacion);
   }

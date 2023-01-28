@@ -24,6 +24,7 @@ import { CargarScrpitsService } from './cargar-scrpits.service';
 // PAGINACION
 import {NgxPaginationModule} from 'ngx-pagination';
 import { ListFundacioComponent } from './Modules/admin-super/list-fundacio/list-fundacio.component';
+import { CommonModule } from '@angular/common';
 
 
 
@@ -54,7 +55,8 @@ import { ListFundacioComponent } from './Modules/admin-super/list-fundacio/list-
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    CommonModule
   ],
   providers: [
     CargarScrpitsService

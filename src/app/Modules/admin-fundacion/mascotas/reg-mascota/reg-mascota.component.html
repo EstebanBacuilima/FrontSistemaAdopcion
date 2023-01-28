@@ -1,1 +1,64 @@
-<p>reg-mascota works!</p>
+<div class="container">
+    
+    <form class="row g-2">
+        <div class="col-md-3">
+            <button type="button" class="btn btn-primary form-control">Registrar</button>
+        </div>
+        <div class="col-md-3" >
+            <a class="btn btn-primary form-control" href="http://localhost:4200/list-mascota" role="button">Listar Mascotas</a>
+        </div>
+
+        <h2 class="form-label-p text-center">Datos Mascota</h2>
+
+        <div class="col-md-6">
+            <label for="chip" class="form-label-p"> Chip</label>
+            <input type="text" class="form-control" name="chip" >
+        </div>
+        <div class="col-md-6">
+            <label for="nombreM" class="form-label-p"> Nombre</label>
+            <input type="text" class="form-control" name="nombreM" >
+        </div>
+        <div class="col-md-6">
+            <label for="color" class="form-label-p"> Color</label>
+            <input type="text" class="form-control" name="color" >
+        </div>
+        <div class="col-md-6">
+            <label for="sexo" class="form-label-p"> Sexo</label>
+            <input type="text" class="form-control" name="sexo" >
+        </div>
+        <div class="col-6">
+            <label for="raza" class="form-label-p"> Raza</label>
+            <input type="text" class="form-control" name="raza">
+        </div>
+        <div class="col-md-6">
+            <label for="especie" class="form-label-p"> Especie</label>
+            <input type="text" class="form-control" name="especie">
+        </div>
+        <div class="col-md-6">
+            <label for="descripcion" class="form-label-p"> Descripción</label>
+            <input type="text" class="form-control" name="descripcion" >
+        </div>
+        <div class="col-md-2">
+            <label for="descripcion" class="form-label-p"> Estado de adopción</label>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                <label class="form-check-label" for="inlineRadio1">En espera</label>
+              </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                <label class="form-check-label" for="inlineRadio2">Adoptado</label>
+            </div>             
+        </div>
+        <div class="col-md-12">
+            <label for="fotoPerfil" class="form-label-p">Foto</label>
+                <span class="p-float-label">
+                    <input name="foto" type="file" class="form-control"
+                        id="float-input" required />
+                    <label for="float-input"></label>
+                </span>
+                <div class="mt-3 text-center">
+                    <img class="rounded" alt="..." style="max-width: 50%;" />
+                </div>
+        </div>
+    </form>
+</div>

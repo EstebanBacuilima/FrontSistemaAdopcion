@@ -22,6 +22,7 @@ const routes: Routes = [
 
   { path: 'reg-mascota', component: RegMascotaComponent },
   { path: 'list-mascota', component: ListMascotaComponent },
+  
   { path: 'reg-voluntario', component: RegVoluntarioComponent },
   { path: 'list-voluntario', component: ListVoluntarioComponent },
 

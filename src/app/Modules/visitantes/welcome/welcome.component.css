@@ -1,36 +1,40 @@
-body{
+body {
     background: rgb(163, 226, 255);
     padding: 35px;
-    
+
 }
-*{
+
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
-.title{
+
+
+.title {
     text-align: center;
-    
+
 }
 
-.text{
-   margin-left:48vh;
+.text {
+    margin-left: 48vh;
 }
-.containers{
+
+.containers {
     min-height: 100vh;
     width: 100%;
     display: flex;
     align-items: center;
 }
 
-.containeres{
+.containeres {
     min-height: 100vh;
     width: 100%;
     display: flex;
     align-items: center;
 }
 
-.container{
+.container {
     position: absolute;
     top: 50%;
     right: 5%;
@@ -40,13 +44,13 @@ body{
 }
 
 
-.container-text{
+.container-text {
     position: absolute;
     top: 50%;
     right: 20%;
 }
 
-.container2{
+.container2 {
     position: absolute;
     top: 50%;
     left: 15%;
@@ -55,13 +59,13 @@ body{
     display: flex;
 }
 
-.container-text2{
+.container-text2 {
     position: absolute;
     top: 50%;
     left: 20%;
 }
 
-#hero{
+#hero {
     background-image: url('/assets/Imagenes/mascotas.png');
     background-position: top center;
     background-size: cover;
@@ -70,7 +74,7 @@ body{
 }
 
 
-#heros{
+#heros {
     background-image: url('/assets/Imagenes/objetivo.png');
     background-position: top center;
     background-size: cover;
@@ -79,14 +83,16 @@ body{
 }
 
 
-#second{
-    background-image: url('/assets/Imagenes/fundacion.png');
+#second {
+    /* background-image: url('/assets/Imagenes/fundacion.png'); */
     background-position: top center;
+    background-color:rgb(114, 125, 226);
     background-size: cover;
     position: relative;
     z-index: 1;
 }
-#second::after{
+
+#second::after {
     position: absolute;
     left: 0;
     top: 0;
@@ -97,15 +103,16 @@ body{
 }
 
 
-#third{
+#third {
     background-image: url('/assets/Imagenes/pets.png');
-    background-color: #c9e265;
+    background-color:rgb(114, 125, 226);
     background-position: top center;
     background-size: cover;
     position: relative;
     z-index: 1;
 }
-#third::after{
+
+#third::after {
     position: absolute;
     left: 0;
     top: 0;
@@ -113,23 +120,220 @@ body{
     width: 100%;
     z-index: -1;
 }
-.card-link{
-    margin-left: 65%;
+
+/* Estilos de Procesos de Adopcion */
+.card_container{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background-color:rgb(114, 125, 226);
 }
 
 .card{
-    margin-top: 1ex;
-    margin-left: 5ex;
-    width: 40ex;
-    position: relative;
-    display: flex;
-    padding: 1.7ex
+    width:650px;
+    height:400px;
+    border-radius:14px;
+    padding:20px;
+    position:relative;
+    background-color: #000000;
+    
 }
 
-.carousel{
-    margin: 1ex, 1ex, 1ex,  1ex;
+.card .card-container{
+    width:100%;
+    height:100%;
+    position:relative;
+    background: linear-gradient(90deg, rgb(128, 126, 223) 0%, rgba(111, 111, 196, 0.958) 35%, rgba(0,212,255,1) 100%);
+    z-index:10;
+    border-radius:10px;
+    padding:15px;
+    padding-top:50px;
+    
+}
+
+.card-container h4{
+    font-size:26px;
+    margin-bottom:10px;
+    color: #fff;
+}
+
+.card p {
+    font-size:17px;
+}
+
+.card::before{
+    position:absolute;
+    content:'';
+    background-color:#3c23ca;
+    height:35px;
+    width:35px;
+    top:3rem;
+    right:-23px;
+    transform:rotate(45deg);
+    z-index:10;
+    
+}
+
+
+.card::after{
+    position:absolute;
+    content:attr(data-label);
+    top:27px;
+    padding-left:20px;
+    padding:10px;
+    right:-31px;
+    width:8rem;
+    background-color:#1536c9;
+    z-index:12;
+    border-bottom-left-radius:20px;
+    border-top-left-radius:20px;
+    border-top-right-radius:10px;
+    color:#fff;
+}
+
+/* Estilos de Fundaciones */
+.testimonios {
+    padding: 40px 40px 80px 40px;
+    margin: 0 auto;
+}
+
+.testimonios .carousel {
+    max-width: 800px;
+}
+
+.carousel-item {
+    height: 500px;
+}
+
+.carousel-item .container {
     width: 100%;
-    position: relative;
+    height: 100%;
     display: flex;
-    padding: 20ex
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.testimonio-imagen {
+    height: 200px;
+    width: 150px;
+    position: relative;
+    bottom: 90px;
+    left: 25px;
+}
+.seccion-titulo{
+    text-align: center;
+    color: aliceblue;
+
+}
+
+.testimonio-texto {
+    max-width: 70%;
+    font-size: 20px;
+    text-align: center;
+    font-family: 'Share Tech Mono', monospace;
+    position: relative;
+    left: 30px;
+    
+}
+
+.testimonio-info {
+    font-weight: bold;
+    text-align: center;
+}
+
+.testimonio-info p {
+    margin-bottom: 400px;
+}
+
+.testimonio-footer .cliente {
+    font-size: 1.2rem;
+}
+
+.testimonio-info .cargo {
+    font-size: 0.9rem;
+    color: #656060;
+    position: relative;
+    left: 30px;
+}
+
+@media screen and (max-width: 800px) {
+    .testimonio-imagen {
+        height: 120px;
+        width: 120px;
+    }
+
+    .testimonio-texto {
+        font-size: 18px;
+    }
+}
+.carta{
+    padding: 25px;
+}
+
+/* Estilos de Macota */
+.box {
+    height: 280px;
+    width: 300px;
+    background-color: lightblue;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.box img {
+    width: 100%;
+    height: 100%
+}
+
+.content {
+    background-color: black;
+    color: white;
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    transition: all 0.7s;
+    opacity: 0.7
+}
+
+.box:hover .content {
+    left: 0
+}
+
+.content h3 {
+    text-align: center;
+    border-bottom: 1px solid white;
+
+    
+}
+.content p {
+    text-align: center;
+    padding-top: 10px ;    
+}
+.details{
+    color: #2306ff;
+    text-decoration: underline;
+    cursor: pointer;
+    text-align: center;
+    padding: 95px;
+    padding-top:20px ;
+}
+.titulo-mascota{
+    padding-top: 30px;
+    margin-bottom: 50px;
+    text-align: center;
+    color: lightgoldenrodyellow;
+    font-family: 'Times New Roman', Times, serif;
+    /* text-decoration: underline; */
+}
+@media screen and (max-width: 800px) {
+    .box {
+        height: 120px;
+        width: 120px;
+    }
+
+   
 }

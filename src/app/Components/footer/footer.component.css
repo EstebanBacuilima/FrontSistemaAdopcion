@@ -2,19 +2,9 @@
 .footer{
     color: black;
     background-color: #0B173B;
-    text-align: center;
+  
+    /* text-align: center; */
 }
     
 
 
-/* text-muted */
-.fa{
-
-    margin: 250px;
-    /* margin: 250px; */
-}
-span{
-    position: relative;
-    left: 170px;
-    /* text-align: center; */
-}

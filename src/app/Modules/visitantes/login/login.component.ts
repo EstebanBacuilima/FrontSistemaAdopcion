@@ -62,6 +62,7 @@ export class LoginComponent implements OnInit{
               timer: 1500
             })
             localStorage.setItem('rol', String(this.usuario.rol));
+            //localStorage.setItem('fundacion', String(this.usuario.fundacion?.idFundacion));
             localStorage.setItem('idUsuario', String(this.usuario.idUsuario));
             localStorage.setItem('nameImagen', String(this.user));
             localStorage.setItem('nameLogo', String(this.fundacion));

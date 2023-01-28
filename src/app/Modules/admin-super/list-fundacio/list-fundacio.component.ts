@@ -19,6 +19,7 @@ export class ListFundacioComponent implements OnInit {
   usuario: Usuario = new Usuario;
   persona: Persona = new Persona;
   fundacion: Fundacion = new Fundacion;
+  
   pageActual: number = 1;
   public myCounter: number = 0;
   listaFundaciones: Fundacion[] = [];

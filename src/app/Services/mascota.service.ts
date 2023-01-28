@@ -7,11 +7,15 @@ import { Mascota } from '../Models/Mascota';
 })
 export class MascotaService {
 
-  private URL = "http://localhost:5000/api/mascotas/";
+  private URL = "http://localhost:5000/api/mascota/";
   constructor(private http: HttpClient) { }
 
   getMascota(){
-    return this.http.get<Mascota[]>(this.URL+'/listar');
+    return this.http.get<Mascota[]>(this.URL+'listar');
+  }
+
+  getMascotaFundacion(idFundacion: any){
+    return this.http.get<Mascota[]>(this.URL+'listarMacotasPorFundacion/' + idFundacion);
   }
 
   getPorId(idMascota: number){

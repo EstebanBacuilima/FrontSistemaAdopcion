@@ -1,95 +1,131 @@
-<div class="table-responsive">
-<table class="table">
-    <thead>
-      <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Chip</th>
-        <th scope="col">Nombre</th>
-        <th scope="col">Color</th>
-        <th scope="col">Sexo</th>
-        <th scope="col">Raza</th>
-        <th scope="col">Especie</th>
-        <th scope="col">Descripción</th>
-        <th scope="col">Estado adopción</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>56789456545</td>
-        <td>Otto</td>
-        <td>Gris</td>
-        <td>Macho</td>
-        <td>Schnauzer</td>
-        <td>Canino</td>
-        <td>Adulto</td>
-        <td>En espera</td>
-        <div class="btn-group btn-group-sm">
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button">Actualizar</button>
-            </div>
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button">Eliminar</button>
-            </div>
-        </div>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>44566889987</td>
-        <td>Thom</td>
-        <td>Blanco</td>
-        <td>Macho</td>
-        <td>Siamés</td>
-        <td>Felino</td>
-        <td>Cachorro</td>
-        <td>Adoptado</td>
-        <div class="btn-group btn-group-sm">
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button">Actualizar</button>
-            </div>
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button">Eliminar</button>
-            </div>
-        </div>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>3515254425</td>
-        <td>Larry</td>
-        <td>Verde</td>
-        <td>Hembra</td>
-        <td>Ave</td>
-        <td>Loro</td>
-        <td>Adulto</td>
-        <td>En espera</td>
-        <div class="btn-group btn-group-sm">
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button">Actualizar</button>
-            </div>
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button">Eliminar</button>
-            </div>
-        </div>
-      </tr>
-    </tbody>
-  </table>
-</div>
-  
+<div class="container px-1 py-5 mx-auto p-8 rounded border-gray-200">
 
-<nav aria-label="Page navigation example">
-    <ul class="pagination">
-      <li class="page-item">
-        <a class="page-link" href="#" aria-label="Previous">
-          <span aria-hidden="true">&laquo;</span>
-          <span class="sr-only">Previous</span>
-        </a>
-      </li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item">
-        <a class="page-link" href="#" aria-label="Next">
-          <span class="sr-only">Next</span>
-          <span aria-hidden="true">&raquo;</span>
-        </a>
-      </li>
-    </ul>
-  </nav>
+  <ul class="nav justify-content-center">
+    <li class="nav-item">
+      <button type="button" class="btn btn-primary  m-1 " routerLink="/reg-mascota">Registrar Mascota</button>
+      <button class="btn btn-primary m-1">Listar Mascotas</button>
+    </li>
+  </ul>
+
+  <div class="row mt-6">
+    <div class="col">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Chip</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Color</th>
+            <th scope="col">Sexo</th>
+            <th scope="col">Raza</th>
+            <th scope="col">Especie</th>
+            <th scope="col">Descripción</th>
+            <th scope="col">Estado adopción</th>
+            <th scope="col">&nbsp;</th>
+            <th scope="col">&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let mascota of listaMascotas | paginate: {itemsPerPage: 10, currentPage: pageActual}; index as i">
+            <th scope="row">{{i+1}}</th>
+            <td>{{mascota.chip_mascota}}</td>
+            <td>{{mascota.nombre_mascota}}</td>
+            <td>{{mascota.color}}</td>
+            <td>{{mascota.sexo}}</td>
+            <td>{{mascota.raza}}</td>
+            <td>{{mascota.especie}}</td>
+            <td>{{mascota.descripcion}}</td>
+            <td>
+              <div *ngIf='obtenerEstado(mascota.estado_adopcion) === "NOADOPTAOD"'><b style="color: orange;">NO ADOPTADO</b></div>
+              <div *ngIf='obtenerEstado(mascota.estado_adopcion) === "ADOPTADO"'><b style="color: rgb(77, 255, 0);">ADOPTADO</b></div>
+            </td>
+            <!-- <td>{{mascota.estado_adopcion}}</td> -->
+            <td>
+              <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalUpdate">Altualizar</button>
+            </td>
+            <td>
+              <a href="" class="btn btn-danger">Eliminar</a>
+            </td>
+        </tbody>
+      </table>
+    </div>
+    <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal " id="modalUpdate" tabindex="-5" aria-labelledby="modalUpdateLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Actualizar</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="container w-75 mt-25 me-25 mt-5 shadown">
+        <div class="rows align-items-strech">
+          <div class="col bg-white mt-25 p-25 ">
+
+            <form class="row g-2">
+              <h2 class="form text-center">Datos Mascota</h2>
+              <div class="col-md-6">
+                  <label for="chip" class="form-label-p"> Chip</label>
+                  <input type="text" class="form-control" name="chip" >
+              </div>
+              <div class="col-md-6">
+                  <label for="nombreM" class="form-label-p"> Nombre</label>
+                  <input type="text" class="form-control" name="nombreM" >
+              </div>
+              <div class="col-md-6">
+                  <label for="color" class="form-label-p"> Color</label>
+                  <input type="text" class="form-control" name="color" >
+              </div>
+              <div class="col-md-6">
+                  <label for="sexo" class="form-label-p"> Sexo</label>
+                  <input type="text" class="form-control" name="sexo" >
+              </div>
+              <div class="col-6">
+                  <label for="raza" class="form-label-p"> Raza</label>
+                  <input type="text" class="form-control" name="raza">
+              </div>
+              <div class="col-md-6">
+                  <label for="especie" class="form-label-p"> Especie</label>
+                  <input type="text" class="form-control" name="especie">
+              </div>
+              <div class="col-md-12">
+                  <label for="descripcion" class="form-label-p"> Descripción</label>
+                  <input type="text" class="form-control" name="descripcion" >
+              </div>
+              <div class="col-md-2">
+                  <label for="descripcion" class="form-label-p"> Estado de adopción</label>
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                      <label class="form-check-label" for="inlineRadio1">En espera</label>
+                    </div>
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                      <label class="form-check-label" for="inlineRadio2">Adoptado</label>
+                  </div>             
+              </div>
+              <div class="col-md-12">
+                  <label for="fotoPerfil" class="form-label-p">Foto</label>
+                      <span class="p-float-label">
+                          <input name="foto" type="file" class="form-control"
+                              id="float-input" required />
+                          <label for="float-input"></label>
+                      </span>
+                      <div class="mt-3 text-center">
+                          <img class="rounded" alt="..." style="max-width: 50%;" />
+                      </div>
+              </div>
+          </form>
+
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary">Actualizar</button>
+      </div>
+    </div>
+  </div>
+</div>

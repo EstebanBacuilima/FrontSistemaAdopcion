@@ -25,6 +25,11 @@ import { CargarScrpitsService } from './cargar-scrpits.service';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { ListFundacioComponent } from './Modules/admin-super/list-fundacio/list-fundacio.component';
 import { CommonModule } from '@angular/common';
+import { CatalgoMascotasComponent } from './Modules/cliente/catalgo-mascotas/catalgo-mascotas.component';
+import { PanelSolicitudesComponent } from './Modules/cliente/panel-solicitudes/panel-solicitudes.component';
+import { PanelSeguimientoComponent } from './Modules/cliente/panel-seguimiento/panel-seguimiento.component';
+import { PanelSeguimientoAdminComponent } from './Modules/admin-super/panel-seguimiento-admin/panel-seguimiento-admin.component';
+import { PanelSolicitudAdminComponent } from './Modules/admin-super/panel-solicitud-admin/panel-solicitud-admin.component';
 
 
 
@@ -42,7 +47,11 @@ import { CommonModule } from '@angular/common';
     RegVoluntarioComponent,
     ListVoluntarioComponent,
     ListFundacioComponent,
-    
+    CatalgoMascotasComponent,
+    PanelSolicitudesComponent,
+    PanelSeguimientoComponent,
+    PanelSeguimientoAdminComponent,
+    PanelSolicitudAdminComponent
   ],
   imports: [
     BrowserModule,

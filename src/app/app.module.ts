@@ -28,8 +28,9 @@ import { CommonModule } from '@angular/common';
 import { CatalgoMascotasComponent } from './Modules/cliente/catalgo-mascotas/catalgo-mascotas.component';
 import { PanelSolicitudesComponent } from './Modules/cliente/panel-solicitudes/panel-solicitudes.component';
 import { PanelSeguimientoComponent } from './Modules/cliente/panel-seguimiento/panel-seguimiento.component';
-import { PanelSeguimientoAdminComponent } from './Modules/admin-super/panel-seguimiento-admin/panel-seguimiento-admin.component';
-import { PanelSolicitudAdminComponent } from './Modules/admin-super/panel-solicitud-admin/panel-solicitud-admin.component';
+import { PanelSolicitudAdminComponent } from './Modules/admin-fundacion/panel-solicitud-admin/panel-solicitud-admin.component';
+import { PanelSeguimientoAdminComponent } from './Modules/admin-fundacion/panel-seguimiento-admin/panel-seguimiento-admin.component';
+
 
 
 

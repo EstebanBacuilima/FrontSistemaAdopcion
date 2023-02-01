@@ -24,6 +24,12 @@ import { CargarScrpitsService } from './cargar-scrpits.service';
 // PAGINACION
 import {NgxPaginationModule} from 'ngx-pagination';
 import { ListFundacioComponent } from './Modules/admin-super/list-fundacio/list-fundacio.component';
+import { CommonModule } from '@angular/common';
+import { CatalgoMascotasComponent } from './Modules/cliente/catalgo-mascotas/catalgo-mascotas.component';
+import { PanelSolicitudesComponent } from './Modules/cliente/panel-solicitudes/panel-solicitudes.component';
+import { PanelSeguimientoComponent } from './Modules/cliente/panel-seguimiento/panel-seguimiento.component';
+import { PanelSeguimientoAdminComponent } from './Modules/admin-super/panel-seguimiento-admin/panel-seguimiento-admin.component';
+import { PanelSolicitudAdminComponent } from './Modules/admin-super/panel-solicitud-admin/panel-solicitud-admin.component';
 
 
 
@@ -41,7 +47,11 @@ import { ListFundacioComponent } from './Modules/admin-super/list-fundacio/list-
     RegVoluntarioComponent,
     ListVoluntarioComponent,
     ListFundacioComponent,
-    
+    CatalgoMascotasComponent,
+    PanelSolicitudesComponent,
+    PanelSeguimientoComponent,
+    PanelSeguimientoAdminComponent,
+    PanelSolicitudAdminComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +64,8 @@ import { ListFundacioComponent } from './Modules/admin-super/list-fundacio/list-
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    CommonModule
   ],
   providers: [
     CargarScrpitsService

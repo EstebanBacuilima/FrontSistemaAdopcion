@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CargarScrpitsService } from 'src/app/cargar-scrpits.service';
+import { Fundacion } from 'src/app/Models/Fundacion';
 import { Persona } from 'src/app/Models/Persona';
 import { Usuario } from 'src/app/Models/Usuario';
 import { PersonaService } from 'src/app/Services/persona.service';
@@ -15,12 +16,14 @@ import Swal from 'sweetalert2';
 })
 export class LoginComponent implements OnInit{
 
-  usuario: Usuario = new Usuario;
-  tipoUser: any;
-  user: any;
-  fundacion:any;
-  nombreUsuario:any;
   persona: Persona = new Persona;
+  usuario: Usuario = new Usuario;
+  fundacion: Fundacion = new Fundacion;
+
+  tipoUser: any;
+  userFoto: any;
+  fundacionLogo:any;
+  nombreUsuario:any;
 
   constructor(
     private _CargarScript: CargarScrpitsService,
@@ -51,8 +54,8 @@ export class LoginComponent implements OnInit{
 
           if (data.estado) {
             this.usuario.idUsuario = data.idUsuario;
-            this.user = data.foto_perfil;
-            this.fundacion = data.fundacion?.logo;
+            this.userFoto = data.foto_perfil;
+            this.fundacionLogo = data.fundacion?.logo;
 
             Swal.fire({
               position: 'top-end',
@@ -64,8 +67,8 @@ export class LoginComponent implements OnInit{
             localStorage.setItem('rol', String(this.usuario.rol));
             //localStorage.setItem('fundacion', String(this.usuario.fundacion?.idFundacion));
             localStorage.setItem('idUsuario', String(this.usuario.idUsuario));
-            localStorage.setItem('nameImagen', String(this.user));
-            localStorage.setItem('nameLogo', String(this.fundacion));
+            localStorage.setItem('nameImagen', String(this.userFoto));
+            localStorage.setItem('nameLogo', String(this.fundacionLogo));
             location.replace('/bienvenido');
           } else {
             console.log("Desactivo")
@@ -79,7 +82,6 @@ export class LoginComponent implements OnInit{
           
         }else{
           console.log("no encontrado")
-
           Swal.fire({
             icon: 'error',
             title: 'Username o password incorrectos!',

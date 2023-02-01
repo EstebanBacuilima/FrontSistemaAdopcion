@@ -21,7 +21,6 @@ export class PersonaService {
     return this.http.get<Persona>(this.URL+idPersona);
   }
 
-
   postPersona(persona: Persona){
     return this.http.post<Persona>(this.URL+'?', persona);
   }
@@ -32,10 +31,6 @@ export class PersonaService {
 
   deletePersona(idPersona: number){
     return this.http.delete<boolean>(this.URL+`eliminar/${idPersona}`);
-  }
-
-  save(persona:Persona){
-    return this.http.post(`${this.URL}/`,persona);
   }
 
   listarPersona():Observable<any>{

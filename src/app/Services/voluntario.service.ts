@@ -15,8 +15,12 @@ export class VoluntarioService {
     return this.http.get<Voluntario[]>(this.URL+'/listar');
   }
 
+  getVoluntariosFundacion(idFundacion: any){
+    return this.http.get<Voluntario[]>(this.URL+'listarVoluntariosPorFundacion/' + idFundacion);
+  }
+
   getPorId(idVoluntario: number){
-    return this.http.get<Voluntario>(this.URL+idVoluntario);
+    return this.http.get<Voluntario>(this.URL+'porId/'+idVoluntario);
   }
 
   postVoluntario(voluntario: Voluntario){

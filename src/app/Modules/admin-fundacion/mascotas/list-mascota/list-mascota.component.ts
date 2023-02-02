@@ -7,6 +7,7 @@ import { FundacionService } from 'src/app/Services/fundacion.service';
 import { FotoService } from 'src/app/Services/imagen.service';
 import { MascotaService } from 'src/app/Services/mascota.service';
 import { UsuarioService } from 'src/app/Services/usuario.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-list-mascota',
@@ -54,7 +55,7 @@ export class ListMascotaComponent implements OnInit {
           result => {
             let mascota = new Mascota;
             mascota.idMascota = result.idMascota;
-            mascota.chip_mascota = result.chip_mascota;
+            mascota.chipMascota = result.chipMascota;
             mascota.nombre_mascota = result.nombre_mascota;
             mascota.color = result.color
             mascota.sexo = result.sexo;
@@ -77,8 +78,73 @@ export class ListMascotaComponent implements OnInit {
       estado = 'NOADOPTAOD';
     } else if (estado_adopcion == false) {
       estado = 'ADOPTADO';
-    } 
+    }
     return estado;
   }
 
+  datainicialMascota: any;
+
+  capParaEdicion(idMascota: any) {
+    this.datainicialMascota = idMascota;
+    console.log("idMascota " + idMascota)
+    this.optenerDatos();
+  }
+
+  optenerDatos() {
+    this.mascotaService.getPorId(this.datainicialMascota).subscribe(data => {
+      this.mascota = data
+      this.mascota.idMascota = this.mascota.idMascota
+      this.mascota.chipMascota
+      this.mascota.nombre_mascota;
+      this.mascota.color;
+      this.mascota.sexo;
+      this.mascota.raza;
+      this.mascota.especie;
+      this.mascota.descripcion;
+      this.mascota.estado_mascota;
+      this.mascota.estado_adopcion;
+      this.mascota.foto;
+      console.log("img = " + this.mascota.foto)
+    })
+  }
+
+  actualizarMascota() {
+    this.cargarImagenMascota();
+    this.mascotaService.updateMascota(this.mascota, this.mascota.idMascota).subscribe(data => {
+      console.log(data)
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Actualizado Correctamente',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    })
+  }
+
+  // IMAGEN
+  file: any = '';
+  image!: any;
+  retrievedImage: any;
+  foto_mascota: string = "";
+  cap_nombre_archivo: any;
+  selectedFile!: File;
+  public imageSelected(event: any) {
+    this.selectedFile = event.target.files[0];
+    // mostrar imagen seleccionada
+    this.image = this.selectedFile;
+    const reader = new FileReader();
+    reader.readAsDataURL(this.selectedFile);
+    reader.onload = () => {
+      this.file = reader.result;
+    };
+    this.cap_nombre_archivo = event.target.value;
+    this.foto_mascota = this.cap_nombre_archivo.slice(12);
+    console.log("Nombre imagen original => " + this.foto_mascota);
+    this.mascota.foto = this.foto_mascota;
+  }
+
+  cargarImagenMascota() {
+    this.fotoService.guararImagenes(this.selectedFile);
+  }
 }

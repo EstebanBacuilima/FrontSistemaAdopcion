@@ -5,7 +5,7 @@ import { Usuario } from "./Usuario";
 export class Mascota {
 
     idMascota?: number;
-    chip_mascota?: string;
+    chipMascota?: string;
     nombre_mascota?: string;
     sexo?: string;
     especie?: Date;

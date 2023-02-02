@@ -56,10 +56,10 @@ export class ListFundacioComponent implements OnInit {
     )
   }
 
-  datainicialPersonal: any;
+  datainicialFundacion: any;
 
   capParaEdicion(idFundacion: any) {
-    this.datainicialPersonal = idFundacion;
+    this.datainicialFundacion = idFundacion;
     console.log("idFundacion " + idFundacion)
     this.optenerDatos();
   }
@@ -68,7 +68,7 @@ export class ListFundacioComponent implements OnInit {
   idUsuarioCap: any;
 
   optenerDatos() {
-    this.fundacionService.getPorId(this.datainicialPersonal).subscribe(data => {
+    this.fundacionService.getPorId(this.datainicialFundacion).subscribe(data => {
       this.fundacion = data
       this.persona.idPersona = this.fundacion.persona.idPersona
       this.persona.cedula = this.fundacion.persona?.cedula
@@ -161,8 +161,5 @@ export class ListFundacioComponent implements OnInit {
   cargarImagenFundacion() {
     this.fotoService.guararImagenes(this.selectedFiles);
   }
-}
-function actualizarFundacion() {
-  throw new Error('Function not implemented.');
 }
 

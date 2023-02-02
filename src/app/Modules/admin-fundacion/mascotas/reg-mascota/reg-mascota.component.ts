@@ -55,7 +55,7 @@ export class RegMascotaComponent implements OnInit {
 
   registraMascota() {
 
-    if (this.mascota.chip_mascota === '' || this.mascota.chip_mascota === null
+    if (this.mascota.chipMascota === '' || this.mascota.chipMascota === null
       || this.mascota.nombre_mascota === '' || this.mascota.sexo === '' || this.mascota.raza === ''
       || this.mascota.color === '' || this.mascota.estado_adopcion === null) {
       Swal.fire({

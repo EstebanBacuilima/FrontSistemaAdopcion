@@ -14,9 +14,7 @@
                     <tr>
                         <th scope="col">N</th>
                         <th scope="col">Cédula</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Teléfono</th>
-                        <th scope="col">Género</th>
+                        <th scope="col">Nombres</th>
                         <th scope="col">Área de Trabajo</th>
                         <th scope="col">Cargo</th>
                         <th scope="col">Estado</th>
@@ -26,18 +24,16 @@
                 </thead>
                 <tbody>
                     <tr
-                    *ngFor="let voluntario of listaVoluntarios | paginate: {itemsPerPage: 10, currentPage: pageActual}; index as i">
+                    *ngFor="let voluntario of voluntarios | paginate: {itemsPerPage: 10, currentPage: pageActual}; index as i">
                         <th scope="row">{{i+1}}</th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td><input type="checkbox" id="cbox1" value="first_checkbox" >
+                        <td>{{voluntario.usuario.persona.cedula}} </td>
+                        <td>{{voluntario.usuario.persona.nombres}} {{voluntario.usuario.persona.apellidos}}</td>
+                        <td>{{voluntario.area_trabajo}}</td>
+                        <td>{{voluntario.cargo}} </td>
+                        <td><input type="checkbox" id="cbox1" value="first_checkbox" [(ngModel)]="voluntario.estado">
                         </td>
                         <td>
-                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalUpdate" >Actualizar</button>
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalUpdate" (click)="capParaEdicion(voluntario.idVoluntario)">Actualizar</button>
                         </td>
                         <td>
                             <a href="" class="btn btn-danger">Eliminar</a>
@@ -149,7 +145,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary">Actualizar</button>
+                <button type="button" class="btn btn-primary"(click)="actualizarVoluntarios()" >Actualizar</button>
             </div>
         </div>
     </div>

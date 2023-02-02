@@ -23,7 +23,7 @@ export class MascotaService {
   }
 
   getPorId(idMascota: number){
-    return this.http.get<Mascota>(this.URL+ idMascota);
+    return this.http.get<Mascota>(this.URL+ 'porId/'+idMascota);
   }
 
   postMascota(mascota: Mascota){

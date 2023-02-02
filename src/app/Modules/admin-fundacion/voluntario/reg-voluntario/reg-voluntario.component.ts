@@ -60,69 +60,124 @@ export class RegVoluntarioComponent implements OnInit {
   }
 
   registrarVoluntario() {
-
-    if (this.verficarPassword == this.usuario.password) {
-
-      if (this.persona.nombres === '' || this.persona.apellidos === '' || this.persona.correo === '' || this.usuario.username === '' || this.usuario.password === ''
-        || this.persona.nombres === null || this.persona.apellidos === null || this.persona.correo === null || this.usuario.username === null || this.usuario.password === null) {
-        Swal.fire({
-          icon: 'error',
-          title: 'Verifique los Campos!'
-        })
-      } else {
-        this.usuarioService.verfUsername(this.usuario.username).subscribe(
-          data => {
-            if (!data) {
-              this.personaService.postPersona(this.persona).subscribe(
-                data => {
-                  console.log("persona: "  + data);
-                  this.persona.idPersona = data.idPersona;
-                  this.usuario.persona = this.persona;
-                  this.usuario.fundacion = this.fundacion;
-                  this.usuario.estado = true;
-                  this.usuario.rol = "VOLUNTARIO";
-                  this.voluntario.estado = true;
-                  this.usuarioService.postUsuario(this.usuario).subscribe(
-                    result => {
-                      console.log("usuario: " + result);
-                      this.usuario = result;
-                      this.voluntario.usuario = this.usuario
-                      this.voluntarioService.postVoluntario(this.voluntario).subscribe(
-                        dataP => {
-                          console.log("personal: " + dataP);
-                          Swal.fire({
-                            position: 'top-end',
-                            icon: 'success',
-                            title: 'Registrado Exitosamente',
-                            showConfirmButton: false,
-                            timer: 1500
-                          })
-                        }
-                      )
-                    }
-                  )
-                }
-              )
-            } else {
-              Swal.fire({
-                icon: 'error',
-                title: 'El username que eligio ya está en uso!',
-                text: 'Cambie su username'
-              })
-              this.usuario.username = '';
-            }
-          }
-        )
-      }
-    } else {
-      Swal.fire({
-        icon: 'error',
-        title: 'Contraseñas son distintas!',
-        text: 'Verifique su contraseña'
-      })
+    if (this.usuario.password !== this.verficarPassword) {
+      this.mostrarMensajeError("Contraseñas son distintas!", "Verifique su contraseña");
+      return;
     }
-
+  
+    if (!this.persona.nombres || !this.persona.apellidos || !this.persona.correo || !this.usuario.username || !this.usuario.password) {
+      this.mostrarMensajeError("Verifique los Campos!");
+      return;
+    }
+  
+    this.usuarioService.verfUsername(this.usuario.username).subscribe(
+      data => {
+        if (data) {
+          this.mostrarMensajeError("El username que eligió ya está en uso!", "Cambie su username");
+          this.usuario.username = '';
+          return;
+        }
+        this.personaService.postPersona(this.persona).subscribe(personaData => {
+          this.persona.idPersona = personaData.idPersona;
+          this.usuario.persona = this.persona;
+          this.usuario.fundacion = this.fundacion;
+          this.usuario.estado = true;
+          this.usuario.rol = "VOLUNTARIO";
+          this.voluntario.estado = true;
+          this.usuarioService.postUsuario(this.usuario).subscribe(usuarioData => {
+            this.usuario = usuarioData;
+            this.voluntario.usuario = this.usuario;
+            this.voluntarioService.postVoluntario(this.voluntario).subscribe(() => {
+              this.mostrarMensajeExito("Registrado Exitosamente");
+            });
+          });
+        });
+      }
+    );
   }
+  
+  mostrarMensajeError(titulo: string, texto?: string) {
+    Swal.fire({
+      icon: 'error',
+      title: titulo,
+      text: texto
+    });
+  }
+  
+  mostrarMensajeExito(titulo: string) {
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: titulo,
+      showConfirmButton: false,
+      timer: 1500
+    });
+  }
+
+  // registrarVoluntario() {
+
+  //   if (this.verficarPassword == this.usuario.password) {
+
+  //     if (this.persona.nombres === '' || this.persona.apellidos === '' || this.persona.correo === '' || this.usuario.username === '' || this.usuario.password === ''
+  //       || this.persona.nombres === null || this.persona.apellidos === null || this.persona.correo === null || this.usuario.username === null || this.usuario.password === null) {
+  //       Swal.fire({
+  //         icon: 'error',
+  //         title: 'Verifique los Campos!'
+  //       })
+  //     } else {
+  //       this.usuarioService.verfUsername(this.usuario.username).subscribe(
+  //         data => {
+  //           if (!data) {
+  //             this.personaService.postPersona(this.persona).subscribe(
+  //               data => {
+  //                 console.log("persona: "  + data);
+  //                 this.persona.idPersona = data.idPersona;
+  //                 this.usuario.persona = this.persona;
+  //                 this.usuario.fundacion = this.fundacion;
+  //                 this.usuario.estado = true;
+  //                 this.usuario.rol = "VOLUNTARIO";
+  //                 this.voluntario.estado = true;
+  //                 this.usuarioService.postUsuario(this.usuario).subscribe(
+  //                   result => {
+  //                     console.log("usuario: " + result);
+  //                     this.usuario = result;
+  //                     this.voluntario.usuario = this.usuario
+  //                     this.voluntarioService.postVoluntario(this.voluntario).subscribe(
+  //                       dataP => {
+  //                         console.log("personal: " + dataP);
+  //                         Swal.fire({
+  //                           position: 'top-end',
+  //                           icon: 'success',
+  //                           title: 'Registrado Exitosamente',
+  //                           showConfirmButton: false,
+  //                           timer: 1500
+  //                         })
+  //                       }
+  //                     )
+  //                   }
+  //                 )
+  //               }
+  //             )
+  //           } else {
+  //             Swal.fire({
+  //               icon: 'error',
+  //               title: 'El username que eligio ya está en uso!',
+  //               text: 'Cambie su username'
+  //             })
+  //             this.usuario.username = '';
+  //           }
+  //         }
+  //       )
+  //     }
+  //   } else {
+  //     Swal.fire({
+  //       icon: 'error',
+  //       title: 'Contraseñas son distintas!',
+  //       text: 'Verifique su contraseña'
+  //     })
+  //   }
+
+  // }
 
   // IMAGEN
   file: any = '';

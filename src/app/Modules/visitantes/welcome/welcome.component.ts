@@ -60,7 +60,7 @@ export class WelcomeComponent implements OnInit {
           result => {
             let mascota = new Mascota;
             mascota.idMascota = result.idMascota;
-            mascota.chip_mascota = result.chip_mascota;
+            mascota.chipMascota = result.chipMascota;
             mascota.nombre_mascota = result.nombre_mascota;
             mascota.color = result.color
             mascota.sexo = result.sexo;

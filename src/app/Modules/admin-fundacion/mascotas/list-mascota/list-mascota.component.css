@@ -1,0 +1,36 @@
+.modal-dialog { 
+    max-width: 1350px!important
+}
+
+.form-titulo{
+    background-color: #32507d;
+    border-radius: 5px;
+    color: #32507d;
+    font-weight: 10px;
+    font-size: 20px;
+    font-family: inherit;
+}
+
+.btnO{
+    background-color: #a9cbff;
+}
+
+.btnA{
+    background-color: #32507d;
+    color: white;
+}
+
+
+
+.nav {
+    margin-bottom: 0px;
+    margin: 0;
+    padding:0;
+}
+
+.row {
+    margin-top: 12px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 12px;
+}

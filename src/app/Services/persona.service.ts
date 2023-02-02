@@ -33,10 +33,6 @@ export class PersonaService {
     return this.http.delete<boolean>(this.URL+`eliminar/${idPersona}`);
   }
 
-  save(persona:Persona){
-    return this.http.post(`${this.URL}/`,persona);
-  }
-
   listarPersona():Observable<any>{
     return this.http.get(`${this.URL}/listar`);
   }

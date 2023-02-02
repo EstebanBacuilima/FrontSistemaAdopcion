@@ -1,1 +1,79 @@
-<p>reg-mascota works!</p>
+<div class="container px-1 ">
+
+    <ul class="nav justify-content-center">
+        <li class="col-md-6">
+            <button type="button" class="btn btnA form-control" >Registrar Mascota</button>
+        </li>
+        <li class="col-md-6">
+            <button type="button" class="btn btnO form-control" routerLink="/list-mascota">Listar Mascotas</button>
+        </li>
+    </ul>
+
+    <form class="row g-2 d-flex justify-content-center">
+
+        <h2 class="form-label-p text-center">Datos Mascota</h2>
+
+        <div class="col-md-6">
+            <label for="chip" class="form-label-p"> Chip</label>
+            <input type="text" class="form-control" name="chip_mascota" [(ngModel)]="mascota.chip_mascota">
+        </div>
+        <div class="col-md-6">
+            <label for="nombreM" class="form-label-p"> Nombre</label>
+            <input type="text" class="form-control" name="nombre_mascota" [(ngModel)]="mascota.nombre_mascota">
+        </div>
+        <div class="col-md-6">
+            <label for="color" class="form-label-p"> Color</label>
+            <input type="text" class="form-control" name="color" [(ngModel)]="mascota.color">
+        </div>
+        <div class="col-md-6">
+            <label for="sexo" class="form-label-p"> Sexo</label>
+            <select id="sexo" class="form-control" name="sexo" [(ngModel)]="mascota.sexo">
+                <option value="" disabled selected>Selecciona un sexo</option>
+                <option value="Macho">Macho</option>
+                <option value="Hembra">Hembra</option>
+                <option value="otro">Otro</option>
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label for="raza" class="form-label-p"> Raza</label>
+            <input type="text" class="form-control" name="raza" [(ngModel)]="mascota.raza">
+        </div>
+        <div class="col-md-6">
+            <label for="especie" class="form-label-p"> Especie</label>
+            <select id="especie" class="form-control" name="especie" [(ngModel)]="mascota.especie">
+                <option value="" disabled selected>Selecciona uns especie</option>
+                <option value="canino">Canino</option>
+                <option value="felino">Felino</option>
+            </select>
+        </div>
+        <div class="col-md-12">
+            <label for="especie" class="form-label-p"> Esterelizado</label>
+            <select id="especie" class="form-control" name="estado_mascota" [(ngModel)]="mascota.estado_mascota">
+                <option value="" disabled selected>Selecciona una opcion</option>
+                <option value="true">Si</option>
+                <option value="false">No</option>
+            </select>
+        </div>
+        <div class="col-md-12">
+            <label for="descripcion" class="form-label-p"> Descripción</label>
+            <textarea class="form-control" aria-label="With textarea" name="descripcion"
+                [(ngModel)]="mascota.descripcion"></textarea>
+        </div>
+
+        <br>
+        <div class="foto">
+            <div class="roww">
+                <div class="col-md-2 imgUp">
+                    <div class="imagePreview" *ngIf="file">
+                        <img [src]="file" class="imagePreview" alt="..." />
+                    </div>
+                    <label class="btn btn-primarys rounded-mid">Foto
+                        <input type="file" class="uploadFile img" value="Upload Photo" (change)="imageSelected($event)"
+                            style="width: 0px;height: 0px;overflow: hidden;">
+                    </label>
+                </div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-primary" (click)="registraMascota()">Registrar Mascota</button>
+    </form>
+</div>

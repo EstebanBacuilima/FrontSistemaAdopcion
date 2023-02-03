@@ -8,7 +8,6 @@ import { ListVoluntarioComponent } from './Modules/admin-fundacion/voluntario/li
 import { RegVoluntarioComponent } from './Modules/admin-fundacion/voluntario/reg-voluntario/reg-voluntario.component';
 import { BienvenidoComponent } from './Modules/admin-super/bienvenido/bienvenido.component';
 import { ListFundacioComponent } from './Modules/admin-super/list-fundacio/list-fundacio.component';
-
 import { RegFundacionComponent } from './Modules/admin-super/reg-fundacion/reg-fundacion.component';
 import { CatalgoMascotasComponent } from './Modules/cliente/catalgo-mascotas/catalgo-mascotas.component';
 import { PanelSeguimientoComponent } from './Modules/cliente/panel-seguimiento/panel-seguimiento.component';
@@ -35,7 +34,6 @@ const routes: Routes = [
   { path: 'catalogo-mascota', component: CatalgoMascotasComponent },
   { path: 'panel-solicitudes-cliente', component: PanelSolicitudesComponent },
   { path: 'panel-seguimiento-cliente', component: PanelSeguimientoComponent },
-
   { path: 'panel-solicitudes-admin', component: PanelSolicitudAdminComponent },
   { path: 'panel-seguimiento-admin', component: PanelSeguimientoAdminComponent },
 
@@ -49,4 +47,8 @@ const routes: Routes = [
 export class AppRoutingModule { 
 
 }
+
+
+
+
 

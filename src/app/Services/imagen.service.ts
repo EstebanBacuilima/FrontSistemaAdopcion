@@ -13,7 +13,7 @@ export class FotoService {
         private http: HttpClient
     ) {}
 
-    private urlApiFoto: string = 'http://localhost:5000/imagen';
+    private urlApiFoto: string = 'https://09fd-181-188-201-61.jp.ngrok.io/imagen';
 
     // NUEVOS METODOS
     guararImagenes(file:File) {

@@ -1,1 +1,132 @@
-<p>panel-solicitud-admin works!</p>
+<!-- <p>panel-solicitud-admin works!</p> -->
+<div class="col-md-10 text-center">
+    <span class="name">Solicitudes de los Adoptantes</span>
+</div>
+<div class="container-fluid g-0 p-2">
+
+    <div class="row g-0">
+
+
+        <div class="col ps-2">
+
+            <div class="row g-0">
+
+            </div>
+
+
+
+
+            <div class="row cards g-0 mt-3">
+
+
+                <div class="col-md-2 d-flex justify-content-center align-items-center">
+                    <img src="/assets/Imagenes/persona-large.jpg" alt="Profile Image" class="profile">
+                </div>
+
+
+                <div class="col-md">
+
+                    <table class="table table-hover mx-auto">
+                        <thead class="text-center fs-5 fst-italic text-secondary">
+                            <tr>
+                                <td colspan="2">Carlos Javier Ibarra Loor</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Cedula</td>
+                                <td>1208377174</td>
+                            </tr>
+                            <tr>
+                                <td>Gmail</td>
+                                <td>carlos@gmail.com</td>
+                            </tr>
+                            <tr>
+                                <td>Telefono</td>
+                                <td>097276353</td>
+                            </tr>
+                            <tr>
+                                <td>Direccion</td>
+                                <td>Ubillas y Babacos</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+                <div class="col-md-2 mascota d-flex justify-content-center align-items-center">
+                    <img src="/assets/Imagenes/pastor-aleman.jpg" alt="Profile Image" class="profile">
+                </div>
+
+                <div class="col">
+
+                    <table class="table table-hover mx-auto">
+                        <thead class="text-center fs-5 fst-italic text-secondary">
+                            <tr>
+                                <td colspan="2">Thomas</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Chip</td>
+                                <td>1623534477474</td>
+                            </tr>
+
+                            <tr>
+                                <td>Sexo</td>
+                                <td>Macho</td>
+                            </tr>
+                            <tr>
+                                <td>Raza</td>
+                                <td>Aleman</td>
+                            </tr>
+                            <tr>
+                                <td>Descripcion</td>
+                                <td>Es un aleman muy grande</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" 
+                data-bs-target="#modal-detalle">Detalles</button>
+
+            </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+    
+  <!-- modal -->
+  <div class="modal " id="modal-detalle" tabindex="-5" aria-labelledby="modal-detalle" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Detalle de la Solicitud</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="container w-75 mt-25 me-25 mt-5 shadown">
+        <div class="rows align-items-strech">
+          <div class="col bg-white mt-25 p-25 ">
+
+           <h1>Detallado de persona</h1>
+
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+      
+
+        <button type="button" class="btn btn-outline-success">Aceptado</button>
+        <button type="button" class="btn btn-outline-warning">Pendeiente</button>
+        <button type="button" class="btn btn-outline-danger">Rechazado</button>
+
+
+      </div>
+    </div>
+  </div>
+</div>

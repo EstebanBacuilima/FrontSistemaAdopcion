@@ -1,1 +1,210 @@
-<p>catalgo-mascotas works!</p>
+<div class="container-fluid">
+    <div class="px-lg-5">
+        <div class="row">
+            <div class="carta col-xl-3 col-lg-4 col-md-6 mb-4 p-25" *ngFor="let mascotas of listaMascotas">
+                <div class="container-mascota rounded ">
+                    <div class="box">
+                        <img [src]="'http://localhost:5000/imagen/images/' + mascotas.foto" [alt]="mascotas.foto"
+                            class="mascotas_foto" />
+                        <div class="content p-4">
+                            <h3>{{mascotas.nombre_mascota}}</h3>
+                            <p>{{mascotas.sexo}}</p>
+                            <p>{{mascotas.especie}}</p>
+                            <p>{{mascotas.raza}}</p>
+                            <p>{{mascotas.descripcion}}</p>
+                            <div class="conBtnr">
+                                <button type="button" class="btn boton btn-outline-success" data-bs-toggle="modal"
+                                    data-bs-target="#modal-formulario" (click)="capParaEdicion(mascotas.idMascota)">Adoptar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- modal -->
+<div class="modal " id="modal-formulario" tabindex="-5" aria-labelledby="modal-formulario" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="container w-75 mt-25 me-25 mt-5 shadown">
+                <div class="rows align-items-strech">
+                    <div class="col bg-white mt-25 p-25 ">
+
+                        <form action="#" method="POST" class="row">
+                            <h3 class="form-title">Formulario</h3>
+                            <div class="steps">
+                                <ul class="step-tab-items">
+                                    <li class="step-item active">1</li>
+                                    <li class="step-item">2</li>
+                                    <li class="step-item">3</li>
+                                </ul>
+                                <div class="step-tabs">
+                                    <div class="step-tab active" id="step-01">
+                                        <h4 class="form-title-sc">Datos Adoptante</h4>
+
+                                        <div class="perfil-usuario-avatar text-center">
+                                            <img [src]="'http://localhost:5000/imagen/images/' + usuario.foto_perfil"
+                                                alt="img-avatar">
+                                        </div>
+
+                                        <div class="form-controll">
+                                            <div class="form-input">
+                                                <input type="text" name="cedula" id="cedula" [(ngModel)]="personas.cedula">
+                                                <label for="cedula">Cedula</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="grid-2">
+                                            <div class="form-controll">
+                                                <div class="form-input">
+                                                    <input type="text" name="nombres" id="nombres" [(ngModel)]="personas.nombres">
+                                                    <label for="nombres">Nombres</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-controll">
+                                                <div class="form-input">
+                                                    <input type="text" name="apellidos" id="apellidos" [(ngModel)]="personas.apellidos">
+                                                    <label for="apellidos">Apellidos</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="grid-2">
+                                        <div class="form-controll">
+                                            <div class="form-input">
+                                                <input type="text" name="telefono" id="telefono" [(ngModel)]="personas.telefono">
+                                                <label for="telefono">Telefono</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-controll">
+                                            <div class="form-input">
+                                                <input type="text" name="celular" id="celular" [(ngModel)]="personas.celular">
+                                                <label for="celular">Celular</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                        <div class="form-controll">
+                                            <div class="form-input">
+                                                <input type="text" name="direccion" id="direccion" [(ngModel)]="personas.direccion">
+                                                <label for="direccion">Direccion</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-controll">
+                                            <div class="form-input">
+                                                <input type="text" name="correo" id="correo" [(ngModel)]="personas.correo">
+                                                <label for="correo">Correo</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-submit">
+                                            <button class="form-btn" type="button" tab-target="step-02">Siguiente</button>
+                                        </div>
+                                    </div>
+                                    <div class="step-tab" id="step-02">
+                                        <h4 class="form-title-sc">Datos Mascota</h4>
+
+                                        <div class="perfil-usuario-avatar text-center">
+                                            <img [src]="'http://localhost:5000/imagen/images/' + mascota.foto"
+                                                alt="img-avatar">
+                                        </div>
+
+                                        <div class="form-controll">
+                                            <div class="form-input">
+                                                <input type="text" name="chipMascota" id="chipMascota" [(ngModel)]="mascota.chipMascota">
+                                                <label for="chipMascota">Chip</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="grid-2">
+                                            <div class="form-controll">
+                                                <div class="form-input">
+                                                    <input type="text" name="nombre_mascota" id="nombre_mascota" [(ngModel)]="mascota.nombre_mascota">
+                                                    <label for="nombre_mascota">Nombre</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-controll">
+                                                <div class="form-input">
+                                                    <input type="text" name="raza" id="raza" [(ngModel)]="mascota.raza">
+                                                    <label for="raza">Raza</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-controll">
+                                            <div class="form-input">
+                                                <input type="text" name="sexo" id="sexo" [(ngModel)]="mascota.sexo">
+                                                <label for="sexo">Sexo</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-controll">
+                                            <div class="form-input">
+                                                <input type="text" name="descripcion" id="descripcion" [(ngModel)]="mascota.descripcion">
+                                                <label for="descripcion">Descripcion</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-submit grid-2">
+                                            <button type="button" class="form-btn"
+                                                tab-target="step-01">Atras</button>
+                                            <button type="button" class="form-btn" tab-target="step-03">Siguiente</button>
+                                        </div>
+                                    </div>
+                                    <div class="step-tab" id="step-03">
+                                        <h4 class="form-title-sc">Formulario</h4>
+
+                                        <div class="form-controll">
+                                            <div class="form-input">
+                                                <input type="text" name="company" id="company" required>
+                                                <label for="company">Current Company</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-controll">
+                                            <div class="form-input">
+                                                <input type="text" name="experience" id="experience" required>
+                                                <label for="experience">Total Experience</label>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-controll">
+                                            <div class="form-input">
+                                                <input type="text" name="designation" id="designation" required>
+                                                <label for="designation">Designation</label>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-submit grid-2">
+                                            <button type="button" class="form-btn"
+                                                tab-target="step-02">Atras</button>
+                                            <button type="submit" class="form-btn">Enviar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br><br><br>
+            <div >
+            </div>
+        </div>
+    </div>
+</div>

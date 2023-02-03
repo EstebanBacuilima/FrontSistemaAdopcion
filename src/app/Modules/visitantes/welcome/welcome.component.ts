@@ -22,17 +22,10 @@ export class WelcomeComponent implements OnInit {
   ngOnInit(): void {
     this.obtenerFundaciones();
     this.obtenerMasotas();
-    this.getlist();
   }
 
   listaFundaciones: Fundacion[] = [];
 
-  getlist(){
-    this.fundacionService.getFundacion1().subscribe((data:any)=>{  
-      alert('llego->'+data)
-      console.log(data)
-    },(err)=>{alert(err)})
-  }
   obtenerFundaciones() {
     this.fundacionService.getFundacion().subscribe(
       data => {

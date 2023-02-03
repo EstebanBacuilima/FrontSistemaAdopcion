@@ -7,7 +7,7 @@ import { Mascota } from '../Models/Mascota';
 })
 export class MascotaService {
 
-  private URL = "https://09fd-181-188-201-61.jp.ngrok.io/api/mascota/";
+  private URL = "http://localhost:5000/api/mascota/";
   constructor(private http: HttpClient) { }
 
   getMascota(){

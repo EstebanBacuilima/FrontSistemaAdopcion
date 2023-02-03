@@ -64,7 +64,7 @@
         </li>
 
         <li>
-          <a href="#" class="nav-link text_0 px-2 text-whitee" routerLink="/reg-voluntario" routerLinkActive="active"
+          <a href="#" class="nav-link text_0 px-2 text-whitee" routerLink="/panel-solicitudes-admin" routerLinkActive="active"
             *ngIf='isFundacionAdmin'>Solictud de Adopciones</a>
         </li>
 
@@ -73,6 +73,11 @@
             *ngIf='isFundacionAdmin'>Reportes</a>
         </li>
 
+        <!-- CLIENTE -->
+        <li>
+          <a href="#" class="nav-link text_0 px-2 text-whitee" routerLink="/catalogo-mascota" routerLinkActive="active"
+            *ngIf='isClient'>Catalogo</a>
+        </li>
       </ul>
       <div class="text-center" [hidden]="isLogin">
         <button type="button" class="btn btn-outline-primary" routerLink="login">Login</button>

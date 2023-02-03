@@ -2,17 +2,22 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Fundacion } from '../Models/Fundacion';
 
+const API= "https://09fd-181-188-201-61.jp.ngrok.io/api/fundacion/";
 @Injectable({
   providedIn: 'root'
 })
 export class FundacionService {
 
-  private URL = "http://localhost:5000/api/fundacion/";
+  private URL = "https://09fd-181-188-201-61.jp.ngrok.io/api/fundacion/";
 
   constructor(private http: HttpClient) { }
 
   getFundacion(){
-    return this.http.get<Fundacion[]>(this.URL+'listar');
+    return this.http.get<Fundacion[]>(API+'listar');
+  }
+
+  getFundacion1(){
+    return this.http.get(API+'listar');
   }
 
   getPorId(idFundacion: number){

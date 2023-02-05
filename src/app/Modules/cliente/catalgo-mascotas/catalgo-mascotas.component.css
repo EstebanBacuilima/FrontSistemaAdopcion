@@ -170,7 +170,6 @@ input:focus {
 }
 
 
-
 .form-submit {
     position: relative;
     width:100%;
@@ -209,49 +208,6 @@ input:focus {
     grid-gap: 30px;
 }
 
-.password-showHide{
-    position: absolute;
-    right: 0px;
-    top: 50%;
-    display: grid;
-    transform: translateY(-50%);
-    cursor: pointer;
-    z-index:99;
-}
-
-.password-showHide .icon {
-    grid-row: 1/2;
-    grid-column: 1/2;
-}
-
-.password-showHide .icon path {
-    fill: #c2c2c2;
-    transition: all 0.2s ease;
-}
-
-.password-showHide:hover .icon path {
-    fill: #2c3638;
-    transition: all 0.2s ease;
-}
-
-.password-showHide .icon.show-password {
-    opacity: 1;
-    z-index: 9;
-}
-.password-showHide .icon.hide-password {
-    opacity: 0;
-    z-index: -1;
-}
-
-.password-showHide.hide .icon.show-password {
-    opacity: 0;
-    z-index: -1;
-}
-
-.password-showHide.hide .icon.hide-password {
-    z-index: 9;
-    opacity: 1;
-}
 
 /*Steps*/
 

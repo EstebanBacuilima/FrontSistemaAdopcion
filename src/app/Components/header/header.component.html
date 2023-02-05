@@ -45,6 +45,11 @@
             *ngIf='isFundacionAdmin'>Home</a>
         </li>
 
+        <li>
+          <a href="#" class="nav-link text_0 px-2 text-white" routerLink="/bienvenido" routerLinkActive="active"
+            *ngIf='isVoluntario'>Home</a>
+        </li>
+
 
         <!-- SUPER ADMIN -->
         <li>
@@ -59,13 +64,24 @@
         </li>
 
         <li>
+          <a href="#" class="nav-link text_0 px-2 text-whitee" routerLink="/reg-mascota" routerLinkActive="active"
+            *ngIf='isVoluntario'>Mascota</a>
+        </li>
+
+
+        <li>
           <a href="#" class="nav-link text_0 px-2 text-whitee" routerLink="/reg-voluntario" routerLinkActive="active"
             *ngIf='isFundacionAdmin'>Voluntario</a>
         </li>
 
         <li>
           <a href="#" class="nav-link text_0 px-2 text-whitee" routerLink="/panel-solicitudes-admin" routerLinkActive="active"
-            *ngIf='isFundacionAdmin'>Solictud de Adopciones</a>
+            *ngIf='isFundacionAdmin'>Solictudes de Adopciones</a>
+        </li>
+
+        <li>
+          <a href="#" class="nav-link text_0 px-2 text-whitee" routerLink="/panel-solicitudes-admin" routerLinkActive="active"
+            *ngIf='isVoluntario'>Solictudes de Adopciones</a>
         </li>
 
         <li>
@@ -73,11 +89,25 @@
             *ngIf='isFundacionAdmin'>Reportes</a>
         </li>
 
+        <li>
+          <a href="#" class="nav-link text_0 px-2 text-whitee" routerLink="/reg-voluntario" routerLinkActive="active"
+            *ngIf='isVoluntario'>Seguimiento de Mascotas</a>
+        </li>
+
         <!-- CLIENTE -->
         <li>
           <a href="#" class="nav-link text_0 px-2 text-whitee" routerLink="/catalogo-mascota" routerLinkActive="active"
             *ngIf='isClient'>Catalogo</a>
         </li>
+        <li>
+          <a href="#" class="nav-link text_0 px-2 text-whitee" routerLink="/panel-solicitudes-cliente" routerLinkActive="active"
+            *ngIf='isClient'>Solicitudes</a>
+        </li>
+        <li>
+          <a href="#" class="nav-link text_0 px-2 text-whitee" routerLink="/panel-solicitudes-cliente" routerLinkActive="active"
+            *ngIf='isClient'>Mis Mascotas</a>
+        </li>
+
       </ul>
       <div class="text-center" [hidden]="isLogin">
         <button type="button" class="btn btn-outline-primary" routerLink="login">Login</button>

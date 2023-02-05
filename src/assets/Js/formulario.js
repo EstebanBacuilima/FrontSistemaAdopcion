@@ -26,7 +26,7 @@ allStepBtn.forEach(item => {
         allStepItem.forEach(item => {
             item.classList.remove('active')
         })
-     
+    
         allTabs.forEach((tab,i) => {
             if(tab.id === currentTab.id) {
                 for(let l = 0; i >= 0; i--) {

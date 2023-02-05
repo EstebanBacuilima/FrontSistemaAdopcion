@@ -5,9 +5,7 @@ export class SolicitudAdopcion {
 
     idSolicitudAdopcion?: number;
     fecha_solicitud_adopcion?: Date;
-    descripcion?: string;
-    razon?: string;
-    estado?: boolean;
+    estado?: string;
 
     mascota?: Mascota;
     usuario?: Usuario;

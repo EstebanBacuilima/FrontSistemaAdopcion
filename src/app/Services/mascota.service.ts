@@ -34,6 +34,14 @@ export class MascotaService {
     return this.http.put<Mascota>(this.URL+`actualizar/${idMascota}`, mascota);
   }
 
+  updateEstadoAdopcion(mascota: Mascota, idMascota: any){
+    return this.http.put<Mascota>(this.URL+`actualizarEstadoMascota/${idMascota}`, mascota);
+  }
+
+  updateDueñoMascota(mascota: Mascota, idMascota: any){
+    return this.http.put<Mascota>(this.URL+`actualizarEstadoMascota/${idMascota}`, mascota);
+  }
+
   deleteMascota(idMascota: number){
     return this.http.delete<boolean>(this.URL+`eliminar/${idMascota}`);
   }

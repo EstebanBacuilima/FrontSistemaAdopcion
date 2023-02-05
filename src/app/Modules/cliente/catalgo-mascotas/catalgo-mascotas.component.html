@@ -14,7 +14,7 @@
                             <p>{{mascotas.descripcion}}</p>
                             <div class="conBtnr">
                                 <button type="button" class="btn boton btn-outline-success" data-bs-toggle="modal"
-                                    data-bs-target="#modal-formulario" (click)="capParaEdicion(mascotas.idMascota)">Adoptar</button>
+                                    data-bs-target="#modal-formulario" (click)="capParaSolicitudAdopcion(mascotas.idMascota)">Adoptar</button>
                             </div>
                         </div>
                     </div>
@@ -165,34 +165,18 @@
                                     <div class="step-tab" id="step-03">
                                         <h4 class="form-title-sc">Formulario</h4>
 
-                                        <div class="form-controll">
+                                        <div class="form-controll" *ngFor="let pregunta of listaPreguntas">
                                             <div class="form-input">
-                                                <input type="text" name="company" id="company" required>
-                                                <label for="company">Current Company</label>
+                                                <input type="text" name="respuesta" id="respuesta" [(ngModel)]="pregunta.respuesta">
+                                                <label for="company">{{ pregunta.pregunta }}</label>
                                             </div>
                                         </div>
-
-                                        <div class="form-controll">
-                                            <div class="form-input">
-                                                <input type="text" name="experience" id="experience" required>
-                                                <label for="experience">Total Experience</label>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="form-controll">
-                                            <div class="form-input">
-                                                <input type="text" name="designation" id="designation" required>
-                                                <label for="designation">Designation</label>
-                                            </div>
-                                        </div>
-
 
                                         <div class="form-submit grid-2">
                                             <button type="button" class="form-btn"
                                                 tab-target="step-02">Atras</button>
-                                            <button type="submit" class="form-btn">Enviar</button>
-                                        </div>
+                                            <button type="submit" class="form-btn" (click)="enviarSolicitud()">Enviar</button>
+                                        </div> 
                                     </div>
                                 </div>
                             </div>

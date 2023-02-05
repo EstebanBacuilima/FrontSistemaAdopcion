@@ -98,7 +98,13 @@ openFileInput() {
               this.isClient = false;
               this.isVoluntario = false;
               this.isPublico = false;
-              //this.verificaVoluntario(data.idUsuario);
+              break;
+            case 'VOLUNTARIO':
+                this.isSuperAdmin = false;
+                this.isFundacionAdmin = false;
+                this.isClient = false;
+                this.isVoluntario = true;
+                this.isPublico = false;
               break;
             case 'SUPER_ADMINISTRADOR':
               this.isSuperAdmin = true;
@@ -152,22 +158,20 @@ openFileInput() {
     this.fotoService.guararImagenes(this.selectedFile);
   }
 
-  /*verificaVoluntario(idUsuario: any) {
-    console.log('Comprobando los cargos del usuario ...')
-    this.personalCargoService.getByUsuario(idUsuario).subscribe(
-      data => {
-        if (data != null && data.length > 0) {
-          data.forEach(personal => {
-            if (personal.cargo?.nombre === 'Bodega') {
-              this.isVoluntario = true;
-            } 
-          });
-        } else {
-          this.isVoluntario = true;
-        }
-      }
-    )
-  }*/
+  // verificaVoluntario(idUsuario: any) {
+  //   this.usuarioService.getPorId(idUsuario).subscribe(
+  //     data => {
+  //       if (data != null) {
+  //         this.usuario = data
+  //           if (this.usuario.rol === 'VOLUNTARIO') {
+  //             this.isVoluntario = true;
+  //           } 
+  //       } else {
+  //         this.isVoluntario = true;
+  //       }
+  //     }
+  //   )
+  // }
 
 }
 

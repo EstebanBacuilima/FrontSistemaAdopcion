@@ -1,9 +1,11 @@
 <div class="container px-1 py-5 mx-auto p-8 rounded border-gray-200">
 
     <ul class="nav justify-content-center">
-        <li class="nav-item">
-            <button class="btn btn-primary m-1" type="button" routerLink="/register-fundacion">Registrar Fundacion</button>
-            <button class="btn btn-primary m-1" type="button">Listar Fundaciones</button>
+        <li class="col-md-6">
+            <button type="button" class="btn btnO form-control" routerLink="/register-fundacion">Registrar Fundacion</button>
+        </li>
+        <li class="col-md-6">
+            <button type="button" class="btn btnA form-control" >Listar Fundaciones</button>
         </li>
     </ul>
 
@@ -52,6 +54,8 @@
             <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
         </div>
     </div>
+    <h2 class="form-titulo text-center">.</h2>
+
 </div>
 
  <!-- Modal -->

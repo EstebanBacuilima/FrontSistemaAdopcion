@@ -24,8 +24,22 @@ export class RegFundacionComponent implements OnInit {
   constructor(private fundacionService: FundacionService, private personaService: PersonaService, private usuarioService: UsuarioService, private router: Router, private fotoService: FotoService) { }
 
   ngOnInit(): void {
-    this.fundacion.ruc === '';
   }
+
+
+  mostrarMensajeRuc = false;
+
+  mensajeInput(event:any) {
+    if (event.target.value === '') {
+      console.log('El input está vacío');
+      this.mostrarMensajeRuc = true;
+    } else {
+      console.log('El input está lleno');
+      this.mostrarMensajeRuc = false;
+    }
+  }
+
+
 
   registrarFundacion() {
     if ( !this.fundacion.ruc || this.fundacion.ruc === null || !this.fundacion.acronimo || this.fundacion.acronimo === null || this.fundacion.telefono === null || !this.fundacion.direccion || !this.fundacion.correo || this.fundacion.correo === null || !this.fundacion.logo || this.fundacion.logo === null || !this.fundacion.mision || this.fundacion.mision === null || !this.fundacion.nombre_fundacion || this.fundacion.nombre_fundacion === null
@@ -114,7 +128,7 @@ export class RegFundacionComponent implements OnInit {
     }
   }
 
-  // IMAGEN
+  // IMAGEN USUARIO
   file: any = '';
   image!: any;
   retrievedImage: any;
@@ -140,7 +154,7 @@ export class RegFundacionComponent implements OnInit {
     this.fotoService.guararImagenes(this.selectedFile);
   }
 
-  // IMAGEN USUARIO
+  // IMAGEN FUDACION
   imagen!: any;
   filem: any = '';
   foto_fundacion: string = "";
@@ -164,4 +178,7 @@ export class RegFundacionComponent implements OnInit {
   cargarImagenFundacion() {
     this.fotoService.guararImagenes(this.selectedFiles);
   }
+
+
+
 }

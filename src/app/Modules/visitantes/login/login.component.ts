@@ -5,6 +5,7 @@ import { CargarScrpitsService } from 'src/app/cargar-scrpits.service';
 import { Fundacion } from 'src/app/Models/Fundacion';
 import { Persona } from 'src/app/Models/Persona';
 import { Usuario } from 'src/app/Models/Usuario';
+import { FotoService } from 'src/app/Services/imagen.service';
 import { PersonaService } from 'src/app/Services/persona.service';
 import { UsuarioService } from 'src/app/Services/usuario.service';
 import Swal from 'sweetalert2';
@@ -30,6 +31,7 @@ export class LoginComponent implements OnInit{
     private usuarioService: UsuarioService, 
     private personaService: PersonaService,
     private router: Router,
+    private fotoService: FotoService,
     
   ){
     _CargarScript.Cargar(["loginFunciones"]);
@@ -42,7 +44,6 @@ export class LoginComponent implements OnInit{
     this.persona.correo = '';
     this.usuario.username = '';
     this.usuario.password = '';
-    localStorage.removeItem('idUsuario');
   }
 
 
@@ -116,6 +117,11 @@ export class LoginComponent implements OnInit{
     this.usuario.foto_perfil= this.nombre_orignal_u;
   }
 
+  cargarImagenUsuario() {
+    this.fotoService.guararImagenes(this.selectedFiles);
+  }
+
+
   // REGISTRARSE //
 
   verficarPassword: any;
@@ -139,10 +145,12 @@ export class LoginComponent implements OnInit{
               data => {
                 console.log(data);
                 this.persona.idPersona = data.idPersona;
+                this.persona = data;
                 this.usuario.persona = this.persona;
                 this.usuario.fundacion = this.fundacion;
                 this.usuario.estado = true;
                 this.usuario.rol = "CLIENTE";
+                this.cargarImagenUsuario();
                     this.usuarioService.postUsuario(this.usuario).subscribe(
                       result => {
                         console.log(result);

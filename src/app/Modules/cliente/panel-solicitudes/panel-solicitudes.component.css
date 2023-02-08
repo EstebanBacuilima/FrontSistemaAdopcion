@@ -46,14 +46,12 @@
     background-color: #32507d;
     color: white;
   }
-  .col-md-{
-    padding: 10px;
-  }
+
   .btn{
     background-color: #32507d;
     color: white;
   }
-  
+
   .modal-dialog {
     max-width: 1350px !important
   }
@@ -85,5 +83,21 @@
   .respuesta{
     color: #000000;
     font-size:20px ;
+    text-align: center;
+  }
+
+  .estado{
+    border-radius: 10px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .col-md-{
+    padding: 10px;
+  }
+
+  .mensaje{
+    border-radius: 1px;
+    width: 100%;
     text-align: center;
   }

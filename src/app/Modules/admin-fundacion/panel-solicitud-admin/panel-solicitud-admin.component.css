@@ -86,3 +86,19 @@ button {
   font-size:20px ;
   text-align: center;
 }
+
+.estado{
+  border-radius: 10px;
+  width: 100%;
+  text-align: center;
+}
+
+.col-md-{
+  padding: 10px;
+}
+
+.mensaje{
+  border-radius: 1px;
+  width: 100%;
+  text-align: center;
+}

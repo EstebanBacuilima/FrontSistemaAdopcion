@@ -8,21 +8,20 @@
             <div class="row g-0">
             </div>
             <div class="row cards g-0 mt-3" *ngFor="let solicitudes of solicitudes">
-                <div class="col-md-"> 
-                    <label class="btn" style="background-color: orange;" *ngIf='obtenerEstado(solicitudes.estado) === "PENDIENTE"' >PENDIENTE</label>
+                <div class="col-md-" *ngIf='obtenerEstado(solicitudes.estado) === "PENDIENTE"'> 
+                    <label class="estado" style="background-color: orange;" >PENDIENTE</label>
                 </div>
 
-                <div class="col-md-" > 
-                    <label class="btn" style="background-color: greenyellow; color: black;" *ngIf='obtenerEstado(solicitudes.estado) === "ACEPTADO"' >ACEPTADO</label>
-                </div>
-                
-                
-                <div class="col-md-" > 
-                    <label class="btn" style="background-color: rgb(63, 193, 236); color: black;" *ngIf='obtenerEstado(solicitudes.estado) === "EN PROCESO"' >EN PROCESO</label>
+                <div class="col-md-" *ngIf='obtenerEstado(solicitudes.estado) === "ACEPTADO"'> 
+                    <label class="estado" style="background-color: greenyellow; color: black;"  >ACEPTADO</label>
                 </div>
 
-                <div class="col-md-" > 
-                    <label class="btn" style="background-color: rgb(212, 51, 27); color: rgb(255, 255, 255);" *ngIf='obtenerEstado(solicitudes.estado) === "SOLICITUD RECHAZADA"' >SOLICITUD RECHAZADA</label>
+                <div class="col-md-" *ngIf='obtenerEstado(solicitudes.estado) === "EN PROCESO"'> 
+                    <label class="estado" style="background-color: rgb(63, 193, 236); color: black;"  >EN PROCESO</label>
+                </div>
+
+                <div class="col-md-" *ngIf='obtenerEstado(solicitudes.estado) === "SOLICITUD RECHAZADA"'> 
+                    <label class="estado" style="background-color: rgb(212, 51, 27); color: rgb(255, 255, 255);"  >SOLICITUD RECHAZADA</label>
                 </div>
                 
                 <div class="col-md-2 d-flex justify-content-center align-items-center">
@@ -96,6 +95,22 @@
 
                 </div>
 
+                <div class="col-md-" *ngIf='obtenerEstado(solicitudes.estado) === "PENDIENTE"'> 
+                    <label class="mensaje" style="background-color: rgb(234, 243, 245);">Su solicitud se envio correctamente a la Fundacion: {{solicitudes.mascota.fundacion.nombre_fundacion}} </label>
+                </div>
+                <div class="col-md-" *ngIf='obtenerEstado(solicitudes.estado) === "ACEPTADO"'> 
+                    <label class="mensaje" style="background-color: rgb(234, 243, 245); color: black;">Felicidades tu solicitud a sido Aprobada</label>
+                    <label class="mensaje" style="background-color: rgb(234, 243, 245);color: black;">Gracias por tu Adopcion de parte de {{solicitudes.mascota.fundacion.nombre_fundacion}}</label>
+                    <label class="mensaje" style="background-color: rgb(234, 243, 245); color: black;">Puedes Acercarte a nuestras instalaciones ubicada en  {{solicitudes.mascota.fundacion.direccion}} </label>
+                    <label class="mensaje" style="background-color: rgb(234, 243, 245); color: black;"> Telf: {{solicitudes.mascota.fundacion.telefono}} Correo: {{solicitudes.mascota.fundacion.correo}}</label>
+                </div>
+                <div class="col-md-" *ngIf='obtenerEstado(solicitudes.estado) === "EN PROCESO"'> 
+                    <label class="mensaje" style="background-color: rgb(234, 243, 245);">Su solicitud esta en proceso de revisión</label>
+                </div>
+                <div class="col-md-" *ngIf='obtenerEstado(solicitudes.estado) === "SOLICITUD RECHAZADA"'> 
+                    <label class="mensaje" style="background-color: rgb(234, 243, 245);">Su solicitud de Adopción fue rechazada por la fundacion {{solicitudes.mascota.fundacion.nombre_fundacion}} </label>
+                    <label class="mensaje" style="background-color: rgb(234, 243, 245);"></label>
+                </div>
             </div>
         </div>
     </div>

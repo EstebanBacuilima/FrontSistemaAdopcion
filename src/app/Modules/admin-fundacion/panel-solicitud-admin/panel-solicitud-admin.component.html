@@ -8,21 +8,22 @@
             <div class="row g-0">
             </div>
             <div class="row cards g-0 mt-3" *ngFor="let solicitudes of solicitudes">
-                <div class="col-md-"> 
-                    <label class="btn" style="background-color: orange;" *ngIf='obtenerEstado(solicitudes.estado) === "PENDIENTE"' >PENDIENTE</label>
+                <div class="col-md-" *ngIf='obtenerEstado(solicitudes.estado) === "PENDIENTE"'> 
+                    <label class="estado" style="background-color: orange;"  >PENDIENTE</label>
                 </div>
 
-                <div class="col-md-" > 
-                    <label class="btn" style="background-color: greenyellow; color: black;" *ngIf='obtenerEstado(solicitudes.estado) === "ACEPTADO"' >ACEPTADO</label>
+                <div class="col-md-" *ngIf='obtenerEstado(solicitudes.estado) === "ACEPTADO"'> 
+                    <label class="estado" style="background-color: greenyellow; color: black;"  >ACEPTADO</label>
                 </div>
 
-                <div class="col-md-" > 
-                    <label class="btn" style="background-color: rgb(63, 193, 236); color: black;" *ngIf='obtenerEstado(solicitudes.estado) === "EN PROCESO"' >EN PROCESO</label>
+                <div class="col-md-" *ngIf='obtenerEstado(solicitudes.estado) === "EN PROCESO"'> 
+                    <label class="estado" style="background-color: rgb(63, 193, 236); color: black;"  >EN PROCESO</label>
                 </div>
 
-                <div class="col-md-" > 
-                    <label class="btn" style="background-color: rgb(212, 51, 27); color: rgb(255, 255, 255);" *ngIf='obtenerEstado(solicitudes.estado) === "SOLICITUD RECHAZADA"' >SOLICITUD RECHAZADA</label>
+                <div class="col-md-" *ngIf='obtenerEstado(solicitudes.estado) === "SOLICITUD RECHAZADA"'> 
+                    <label class="estado" style="background-color: rgb(212, 51, 27); color: rgb(255, 255, 255);"  >SOLICITUD RECHAZADA</label>
                 </div>
+                
                 
                 <div class="col-md-2 d-flex justify-content-center align-items-center">
                     <img [src]="'http://localhost:5000/imagen/images/' + solicitudes.usuario.foto_perfil"

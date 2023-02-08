@@ -22,6 +22,10 @@ export class WelcomeComponent implements OnInit {
   ngOnInit(): void {
     this.obtenerFundaciones();
     this.obtenerMasotas();
+    localStorage.removeItem('idUsuario');
+    localStorage.removeItem('rol');
+    localStorage.removeItem('nameImagen');
+    localStorage.removeItem('nameLogo');
   }
 
   listaFundaciones: Fundacion[] = [];

@@ -9,7 +9,7 @@ import { CargarScrpitsService } from 'src/app/cargar-scrpits.service';
 export class BienvenidoComponent implements OnInit {
 
   constructor(private _CargarScript: CargarScrpitsService) {
-    _CargarScript.Cargar(["formulario"]);
+   // _CargarScript.Cargar(["formulario"]);
   }
 
   cargarScrip() {
@@ -18,7 +18,7 @@ export class BienvenidoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cargarScrip();
+    //this.cargarScrip();
   }
 
 }

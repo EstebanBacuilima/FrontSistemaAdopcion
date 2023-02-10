@@ -92,44 +92,4 @@ export class PanelSolicitudesComponent implements OnInit {
     )
   }
 
-  // obtenerRespuestasyPreguntasSolicitante() {
-  //   this.solicitudAdopcionService.listarRespuestasPreguntasPorSolicitud(this.datainicialSolicitud).subscribe(
-  //     data => {
-  //     this.preguntasRespuestas = data.map(
-  //         result => {
-  //           let respuesta = new Respuesta;
-  //           respuesta.idRespuesta = result.idRespuesta;
-  //           respuesta.respuestas = result.respuestas;
-  //           //respuesta.pregunta = result.pregunta;
-  //           return respuesta;
-  //         }
-  //       );
-  //     },
-  //     error => (console.log(error))
-  //   )
-  // }
-
-  // obtenerSolicitudes() {
-  //   this.solicitudAdopcionService.getSolicitudesFundacion(this.idFundacion).subscribe(
-  //     data => {
-  //       this.listaSolicitudes = data.map(
-  //         result => {
-  //           let solicitud = new SolicitudAdopcion;
-  //           this.solicitud.idSolicitudAdopcion = result.idSolicitudAdopcion;
-  //           this.solicitud.fecha_solicitud_adopcion = result.fecha_solicitud_adopcion;
-  //           this.solicitud.razon = result.razon;
-  //           this.solicitud.descripcion = result.descripcion
-  //           this.solicitud.estado = result.estado;
-  //           this.usuario.foto_perfil = result.usuario?.foto_perfil;
-  //           this.solicitud.usuario = result.usuario;
-  //           this.solicitud.mascota = result.mascota;
-  //           return solicitud;
-  //         }
-  //       );
-  //       this.loading = false;
-  //     }
-  //   )
-  // }
-
-
 }

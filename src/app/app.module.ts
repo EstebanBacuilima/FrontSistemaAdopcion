@@ -30,10 +30,13 @@ import { PanelSolicitudesComponent } from './Modules/cliente/panel-solicitudes/p
 import { PanelSeguimientoComponent } from './Modules/cliente/panel-seguimiento/panel-seguimiento.component';
 import { PanelSolicitudAdminComponent } from './Modules/admin-fundacion/panel-solicitud-admin/panel-solicitud-admin.component';
 import { PanelSeguimientoAdminComponent } from './Modules/admin-fundacion/panel-seguimiento-admin/panel-seguimiento-admin.component';
-
-
-
-
+// NUEVOS
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+// PRIMENG
+import {InputTextareaModule} from 'primeng/inputtextarea';
+import { ReportesComponent } from './Modules/admin-fundacion/reportes/reportes.component';
+import {ChartModule} from 'primeng/chart';
+import {ToastModule} from 'primeng/toast';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,7 +55,8 @@ import { PanelSeguimientoAdminComponent } from './Modules/admin-fundacion/panel-
     PanelSolicitudesComponent,
     PanelSeguimientoComponent,
     PanelSeguimientoAdminComponent,
-    PanelSolicitudAdminComponent
+    PanelSolicitudAdminComponent,
+    ReportesComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,11 +70,18 @@ import { PanelSeguimientoAdminComponent } from './Modules/admin-fundacion/panel-
     ReactiveFormsModule,
     BrowserAnimationsModule,
     NgxPaginationModule,
-    CommonModule
+    CommonModule,
+    // PRIME
+
   ],
   providers: [
     CargarScrpitsService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent
+  ],
+  schemas: [ 
+    CUSTOM_ELEMENTS_SCHEMA 
+  ]
+
 })
 export class AppModule { }

@@ -30,19 +30,49 @@ export class CatalgoMascotasComponent implements OnInit {
   idFundacion: any;
 
   constructor(private _CargarScript: CargarScrpitsService, private solicitudService: SolicitudAdopcionService, private mascotaService: MascotaService, private fundacionService: FundacionService, private personaService: PersonaService, private usuarioService: UsuarioService, private router: Router) {
-    _CargarScript.Cargar(["formulario"]);
+    // _CargarScript.Cargar(["formulario"]);
   }
 
-  cargarScrip() {
-    this._CargarScript.Cargar(["formulario"]);
-    console.log("Esta activado scrip -> ");
-  }
 
   ngOnInit(): void {
     this.obtenerMasotas();
     this.obtenerUsuario();
     this.cargarScrip();
     this.obtenerPreguntas();
+  }
+
+  cargarScrip(){
+    let allStepBtn = document.querySelectorAll('[tab-target]');
+    let allStepItem = document.querySelectorAll('.step-item');
+    let allTabs = document.querySelectorAll('.step-tab');
+    allStepBtn.forEach(item => {
+      item.addEventListener('click', () => {
+        let currentTabId = item.getAttribute('tab-target');
+        let currentTab = document.getElementById(`${currentTabId}`);
+  
+        allStepItem.forEach(item => {
+          item.classList.remove('active');
+        });
+  
+        allTabs.forEach((tab, i) => {
+          if (currentTab && currentTab.id === currentTab.id)  {
+            for (let l = 0; i >= 0; i--) {
+              allStepItem[i].classList.add('active');
+            }
+          }
+        });
+  
+        allTabs.forEach(item => {
+          item.classList.remove('active');
+        });
+  
+        if (currentTab) {
+          currentTab.classList.add('active');
+          item.classList.add('active');
+        }
+        
+      });
+    });
   }
 
   personas: any;

@@ -82,6 +82,19 @@ export class PanelSolicitudAdminComponent implements OnInit {
     this.datainicialSolicitud = idSolicitudAdopcion;
     console.log("idSolicitud " + idSolicitudAdopcion)
     this.obtenerRespuestasyPreguntasSolicitante();
+    this. obtenerSolicitudesCapturadas();
+  }
+
+  solicitudCap:any
+
+  obtenerSolicitudesCapturadas() {
+    console.log("entro solo a sus datos")
+    this.solicitudAdopcionService.getPorId(this.datainicialSolicitud).subscribe(
+      data => {
+        this.solicitudCap = data
+      },
+      error => (console.log(error))
+    )
   }
 
   preguntasRespuestas: any;
@@ -109,6 +122,7 @@ export class PanelSolicitudAdminComponent implements OnInit {
           this.usuario = dataU
           this.solicitud.estado = 'A';
           this.mascota.estado_adopcion = false;
+          this.mascota.estado_seguimiento = true;
           this.solicitud.mascota = this.mascota;
           this.solicitud.usuario = this.usuario;
           console.log("Estado mascota adopcion antes " + this.idSolicitud);

@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
 
@@ -32,10 +32,12 @@ export class LoginComponent implements OnInit {
     private personaService: PersonaService,
     private router: Router,
     private fotoService: FotoService,
-
+    private toastrService: ToastrService
   ) {
     _CargarScript.Cargar(["loginFunciones"]);
   }
+
+
 
   ngOnInit(): void {
     localStorage.removeItem('idUsuario');
@@ -44,54 +46,56 @@ export class LoginComponent implements OnInit {
     localStorage.removeItem('nameLogo');
   };
 
-
+  showSpinner:any;
   login() {
-    this.usuarioService.login(this.usuario.username, this.usuario.password).subscribe(
-      data => {
-        console.log(data);
-        if (data != null) {
-
-          if (data.estado) {
-            this.usuario.idUsuario = data.idUsuario;
-            this.userFoto = data.foto_perfil;
-            this.fundacionLogo = data.fundacion?.logo;
-
-            Swal.fire({
-              position: 'top-end',
-              icon: 'success',
-              title: 'Bienvenido ' + data.username,
-              showConfirmButton: false,
-              timer: 1500
-            })
-            localStorage.setItem('rol', String(this.usuario.rol));
-            localStorage.setItem('idUsuario', String(this.usuario.idUsuario));
-            localStorage.setItem('nameImagen', String(this.userFoto));
-            localStorage.setItem('nameLogo', String(this.fundacionLogo));
-            location.replace('/bienvenido');
+    if ( !this.usuario.username || !this.usuario.password) {
+      this.toastrService.error('Uno o más campos vacios', 'Verifique los Campos de texto', {
+        timeOut: 3000,
+      });
+    } else {
+      this.showSpinner = true;
+      this.usuarioService.login(this.usuario.username, this.usuario.password).subscribe(
+        data => {
+          console.log(data);
+          if (data != null) {
+            if (data.estado == true) {
+              this.usuario.idUsuario = data.idUsuario;
+              this.userFoto = data.foto_perfil;
+              this.fundacionLogo = data.fundacion?.logo;
+              this.toastrService.success('Bienvenido', 'Exitoso', {
+                timeOut: 1500,
+                'progressBar': true,
+                'progressAnimation': 'increasing'
+              });
+              
+              localStorage.setItem('rol', String(this.usuario.rol));
+              localStorage.setItem('idUsuario', String(this.usuario.idUsuario));
+              localStorage.setItem('nameImagen', String(this.userFoto));
+              localStorage.setItem('nameLogo', String(this.fundacionLogo));
+              setTimeout(() => {
+                this.showSpinner = false;
+                location.replace('/bienvenido');
+              }, 1500);
+            } else {
+              console.log("Desactivo")
+              this.toastrService.error('Usuario Inhabilitado', 'No tiene acceso', {
+                timeOut: 3000,
+              });
+              this.usuario = new Usuario;
+            }
           } else {
-            console.log("Desactivo")
-            Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: 'Usuario inhabilitado'
-            })
+            console.log("no encontrado")
+            this.toastrService.warning('Username o password incorrectos!', 'Aviso!', {
+              timeOut: 4000,
+            });
             this.usuario = new Usuario;
           }
-
-        } else {
-          console.log("no encontrado")
-          Swal.fire({
-            icon: 'error',
-            title: 'Username o password incorrectos!',
-            text: 'Revise sus credenciales porfavor'
-          })
-          this.usuario = new Usuario;
-
+          this.showSpinner = false;
         }
-
-      }
-    )
+      )
+    }
   }
+
 
   imagen!: any;
   nombre_orignal_u: string = "";

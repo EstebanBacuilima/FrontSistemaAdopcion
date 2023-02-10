@@ -15,6 +15,7 @@ export class Mascota {
     foto?: string;
     estado_mascota?: boolean;
     estado_adopcion?: boolean;
+    estado_seguimiento?: boolean;
     
     fundacion?: Fundacion;
     usuario?: Usuario;

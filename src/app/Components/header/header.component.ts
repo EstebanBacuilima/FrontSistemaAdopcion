@@ -5,7 +5,9 @@ import { CargarScrpitsService } from 'src/app/cargar-scrpits.service';
 import { Persona } from 'src/app/Models/Persona';
 import { Usuario } from 'src/app/Models/Usuario';
 import { FotoService } from 'src/app/Services/imagen.service';
+import { PersonaService } from 'src/app/Services/persona.service';
 import { UsuarioService } from 'src/app/Services/usuario.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-header',
@@ -36,6 +38,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
 
   constructor(
+    private personaService: PersonaService,
     private _CargarScript: CargarScrpitsService,
     private usuarioService: UsuarioService,
     private fotoService: FotoService,
@@ -62,9 +65,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
   }
 
-  onFileSelected(event: any) {
-    const selectedFile = event.target.files[0];
-  }
 
   persona: Persona = new Persona;
 
@@ -75,6 +75,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         data => {
           this.usuario = data;
           this.usuario.persona = data.persona;
+          this.persona.idPersona = data.persona?.idPersona;
           this.persona.nombres = data.persona?.nombres;
           this.persona.apellidos = data.persona?.apellidos;
           this.persona.cedula = data.persona?.cedula;
@@ -165,6 +166,25 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   cargarImagenUsuario() {
     this.fotoService.guararImagenes(this.selectedFile);
+  }
+
+
+  // ACTULIZAR PERFIL DE USUARIO
+  actualizarFundacion() {
+    this.personaService.updatePersona(this.persona, this.persona.idPersona).subscribe(data => {
+      console.log(data)
+      this.cargarImagenUsuario();
+      this.usuarioService.updateUsuario(this.usuario, this.usuario.idUsuario).subscribe(data => {
+        console.log(data)
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Perfil Actualizado Correctamente',
+            showConfirmButton: false,
+            timer: 1500
+          })
+      })
+    })
   }
 
 

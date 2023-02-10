@@ -115,6 +115,25 @@
                 <div class="rows align-items-strech">
                     <div class="col bg-white mt-25 p-25 ">
 
+                        <!-- <form class="row g-2 d-flex justify-content-center">
+                            <h2 class="form text-center p-25 ">Datos de la Solicitud</h2>
+                            <div class="col-md-6 text-center" >
+                                <div class="col-12 p-10">
+                                    <label for="cedula" class="form-label-p"> Cedula:  </label>
+                                    <label type="cedula" class="cedula text-center" name="cedula">{{solicitudes.usuario.persona?.cedula}}</label>   
+                                </div> 
+                                <div class="col-12 p-10">
+                                    <label for="cedula" class="form-label-p"> Nombres:  </label>
+                                    <label type="cedula" class="cedula text-center" name="cedula">{{solicitudes.usuario.persona?.nombres}} {{solicitudes.usuario.persona?.apellidos}}</label>   
+                                </div> 
+                            </div>
+                            <div class="col-md-6">
+                                <label for="password" class="form-label-p"> Repita su Contraseña</label>
+                                <label for="password" class="form-label-p"> Repita su Contraseña</label>
+                                <label for="password" class="form-label-p"> Repita su Contraseña</label>
+                            </div>
+                        </form> -->
+
                         <h4 class="form-title-sc text-center">Formulario de Adopcion</h4>
 
                         <div class="forma">
@@ -130,13 +149,13 @@
             </div>
             <div class="modal-footer">
 
-
-                <button type="button" class="btn btn-outline-success" (click)="aceptarSolicitud()">Aceptar Solicitud</button>
-                <button type="button" class="btn btn-outline-warning" (click)="enEsperaSolicitud()">Pendiente</button>
-                <button type="button" class="btn btn-outline-danger" (click)="rechazarSolicitud()">Rechazado</button>
+                <button *ngIf='solicitudes.estado === "A" ' type="button" class="btn btn-outline-success" (click)="aceptarSolicitud()">Aceptar Solicitud</button>
+                <button *ngIf='solicitudes.estado === "A"' type="button" class="btn btn-outline-warning" (click)="enEsperaSolicitud()">Pendiente</button>
+                <button *ngIf='solicitudes.estado === "A"' type="button" class="btn btn-outline-danger" (click)="rechazarSolicitud()">Rechazado</button>
 
 
             </div>
         </div>
     </div>
 </div>
+

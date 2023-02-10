@@ -68,7 +68,7 @@ export class RegMascotaComponent implements OnInit {
       this.mascota.estado_adopcion = true;
       this.mascota.fundacion = this.fundacion;
       this.mascota.usuario = this.usuario;
-
+      this.mascota.estado_seguimiento = false;
       console.log("es la mascota =>" + this.mascota.foto);
 
       this.mascotaService.postMascota(this.mascota).subscribe(

@@ -8,6 +8,6 @@ export class Seguimiento {
     estado_comportamiento?: string;
     estado_salud?: string;
     foto_evidencia?: string;
-    estado?: string;
-    mascota?: Mascota;
+    estado?: boolean;
+    mascota!: Mascota;
 } 

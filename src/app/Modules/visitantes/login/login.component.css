@@ -1,4 +1,4 @@
-
+@import 'ngx-toastr/toastr';
 body {
     background: #a9b7e2;
     padding: 42px;
@@ -36,3 +36,4 @@ body {
     margin-top: 15px;
     padding: 10px;
 }
+/*ALERTAs */

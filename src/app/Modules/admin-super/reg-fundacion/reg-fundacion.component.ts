@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { CargarScrpitsService } from 'src/app/cargar-scrpits.service';
 import { Fundacion } from 'src/app/Models/Fundacion';
 import { Persona } from 'src/app/Models/Persona';
 import { Usuario } from 'src/app/Models/Usuario';
@@ -45,6 +46,7 @@ export class RegFundacionComponent implements OnInit {
   // }
 
   ValidarCampos() {
+    console.log("ya esta activo")
     document.addEventListener('DOMContentLoaded', () => {
       const forms = document.querySelectorAll('.needs-validation') as NodeListOf<HTMLFormElement>;
       Array.from(forms).forEach(form => {
@@ -77,9 +79,16 @@ export class RegFundacionComponent implements OnInit {
   persona: Persona = new Persona;
   verficarPassword:any;
   
-  constructor(private toastrService: ToastrService,private fundacionService: FundacionService, private personaService: PersonaService, private usuarioService: UsuarioService, private router: Router, private fotoService: FotoService) { }
+  constructor(private _CargarScript: CargarScrpitsService,private toastrService: ToastrService,private fundacionService: FundacionService, private personaService: PersonaService, private usuarioService: UsuarioService, private router: Router, private fotoService: FotoService) {
+    this.ValidarCampos();
+    _CargarScript.Cargar(["validaciones"]);
+  }
 
   ngOnInit(): void {
+    this.ValidarCampos();
+  }
+
+  ngAfterViewInit() {
     this.ValidarCampos();
   }
 

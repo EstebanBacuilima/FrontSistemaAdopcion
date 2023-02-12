@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CargarScrpitsService } from 'src/app/cargar-scrpits.service';
@@ -8,7 +8,6 @@ import { Usuario } from 'src/app/Models/Usuario';
 import { FotoService } from 'src/app/Services/imagen.service';
 import { PersonaService } from 'src/app/Services/persona.service';
 import { UsuarioService } from 'src/app/Services/usuario.service';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +15,37 @@ import Swal from 'sweetalert2';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+
+  //VALIDACIONES
+
+  // MAYUSCULAS
+  formatInput(model: any) {
+    model = model.toUpperCase();
+  }
+
+  // letras y espacios
+  letrasEspace: RegExp = /^[a-zA-Z\s]+$/;
+  letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\s]+$/;
+  expCorreo: RegExp = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
+  valCorreo: boolean = true;
+  verfCorreo: string = '';
+
+  validarCorreo() {
+    this.valCorreo = this.expCorreo.test(this.persona.correo!);
+    if (this.valCorreo) {
+      console.log("Correo Bueno");
+      // this.verfCorreo = 'form-control is-valid';
+    } else {
+      this.verfCorreo = 'ng-invalid ng-dirty';
+      console.log("Correo malo");
+    }
+  }
+  //
+
+  generos: string[] = [
+    'Masculino', 'Femenino', 'Otro'
+  ];
+
 
   persona: Persona = new Persona;
   usuario: Usuario = new Usuario;
@@ -129,14 +159,16 @@ export class LoginComponent implements OnInit {
 
   registrarUsuario() {
 
-    if (this.verficarPassword == this.usuario.password) {
+    let modal = document.getElementById('exampleModal');
 
-      if (this.persona.nombres === '' || this.persona.apellidos === '' || this.persona.correo === '' || this.usuario.username === '' || this.usuario.password === ''
-        || this.persona.nombres === null || this.persona.apellidos === null || this.persona.correo === null || this.usuario.username === null || this.usuario.password === null) {
-        Swal.fire({
-          icon: 'error',
-          title: 'Verifique los Campos!'
-        })
+
+    // Cerrar el modal
+    if (this.verficarPassword == this.usuario.password) {
+      if (!this.persona.nombres || !this.persona.apellidos || !this.persona.correo || !this.usuario.username  || !this.usuario.password 
+        || !this.persona.nombres  || !this.persona.apellidos  || !this.persona.correo  || !this.usuario.username  || !this.usuario.password ) {
+          this.toastrService.error('Uno o más campos vacios', 'Verifique los Campos de texto', {
+            timeOut: 3000,
+          });
       } else {
         this.usuarioService.verfUsername(this.usuario.username).subscribe(
           data => {
@@ -155,35 +187,30 @@ export class LoginComponent implements OnInit {
                     result => {
                       console.log(result);
                       this.usuario = result;
-                      Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'Registrado Exitosamente',
-                        showConfirmButton: false,
-                        timer: 1500
-                      })
+                      this.toastrService.success('Registrado Exitosamente', 'Bienvenido ', {
+                        timeOut: 1000,
+                      });
+                      if (modal) {
+                        modal.style.display = "none";
+                      }
                       location.replace('/login');
                     }
                   )
                 }
               )
             } else {
-              Swal.fire({
-                icon: 'error',
-                title: 'El username que eligio ya está en uso!',
-                text: 'Cambie su username'
-              })
+              this.toastrService.error('Username ya en uso', 'Digite otro username', {
+                timeOut: 3000,
+              });
               this.usuario.username = '';
             }
           }
         )
       }
     } else {
-      Swal.fire({
-        icon: 'error',
-        title: 'Contraseñas son distintas!',
-        text: 'Verifique su contraseña'
-      })
+      this.toastrService.error('No son similares', 'Verifique su contraseña', {
+                timeOut: 3000,
+      });
     }
 
   }

@@ -5,7 +5,7 @@ export class Fundacion {
     ruc!: string;
     nombre_fundacion!: string;
     direccion!: string;
-    telefono!: Date;
+    telefono!: string;
     correo!: string;
     acronimo!: string;
     mision!: string;

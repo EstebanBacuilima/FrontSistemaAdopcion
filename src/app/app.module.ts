@@ -7,8 +7,6 @@ import { FooterComponent } from './Components/footer/footer.component';
 import { HeaderComponent } from './Components/header/header.component';
 import { LoginComponent } from './Modules/visitantes/login/login.component';
 import { WelcomeComponent } from './Modules/visitantes/welcome/welcome.component';
-import { KeyFilterModule } from 'primeng/keyfilter';
-import { PasswordModule } from 'primeng/password';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
@@ -34,9 +32,16 @@ import { PanelSeguimientoAdminComponent } from './Modules/admin-fundacion/panel-
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 // PRIMENG
 import {InputTextareaModule} from 'primeng/inputtextarea';
+import {InputMaskModule} from 'primeng/inputmask';
 import { ReportesComponent } from './Modules/admin-fundacion/reportes/reportes.component';
 import {ChartModule} from 'primeng/chart';
 import {ToastModule} from 'primeng/toast';
+import {KeyFilterModule } from 'primeng/keyfilter';
+import {PasswordModule } from 'primeng/password';
+import {InputTextModule} from 'primeng/inputtext';
+import {CalendarModule} from 'primeng/calendar';
+import {DropdownModule} from 'primeng/dropdown';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,8 +68,6 @@ import {ToastModule} from 'primeng/toast';
     AppRoutingModule,
     FormsModule,
     ToastrModule.forRoot(),
-    KeyFilterModule,
-    PasswordModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
@@ -72,7 +75,12 @@ import {ToastModule} from 'primeng/toast';
     NgxPaginationModule,
     CommonModule,
     // PRIME
-
+    InputMaskModule,
+    PasswordModule,
+    KeyFilterModule,
+    InputTextModule,
+    CalendarModule,
+    DropdownModule
   ],
   providers: [
     CargarScrpitsService

@@ -2,10 +2,11 @@
 
     <ul class="nav justify-content-center">
         <li class="col-md-6">
-            <button type="button" class="btn btnO form-control" routerLink="/register-fundacion">Registrar Fundacion</button>
+            <button type="button" class="btn btnO form-control" routerLink="/register-fundacion">Registrar
+                Fundacion</button>
         </li>
         <li class="col-md-6">
-            <button type="button" class="btn btnA form-control" >Listar Fundaciones</button>
+            <button type="button" class="btn btnA form-control">Listar Fundaciones</button>
         </li>
     </ul>
 
@@ -23,7 +24,7 @@
                         <th scope="col">Correo</th>
                         <th scope="col">Telefono</th>
                         <th scope="col">Direccion</th>
-                        <th scope="col">Estado</th>
+                        <!-- <th scope="col">Estado</th> -->
                         <th scope="col">&nbsp;</th>
                         <th scope="col">&nbsp;</th>
                     </tr>
@@ -40,13 +41,20 @@
                         <td>{{fundacion.correo}}</td>
                         <td>{{fundacion.telefono}}</td>
                         <td>{{fundacion.direccion}}</td>
-                        <td><input type="checkbox" id="cbox1" value="first_checkbox" [(ngModel)]="fundacion.estado">
+                        <!--<td><input type="checkbox" id="cbox1" value="first_checkbox" [(ngModel)]="fundacion.estado">
+                        </td> -->
+                        <td>
+                            <button (click)="capParaEdicion(fundacion.idFundacion)" class="btn btn-primary"
+                                data-bs-toggle="modal" data-bs-target="#modalUpdate"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
+                                </svg></button>
                         </td>
                         <td>
-                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalUpdate" (click)="capParaEdicion(fundacion.idFundacion)"  >Altualizar</button>
-                        </td>
-                        <td>
-                            <a href="" class="btn btn-danger">Eliminar</a>
+                            
+                            <a href="" class="btn btn-danger"><i class="pi pi-times"></i></a>
                         </td>
                     </tr>
                 </tbody>
@@ -58,8 +66,8 @@
 
 </div>
 
- <!-- Modal -->
- <div class="modal " id="modalUpdate" tabindex="-5" aria-labelledby="modalUpdateLabel" aria-hidden="true">
+<!-- Modal -->
+<div class="modal " id="modalUpdate" tabindex="-5" aria-labelledby="modalUpdateLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -79,11 +87,13 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="nombre_fundacion" class="form-label-p"> Nombre Fundacion</label>
-                                <input type="text" class="form-control" name="nombre_fundacion" [(ngModel)]="fundacion.nombre_fundacion">
+                                <input type="text" class="form-control" name="nombre_fundacion"
+                                    [(ngModel)]="fundacion.nombre_fundacion">
                             </div>
                             <div class="col-md-6">
                                 <label for="acronimo" class="form-label-p"> Acronimo</label>
-                                <input type="text" class="form-control" name="acronimo" [(ngModel)]="fundacion.acronimo">
+                                <input type="text" class="form-control" name="acronimo"
+                                    [(ngModel)]="fundacion.acronimo">
                             </div>
                             <div class="col-md-6">
                                 <label for="mision" class="form-label-p"> Mision</label>
@@ -91,11 +101,13 @@
                             </div>
                             <div class="col-12">
                                 <label for="direccion" class="form-label-p"> Direccion</label>
-                                <input type="text" class="form-control" name="direccions" [(ngModel)]="fundacion.direccion">
+                                <input type="text" class="form-control" name="direccions"
+                                    [(ngModel)]="fundacion.direccion">
                             </div>
                             <div class="col-md-6">
                                 <label for="telefono" class="form-label-p"> Telefono</label>
-                                <input type="text" class="form-control" name="telefono" [(ngModel)]="fundacion.telefono">
+                                <input type="text" class="form-control" name="telefono"
+                                    [(ngModel)]="fundacion.telefono">
                             </div>
                             <div class="col-md-6">
                                 <label for="correo" class="form-label-p"> Correo</label>
@@ -104,22 +116,23 @@
                             <div class="col-md-12">
                                 <label for="logo" class="form-label-p">Logo</label>
                                 <span class="p-float-label">
-                                    <input (change)="imageSelectedl($event)" name="logo" type="file" class="form-control" id="float-input2"
-                                        required />
+                                    <input (change)="imageSelectedl($event)" name="logo" type="file"
+                                        class="form-control" id="float-input2" required />
                                     <label for="float-input"></label>
                                 </span>
                                 <div *ngIf="filem" class="mt-3 text-center">
                                     <img [src]="filem" class="rounded" alt="..." style="max-width: 10%;" />
                                 </div>
                             </div>
-                    
+
                             <!-- DISTINTOS -->
-                    
+
                             <h2 class="form-titulo text-center">.</h2>
                             <h2 class="form text-center">Datos Representante</h2>
                             <div class="col-md-6">
                                 <label for="cedula" class="form-label-p"> Cedula</label>
-                                <input type="text" class="form-control" name="cedula" readonly [(ngModel)]="persona.cedula">
+                                <input type="text" class="form-control" name="cedula" readonly
+                                    [(ngModel)]="persona.cedula">
                             </div>
                             <div class="col-md-6">
                                 <label for="nombres" class="form-label-p"> Nombres</label>
@@ -127,15 +140,18 @@
                             </div>
                             <div class="col-6">
                                 <label for="apellidos" class="form-label-p"> Apellidos</label>
-                                <input type="text" class="form-control" name="apellidos" [(ngModel)]="persona.apellidos">
+                                <input type="text" class="form-control" name="apellidos"
+                                    [(ngModel)]="persona.apellidos">
                             </div>
                             <div class="col-6">
                                 <label for="fechaNacimiento" class="form-label-p"> Fecha De Nacimiento</label>
-                                <input type="date" class="form-control" name="fechaNacimiento" [(ngModel)]="persona.fechaNacimiento">
+                                <input type="date" class="form-control" name="fechaNacimiento"
+                                    [(ngModel)]="persona.fechaNacimiento">
                             </div>
                             <div class="col-md-12">
                                 <label for="direccion" class="form-label-p"> Direccion</label>
-                                <input type="text" class="form-control" name="direccion" [(ngModel)]="persona.direccion">
+                                <input type="text" class="form-control" name="direccion"
+                                    [(ngModel)]="persona.direccion">
                             </div>
                             <div class="col-md-6">
                                 <label for="genero" class="form-label-p"> Genero</label>
@@ -163,21 +179,23 @@
                                 <input type="text" class="form-control" name="username" [(ngModel)]="usuario.username">
                             </div>
                             <div class="col-md-6">
-                                <label for="password" class="form-label-p"> Contraseña <i class="uil uil-eye-slash showHidePw"></i></label>
-                                <input type="password" class="password form-control" name="password" [(ngModel)]="usuario.password">
+                                <label for="password" class="form-label-p"> Contraseña <i
+                                        class="uil uil-eye-slash showHidePw"></i></label>
+                                <input type="password" class="password form-control" name="password"
+                                    [(ngModel)]="usuario.password">
                             </div>
                             <div class="col-md-12">
                                 <label for="fotoPerfil" class="form-label-p"> Foto de Perfil</label>
                                 <span class="p-float-label">
-                                    <input (change)="imageSelected($event)" name="fotoPerfil" type="file" class="form-control" id="float-input"
-                                        required />
+                                    <input (change)="imageSelected($event)" name="fotoPerfil" type="file"
+                                        class="form-control" id="float-input" required />
                                     <label for="float-input"></label>
                                 </span>
                                 <div *ngIf="file" class="mt-3 text-center">
                                     <img [src]="file" class="rounded" alt="..." style="max-width: 10%;" />
                                 </div>
                             </div>
-                            
+
                         </form>
 
                     </div>

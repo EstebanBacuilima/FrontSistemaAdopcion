@@ -10,6 +10,7 @@ import { VoluntarioService } from 'src/app/Services/voluntario.service';
 import { takeWhile } from 'rxjs';
 import { PersonaService } from 'src/app/Services/persona.service';
 import Swal from 'sweetalert2';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-list-voluntario',
@@ -26,7 +27,7 @@ export class ListVoluntarioComponent implements OnInit {
   public myCounter: number = 0;
 
 
-  constructor(private personaService: PersonaService,private voluntarioService: VoluntarioService, private fundacionService: FundacionService, private usuarioService: UsuarioService, private router: Router, private fotoService: FotoService
+  constructor(private toastrService: ToastrService,private personaService: PersonaService,private voluntarioService: VoluntarioService, private fundacionService: FundacionService, private usuarioService: UsuarioService, private router: Router, private fotoService: FotoService
   ) { }
 
 
@@ -147,22 +148,27 @@ export class ListVoluntarioComponent implements OnInit {
   
 
   actualizarVoluntarios() {
-    this.personaService.updatePersona(this.persona, this.persona.idPersona).subscribe(data => {
-      console.log(data)
-      this.usuarioService.updateUsuario(this.usuario, this.usuario.idUsuario).subscribe(data => {
+    if (!this.persona.cedula || !this.persona.apellidos || !this.persona.correo || !this.persona.direccion || !this.persona.telefono || !this.persona.celular
+      || !this.voluntario.area_trabajo || !this.voluntario.cargo || !this.persona.nombres || !this.persona.fechaNacimiento || !this.persona.genero || !this.usuario.username || !this.usuario.password) {
+      this.toastrService.error('Uno o más campos vacios', 'Verifique los Campos de texto', {
+        timeOut: 2000,
+      });
+    } else {
+      this.personaService.updatePersona(this.persona, this.persona.idPersona).subscribe(data => {
         console.log(data)
-        this.voluntarioService.updateVoluntario(this.voluntario, this.voluntario.idVoluntario).subscribe(data => {
+        this.usuarioService.updateUsuario(this.usuario, this.usuario.idUsuario).subscribe(data => {
           console.log(data)
-          Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Actualizado Correctamente',
-            showConfirmButton: false,
-            timer: 1500
+          this.voluntarioService.updateVoluntario(this.voluntario, this.voluntario.idVoluntario).subscribe(data => {
+            this.cargarImagenUsuario();
+            this.obtenerVoluntarios();
+            this.toastrService.success('Su ha modificado el voluntario', 'Voluntario Actualizado', {
+              timeOut: 1500,
+            });
           })
         })
       })
-    })
+    }
+    
   }
 
   // IMAGEN

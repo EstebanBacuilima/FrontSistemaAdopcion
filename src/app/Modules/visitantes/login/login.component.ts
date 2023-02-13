@@ -67,18 +67,20 @@ export class LoginComponent implements OnInit {
     _CargarScript.Cargar(["loginFunciones"]);
   }
 
-
+  usuarioRol: string = "PUBLICO";
 
   ngOnInit(): void {
     localStorage.removeItem('idUsuario');
-    localStorage.removeItem('rol');
     localStorage.removeItem('nameImagen');
     localStorage.removeItem('nameLogo');
+    localStorage.setItem('rol', String(this.usuarioRol));
+    console.log("ROL ->" + localStorage.getItem('rol'))
   };
 
-  showSpinner:any;
+  showSpinner: any;
+  usuarioRolCapturado: any;
   login() {
-    if ( !this.usuario.username || !this.usuario.password) {
+    if (!this.usuario.username || !this.usuario.password) {
       this.toastrService.error('Uno o más campos vacios', 'Verifique los Campos de texto', {
         timeOut: 3000,
       });
@@ -88,30 +90,38 @@ export class LoginComponent implements OnInit {
         data => {
           console.log(data);
           if (data != null) {
-            if (data.estado == true) {
-              this.usuario.idUsuario = data.idUsuario;
-              this.userFoto = data.foto_perfil;
-              this.fundacionLogo = data.fundacion?.logo;
-              this.toastrService.success('Bienvenido', 'Exitoso', {
-                timeOut: 1500,
-                'progressBar': true,
-                'progressAnimation': 'increasing'
+            if (data == null) {
+              this.toastrService.warning('Usuario deshabilitado!', 'Aviso!', {
+                timeOut: 4000,
               });
-              
-              localStorage.setItem('rol', String(this.usuario.rol));
-              localStorage.setItem('idUsuario', String(this.usuario.idUsuario));
-              localStorage.setItem('nameImagen', String(this.userFoto));
-              localStorage.setItem('nameLogo', String(this.fundacionLogo));
-              setTimeout(() => {
-                this.showSpinner = false;
-                location.replace('/bienvenido');
-              }, 1500);
             } else {
-              console.log("Desactivo")
-              this.toastrService.error('Usuario Inhabilitado', 'No tiene acceso', {
-                timeOut: 3000,
-              });
-              this.usuario = new Usuario;
+              if (data.estado == true) {
+                this.usuario.idUsuario = data.idUsuario;
+                this.userFoto = data.foto_perfil;
+                this.fundacionLogo = data.fundacion?.logo;
+                this.usuarioRolCapturado = data.rol;
+                this.toastrService.success('Bienvenido', 'Exitoso', {
+                  timeOut: 1500,
+                  'progressBar': true,
+                  'progressAnimation': 'increasing'
+                });
+                localStorage.setItem('rol', String(this.usuarioRolCapturado));
+                localStorage.setItem('idUsuario', String(this.usuario.idUsuario));
+                localStorage.setItem('nameImagen', String(this.userFoto));
+                localStorage.setItem('nameLogo', String(this.fundacionLogo));
+                console.log("ROL CAPTURADO ->" + String(this.usuarioRolCapturado))
+                console.log("CAMBIO DE ROL ->" + localStorage.getItem('rol'))
+                setTimeout(() => {
+                  this.showSpinner = false;
+                  location.replace('/bienvenido');
+                }, 1500);
+              } else {
+                console.log("Desactivo")
+                this.toastrService.error('Usuario Inhabilitado', 'No tiene acceso', {
+                  timeOut: 3000,
+                });
+                this.usuario = new Usuario;
+              }
             }
           } else {
             console.log("no encontrado")
@@ -164,11 +174,11 @@ export class LoginComponent implements OnInit {
 
     // Cerrar el modal
     if (this.verficarPassword == this.usuario.password) {
-      if (!this.persona.nombres || !this.persona.apellidos || !this.persona.correo || !this.usuario.username  || !this.usuario.password 
-        || !this.persona.nombres  || !this.persona.apellidos  || !this.persona.correo  || !this.usuario.username  || !this.usuario.password ) {
-          this.toastrService.error('Uno o más campos vacios', 'Verifique los Campos de texto', {
-            timeOut: 3000,
-          });
+      if (!this.persona.nombres || !this.persona.apellidos || !this.persona.correo || !this.usuario.username || !this.usuario.password
+        || !this.persona.fechaNacimiento || !this.persona.telefono || !this.persona.celular || !this.usuario.username || !this.verficarPassword) {
+        this.toastrService.error('Uno o más campos vacios', 'Verifique los Campos de texto', {
+          timeOut: 3000,
+        });
       } else {
         this.usuarioService.verfUsername(this.usuario.username).subscribe(
           data => {
@@ -209,7 +219,7 @@ export class LoginComponent implements OnInit {
       }
     } else {
       this.toastrService.error('No son similares', 'Verifique su contraseña', {
-                timeOut: 3000,
+        timeOut: 3000,
       });
     }
 

@@ -7,7 +7,7 @@
         <div class="col ps-2">
             <div class="row g-0">
             </div>
-            <div class="row cards g-0 mt-3" *ngFor="let solicitudes of solicitudes">
+            <div class="row cards g-0 mt-3" *ngFor="let solicitudes of solicitudes | filtradoFechas">
                 <div class="col-md-" *ngIf='obtenerEstado(solicitudes.estado) === "PENDIENTE"'> 
                     <label class="estado" style="background-color: orange;"  >PENDIENTE</label>
                 </div>
@@ -149,9 +149,9 @@
             </div>
             <div class="modal-footer">
 
-                <button *ngIf='solicitudes.estado === "A" ' type="button" class="btn btn-outline-success" (click)="aceptarSolicitud()">Aceptar Solicitud</button>
-                <button *ngIf='solicitudes.estado === "A"' type="button" class="btn btn-outline-warning" (click)="enEsperaSolicitud()">Pendiente</button>
-                <button *ngIf='solicitudes.estado === "A"' type="button" class="btn btn-outline-danger" (click)="rechazarSolicitud()">Rechazado</button>
+                <button  type="button" class="btn btn-outline-success" (click)="aceptarSolicitud()">Aceptar Solicitud</button>
+                <button  type="button" class="btn btn-outline-warning" (click)="enEsperaSolicitud()">Pendiente</button>
+                <button  type="button" class="btn btn-outline-danger" (click)="rechazarSolicitud()">Rechazado</button>
 
 
             </div>

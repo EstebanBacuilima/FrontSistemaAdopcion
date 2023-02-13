@@ -31,16 +31,19 @@ import { PanelSeguimientoAdminComponent } from './Modules/admin-fundacion/panel-
 // NUEVOS
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 // PRIMENG
-import {InputTextareaModule} from 'primeng/inputtextarea';
 import {InputMaskModule} from 'primeng/inputmask';
-import { ReportesComponent } from './Modules/admin-fundacion/reportes/reportes.component';
-import {ChartModule} from 'primeng/chart';
-import {ToastModule} from 'primeng/toast';
+import {ReportesComponent } from './Modules/admin-fundacion/reportes/reportes.component';
 import {KeyFilterModule } from 'primeng/keyfilter';
 import {PasswordModule } from 'primeng/password';
 import {InputTextModule} from 'primeng/inputtext';
 import {CalendarModule} from 'primeng/calendar';
 import {DropdownModule} from 'primeng/dropdown';
+
+//PDF
+import { PdfMakeWrapper } from 'pdfmake-wrapper';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+import { FiltradoFechasPipe } from './Components/Pipes/filtrado-fechas.pipe';
+PdfMakeWrapper.setFonts(pdfFonts);
 
 @NgModule({
   declarations: [
@@ -62,6 +65,7 @@ import {DropdownModule} from 'primeng/dropdown';
     PanelSeguimientoAdminComponent,
     PanelSolicitudAdminComponent,
     ReportesComponent,
+    FiltradoFechasPipe,
   ],
   imports: [
     BrowserModule,
@@ -80,7 +84,7 @@ import {DropdownModule} from 'primeng/dropdown';
     KeyFilterModule,
     InputTextModule,
     CalendarModule,
-    DropdownModule
+    DropdownModule,
   ],
   providers: [
     CargarScrpitsService

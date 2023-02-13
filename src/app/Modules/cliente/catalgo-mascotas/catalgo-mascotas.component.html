@@ -57,7 +57,7 @@
 
                                         <div class="form-controll">
                                             <div class="form-input">
-                                                <input type="text" name="cedula" id="cedula" [(ngModel)]="personas.cedula">
+                                                <input type="text" name="cedula" id="cedula" [(ngModel)]="persona.cedula" onmousedown="return false" onkeydown="return false">
                                                 <label for="cedula">Cedula</label>
                                             </div>
                                         </div>
@@ -65,14 +65,14 @@
                                         <div class="grid-2">
                                             <div class="form-controll">
                                                 <div class="form-input">
-                                                    <input type="text" name="nombres" id="nombres" [(ngModel)]="personas.nombres">
+                                                    <input type="text" name="nombres" id="nombres" [(ngModel)]="persona.nombres" onmousedown="return false" onkeydown="return false">
                                                     <label for="nombres">Nombres</label>
                                                 </div>
                                             </div>
 
                                             <div class="form-controll">
                                                 <div class="form-input">
-                                                    <input type="text" name="apellidos" id="apellidos" [(ngModel)]="personas.apellidos">
+                                                    <input type="text" name="apellidos" id="apellidos" [(ngModel)]="persona.apellidos" onmousedown="return false" onkeydown="return false">
                                                     <label for="apellidos">Apellidos</label>
                                                 </div>
                                             </div>
@@ -81,13 +81,13 @@
                                         <div class="grid-2">
                                         <div class="form-controll">
                                             <div class="form-input">
-                                                <input type="text" name="telefono" id="telefono" [(ngModel)]="personas.telefono">
+                                                <input type="text" name="telefono" id="telefono" [(ngModel)]="persona.telefono" onmousedown="return false" onkeydown="return false">
                                                 <label for="telefono">Telefono</label>
                                             </div>
                                         </div>
                                         <div class="form-controll">
                                             <div class="form-input">
-                                                <input type="text" name="celular" id="celular" [(ngModel)]="personas.celular">
+                                                <input type="text" name="celular" id="celular" [(ngModel)]="persona.celular" onmousedown="return false" onkeydown="return false">
                                                 <label for="celular">Celular</label>
                                             </div>
                                         </div>
@@ -95,14 +95,14 @@
 
                                         <div class="form-controll">
                                             <div class="form-input">
-                                                <input type="text" name="direccion" id="direccion" [(ngModel)]="personas.direccion">
+                                                <input type="text" name="direccion" id="direccion" [(ngModel)]="persona.direccion" onmousedown="return false" onkeydown="return false">
                                                 <label for="direccion">Direccion</label>
                                             </div>
                                         </div>
 
                                         <div class="form-controll">
                                             <div class="form-input">
-                                                <input type="text" name="correo" id="correo" [(ngModel)]="personas.correo">
+                                                <input type="text" name="correo" id="correo" [(ngModel)]="persona.correo" onmousedown="return false" onkeydown="return false">
                                                 <label for="correo">Correo</label>
                                             </div>
                                         </div>
@@ -121,7 +121,7 @@
 
                                         <div class="form-controll">
                                             <div class="form-input">
-                                                <input type="text" name="chipMascota" id="chipMascota" [(ngModel)]="mascota.chipMascota">
+                                                <input type="text" name="chipMascota" id="chipMascota" [(ngModel)]="mascota.chipMascota" onmousedown="return false" onkeydown="return false">
                                                 <label for="chipMascota">Chip</label>
                                             </div>
                                         </div>
@@ -129,14 +129,14 @@
                                         <div class="grid-2">
                                             <div class="form-controll">
                                                 <div class="form-input">
-                                                    <input type="text" name="nombre_mascota" id="nombre_mascota" [(ngModel)]="mascota.nombre_mascota">
+                                                    <input type="text" name="nombre_mascota" id="nombre_mascota" [(ngModel)]="mascota.nombre_mascota" onmousedown="return false" onkeydown="return false">
                                                     <label for="nombre_mascota">Nombre</label>
                                                 </div>
                                             </div>
 
                                             <div class="form-controll">
                                                 <div class="form-input">
-                                                    <input type="text" name="raza" id="raza" [(ngModel)]="mascota.raza">
+                                                    <input type="text" name="raza" id="raza" [(ngModel)]="mascota.raza" onmousedown="return false" onkeydown="return false">
                                                     <label for="raza">Raza</label>
                                                 </div>
                                             </div>
@@ -145,14 +145,14 @@
 
                                         <div class="form-controll">
                                             <div class="form-input">
-                                                <input type="text" name="sexo" id="sexo" [(ngModel)]="mascota.sexo">
+                                                <input type="text" name="sexo" id="sexo" [(ngModel)]="mascota.sexo" onmousedown="return false" onkeydown="return false">
                                                 <label for="sexo">Sexo</label>
                                             </div>
                                         </div>
 
                                         <div class="form-controll">
                                             <div class="form-input">
-                                                <input type="text" name="descripcion" id="descripcion" [(ngModel)]="mascota.descripcion">
+                                                <input type="text" name="descripcion" id="descripcion" [(ngModel)]="mascota.descripcion" onmousedown="return false" onkeydown="return false">
                                                 <label for="descripcion">Descripcion</label>
                                             </div>
                                         </div>
@@ -168,7 +168,7 @@
 
                                         <div class="form-controll" *ngFor="let pregunta of listaPreguntas">
                                             <div class="form-input">
-                                                <input type="text" name="respuesta" id="respuesta" [(ngModel)]="pregunta.respuesta">
+                                                <input type="text" name="respuesta" id="respuesta" [(ngModel)]="respuesta.respuestas">
                                                 <label for="company">{{ pregunta.pregunta }}</label>
                                             </div>
                                         </div>

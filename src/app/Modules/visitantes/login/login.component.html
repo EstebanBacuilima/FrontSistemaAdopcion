@@ -33,8 +33,8 @@
                         <small id="password-help">Ingresa mas de 5 digitos</small>
                     </div>
 
-                    <div class="d-grid">
-                        <button pButton  type="submit" class="btn btn-primary p-button-rounded" style="text-align: center;" (click)="login()" value="Iniciar Sesión">Iniciar Sesión</button>
+                    <div class="d-grid text-center">
+                        <button  type="submit" class="btn btn-primary p-button-rounded" style="text-align: center;" (click)="login()" value="Iniciar Sesión">Iniciar Sesión</button>
                     </div>
 
                     <!-- <ng-container *ngIf="showSpinner">
@@ -61,14 +61,15 @@
     <div class="modal" id="exampleModal" tabindex="-5" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Registrate</h5>
+                <div class="modal-header" style="text-align: center;">
+                    <!-- <h5 class="modal-title" id="exampleModalLabel"  style="text-align: center;">Registrate</h5> -->
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="closeModal"></button>
                 </div>
                 <div class="container w-75 mt-25 me-25 mt-5 shadown">
                     <div class="row align-items-strech">
                         <div class="col bg-white mt-25 p-25 grid p-fluid ">
 
+                            <h5 class="titulo" id="titulo"  style="text-align: center; padding: 25px;" >FORMULARIO DE REGISTRO</h5>
                             <form class="row g-2">
                                 <div  class="col-md-6">
                                     <label for="cedula" class="form-label-p"> Cedula</label>

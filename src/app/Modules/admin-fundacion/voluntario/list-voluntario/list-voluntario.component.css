@@ -83,3 +83,9 @@
     height: 180px;
     border-radius: 50%;
 }
+
+
+
+input[readonly] {
+    background-color: transparent;
+}

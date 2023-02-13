@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Fundacion } from 'src/app/Models/Fundacion';
 import { Mascota } from 'src/app/Models/Mascota';
 import { Usuario } from 'src/app/Models/Usuario';
@@ -21,7 +22,7 @@ export class ListMascotaComponent implements OnInit {
   listaMascotas: Mascota[] = [];
   loading: boolean = true;
 
-  constructor(private mascotaService: MascotaService, private fundacionService: FundacionService, private usuarioService: UsuarioService, private router: Router, private fotoService: FotoService
+  constructor(private toastrService: ToastrService,private mascotaService: MascotaService, private fundacionService: FundacionService, private usuarioService: UsuarioService, private router: Router, private fotoService: FotoService
   ) { }
 
   ngOnInit(): void {
@@ -109,17 +110,19 @@ export class ListMascotaComponent implements OnInit {
   }
 
   actualizarMascota() {
-    this.cargarImagenMascota();
-    this.mascotaService.updateMascota(this.mascota, this.mascota.idMascota).subscribe(data => {
-      console.log(data)
-      Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: 'Actualizado Correctamente',
-        showConfirmButton: false,
-        timer: 1500
+    if (!this.mascota.chipMascota || this.mascota.chipMascota === null || !this.mascota.nombre_mascota || !this.mascota.sexo || !this.mascota.raza || !this.mascota.color || !this.mascota.especie || !this.mascota.descripcion || !this.mascota.estado_mascota) {
+      this.toastrService.error('Uno o más campos vacios', 'Verifique los Campos de texto', {
+        timeOut: 2000,
+      });
+    } else {
+      this.cargarImagenMascota();
+      this.mascotaService.updateMascota(this.mascota, this.mascota.idMascota).subscribe(data => {
+        this.obtenerMasotas();
+        this.toastrService.success('Se han guardado los cambios', 'Actualizado', {
+          timeOut: 1500,
+        });
       })
-    })
+    }
   }
 
   // IMAGEN

@@ -53,5 +53,9 @@ export class MascotaService {
   getAllMascotasEnSeguimiento(){
     return this.http.get<Mascota[]>(this.URL+'listarMascotasEnSeguimiento');
   }
+
+  getPorChip(chipMascota: any){
+    return this.http.get<Mascota>(this.URL + `byChipMascota/${chipMascota}`);
+  }
   
 }

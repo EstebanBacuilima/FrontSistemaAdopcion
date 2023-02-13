@@ -16,6 +16,7 @@ export class WelcomeComponent implements OnInit {
 
   
   loading: boolean = true;
+  usuarioRol: string = "PUBLICO";
 
   constructor( private mascotaService: MascotaService,private fundacionService: FundacionService, private personaService: PersonaService, private usuarioService: UsuarioService, private router: Router) { }
   
@@ -23,9 +24,10 @@ export class WelcomeComponent implements OnInit {
     this.obtenerFundaciones();
     this.obtenerMasotas();
     localStorage.removeItem('idUsuario');
-    localStorage.removeItem('rol');
     localStorage.removeItem('nameImagen');
     localStorage.removeItem('nameLogo');
+    localStorage.setItem('rol', String(this.usuarioRol));
+    console.log("ROL ->" + localStorage.getItem('rol'))
   }
 
   listaFundaciones: Fundacion[] = [];

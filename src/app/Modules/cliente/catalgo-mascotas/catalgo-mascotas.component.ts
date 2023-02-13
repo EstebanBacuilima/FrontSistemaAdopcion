@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { CargarScrpitsService } from 'src/app/cargar-scrpits.service';
 import { Fundacion } from 'src/app/Models/Fundacion';
 import { Mascota } from 'src/app/Models/Mascota';
@@ -29,7 +30,7 @@ export class CatalgoMascotasComponent implements OnInit {
   idUsuario: any;
   idFundacion: any;
 
-  constructor(private _CargarScript: CargarScrpitsService, private solicitudService: SolicitudAdopcionService, private mascotaService: MascotaService, private fundacionService: FundacionService, private personaService: PersonaService, private usuarioService: UsuarioService, private router: Router) {
+  constructor(private _CargarScript: CargarScrpitsService,private toastrService: ToastrService, private solicitudService: SolicitudAdopcionService, private mascotaService: MascotaService, private fundacionService: FundacionService, private personaService: PersonaService, private usuarioService: UsuarioService, private router: Router) {
     // _CargarScript.Cargar(["formulario"]);
   }
 
@@ -45,6 +46,12 @@ export class CatalgoMascotasComponent implements OnInit {
     let allStepBtn = document.querySelectorAll('[tab-target]');
     let allStepItem = document.querySelectorAll('.step-item');
     let allTabs = document.querySelectorAll('.step-tab');
+    let firstStepItem = document.querySelector('.step-item:nth-child(1)');
+
+    if (firstStepItem) {
+        firstStepItem.classList.add('active');
+    }
+
     allStepBtn.forEach(item => {
       item.addEventListener('click', () => {
         let currentTabId = item.getAttribute('tab-target');
@@ -76,6 +83,7 @@ export class CatalgoMascotasComponent implements OnInit {
   }
 
   personas: any;
+  persona: Persona = new Persona;
 
   obtenerUsuario() {
     this.idUsuario = localStorage.getItem('idUsuario');
@@ -84,6 +92,7 @@ export class CatalgoMascotasComponent implements OnInit {
         console.log(data);
         this.usuario = data;
         this.personas = this.usuario.persona;
+        this.persona = this.personas;
       })
     } else {
       console.log("Usuario no foun => ")
@@ -148,35 +157,38 @@ export class CatalgoMascotasComponent implements OnInit {
   solicitudAdopcion: SolicitudAdopcion = new SolicitudAdopcion;
   capIdSolicitud: any;
 
+
   enviarSolicitud() {
-    let fechaPrueba: Date = new Date();
-    this.solicitudAdopcion.estado = 'P';
-    this.solicitudAdopcion.fecha_solicitud_adopcion = fechaPrueba;
-    this.solicitudAdopcion.mascota = this.mascota;
-    this.solicitudAdopcion.usuario = this.usuario;
-    this.mascota.estado_adopcion = false;
-    console.log("Mascota enviar -> " + this.mascota.nombre_mascota);
-    console.log("Usuario enviar -> " + this.usuario.persona?.nombres);
-    this.solicitudService.postSolicitud(this.solicitudAdopcion).subscribe(
-      info => {
-        this.mascotaService.updateEstadoAdopcion(this.mascota, this.mascota.idMascota).subscribe(
-          data => {
-            console.log("Se cambio a " + data.estado_adopcion);
-            this.capIdSolicitud = info.idSolicitudAdopcion;
-            this.enviarRespuestas();
-            console.log(info);
-            this.obtenerMasotas();
-            Swal.fire({
-              position: 'top-end',
-              icon: 'success',
-              title: 'Solicitud Enviada',
-              showConfirmButton: false,
-              timer: 1500
+    if (!this.respuesta.respuestas) {
+      this.toastrService.error('Revise las preguntas!', 'Preguntas Vacias', {
+        timeOut: 2000,
+      });
+    } else {
+      let fechaPrueba: Date = new Date();
+      this.solicitudAdopcion.estado = 'P';
+      this.solicitudAdopcion.fecha_solicitud_adopcion = fechaPrueba;
+      this.solicitudAdopcion.mascota = this.mascota;
+      this.solicitudAdopcion.usuario = this.usuario;
+      this.mascota.estado_adopcion = false;
+      console.log("Mascota enviar -> " + this.mascota.nombre_mascota);
+      console.log("Usuario enviar -> " + this.usuario.persona?.nombres);
+      this.solicitudService.postSolicitud(this.solicitudAdopcion).subscribe(
+        info => {
+          this.mascotaService.updateEstadoAdopcion(this.mascota, this.mascota.idMascota).subscribe(
+            data => {
+              console.log("Se cambio a " + data.estado_adopcion);
+              this.capIdSolicitud = info.idSolicitudAdopcion;
+              this.enviarRespuestas();
+              console.log(info);
+              this.obtenerMasotas();
+              this.toastrService.success('Espera la respuesta', 'Formualario Enviado', {
+                timeOut: 1500,
+              });
+              this.limpiar();
             })
-            //this.limpiar();
-          })
-      }
-    );
+        }
+      );
+    }
   }
 
   // FORMULARIO
@@ -196,10 +208,12 @@ export class CatalgoMascotasComponent implements OnInit {
     );
   }
 
+  respuesta: Respuesta = new Respuesta;
+
   enviarRespuestas() {
     this.listaPreguntas.forEach(pregunta => {
       let respuesta = {
-        "respuestas": pregunta.respuesta,
+        "respuestas": this.respuesta.respuestas,
         "pregunta": {
           "idPregunta": pregunta.idPregunta
         },
@@ -213,6 +227,10 @@ export class CatalgoMascotasComponent implements OnInit {
         }
       );
     });
+  }
+
+  limpiar(){
+    this.respuesta.respuestas = '';
   }
 
 }

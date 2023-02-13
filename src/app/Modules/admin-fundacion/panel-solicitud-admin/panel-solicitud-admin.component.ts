@@ -23,11 +23,19 @@ export class PanelSolicitudAdminComponent implements OnInit {
   listaSolicitudes: SolicitudAdopcion[] = [];
   loading: boolean = true;
 
+  // PIPE
+  fechaActual = new Date;
+  fechaFormateada= this.fechaActual.toISOString().substr(0,10);
+
+  
+  //
+
   constructor(private solicitudAdopcionService: SolicitudAdopcionService, private mascotaService: MascotaService, private fundacionService: FundacionService, private usuarioService: UsuarioService, private router: Router, private fotoService: FotoService
   ) { }
 
   ngOnInit(): void {
     this.obtenerUsuario();
+    console.log("FECHA DE HOY ->" +  this.fechaFormateada)
   }
 
   mascota: Mascota = new Mascota;

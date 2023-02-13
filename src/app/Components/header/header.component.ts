@@ -136,10 +136,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
   }
 
+  usuarioRol: string = "PUBLICO";
   cerrarSesion() {
     sessionStorage.removeItem('nameImagen');
     sessionStorage.removeItem('nameLogo');
     localStorage.removeItem('idUsuario');
+    localStorage.setItem('rol', String(this.usuarioRol));
     location.replace('/welcome');
   }
 

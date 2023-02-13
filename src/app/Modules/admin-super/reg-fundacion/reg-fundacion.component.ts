@@ -20,17 +20,40 @@ export class RegFundacionComponent implements OnInit {
 
   
   //VALIDACIONES
-
-  // MAYUSCULAS
-  formatInput(model: any) {
-    model = model.toUpperCase();
-  }
-
+  
   // letras y espacios
   letrasEspace: RegExp = /^[a-zA-Z\s]+$/;
   letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\s]+$/;
   expCorreo: RegExp = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
   
+  valCorreo: boolean = true;
+  verfCorreo: string = '';
+
+  validarCorreo() {
+    this.valCorreo = this.expCorreo.test(this.fundacion.correo!);
+    if (this.valCorreo) {
+      console.log("Correo Bueno");
+      // this.verfCorreo = 'form-control is-valid';
+    } else {
+      this.verfCorreo = 'ng-invalid ng-dirty';
+      console.log("Correo malo");
+    }
+  }
+
+  valCorreo2: boolean = true;
+  verfCorreo2: string = '';
+
+  validarCorreo2() {
+    this.valCorreo2 = this.expCorreo.test(this.persona.correo!);
+    if (this.valCorreo2) {
+      console.log("Correo Bueno");
+      // this.verfCorreo = 'form-control is-valid';
+    } else {
+      this.verfCorreo2 = 'ng-invalid ng-dirty';
+      console.log("Correo malo");
+    }
+  }
+
   // verfRuc: string = '';
   // rucNum: any;
 
@@ -97,7 +120,7 @@ export class RegFundacionComponent implements OnInit {
       || !this.persona.apellidos  || this.persona.apellidos === null || !this.persona.cedula || this.persona.cedula === null || !this.persona.celular|| this.persona.celular === null || !this.persona.correo|| this.persona.correo === null || !this.persona.celular || this.persona.celular === null || !this.persona.correo|| this.persona.correo === null || !this.persona.direccion || this.persona.direccion === null || !this.persona.nombres || this.persona.nombres === null || !this.persona.telefono  || this.persona.telefono === null
       || !this.usuario.username || this.usuario.username === null || !this.usuario.password || this.usuario.password === null) {
         this.toastrService.error('Uno o más campos vacios', 'Verifique los Campos de texto', {
-          timeOut: 3000,
+          timeOut: 2000,
         });
     } else {
       this.fundacionService.verfRuc(this.fundacion.ruc).subscribe(

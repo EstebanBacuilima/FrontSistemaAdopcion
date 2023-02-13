@@ -383,3 +383,8 @@ h1 span {
     object-fit: cover;
     object-position: center right;
 }
+
+
+input[readonly] {
+    background-color: transparent;
+}

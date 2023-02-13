@@ -38,6 +38,7 @@ import {PasswordModule } from 'primeng/password';
 import {InputTextModule} from 'primeng/inputtext';
 import {CalendarModule} from 'primeng/calendar';
 import {DropdownModule} from 'primeng/dropdown';
+import {MatTabsModule} from '@angular/material/tabs';
 
 //PDF
 import { PdfMakeWrapper } from 'pdfmake-wrapper';
@@ -85,6 +86,7 @@ PdfMakeWrapper.setFonts(pdfFonts);
     InputTextModule,
     CalendarModule,
     DropdownModule,
+    MatTabsModule
   ],
   providers: [
     CargarScrpitsService

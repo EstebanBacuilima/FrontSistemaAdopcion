@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { CargarScrpitsService } from 'src/app/cargar-scrpits.service';
 import { Fundacion } from 'src/app/Models/Fundacion';
 import { Mascota } from 'src/app/Models/Mascota';
@@ -28,7 +29,7 @@ export class PanelSeguimientoComponent implements OnInit {
   idUsuario: any;
   idFundacion: any;
 
-  constructor(private fotoService: FotoService ,private seguimientoService: SeguimientoService, private _CargarScript: CargarScrpitsService, private solicitudService: SolicitudAdopcionService, private mascotaService: MascotaService, private fundacionService: FundacionService, private personaService: PersonaService, private usuarioService: UsuarioService, private router: Router) {
+  constructor(private toastrService: ToastrService,private fotoService: FotoService ,private seguimientoService: SeguimientoService, private _CargarScript: CargarScrpitsService, private solicitudService: SolicitudAdopcionService, private mascotaService: MascotaService, private fundacionService: FundacionService, private personaService: PersonaService, private usuarioService: UsuarioService, private router: Router) {
   }
 
 
@@ -113,10 +114,15 @@ export class PanelSeguimientoComponent implements OnInit {
   seguimientos: any;
 
   realizarSeguimiento() {
-    let fechaPrueba: Date = new Date();
+
+    if (!this.seguimiento.descripcion_mascota || !this.seguimiento.descripcion_visita  || !this.seguimiento.estado_comportamiento  || !this.seguimiento.estado_salud) {
+      this.toastrService.error('Uno o más campos vacios', 'Verifique los Campos de texto', {
+        timeOut: 2000,
+      });
+    } else {
+      let fechaPrueba: Date = new Date();
     let fechaFormateada = fechaPrueba.toISOString().substr(0,10);
     console.log("es la fecha de hoy -> " + fechaFormateada);
-
     this.seguimiento.fecha_seguimiento = fechaPrueba;
     this.seguimiento.mascota = this.mascota;
     this.seguimiento.estado = false;
@@ -130,13 +136,9 @@ export class PanelSeguimientoComponent implements OnInit {
           this.cargarImagenEvidencia();
           this.seguimientoService.postSeguimiento(this.seguimiento).subscribe(
             info => {
-              Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: 'Seguimiento Realizado',
-                showConfirmButton: false,
-                timer: 1500
-              })
+              this.toastrService.success('Seguimiento realizado con exito', 'Enviado', {
+                timeOut: 1500,
+              });
             }
           );
         } else{
@@ -149,7 +151,7 @@ export class PanelSeguimientoComponent implements OnInit {
         }
       }
     );
-
+    }
   }
 
   pageActual: number = 1;

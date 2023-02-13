@@ -168,11 +168,6 @@ export class LoginComponent implements OnInit {
   verficarPassword: any;
 
   registrarUsuario() {
-
-    let modal = document.getElementById('exampleModal');
-
-
-    // Cerrar el modal
     if (this.verficarPassword == this.usuario.password) {
       if (!this.persona.nombres || !this.persona.apellidos || !this.persona.correo || !this.usuario.username || !this.usuario.password
         || !this.persona.fechaNacimiento || !this.persona.telefono || !this.persona.celular || !this.usuario.username || !this.verficarPassword) {
@@ -200,9 +195,8 @@ export class LoginComponent implements OnInit {
                       this.toastrService.success('Registrado Exitosamente', 'Bienvenido ', {
                         timeOut: 1000,
                       });
-                      if (modal) {
-                        modal.style.display = "none";
-                      }
+                      this.limpiarCampos();
+                      this. closeModal();
                       location.replace('/login');
                     }
                   )
@@ -222,7 +216,33 @@ export class LoginComponent implements OnInit {
         timeOut: 3000,
       });
     }
+  }
 
+  limpiarCampos(){
+    this.persona.cedula = '';
+    this.persona.correo = '';
+    this.persona.genero = '';
+    this.persona.fechaNacimiento = new Date;
+    this.persona.direccion = '';
+    this.persona.nombres = '';
+    this.persona.apellidos = '';
+    this.persona.telefono = '';
+    this.usuario.username = '';
+    this.usuario.password = '';
+    this.verficarPassword = '';
+    this.file = '';
+  }
+
+  closeModal() {
+    let modal = document.getElementById('exampleModal');
+    if (modal) {
+      modal.style.display = 'none';
+      document.body.classList.remove('modal-open');
+      let backdrop = document.querySelector('.modal-backdrop');
+      if (backdrop) {
+        backdrop.remove();
+      }
+    }
   }
 
 }

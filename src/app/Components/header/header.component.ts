@@ -16,16 +16,12 @@ import Swal from 'sweetalert2';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
 
-  title: any = "FAA";
-
 
   usuario: Usuario = new Usuario;
-
-
   idUsuario: any;
   nombreUsuario: any;
   nombreFoto: any;
-  nombreLogo: any;
+  nombreLogo: any ;
 
   isSuperAdmin: boolean = false;
   isFundacionAdmin: boolean = false;
@@ -52,7 +48,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.isPublico = true;
     this.obtenerUsuario();
     this.nombreFoto = localStorage.getItem('nameImagen');
-    this.nombreLogo = localStorage.getItem('nameLogo');
+    this.nombreLogo = localStorage.getItem('nameLogo') || "admin.png";
   }
   ngOnDestroy() {
     console.log("destruir");

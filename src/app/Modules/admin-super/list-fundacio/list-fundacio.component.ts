@@ -7,7 +7,6 @@ import { FundacionService } from 'src/app/Services/fundacion.service';
 import { FotoService } from 'src/app/Services/imagen.service';
 import { PersonaService } from 'src/app/Services/persona.service';
 import { UsuarioService } from 'src/app/Services/usuario.service';
-import Swal from 'sweetalert2';
 import * as pdfMake from "pdfmake/build/pdfmake";
 import { ToastrService } from 'ngx-toastr';
 
@@ -109,16 +108,25 @@ export class ListFundacioComponent implements OnInit {
           this.fundacionService.updateFundacion(this.fundacion, this.fundacion.idFundacion).subscribe(data => {
             console.log(data)
             this.obtenerFundaciones();
-            Swal.fire({
-              position: 'top-end',
-              icon: 'success',
-              title: 'Actualizado Correctamente',
-              showConfirmButton: false,
-              timer: 1500
-            })
+            this.toastrService.success('Cambios realizados con exito', 'Actualizado Correctamente', {
+              timeOut: 1000,
+            });
+            //this.closeModal();
           })
         })
       })
+    }
+  }
+
+  closeModal() {
+    let modal = document.getElementById('modalUpdate');
+    if (modal) {
+      modal.style.display = 'none';
+      document.body.classList.remove('modal-open');
+      let backdrop = document.querySelector('.modal-backdrop');
+      if (backdrop) {
+        backdrop.remove();
+      }
     }
   }
 

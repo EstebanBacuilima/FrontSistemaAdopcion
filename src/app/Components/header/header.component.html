@@ -2,7 +2,7 @@
   <div class="container">
     <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
       <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-        <div [hidden]="isLogin" style="margin-right: 20px" >
+        <div [hidden]="isLogin"  style="margin-right: 20px" >
           <img class="circular--square" src="./assets/Imagenes/logoFundacionesMascotas.png" style="margin: 0 auto"
             routerLink="/welcome" />
         </div>
@@ -16,6 +16,7 @@
         </div>
         <i class="bi bi-house"></i>
       </a>
+      
       <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
         <li>
           <a href="#" class="nav-link text_0 px-2 text-white" routerLink="welcome" routerLinkActive="active"
@@ -32,22 +33,22 @@
 
         <li>
           <a href="#" class="nav-link text_0 px-2 text-white" routerLink="/bienvenido" routerLinkActive="active"
-            *ngIf='isSuperAdmin'>Home</a>
+            *ngIf='isSuperAdmin'><i class="pi pi-home"></i> Home</a>
         </li>
 
         <li>
           <a href="#" class="nav-link text_0 px-2 text-white" routerLink="/bienvenido" routerLinkActive="active"
-            *ngIf='isClient'>Home</a>
+            *ngIf='isClient'><i class="pi pi-home"></i> Home</a>
         </li>
 
         <li>
           <a href="#" class="nav-link text_0 px-2 text-white" routerLink="/bienvenido" routerLinkActive="active"
-            *ngIf='isFundacionAdmin'>Home</a>
+            *ngIf='isFundacionAdmin'><i class="pi pi-home"></i> Home</a>
         </li>
 
         <li>
           <a href="#" class="nav-link text_0 px-2 text-white" routerLink="/bienvenido" routerLinkActive="active"
-            *ngIf='isVoluntario'>Home</a>
+            *ngIf='isVoluntario'><i class="pi pi-home"></i> Home</a>
         </li>
 
 
@@ -153,12 +154,11 @@
         
         <div class="user-profile-body">
           <div class="user-profile-bio">
-
               <div class="mb-3">
                 <form class="row g-2">
                   <div class="col-md-6">
                       <label for="cedula" class="form-label-p"> Cedula</label>
-                      <input type="text" class="form-control" name="cedula" [(ngModel)]="persona.cedula">
+                      <input type="text" class="form-control" name="cedula" [(ngModel)]="persona.cedula" onmousedown="return false" onkeydown="return false">
                   </div>
                   <div class="col-md-6">
                       <label for="nombres" class="form-label-p"> Nombres</label>

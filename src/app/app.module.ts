@@ -36,7 +36,6 @@ import {ReportesComponent } from './Modules/admin-fundacion/reportes/reportes.co
 import {KeyFilterModule } from 'primeng/keyfilter';
 import {PasswordModule } from 'primeng/password';
 import {InputTextModule} from 'primeng/inputtext';
-import {CalendarModule} from 'primeng/calendar';
 import {DropdownModule} from 'primeng/dropdown';
 import {MatTabsModule} from '@angular/material/tabs';
 
@@ -45,6 +44,8 @@ import { PdfMakeWrapper } from 'pdfmake-wrapper';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { FiltradoFechasPipe } from './Components/Pipes/filtrado-fechas.pipe';
 PdfMakeWrapper.setFonts(pdfFonts);
+
+
 
 @NgModule({
   declarations: [
@@ -84,9 +85,9 @@ PdfMakeWrapper.setFonts(pdfFonts);
     PasswordModule,
     KeyFilterModule,
     InputTextModule,
-    CalendarModule,
     DropdownModule,
-    MatTabsModule
+    MatTabsModule,
+
   ],
   providers: [
     CargarScrpitsService
@@ -98,4 +99,6 @@ PdfMakeWrapper.setFonts(pdfFonts);
   ]
 
 })
+
+
 export class AppModule { }

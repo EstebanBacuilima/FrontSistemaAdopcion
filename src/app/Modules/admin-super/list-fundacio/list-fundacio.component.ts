@@ -20,6 +20,20 @@ export class ListFundacioComponent implements OnInit {
   usuario: Usuario = new Usuario;
   persona: Persona = new Persona;
   fundacion: Fundacion = new Fundacion;
+  // Validacion de Campos de Caracteres
+  // letras y espacios
+  letrasEspace: RegExp = /^[a-zA-Z\s]+$/;
+  letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\s]+$/;
+    // letrasEspace: RegExp = /^[a-zA-Z0-9\s^!#$%&*]+$/;
+    // letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\s^!#$%&*-]+$/;
+    
+// Validar que no igrese Guion medio
+    onKeyPress(event: KeyboardEvent) {
+      if (event.key === '-') {
+        event.preventDefault();
+      }
+    }
+    
 
   pageActual: number = 1;
   public myCounter: number = 0;

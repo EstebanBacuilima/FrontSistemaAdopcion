@@ -30,6 +30,8 @@ export class CatalgoMascotasComponent implements OnInit {
   idUsuario: any;
   idFundacion: any;
 
+  
+
   constructor(private _CargarScript: CargarScrpitsService,private toastrService: ToastrService, private solicitudService: SolicitudAdopcionService, private mascotaService: MascotaService, private fundacionService: FundacionService, private personaService: PersonaService, private usuarioService: UsuarioService, private router: Router) {
     // _CargarScript.Cargar(["formulario"]);
   }
@@ -157,13 +159,14 @@ export class CatalgoMascotasComponent implements OnInit {
   solicitudAdopcion: SolicitudAdopcion = new SolicitudAdopcion;
   capIdSolicitud: any;
 
+  pregunta:any;
 
   enviarSolicitud() {
-    if (!this.respuesta.respuestas) {
-      this.toastrService.error('Revise las preguntas!', 'Preguntas Vacias', {
-        timeOut: 2000,
-      });
-    } else {
+    // if (!this.pregunta.respuestas) {
+    //   this.toastrService.error('Revise las preguntas!', 'Preguntas Vacias', {
+    //     timeOut: 2000,
+    //   });
+    // } else {
       let fechaPrueba: Date = new Date();
       this.solicitudAdopcion.estado = 'P';
       this.solicitudAdopcion.fecha_solicitud_adopcion = fechaPrueba;
@@ -184,11 +187,11 @@ export class CatalgoMascotasComponent implements OnInit {
               this.toastrService.success('Espera la respuesta', 'Formualario Enviado', {
                 timeOut: 1500,
               });
-              this.limpiar();
+              // this.limpiar();
             })
         }
       );
-    }
+    // }
   }
 
   // FORMULARIO
@@ -208,12 +211,11 @@ export class CatalgoMascotasComponent implements OnInit {
     );
   }
 
-  respuesta: Respuesta = new Respuesta;
 
   enviarRespuestas() {
     this.listaPreguntas.forEach(pregunta => {
       let respuesta = {
-        "respuestas": this.respuesta.respuestas,
+        "respuestas": pregunta.respuesta,
         "pregunta": {
           "idPregunta": pregunta.idPregunta
         },
@@ -227,10 +229,6 @@ export class CatalgoMascotasComponent implements OnInit {
         }
       );
     });
-  }
-
-  limpiar(){
-    this.respuesta.respuestas = '';
   }
 
 }

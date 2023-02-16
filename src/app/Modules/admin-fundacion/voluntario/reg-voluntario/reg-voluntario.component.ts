@@ -29,6 +29,8 @@ export class RegVoluntarioComponent implements OnInit {
   idFundacion: any;
   verficarPassword: any;
 
+
+
   constructor(private _CargarScript: CargarScrpitsService, private toastrService: ToastrService, private voluntarioService: VoluntarioService, private personaService: PersonaService, private mascotaService: MascotaService, private fundacionService: FundacionService, private usuarioService: UsuarioService, private router: Router, private fotoService: FotoService
   ) { _CargarScript.Cargar(["validaciones"]) }
 
@@ -154,6 +156,13 @@ export class RegVoluntarioComponent implements OnInit {
   // letras y espacios
   letrasEspace: RegExp = /^[a-zA-Z\s]+$/;
   letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\s]+$/;
+
+  // Validar que no igrese Guion medio
+  onKeyPress(event: KeyboardEvent) {
+    if (event.key === '-') {
+      event.preventDefault();
+    }
+  }
 
   ValidarCampos() {
     console.log("ya esta activo")

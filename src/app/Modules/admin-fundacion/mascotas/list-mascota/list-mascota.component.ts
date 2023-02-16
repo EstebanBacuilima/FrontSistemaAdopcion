@@ -22,18 +22,34 @@ export class ListMascotaComponent implements OnInit {
   listaMascotas: Mascota[] = [];
   loading: boolean = true;
 
-  constructor(private toastrService: ToastrService,private mascotaService: MascotaService, private fundacionService: FundacionService, private usuarioService: UsuarioService, private router: Router, private fotoService: FotoService
+  //VALIDACIONES
+
+  // letras y espacios
+  letrasEspace: RegExp = /^[a-zA-Z\s]+$/;
+  letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\s]+$/;
+
+  // Validar que no igrese Guion medio
+  onKeyPress(event: KeyboardEvent) {
+    if (event.key === '-') {
+      event.preventDefault();
+    }
+  }
+
+  constructor(private toastrService: ToastrService, private mascotaService: MascotaService, private fundacionService: FundacionService, private usuarioService: UsuarioService, private router: Router, private fotoService: FotoService
   ) { }
 
   ngOnInit(): void {
     this.obtenerUsuario();
   }
 
+
   mascota: Mascota = new Mascota;
   fundacion: Fundacion = new Fundacion;
   usuario: Usuario = new Usuario;
   idUsuario: any;
   idFundacion: any;
+
+
 
   obtenerUsuario() {
     this.idUsuario = localStorage.getItem('idUsuario');

@@ -137,6 +137,13 @@ export class RegMascotaComponent implements OnInit {
   letrasEspace: RegExp = /^[a-zA-Z\s]+$/;
   letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\s]+$/;
 
+ // Validar que no igrese Guion medio
+ onKeyPress(event: KeyboardEvent) {
+  if (event.key === '-') {
+    event.preventDefault();
+  }
+}
+
   ValidarCampos() {
     console.log("ya esta activo")
     document.addEventListener('DOMContentLoaded', () => {

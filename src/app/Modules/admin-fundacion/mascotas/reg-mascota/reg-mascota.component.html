@@ -15,15 +15,18 @@
 
         <div class="col-md-6">
             <label for="chipMascota" class="form-label-p"> Chip</label>
-            <input id="chipMascota" type="text" class="form-control" name="chipMascota" [(ngModel)]="mascota.chipMascota" required>
+            <input id="chipMascota" type="text" class="form-control" name="chipMascota"
+             maxlength="10"  [(ngModel)]="mascota.chipMascota" [pKeyFilter]="'int'" (keypress)="onKeyPress($event)"  required>
         </div>
         <div class="col-md-6">
             <label for="nombre_mascota" class="form-label-p"> Nombre</label>
-            <input id="nombre_mascota" type="text" class="form-control" name="nombre_mascota" [(ngModel)]="mascota.nombre_mascota" required>
+            <input id="nombre_mascota" type="text" class="form-control" name="nombre_mascota" 
+            maxlength="30" [(ngModel)]="mascota.nombre_mascota" [pKeyFilter]="letrasEspace" required>
         </div>
         <div class="col-md-6">
             <label for="color" class="form-label-p"> Color</label>
-            <input id="color" type="text" class="form-control" name="color" [(ngModel)]="mascota.color" required>
+            <input id="color" type="text" class="form-control" name="color" 
+            maxlength="20"  [(ngModel)]="mascota.color" [pKeyFilter]="letrasEspace" required>
         </div>
         <div class="col-md-6">
             <label for="sexo" class="form-label-p"> Sexo</label>
@@ -36,7 +39,8 @@
         </div>
         <div class="col-md-6">
             <label for="raza" class="form-label-p"> Raza</label>
-            <input id="raza" type="text" class="form-control" name="raza" [(ngModel)]="mascota.raza" required>
+            <input id="raza" type="text" class="form-control" name="raza" 
+            maxlength="30" [(ngModel)]="mascota.raza" [pKeyFilter]="letrasEspace" required>
         </div>
         <div class="col-md-6">
             <label for="especie" class="form-label-p"> Especie</label>
@@ -57,7 +61,7 @@
         <div class="col-md-12">
             <label for="descripcion" class="form-label-p"> Descripción</label>
             <textarea id="descripcion" pInputTextarea class="form-control" aria-label="With textarea" name="descripcion"
-                [(ngModel)]="mascota.descripcion" required></textarea>
+            maxlength="30"  [(ngModel)]="mascota.descripcion" [pKeyFilter]="letrasEspaceNumbers" required></textarea>
         </div>
 
         <br>

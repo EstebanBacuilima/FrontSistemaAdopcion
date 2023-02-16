@@ -168,8 +168,8 @@
 
                                         <div class="form-controll" *ngFor="let pregunta of listaPreguntas">
                                             <div class="form-input">
-                                                <input type="text" name="respuesta" id="respuesta" [(ngModel)]="respuesta.respuestas">
-                                                <label for="company">{{ pregunta.pregunta }}</label>
+                                                <input type="text" name="respuesta" id="respuesta" [(ngModel)]="pregunta.respuesta">
+                                                <label for="company">{{pregunta.pregunta }}</label>
                                             </div>
                                         </div>
 

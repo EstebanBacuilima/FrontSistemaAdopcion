@@ -18,14 +18,24 @@ import Swal from 'sweetalert2';
 })
 export class RegFundacionComponent implements OnInit {
 
-  
+
   //VALIDACIONES
-  
+
   // letras y espacios
   letrasEspace: RegExp = /^[a-zA-Z\s]+$/;
   letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\s]+$/;
+  // letrasEspace: RegExp = /^[a-zA-Z0-9\s^!#$%&*]+$/;
+  // letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\s^!#$%&*-]+$/;
+
+  // Validar que no igrese Guion medio
+  onKeyPress(event: KeyboardEvent) {
+    if (event.key === '-') {
+      event.preventDefault();
+    }
+  }
+
   expCorreo: RegExp = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
-  
+
   valCorreo: boolean = true;
   verfCorreo: string = '';
 
@@ -100,9 +110,9 @@ export class RegFundacionComponent implements OnInit {
   fundacion: Fundacion = new Fundacion;
   usuario: Usuario = new Usuario;
   persona: Persona = new Persona;
-  verficarPassword:any;
-  
-  constructor(private _CargarScript: CargarScrpitsService,private toastrService: ToastrService,private fundacionService: FundacionService, private personaService: PersonaService, private usuarioService: UsuarioService, private router: Router, private fotoService: FotoService) {
+  verficarPassword: any;
+
+  constructor(private _CargarScript: CargarScrpitsService, private toastrService: ToastrService, private fundacionService: FundacionService, private personaService: PersonaService, private usuarioService: UsuarioService, private router: Router, private fotoService: FotoService) {
     this.ValidarCampos();
     _CargarScript.Cargar(["validaciones"]);
   }
@@ -143,13 +153,6 @@ export class RegFundacionComponent implements OnInit {
                             this.fundacionService.postFundacion(this.fundacion).subscribe(
                               result => {
                                 console.log(result)
-                                Swal.fire({
-                                  position: 'top-end',
-                                  icon: 'success',
-                                  title: 'Fundacion registrada correctamente',
-                                  showConfirmButton: false,
-                                  timer: 1500
-                                })
                                 this.fundacion.idFundacion = result.idFundacion;
                                 this.cargarImagenUsuario();
                                 this.usuario.persona = this.persona;
@@ -159,14 +162,9 @@ export class RegFundacionComponent implements OnInit {
                                 this.usuario.foto_perfil = this.foto_usuario;
                                 this.usuarioService.postUsuario(this.usuario).subscribe(
                                   info => {
-                                    console.log(info);
-                                    Swal.fire({
-                                      position: 'top-end',
-                                      icon: 'success',
-                                      title: 'Usuario registrado correctamente',
-                                      showConfirmButton: false,
-                                      timer: 1500
-                                    })
+                                    this.toastrService.success('Fundación registrada existosamente', 'Registro Exitoso', {
+                                      timeOut: 1500,
+                                    });
                                     this.limpiarCampos();
                                   }
                                 );
@@ -175,26 +173,26 @@ export class RegFundacionComponent implements OnInit {
                           }
                         );
                       } else {
-                        Swal.fire({
-                          icon: 'error',
-                          title: 'El username ya está en uso'
+                        this.toastrService.error('Username ya en uso', 'Digite otro username', {
+                          timeOut: 2000,
                         });
+                        this.usuario.username = '';
                       }
                     }
                   )
                 } else {
-                  Swal.fire({
-                    icon: 'error',
-                    title: 'La cédula ingresada ya está registrada!'
+                  this.toastrService.error('La cédula ingresada ya está registrada!', 'Cedula en uso', {
+                    timeOut: 3000,
                   });
+                  this.persona.cedula = '';
                 }
               }
             )
           } else {
-            Swal.fire({
-              icon: 'error',
-              title: 'El ruc ya está en uso'
+            this.toastrService.error('El ruc ya esta gesitrado', 'Ruc en uso', {
+              timeOut: 3000,
             });
+            this.fundacion.ruc = '';
           }
         }
       )
@@ -280,7 +278,7 @@ export class RegFundacionComponent implements OnInit {
     this.filem = '';
 
     this.limpiarFormulario();
-  
+
   }
 
 }

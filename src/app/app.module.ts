@@ -38,11 +38,13 @@ import {PasswordModule } from 'primeng/password';
 import {InputTextModule} from 'primeng/inputtext';
 import {DropdownModule} from 'primeng/dropdown';
 import {MatTabsModule} from '@angular/material/tabs';
+import {CalendarModule} from 'primeng/calendar';
 
 //PDF
 import { PdfMakeWrapper } from 'pdfmake-wrapper';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { FiltradoFechasPipe } from './Components/Pipes/filtrado-fechas.pipe';
+import { FiltroMascotasPipe } from './Components/Pipes/filtro-mascotas.pipe';
 PdfMakeWrapper.setFonts(pdfFonts);
 
 
@@ -68,6 +70,8 @@ PdfMakeWrapper.setFonts(pdfFonts);
     PanelSolicitudAdminComponent,
     ReportesComponent,
     FiltradoFechasPipe,
+    FiltroMascotasPipe,
+  
   ],
   imports: [
     BrowserModule,
@@ -87,6 +91,7 @@ PdfMakeWrapper.setFonts(pdfFonts);
     InputTextModule,
     DropdownModule,
     MatTabsModule,
+    CalendarModule,
 
   ],
   providers: [

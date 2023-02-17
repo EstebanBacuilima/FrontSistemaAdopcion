@@ -34,6 +34,7 @@ export class CatalgoMascotasComponent implements OnInit {
     // _CargarScript.Cargar(["formulario"]);
   }
 
+  filtroPost = '';
 
   ngOnInit(): void {
     this.obtenerMasotas();

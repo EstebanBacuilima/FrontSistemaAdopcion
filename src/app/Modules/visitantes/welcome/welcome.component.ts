@@ -7,6 +7,8 @@ import { MascotaService } from 'src/app/Services/mascota.service';
 import { PersonaService } from 'src/app/Services/persona.service';
 import { UsuarioService } from 'src/app/Services/usuario.service';
 
+
+
 @Component({
   selector: 'app-welcome',
   templateUrl: './welcome.component.html',
@@ -83,5 +85,7 @@ export class WelcomeComponent implements OnInit {
       }
     )
   }
+
+
 
 }

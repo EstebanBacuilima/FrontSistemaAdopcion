@@ -32,19 +32,21 @@ import { PanelSeguimientoAdminComponent } from './Modules/admin-fundacion/panel-
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 // PRIMENG
 import {InputMaskModule} from 'primeng/inputmask';
-import {ReportesComponent } from './Modules/admin-fundacion/reportes/reportes.component';
 import {KeyFilterModule } from 'primeng/keyfilter';
 import {PasswordModule } from 'primeng/password';
 import {InputTextModule} from 'primeng/inputtext';
-import {CalendarModule} from 'primeng/calendar';
 import {DropdownModule} from 'primeng/dropdown';
 import {MatTabsModule} from '@angular/material/tabs';
+import {CalendarModule} from 'primeng/calendar';
 
 //PDF
 import { PdfMakeWrapper } from 'pdfmake-wrapper';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { FiltradoFechasPipe } from './Components/Pipes/filtrado-fechas.pipe';
+import { FiltroMascotasPipe } from './Components/Pipes/filtro-mascotas.pipe';
 PdfMakeWrapper.setFonts(pdfFonts);
+
+
 
 @NgModule({
   declarations: [
@@ -65,8 +67,9 @@ PdfMakeWrapper.setFonts(pdfFonts);
     PanelSeguimientoComponent,
     PanelSeguimientoAdminComponent,
     PanelSolicitudAdminComponent,
-    ReportesComponent,
     FiltradoFechasPipe,
+    FiltroMascotasPipe,
+  
   ],
   imports: [
     BrowserModule,
@@ -84,9 +87,10 @@ PdfMakeWrapper.setFonts(pdfFonts);
     PasswordModule,
     KeyFilterModule,
     InputTextModule,
-    CalendarModule,
     DropdownModule,
-    MatTabsModule
+    MatTabsModule,
+    CalendarModule,
+
   ],
   providers: [
     CargarScrpitsService
@@ -98,4 +102,6 @@ PdfMakeWrapper.setFonts(pdfFonts);
   ]
 
 })
+
+
 export class AppModule { }

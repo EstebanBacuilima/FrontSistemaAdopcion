@@ -32,7 +32,6 @@ import { PanelSeguimientoAdminComponent } from './Modules/admin-fundacion/panel-
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 // PRIMENG
 import {InputMaskModule} from 'primeng/inputmask';
-import {ReportesComponent } from './Modules/admin-fundacion/reportes/reportes.component';
 import {KeyFilterModule } from 'primeng/keyfilter';
 import {PasswordModule } from 'primeng/password';
 import {InputTextModule} from 'primeng/inputtext';
@@ -68,7 +67,6 @@ PdfMakeWrapper.setFonts(pdfFonts);
     PanelSeguimientoComponent,
     PanelSeguimientoAdminComponent,
     PanelSolicitudAdminComponent,
-    ReportesComponent,
     FiltradoFechasPipe,
     FiltroMascotasPipe,
   

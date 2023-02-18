@@ -4,7 +4,7 @@ export class Voluntario {
 
     idVoluntario?: number;
     area_trabajo?: string;
-    cargo?: string;
+    // cargo?: string;
     estado?: boolean;
     usuario?: Usuario
     

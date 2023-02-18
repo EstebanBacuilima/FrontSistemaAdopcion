@@ -10,7 +10,6 @@ import { ListMascotaComponent } from './Modules/admin-fundacion/mascotas/list-ma
 import { RegMascotaComponent } from './Modules/admin-fundacion/mascotas/reg-mascota/reg-mascota.component';
 import { PanelSeguimientoAdminComponent } from './Modules/admin-fundacion/panel-seguimiento-admin/panel-seguimiento-admin.component';
 import { PanelSolicitudAdminComponent } from './Modules/admin-fundacion/panel-solicitud-admin/panel-solicitud-admin.component';
-import { ReportesComponent } from './Modules/admin-fundacion/reportes/reportes.component';
 import { ListVoluntarioComponent } from './Modules/admin-fundacion/voluntario/list-voluntario/list-voluntario.component';
 import { RegVoluntarioComponent } from './Modules/admin-fundacion/voluntario/reg-voluntario/reg-voluntario.component';
 import { BienvenidoComponent } from './Modules/admin-super/bienvenido/bienvenido.component';
@@ -36,7 +35,6 @@ const routes: Routes = [
   { path: 'list-mascota', component: ListMascotaComponent,canActivate: [AdminFundacionGuard] },
   { path: 'reg-voluntario', component: RegVoluntarioComponent,canActivate: [AdminFundacionGuard] },
   { path: 'list-voluntario', component: ListVoluntarioComponent,canActivate: [AdminFundacionGuard]},
-  { path: 'reportes-admin', component: ReportesComponent,canActivate: [AdminFundacionGuard] },
   { path: 'panel-solicitudes-admin', component: PanelSolicitudAdminComponent,canActivate: [VoluntarioGuard]  },
   { path: 'panel-seguimiento-admin', component: PanelSeguimientoAdminComponent,canActivate: [VoluntarioGuard] },
 

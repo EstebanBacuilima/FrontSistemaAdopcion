@@ -115,6 +115,7 @@ export class PanelSeguimientoAdminComponent implements OnInit {
         showConfirmButton: false,
         timer: 1500
       })
+      this.optenerDatosSeguimiento();
     })
   }
   //

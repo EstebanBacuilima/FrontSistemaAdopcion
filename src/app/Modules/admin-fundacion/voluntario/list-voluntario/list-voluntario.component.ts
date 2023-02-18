@@ -76,46 +76,6 @@ export class ListVoluntarioComponent implements OnInit {
     )
   }
 
-  // listaVoluntarios: Voluntario[] = [];
-
-  // obtenerVoluntarios1() {
-  //   this.voluntarioService.getVoluntariosFundacion(this.idFundacion).subscribe(
-  //     data => {
-  //       console.log(data);
-  //       this.listaVoluntarios = data.map(
-  //         result => {
-  //           let voluntario = new Voluntario;
-  //           voluntario = result;
-  //           return voluntario;
-  //         }
-  //       )
-  //     }
-  //   )
-  // }
-
-
-  // obtenerVoluntarios() {
-  //   this.voluntarioService.getVoluntariosFundacion(this.idFundacion).subscribe(
-  //     data => {
-  //       this.listaVoluntarios = data.map(
-  //         result => {
-  //           let voluntario = new Voluntario;
-  //           voluntario.idVoluntario = result.idVoluntario;
-  //           voluntario.cargo = result.cargo;
-  //           voluntario.area_trabajo = result.area_trabajo;
-  //           voluntario.estado = result.estado;
-  //           voluntario.usuario = result.usuario!;
-  //           console.log("Data Usuario -> " + voluntario.usuario)
-  //           return voluntario;
-  //         }
-  //       );
-  //       this.loading = false;
-  //     }
-  //   )
-  // }
-
-
-  
   datainicialVoluntario: any;
 
   capParaEdicion(idVoluntario: any) {
@@ -130,14 +90,6 @@ export class ListVoluntarioComponent implements OnInit {
   optenerDatos() {
     this.voluntarioService.getPorId(this.datainicialVoluntario).subscribe(data => {
       this.voluntario = data
-      // this.voluntario.idVoluntario = this.voluntario.idVoluntario;
-      // this.voluntario.cargo = this.voluntario.cargo;
-      // this.voluntario.area_trabajo = this.voluntario.area_trabajo;
-      // this.voluntario.estado = this.voluntario.estado;
-      // this.voluntario.usuario = this.voluntario.usuario;
-      // this.usuario.idUsuario =  this.voluntario.usuario!.idUsuario
-      // this.usuario.username =  this.voluntario.usuario!.username
-      // this.usuario.password =  this.voluntario.usuario!.password
       this.persona.idPersona = this.voluntario.usuario?.persona?.idPersona;
       this.persona.cedula = this.voluntario.usuario?.persona?.cedula
       this.persona.nombres = this.voluntario.usuario?.persona?.nombres
@@ -163,7 +115,7 @@ export class ListVoluntarioComponent implements OnInit {
 
   actualizarVoluntarios() {
     if (!this.persona.cedula || !this.persona.apellidos || !this.persona.correo || !this.persona.direccion || !this.persona.telefono || !this.persona.celular
-      || !this.voluntario.area_trabajo || !this.voluntario.cargo || !this.persona.nombres || !this.persona.fechaNacimiento || !this.persona.genero || !this.usuario.username || !this.usuario.password) {
+      || !this.voluntario.area_trabajo || !this.persona.nombres || !this.persona.fechaNacimiento || !this.persona.genero || !this.usuario.username || !this.usuario.password) {
       this.toastrService.error('Uno o más campos vacios', 'Verifique los Campos de texto', {
         timeOut: 2000,
       });
@@ -174,10 +126,10 @@ export class ListVoluntarioComponent implements OnInit {
           console.log(data)
           this.voluntarioService.updateVoluntario(this.voluntario, this.voluntario.idVoluntario).subscribe(data => {
             this.cargarImagenUsuario();
-            this.obtenerVoluntarios();
             this.toastrService.success('Su ha modificado el voluntario', 'Voluntario Actualizado', {
               timeOut: 1500,
             });
+            this.obtenerVoluntarios();
           })
         })
       })

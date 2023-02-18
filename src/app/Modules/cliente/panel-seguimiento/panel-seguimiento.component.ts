@@ -114,7 +114,6 @@ export class PanelSeguimientoComponent implements OnInit {
   seguimientos: any;
 
   realizarSeguimiento() {
-
     if (!this.seguimiento.descripcion_mascota || !this.seguimiento.descripcion_visita  || !this.seguimiento.estado_comportamiento  || !this.seguimiento.estado_salud) {
       this.toastrService.error('Uno o más campos vacios', 'Verifique los Campos de texto', {
         timeOut: 2000,
@@ -139,6 +138,8 @@ export class PanelSeguimientoComponent implements OnInit {
               this.toastrService.success('Seguimiento realizado con exito', 'Enviado', {
                 timeOut: 1500,
               });
+              this.listarSeguimientosPorMasocta();
+              this.limpiarCampos();
             }
           );
         } else{

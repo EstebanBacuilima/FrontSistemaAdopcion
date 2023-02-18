@@ -137,6 +137,7 @@ export class ListMascotaComponent implements OnInit {
         this.toastrService.success('Se han guardado los cambios', 'Actualizado', {
           timeOut: 1500,
         });
+        this.obtenerMasotas();
       })
     }
   }

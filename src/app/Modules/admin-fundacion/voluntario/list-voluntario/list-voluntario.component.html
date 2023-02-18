@@ -35,15 +35,12 @@
               index as i
             ">
                         <th scope="row">{{ i + 1 }}</th>
-                        <td>{{ voluntario.usuario.persona.cedula }}</td>
-                        <td>
-                            {{ voluntario.usuario.persona.nombres }}
-                            {{ voluntario.usuario.persona.apellidos }}
-                        </td>
+                        <td>{{ voluntario.usuario.persona.cedula}}</td>
+                        <td>{{ voluntario.usuario.persona.nombres }} {{ voluntario.usuario.persona.apellidos }}</td>
                         <td>{{ voluntario.usuario.persona.direccion }}</td>
                         <td>{{ voluntario.usuario.persona.telefono }}</td>
                         <td>{{ voluntario.area_trabajo }}</td>
-                        <td>{{ voluntario.cargo }}</td>
+                        <!-- <td>{{ voluntario.cargo }}</td> -->
                         <td>
                             <button (click)="capParaEdicion(voluntario.idVoluntario)" class="btn btn-primary"
                                 data-bs-toggle="modal" data-bs-target="#modalUpdate">
@@ -135,19 +132,19 @@
                                 <input type="email" class="form-control" name="correo"
                                 maxlength="30"  [(ngModel)]="persona.correo" />
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <label for="areatrabajo" class="form-label-p">Área de Trabajo</label>
                                 <select id="areatrabajo" class="form-control" name="areatrabajo"
                                     [(ngModel)]="voluntario.area_trabajo">
                                     <option value="" disabled selected>
                                         Selecciona área de trabajo
                                     </option>
-                                    <option value="masculino">Clinica</option>
-                                    <option value="famenino">Peluqueria</option>
+                                    <option value="Clinica">Clinica</option>
+                                    <option value="Peluqueria">Peluqueria</option>
                                     <option value="otro">Otro</option>
                                 </select>
                             </div>
-                            <div class="col-md-6">
+                            <!-- <div class="col-md-6">
                                 <label for="cargo" class="form-label-p"> Cargo</label>
                                 <select id="cargo" class="form-control" name="cargo" [(ngModel)]="voluntario.cargo">
                                     <option value="" disabled selected>
@@ -157,7 +154,7 @@
                                     <option value="famenino">Seguimiento de Mascota</option>
                                     <option value="otro">Otro</option>
                                 </select>
-                            </div>
+                            </div> -->
                             <div class="col-12">
                                 <label for="username" class="form-label-p"> Username</label>
                                 <input type="text" class="form-control" name="username"

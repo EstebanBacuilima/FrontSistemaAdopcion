@@ -60,16 +60,16 @@
             <input id="correo" type="email" class="form-control" name="correo" 
             maxlength="30"  [(ngModel)]="persona.correo" required>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-12">
             <label for="areatrabajo" class="form-label-p">Área de Trabajo</label>
             <select id="areatrabajo" class="form-control" name="areatrabajo" [(ngModel)]="voluntario.area_trabajo" required>
                 <option value="" disabled selected>Selecciona área de trabajo</option>
-                <option value="masculino">Clinica</option>
-                <option value="famenino">Peluqueria</option>
+                <option value="Clinica">Clinica</option>
+                <option value="Peluqueria">Peluqueria</option>
                 <option value="otro">Otro</option>
             </select>
         </div>
-        <div class="col-md-6">
+        <!-- <div class="col-md-6">
             <label for="cargo" class="form-label-p"> Cargo</label>
             <select id="cargo" class="form-control" name="cargo" [(ngModel)]="voluntario.cargo" required>
                 <option value="" disabled selected>Selecciona un cargo</option>
@@ -77,7 +77,7 @@
                 <option value="famenino">Seguimiento de Mascota</option>
                 <option value="otro">Otro</option>
             </select>
-        </div>
+        </div> -->
         <div class="col-12">
             <label for="username" class="form-label-p"> Username</label>
             <input id="username" type="text" class="form-control" name="username" 

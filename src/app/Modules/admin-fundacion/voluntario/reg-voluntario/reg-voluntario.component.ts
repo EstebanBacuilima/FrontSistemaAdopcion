@@ -66,7 +66,7 @@ export class RegVoluntarioComponent implements OnInit {
 
   registrarVoluntario() {
     if (!this.persona.cedula || !this.persona.apellidos || !this.persona.correo || !this.persona.direccion || !this.persona.telefono || !this.persona.celular
-      || !this.voluntario.area_trabajo || !this.voluntario.cargo || !this.persona.nombres || !this.persona.fechaNacimiento || !this.persona.genero || !this.usuario.username || !this.usuario.password) {
+      || !this.voluntario.area_trabajo || !this.persona.nombres || !this.persona.fechaNacimiento || !this.persona.genero || !this.usuario.username || !this.usuario.password) {
       this.toastrService.error('Uno o más campos vacios', 'Verifique los Campos de texto', {
         timeOut: 2000,
       });
@@ -203,7 +203,6 @@ export class RegVoluntarioComponent implements OnInit {
     this.persona.apellidos = '';
     this.persona.telefono = '';
     this.voluntario.area_trabajo = '';
-    this.voluntario.cargo = '';
     this.usuario.username = '';
     this.usuario.password = '';
     this.verficarPassword = '';

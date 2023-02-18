@@ -29,6 +29,8 @@ export class RegVoluntarioComponent implements OnInit {
   idFundacion: any;
   verficarPassword: any;
 
+
+
   constructor(private _CargarScript: CargarScrpitsService, private toastrService: ToastrService, private voluntarioService: VoluntarioService, private personaService: PersonaService, private mascotaService: MascotaService, private fundacionService: FundacionService, private usuarioService: UsuarioService, private router: Router, private fotoService: FotoService
   ) { _CargarScript.Cargar(["validaciones"]) }
 
@@ -64,7 +66,7 @@ export class RegVoluntarioComponent implements OnInit {
 
   registrarVoluntario() {
     if (!this.persona.cedula || !this.persona.apellidos || !this.persona.correo || !this.persona.direccion || !this.persona.telefono || !this.persona.celular
-      || !this.voluntario.area_trabajo || !this.voluntario.cargo || !this.persona.nombres || !this.persona.fechaNacimiento || !this.persona.genero || !this.usuario.username || !this.usuario.password) {
+      || !this.voluntario.area_trabajo || !this.persona.nombres || !this.persona.fechaNacimiento || !this.persona.genero || !this.usuario.username || !this.usuario.password) {
       this.toastrService.error('Uno o más campos vacios', 'Verifique los Campos de texto', {
         timeOut: 2000,
       });
@@ -155,6 +157,13 @@ export class RegVoluntarioComponent implements OnInit {
   letrasEspace: RegExp = /^[a-zA-Z\s]+$/;
   letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\s]+$/;
 
+  // Validar que no igrese Guion medio
+  onKeyPress(event: KeyboardEvent) {
+    if (event.key === '-') {
+      event.preventDefault();
+    }
+  }
+
   ValidarCampos() {
     console.log("ya esta activo")
     document.addEventListener('DOMContentLoaded', () => {
@@ -194,7 +203,6 @@ export class RegVoluntarioComponent implements OnInit {
     this.persona.apellidos = '';
     this.persona.telefono = '';
     this.voluntario.area_trabajo = '';
-    this.voluntario.cargo = '';
     this.usuario.username = '';
     this.usuario.password = '';
     this.verficarPassword = '';

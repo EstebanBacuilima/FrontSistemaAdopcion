@@ -14,15 +14,18 @@
         <h2 class="form text-center">Datos del Voluntario</h2>
         <div class="col-12">
             <label for="cedula" class="form-label-p"> Cedula</label>
-            <input id="cedula" type="text" class="form-control" name="cedula" [(ngModel)]="persona.cedula" required> 
+            <input id="cedula" type="text" class="form-control" name="cedula"
+            maxlength="10" [(ngModel)]="persona.cedula" [pKeyFilter]="'int'" (keypress)="onKeyPress($event)" required> 
         </div>
         <div class="col-6">
             <label for="nombres" class="form-label-p"> Nombres</label>
-            <input id="nombres" type="text" class="form-control" name="nombres" [(ngModel)]="persona.nombres" required>
+            <input id="nombres" type="text" class="form-control" name="nombres" 
+            maxlength="30"  [(ngModel)]="persona.nombres" [pKeyFilter]="letrasEspace"  required>
         </div>
         <div class="col-6">
             <label for="apellidos" class="form-label-p"> Apellidos</label>
-            <input id="apellidos" type="text" class="form-control" name="apellidos" [(ngModel)]="persona.apellidos" required>
+            <input id="apellidos" type="text" class="form-control" name="apellidos"
+            maxlength="30"  [(ngModel)]="persona.apellidos" [pKeyFilter]="letrasEspace"  required>
         </div>
         <div class="col-6">
             <label for="fechaNacimiento" class="form-label-p"> Fecha De Nacimiento</label>
@@ -39,41 +42,46 @@
         </div>
         <div class="col-12">
             <label for="direccion" class="form-label-p"> Direccion</label>
-            <input id="direccion" type="text" class="form-control" name="direccion" [(ngModel)]="persona.direccion" required>
+            <input id="direccion" type="text" class="form-control" name="direccion" 
+            maxlength="30"  [(ngModel)]="persona.direccion" [pKeyFilter]="letrasEspaceNumbers" required>
         </div>
         <div class="col-md-6">
             <label for="telefono" class="form-label-p"> Telefono</label>
-            <input id="telefono" type="text" class="form-control" name="telefono" [(ngModel)]="persona.telefono" required>
+            <input id="telefono" type="text" class="form-control" name="telefono" 
+            maxlength="7" [(ngModel)]="persona.telefono" [pKeyFilter]="'int'" (keypress)="onKeyPress($event)"  required>
         </div>
         <div class="col-md-6">
             <label for="celular" class="form-label-p"> Celular</label>
-            <input id="celular" type="text" class="form-control" name="celular" [(ngModel)]="persona.celular" required>
+            <input id="celular" type="text" class="form-control" name="celular"
+            maxlength="10"  [(ngModel)]="persona.celular" [pKeyFilter]="'int'" (keypress)="onKeyPress($event)"  required>
         </div>
         <div class="col-12">
             <label for="correo" class="form-label-p"> Correo</label>
-            <input id="correo" type="email" class="form-control" name="correo" [(ngModel)]="persona.correo" required>
+            <input id="correo" type="email" class="form-control" name="correo" 
+            maxlength="30"  [(ngModel)]="persona.correo" required>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-12">
             <label for="areatrabajo" class="form-label-p">Área de Trabajo</label>
             <select id="areatrabajo" class="form-control" name="areatrabajo" [(ngModel)]="voluntario.area_trabajo" required>
                 <option value="" disabled selected>Selecciona área de trabajo</option>
-                <option value="masculino">Masculino</option>
-                <option value="famenino">Femenino</option>
+                <option value="Clinica">Clinica</option>
+                <option value="Peluqueria">Peluqueria</option>
                 <option value="otro">Otro</option>
             </select>
         </div>
-        <div class="col-md-6">
+        <!-- <div class="col-md-6">
             <label for="cargo" class="form-label-p"> Cargo</label>
             <select id="cargo" class="form-control" name="cargo" [(ngModel)]="voluntario.cargo" required>
                 <option value="" disabled selected>Selecciona un cargo</option>
-                <option value="masculino">Masculino</option>
-                <option value="famenino">Femenino</option>
+                <option value="masculino">Solictud de Adopcion</option>
+                <option value="famenino">Seguimiento de Mascota</option>
                 <option value="otro">Otro</option>
             </select>
-        </div>
+        </div> -->
         <div class="col-12">
             <label for="username" class="form-label-p"> Username</label>
-            <input id="username" type="text" class="form-control" name="username" [(ngModel)]="usuario.username" required>
+            <input id="username" type="text" class="form-control" name="username" 
+            maxlength="30" [(ngModel)]="usuario.username" required>
         </div>
         <div class="col-md-6">
             <label for="password" class="form-label-p"> Contraseña <i class="uil uil-eye-slash showHidePw"></i></label>

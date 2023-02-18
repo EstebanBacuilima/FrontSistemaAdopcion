@@ -1,7 +1,26 @@
+
+
+
+
 <div class="container-fluid">
+
+    <div class="grid p-fluid" style="padding-bottom: 25px;" >
+        <div class="col-12 md:col-4">
+            <h4 style="color: cornflowerblue;" >Buscar por razas o tipos</h4>
+            <div class="">
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input type="text" pInputText  placeholder="Buscar..." name="filtroPost" [(ngModel)]="filtroPost">         
+                </span>
+            </div>
+            
+        </div>
+    </div>
+
+    
     <div class="px-lg-5">
         <div class="row">
-            <div class="carta col-xl-3 col-lg-4 col-md-6 mb-4 p-25" *ngFor="let mascotas of listaMascotas">
+            <div class="carta col-xl-3 col-lg-4 col-md-6 mb-4 p-25" *ngFor="let mascotas of listaMascotas | filtroMascotas:filtroPost">
                 <div class="container-mascota rounded ">
                     <div class="box">
                         <img [src]="'http://localhost:5000/imagen/images/' + mascotas.foto" [alt]="mascotas.foto"
@@ -11,7 +30,7 @@
                             <p>{{mascotas.sexo}}</p>
                             <p>{{mascotas.especie}}</p>
                             <p>{{mascotas.raza}}</p>
-                            <p>{{mascotas.descripcion}}</p>
+                            <!-- <p>{{mascotas.descripcion}}</p> -->
                             <div class="conBtnr">
                                 <button type="button" class="btn boton btn-outline-success" data-bs-toggle="modal"
                                     data-bs-target="#modal-formulario" (click)="capParaSolicitudAdopcion(mascotas.idMascota)">Adoptar</button>
@@ -169,7 +188,9 @@
                                         <div class="form-controll" *ngFor="let pregunta of listaPreguntas">
                                             <div class="form-input">
                                                 <input type="text" name="respuesta" id="respuesta" [(ngModel)]="pregunta.respuesta">
-                                                <label for="company">{{pregunta.pregunta }}</label>
+
+                                                <label for="company">{{ pregunta.pregunta }}</label>
+
                                             </div>
                                         </div>
 

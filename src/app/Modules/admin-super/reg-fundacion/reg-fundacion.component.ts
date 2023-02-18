@@ -57,26 +57,11 @@ export class RegFundacionComponent implements OnInit {
     this.valCorreo2 = this.expCorreo.test(this.persona.correo!);
     if (this.valCorreo2) {
       console.log("Correo Bueno");
-      // this.verfCorreo = 'form-control is-valid';
     } else {
       this.verfCorreo2 = 'ng-invalid ng-dirty';
       console.log("Correo malo");
     }
   }
-
-  // verfRuc: string = '';
-  // rucNum: any;
-
-  // validarRuc() {
-  //   this.rucNum = this.fundacion.ruc;
-  //   if (this.rucNum.length == 13) {
-  //     console.log("Ruc completo");
-  //     this.verfRuc = 'form-control is-valid';
-  //   } else {
-  //     this.verfRuc = 'form-control is-invalid';
-  //     console.log("Ruc falta");
-  //   }
-  // }
 
   ValidarCampos() {
     console.log("ya esta activo")
@@ -102,7 +87,6 @@ export class RegFundacionComponent implements OnInit {
         input.classList.remove('ng-invalid', 'ng-dirty');
       });
       form.reset();
-      // this.verfRuc = '';
     });
   }
   //
@@ -118,10 +102,6 @@ export class RegFundacionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.ValidarCampos();
-  }
-
-  ngAfterViewInit() {
     this.ValidarCampos();
   }
 
@@ -199,6 +179,32 @@ export class RegFundacionComponent implements OnInit {
     }
   }
 
+  // NEVO METODO
+  //carga archivo o foto
+  async convertToBase64(file: File): Promise<string> {
+    const reader = new FileReader();
+    return new Promise<string>((resolve, reject) => {
+      reader.onload = () => {
+        const result = btoa(reader.result as string);
+        resolve(result);
+      };
+      reader.onerror = () => {
+        reject(reader.error);
+      };
+      reader.readAsBinaryString(file);
+    });
+  }
+
+  //foto
+  async loadPictureCategory(event: any) {
+    const file = event.target.files[0];
+    try {
+      this.usuario.foto_perfil = await this.convertToBase64(file);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   // IMAGEN USUARIO
   file: any = '';
   image!: any;
@@ -251,17 +257,14 @@ export class RegFundacionComponent implements OnInit {
   }
 
   limpiarCampos() {
-    console.log("Entro a limpiar")
     this.persona.cedula = '';
     this.persona.correo = '';
-
-    // this.persona.genero = '';
+    this.persona.genero = '';
     this.persona.fechaNacimiento = new Date;
     this.persona.direccion = '';
     this.persona.nombres = '';
     this.persona.apellidos = '';
     this.persona.telefono = '';
-
     this.fundacion.nombre_fundacion = '';
     this.fundacion.acronimo = '';
     this.fundacion.ruc = '';
@@ -269,16 +272,12 @@ export class RegFundacionComponent implements OnInit {
     this.fundacion.mision = '';
     this.fundacion.telefono = '';
     this.fundacion.correo = '';
-
     this.usuario.username = '';
     this.usuario.password = '';
     this.verficarPassword = '';
-
     this.file = '';
     this.filem = '';
-
     this.limpiarFormulario();
-
   }
 
 }

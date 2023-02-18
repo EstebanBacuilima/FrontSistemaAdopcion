@@ -9,6 +9,7 @@ import { PersonaService } from 'src/app/Services/persona.service';
 import { UsuarioService } from 'src/app/Services/usuario.service';
 import * as pdfMake from "pdfmake/build/pdfmake";
 import { ToastrService } from 'ngx-toastr';
+import { Header } from 'primeng/api';
 
 @Component({
   selector: 'app-list-fundacio',
@@ -229,6 +230,8 @@ export class ListFundacioComponent implements OnInit {
     this.fotoService.guararImagenes(this.selectedFiles);
   }
 
+
+  fechaAct: Date =new Date();
   // PDF
   generarPDF() {
     const data = this.listaFundaciones;
@@ -253,7 +256,7 @@ export class ListFundacioComponent implements OnInit {
       header: {
         text: 'Tables',
         bold: true,
-        fontSize: 14,
+        fontSize: 8,
         color: "#000",
         font: "Roboto-Regular.ttf",
         margin: [0, 20, 0, 10]
@@ -318,20 +321,45 @@ export class ListFundacioComponent implements OnInit {
     const documentDefinition: any = {
       content: [
         {
-          text: "Reporte de Fundaciones",
+          text: "Sistema de Adopción de Mascotas",
+          fontSize: 10,
           style: "header",
-          alignment: 'center',
+          alignment: 'right',
+          fillColor: 'violet'
+        },
+        "-----------------------------------------------------------------------------------------------------------------------------------------------------------",
+        {
+          text: this.fechaAct,
+          style: "header",
+          alignment: 'right',
           fillColor: 'lightblue'
         },
         {
           text: '\n\n',
         },
         {
+          text: "Reporte de Fundaciones",
+          style: "header",
+          alignment: 'center',
+          fillColor: 'lightblue'
+        },
+        {
+          text: '\n',
+        },
+        {
+          text: 'Listado de fundaciones registradas en el sistema de adopción de mascotas.',
+          alignment: 'center',
+          Color: 'green',
+        },
+        {
+          text: '\n',
+        },
+        {
           table: {
             layout: 'landscape',
-            fontSize: 8,
+            fontSize: 5,
             headerRows: 1,
-            widths: [12, 70, 70, 30, 70, 70, 60, 55],
+            widths: [12, 65, 70, 65, 67, 65, 65, 64],
             body: tableBody
           }
         }
@@ -340,7 +368,7 @@ export class ListFundacioComponent implements OnInit {
         header: {
           fontSize: 20,
           bold: true,
-          fillColor: 'lightblue'
+          fillColor: 'white'
         },
         tableHeader: {
           fillColor: 'lightblue'

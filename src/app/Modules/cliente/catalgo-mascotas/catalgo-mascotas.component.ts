@@ -36,6 +36,7 @@ export class CatalgoMascotasComponent implements OnInit {
     // _CargarScript.Cargar(["formulario"]);
   }
 
+  filtroPost = '';
 
   ngOnInit(): void {
     this.obtenerMasotas();
@@ -162,6 +163,7 @@ export class CatalgoMascotasComponent implements OnInit {
   pregunta:any;
 
   enviarSolicitud() {
+
     // if (!this.pregunta.respuestas) {
     //   this.toastrService.error('Revise las preguntas!', 'Preguntas Vacias', {
     //     timeOut: 2000,
@@ -230,5 +232,6 @@ export class CatalgoMascotasComponent implements OnInit {
       );
     });
   }
+
 
 }

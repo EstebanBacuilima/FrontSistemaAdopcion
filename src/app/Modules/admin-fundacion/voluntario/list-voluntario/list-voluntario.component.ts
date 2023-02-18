@@ -38,6 +38,20 @@ export class ListVoluntarioComponent implements OnInit {
   idUsuario: any;
   idFundacion: any;
 
+   //VALIDACIONES
+
+  // letras y espacios
+  letrasEspace: RegExp = /^[a-zA-Z\s]+$/;
+  letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\s]+$/;
+
+  // Validar que no igrese Guion medio
+  onKeyPress(event: KeyboardEvent) {
+    if (event.key === '-') {
+      event.preventDefault();
+    }
+  }
+
+
   obtenerUsuario() {
     this.idUsuario = localStorage.getItem('idUsuario');
     if (this.idUsuario != '' && this.idUsuario != undefined) {

@@ -30,6 +30,8 @@ export class CatalgoMascotasComponent implements OnInit {
   idUsuario: any;
   idFundacion: any;
 
+  
+
   constructor(private _CargarScript: CargarScrpitsService,private toastrService: ToastrService, private solicitudService: SolicitudAdopcionService, private mascotaService: MascotaService, private fundacionService: FundacionService, private personaService: PersonaService, private usuarioService: UsuarioService, private router: Router) {
     // _CargarScript.Cargar(["formulario"]);
   }
@@ -158,9 +160,11 @@ export class CatalgoMascotasComponent implements OnInit {
   solicitudAdopcion: SolicitudAdopcion = new SolicitudAdopcion;
   capIdSolicitud: any;
 
+  pregunta:any;
 
   enviarSolicitud() {
-    // if (!this.respuesta.respuestas) {
+
+    // if (!this.pregunta.respuestas) {
     //   this.toastrService.error('Revise las preguntas!', 'Preguntas Vacias', {
     //     timeOut: 2000,
     //   });
@@ -209,7 +213,6 @@ export class CatalgoMascotasComponent implements OnInit {
     );
   }
 
-  // respuesta: Respuesta = new Respuesta;
 
   enviarRespuestas() {
     this.listaPreguntas.forEach(pregunta => {
@@ -230,8 +233,5 @@ export class CatalgoMascotasComponent implements OnInit {
     });
   }
 
-  // limpiar(){
-  //   this.respuesta.respuestas = '';
-  // }
 
 }

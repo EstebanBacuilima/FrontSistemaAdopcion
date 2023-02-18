@@ -18,14 +18,24 @@ import Swal from 'sweetalert2';
 })
 export class RegFundacionComponent implements OnInit {
 
-  
+
   //VALIDACIONES
-  
+
   // letras y espacios
   letrasEspace: RegExp = /^[a-zA-Z\s]+$/;
   letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\s]+$/;
+  // letrasEspace: RegExp = /^[a-zA-Z0-9\s^!#$%&*]+$/;
+  // letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\s^!#$%&*-]+$/;
+
+  // Validar que no igrese Guion medio
+  onKeyPress(event: KeyboardEvent) {
+    if (event.key === '-') {
+      event.preventDefault();
+    }
+  }
+
   expCorreo: RegExp = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
-  
+
   valCorreo: boolean = true;
   verfCorreo: string = '';
 
@@ -84,9 +94,9 @@ export class RegFundacionComponent implements OnInit {
   fundacion: Fundacion = new Fundacion;
   usuario: Usuario = new Usuario;
   persona: Persona = new Persona;
-  verficarPassword:any;
-  
-  constructor(private _CargarScript: CargarScrpitsService,private toastrService: ToastrService,private fundacionService: FundacionService, private personaService: PersonaService, private usuarioService: UsuarioService, private router: Router, private fotoService: FotoService) {
+  verficarPassword: any;
+
+  constructor(private _CargarScript: CargarScrpitsService, private toastrService: ToastrService, private fundacionService: FundacionService, private personaService: PersonaService, private usuarioService: UsuarioService, private router: Router, private fotoService: FotoService) {
     this.ValidarCampos();
     _CargarScript.Cargar(["validaciones"]);
   }

@@ -7,8 +7,6 @@ import { FooterComponent } from './Components/footer/footer.component';
 import { HeaderComponent } from './Components/header/header.component';
 import { LoginComponent } from './Modules/visitantes/login/login.component';
 import { WelcomeComponent } from './Modules/visitantes/welcome/welcome.component';
-import { KeyFilterModule } from 'primeng/keyfilter';
-import { PasswordModule } from 'primeng/password';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
@@ -30,7 +28,23 @@ import { PanelSolicitudesComponent } from './Modules/cliente/panel-solicitudes/p
 import { PanelSeguimientoComponent } from './Modules/cliente/panel-seguimiento/panel-seguimiento.component';
 import { PanelSolicitudAdminComponent } from './Modules/admin-fundacion/panel-solicitud-admin/panel-solicitud-admin.component';
 import { PanelSeguimientoAdminComponent } from './Modules/admin-fundacion/panel-seguimiento-admin/panel-seguimiento-admin.component';
+// NUEVOS
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+// PRIMENG
+import {InputMaskModule} from 'primeng/inputmask';
+import {KeyFilterModule } from 'primeng/keyfilter';
+import {PasswordModule } from 'primeng/password';
+import {InputTextModule} from 'primeng/inputtext';
+import {DropdownModule} from 'primeng/dropdown';
+import {MatTabsModule} from '@angular/material/tabs';
+import {CalendarModule} from 'primeng/calendar';
 
+//PDF
+import { PdfMakeWrapper } from 'pdfmake-wrapper';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+import { FiltradoFechasPipe } from './Components/Pipes/filtrado-fechas.pipe';
+import { FiltroMascotasPipe } from './Components/Pipes/filtro-mascotas.pipe';
+PdfMakeWrapper.setFonts(pdfFonts);
 
 
 
@@ -52,25 +66,42 @@ import { PanelSeguimientoAdminComponent } from './Modules/admin-fundacion/panel-
     PanelSolicitudesComponent,
     PanelSeguimientoComponent,
     PanelSeguimientoAdminComponent,
-    PanelSolicitudAdminComponent
+    PanelSolicitudAdminComponent,
+    FiltradoFechasPipe,
+    FiltroMascotasPipe,
+  
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ToastrModule.forRoot(),
-    KeyFilterModule,
-    PasswordModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     NgxPaginationModule,
-    CommonModule
+    CommonModule,
+    // PRIME
+    InputMaskModule,
+    PasswordModule,
+    KeyFilterModule,
+    InputTextModule,
+    DropdownModule,
+    MatTabsModule,
+    CalendarModule,
+
   ],
   providers: [
     CargarScrpitsService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent
+  ],
+  schemas: [ 
+    CUSTOM_ELEMENTS_SCHEMA 
+  ]
+
 })
+
+
 export class AppModule { }

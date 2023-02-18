@@ -9,25 +9,28 @@
         </li>
     </ul>
 
-    <form class="row g-2 d-flex justify-content-center">
+    <form class="row needs-validation g-2 d-flex justify-content-center" novalidate>
 
         <h2 class="form-label-p text-center">Datos Mascota</h2>
 
         <div class="col-md-6">
-            <label for="chip" class="form-label-p"> Chip</label>
-            <input type="text" class="form-control" name="chipMascota" [(ngModel)]="mascota.chipMascota">
+            <label for="chipMascota" class="form-label-p"> Chip</label>
+            <input id="chipMascota" type="text" class="form-control" name="chipMascota"
+             maxlength="10"  [(ngModel)]="mascota.chipMascota" [pKeyFilter]="'int'" (keypress)="onKeyPress($event)"  required>
         </div>
         <div class="col-md-6">
-            <label for="nombreM" class="form-label-p"> Nombre</label>
-            <input type="text" class="form-control" name="nombre_mascota" [(ngModel)]="mascota.nombre_mascota">
+            <label for="nombre_mascota" class="form-label-p"> Nombre</label>
+            <input id="nombre_mascota" type="text" class="form-control" name="nombre_mascota" 
+            maxlength="30" [(ngModel)]="mascota.nombre_mascota" [pKeyFilter]="letrasEspace" required>
         </div>
         <div class="col-md-6">
             <label for="color" class="form-label-p"> Color</label>
-            <input type="text" class="form-control" name="color" [(ngModel)]="mascota.color">
+            <input id="color" type="text" class="form-control" name="color" 
+            maxlength="20"  [(ngModel)]="mascota.color" [pKeyFilter]="letrasEspace" required>
         </div>
         <div class="col-md-6">
             <label for="sexo" class="form-label-p"> Sexo</label>
-            <select id="sexo" class="form-control" name="sexo" [(ngModel)]="mascota.sexo">
+            <select id="sexo" class="form-control" name="sexo" [(ngModel)]="mascota.sexo" required>
                 <option value="" disabled selected>Selecciona un sexo</option>
                 <option value="Macho">Macho</option>
                 <option value="Hembra">Hembra</option>
@@ -36,19 +39,20 @@
         </div>
         <div class="col-md-6">
             <label for="raza" class="form-label-p"> Raza</label>
-            <input type="text" class="form-control" name="raza" [(ngModel)]="mascota.raza">
+            <input id="raza" type="text" class="form-control" name="raza" 
+            maxlength="30" [(ngModel)]="mascota.raza" [pKeyFilter]="letrasEspace" required>
         </div>
         <div class="col-md-6">
             <label for="especie" class="form-label-p"> Especie</label>
-            <select id="especie" class="form-control" name="especie" [(ngModel)]="mascota.especie">
-                <option value="" disabled selected>Selecciona uns especie</option>
+            <select id="especie" class="form-control" name="especie" placeholder="Selecciona una especie" [(ngModel)]="mascota.especie" required>
+                <option value="" disabled selected>Selecciona una especie</option>
                 <option value="canino">Canino</option>
                 <option value="felino">Felino</option>
             </select>
         </div>
         <div class="col-md-12">
             <label for="especie" class="form-label-p"> Esterelizado</label>
-            <select id="especie" class="form-control" name="estado_mascota" [(ngModel)]="mascota.estado_mascota">
+            <select id="especie" class="form-control" name="estado_mascota" placeholder="Selecciona una opcion" [(ngModel)]="mascota.estado_mascota" required>
                 <option value="" disabled selected>Selecciona una opcion</option>
                 <option value="true">Si</option>
                 <option value="false">No</option>
@@ -56,8 +60,8 @@
         </div>
         <div class="col-md-12">
             <label for="descripcion" class="form-label-p"> Descripción</label>
-            <textarea class="form-control" aria-label="With textarea" name="descripcion"
-                [(ngModel)]="mascota.descripcion"></textarea>
+            <textarea id="descripcion" pInputTextarea class="form-control" aria-label="With textarea" name="descripcion"
+            maxlength="30"  [(ngModel)]="mascota.descripcion" [pKeyFilter]="letrasEspaceNumbers" required></textarea>
         </div>
 
         <br>
@@ -69,11 +73,12 @@
                     </div>
                     <label class="btn btn-primarys rounded-mid">Foto
                         <input type="file" class="uploadFile img" value="Upload Photo" (change)="imageSelected($event)"
-                            style="width: 0px;height: 0px;overflow: hidden;">
+                            style="width: 0px;height: 0px;overflow: hidden;" required>
                     </label>
                 </div>
             </div>
         </div>
-        <button type="button" class="btn btn-primary" (click)="registraMascota()">Registrar Mascota</button>
+        <button type="submit" class="btn btn-primary" (click)="registraMascota()">Registrar Mascota</button>
+        <button type="button" class="btn " (click)=" limpiarCampos()" style="background-color: #a9cbff; border: #a9cbff;" >Cancelar</button>
     </form>
 </div>

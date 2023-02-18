@@ -7,6 +7,8 @@ import { MascotaService } from 'src/app/Services/mascota.service';
 import { PersonaService } from 'src/app/Services/persona.service';
 import { UsuarioService } from 'src/app/Services/usuario.service';
 
+
+
 @Component({
   selector: 'app-welcome',
   templateUrl: './welcome.component.html',
@@ -16,12 +18,18 @@ export class WelcomeComponent implements OnInit {
 
   
   loading: boolean = true;
+  usuarioRol: string = "PUBLICO";
 
   constructor( private mascotaService: MascotaService,private fundacionService: FundacionService, private personaService: PersonaService, private usuarioService: UsuarioService, private router: Router) { }
   
   ngOnInit(): void {
     this.obtenerFundaciones();
     this.obtenerMasotas();
+    localStorage.removeItem('idUsuario');
+    localStorage.removeItem('nameImagen');
+    localStorage.removeItem('nameLogo');
+    localStorage.setItem('rol', String(this.usuarioRol));
+    console.log("ROL ->" + localStorage.getItem('rol'))
   }
 
   listaFundaciones: Fundacion[] = [];
@@ -77,5 +85,7 @@ export class WelcomeComponent implements OnInit {
       }
     )
   }
+
+
 
 }

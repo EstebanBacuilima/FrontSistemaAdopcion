@@ -10,6 +10,7 @@ import { VoluntarioService } from 'src/app/Services/voluntario.service';
 import { takeWhile } from 'rxjs';
 import { PersonaService } from 'src/app/Services/persona.service';
 import Swal from 'sweetalert2';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-list-voluntario',
@@ -26,7 +27,7 @@ export class ListVoluntarioComponent implements OnInit {
   public myCounter: number = 0;
 
 
-  constructor(private personaService: PersonaService,private voluntarioService: VoluntarioService, private fundacionService: FundacionService, private usuarioService: UsuarioService, private router: Router, private fotoService: FotoService
+  constructor(private toastrService: ToastrService,private personaService: PersonaService,private voluntarioService: VoluntarioService, private fundacionService: FundacionService, private usuarioService: UsuarioService, private router: Router, private fotoService: FotoService
   ) { }
 
 
@@ -36,6 +37,20 @@ export class ListVoluntarioComponent implements OnInit {
 
   idUsuario: any;
   idFundacion: any;
+
+   //VALIDACIONES
+
+  // letras y espacios
+  letrasEspace: RegExp = /^[a-zA-Z\s]+$/;
+  letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\s]+$/;
+
+  // Validar que no igrese Guion medio
+  onKeyPress(event: KeyboardEvent) {
+    if (event.key === '-') {
+      event.preventDefault();
+    }
+  }
+
 
   obtenerUsuario() {
     this.idUsuario = localStorage.getItem('idUsuario');
@@ -61,46 +76,6 @@ export class ListVoluntarioComponent implements OnInit {
     )
   }
 
-  // listaVoluntarios: Voluntario[] = [];
-
-  // obtenerVoluntarios1() {
-  //   this.voluntarioService.getVoluntariosFundacion(this.idFundacion).subscribe(
-  //     data => {
-  //       console.log(data);
-  //       this.listaVoluntarios = data.map(
-  //         result => {
-  //           let voluntario = new Voluntario;
-  //           voluntario = result;
-  //           return voluntario;
-  //         }
-  //       )
-  //     }
-  //   )
-  // }
-
-
-  // obtenerVoluntarios() {
-  //   this.voluntarioService.getVoluntariosFundacion(this.idFundacion).subscribe(
-  //     data => {
-  //       this.listaVoluntarios = data.map(
-  //         result => {
-  //           let voluntario = new Voluntario;
-  //           voluntario.idVoluntario = result.idVoluntario;
-  //           voluntario.cargo = result.cargo;
-  //           voluntario.area_trabajo = result.area_trabajo;
-  //           voluntario.estado = result.estado;
-  //           voluntario.usuario = result.usuario!;
-  //           console.log("Data Usuario -> " + voluntario.usuario)
-  //           return voluntario;
-  //         }
-  //       );
-  //       this.loading = false;
-  //     }
-  //   )
-  // }
-
-
-  
   datainicialVoluntario: any;
 
   capParaEdicion(idVoluntario: any) {
@@ -115,14 +90,6 @@ export class ListVoluntarioComponent implements OnInit {
   optenerDatos() {
     this.voluntarioService.getPorId(this.datainicialVoluntario).subscribe(data => {
       this.voluntario = data
-      // this.voluntario.idVoluntario = this.voluntario.idVoluntario;
-      // this.voluntario.cargo = this.voluntario.cargo;
-      // this.voluntario.area_trabajo = this.voluntario.area_trabajo;
-      // this.voluntario.estado = this.voluntario.estado;
-      // this.voluntario.usuario = this.voluntario.usuario;
-      // this.usuario.idUsuario =  this.voluntario.usuario!.idUsuario
-      // this.usuario.username =  this.voluntario.usuario!.username
-      // this.usuario.password =  this.voluntario.usuario!.password
       this.persona.idPersona = this.voluntario.usuario?.persona?.idPersona;
       this.persona.cedula = this.voluntario.usuario?.persona?.cedula
       this.persona.nombres = this.voluntario.usuario?.persona?.nombres
@@ -147,22 +114,27 @@ export class ListVoluntarioComponent implements OnInit {
   
 
   actualizarVoluntarios() {
-    this.personaService.updatePersona(this.persona, this.persona.idPersona).subscribe(data => {
-      console.log(data)
-      this.usuarioService.updateUsuario(this.usuario, this.usuario.idUsuario).subscribe(data => {
+    if (!this.persona.cedula || !this.persona.apellidos || !this.persona.correo || !this.persona.direccion || !this.persona.telefono || !this.persona.celular
+      || !this.voluntario.area_trabajo || !this.persona.nombres || !this.persona.fechaNacimiento || !this.persona.genero || !this.usuario.username || !this.usuario.password) {
+      this.toastrService.error('Uno o más campos vacios', 'Verifique los Campos de texto', {
+        timeOut: 2000,
+      });
+    } else {
+      this.personaService.updatePersona(this.persona, this.persona.idPersona).subscribe(data => {
         console.log(data)
-        this.voluntarioService.updateVoluntario(this.voluntario, this.voluntario.idVoluntario).subscribe(data => {
+        this.usuarioService.updateUsuario(this.usuario, this.usuario.idUsuario).subscribe(data => {
           console.log(data)
-          Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Actualizado Correctamente',
-            showConfirmButton: false,
-            timer: 1500
+          this.voluntarioService.updateVoluntario(this.voluntario, this.voluntario.idVoluntario).subscribe(data => {
+            this.cargarImagenUsuario();
+            this.toastrService.success('Su ha modificado el voluntario', 'Voluntario Actualizado', {
+              timeOut: 1500,
+            });
+            this.obtenerVoluntarios();
           })
         })
       })
-    })
+    }
+    
   }
 
   // IMAGEN

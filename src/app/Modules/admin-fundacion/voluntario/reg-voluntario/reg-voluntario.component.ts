@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { CargarScrpitsService } from 'src/app/cargar-scrpits.service';
 import { Fundacion } from 'src/app/Models/Fundacion';
 import { Persona } from 'src/app/Models/Persona';
 import { Usuario } from 'src/app/Models/Usuario';
@@ -10,7 +12,6 @@ import { MascotaService } from 'src/app/Services/mascota.service';
 import { PersonaService } from 'src/app/Services/persona.service';
 import { UsuarioService } from 'src/app/Services/usuario.service';
 import { VoluntarioService } from 'src/app/Services/voluntario.service';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-reg-voluntario',
@@ -28,11 +29,15 @@ export class RegVoluntarioComponent implements OnInit {
   idFundacion: any;
   verficarPassword: any;
 
-  constructor(private voluntarioService: VoluntarioService, private personaService: PersonaService, private mascotaService: MascotaService, private fundacionService: FundacionService, private usuarioService: UsuarioService, private router: Router, private fotoService: FotoService
-  ) { }
+
+
+  constructor(private _CargarScript: CargarScrpitsService, private toastrService: ToastrService, private voluntarioService: VoluntarioService, private personaService: PersonaService, private mascotaService: MascotaService, private fundacionService: FundacionService, private usuarioService: UsuarioService, private router: Router, private fotoService: FotoService
+  ) { _CargarScript.Cargar(["validaciones"]) }
 
   ngOnInit(): void {
     this.obtenerUsuario();
+    this.ValidarCampos();
+    this.limpiarCampos();
   }
   obtenerUsuario() {
     this.idUsuario = localStorage.getItem('idUsuario');
@@ -60,124 +65,65 @@ export class RegVoluntarioComponent implements OnInit {
   }
 
   registrarVoluntario() {
+    if (!this.persona.cedula || !this.persona.apellidos || !this.persona.correo || !this.persona.direccion || !this.persona.telefono || !this.persona.celular
+      || !this.voluntario.area_trabajo || !this.persona.nombres || !this.persona.fechaNacimiento || !this.persona.genero || !this.usuario.username || !this.usuario.password) {
+      this.toastrService.error('Uno o más campos vacios', 'Verifique los Campos de texto', {
+        timeOut: 2000,
+      });
+      return;
+    }
     if (this.usuario.password !== this.verficarPassword) {
-      this.mostrarMensajeError("Contraseñas son distintas!", "Verifique su contraseña");
+      this.toastrService.error('Contraseñas son distintas!', 'Verifique su contraseñ', {
+        timeOut: 2000,
+      });
       return;
     }
-  
-    if (!this.persona.nombres || !this.persona.apellidos || !this.persona.correo || !this.usuario.username || !this.usuario.password) {
-      this.mostrarMensajeError("Verifique los Campos!");
-      return;
-    }
-  
+
     this.usuarioService.verfUsername(this.usuario.username).subscribe(
       data => {
         if (data) {
-          this.mostrarMensajeError("El username que eligió ya está en uso!", "Cambie su username");
+          this.toastrService.error('Username ya en uso', 'Digite otro username', {
+            timeOut: 3000,
+          });
           this.usuario.username = '';
           return;
         }
-        this.personaService.postPersona(this.persona).subscribe(personaData => {
-          this.persona.idPersona = personaData.idPersona;
-          this.usuario.persona = this.persona;
-          this.usuario.fundacion = this.fundacion;
-          this.usuario.estado = true;
-          this.usuario.rol = "VOLUNTARIO";
-          this.voluntario.estado = true;
-          this.usuarioService.postUsuario(this.usuario).subscribe(usuarioData => {
-            this.usuario = usuarioData;
-            this.voluntario.usuario = this.usuario;
-            this.voluntarioService.postVoluntario(this.voluntario).subscribe(() => {
-              this.mostrarMensajeExito("Registrado Exitosamente");
+
+        this.personaService.getPorCedula(this.persona.cedula).subscribe(
+          result => {
+            if (result != null) {
+              this.toastrService.error('Digite otra cedula', 'Cedula Existente', {
+                timeOut: 3000,
+              });
+              this.persona.cedula = '';
+              return;
+            }
+
+            this.personaService.postPersona(this.persona).subscribe(personaData => {
+              this.persona.idPersona = personaData.idPersona;
+              this.usuario.persona = this.persona;
+              this.usuario.fundacion = this.fundacion;
+              this.usuario.estado = true;
+              this.usuario.rol = "VOLUNTARIO";
+              this.voluntario.estado = true;
+              this.usuarioService.postUsuario(this.usuario).subscribe(usuarioData => {
+                this.usuario = usuarioData;
+                this.voluntario.usuario = this.usuario;
+                this.cargarImagenVoluntario();
+                this.voluntarioService.postVoluntario(this.voluntario).subscribe(() => {
+                  this.toastrService.success('Su ha guardado el voluntario', 'Voluntario Registrada Exitosamente', {
+                    timeOut: 1500,
+                  });
+                  this.limpiarCampos();
+                });
+              });
             });
-          });
-        });
+
+          }
+        )
       }
     );
   }
-  
-  mostrarMensajeError(titulo: string, texto?: string) {
-    Swal.fire({
-      icon: 'error',
-      title: titulo,
-      text: texto
-    });
-  }
-  
-  mostrarMensajeExito(titulo: string) {
-    Swal.fire({
-      position: 'top-end',
-      icon: 'success',
-      title: titulo,
-      showConfirmButton: false,
-      timer: 1500
-    });
-  }
-
-  // registrarVoluntario() {
-
-  //   if (this.verficarPassword == this.usuario.password) {
-
-  //     if (this.persona.nombres === '' || this.persona.apellidos === '' || this.persona.correo === '' || this.usuario.username === '' || this.usuario.password === ''
-  //       || this.persona.nombres === null || this.persona.apellidos === null || this.persona.correo === null || this.usuario.username === null || this.usuario.password === null) {
-  //       Swal.fire({
-  //         icon: 'error',
-  //         title: 'Verifique los Campos!'
-  //       })
-  //     } else {
-  //       this.usuarioService.verfUsername(this.usuario.username).subscribe(
-  //         data => {
-  //           if (!data) {
-  //             this.personaService.postPersona(this.persona).subscribe(
-  //               data => {
-  //                 console.log("persona: "  + data);
-  //                 this.persona.idPersona = data.idPersona;
-  //                 this.usuario.persona = this.persona;
-  //                 this.usuario.fundacion = this.fundacion;
-  //                 this.usuario.estado = true;
-  //                 this.usuario.rol = "VOLUNTARIO";
-  //                 this.voluntario.estado = true;
-  //                 this.usuarioService.postUsuario(this.usuario).subscribe(
-  //                   result => {
-  //                     console.log("usuario: " + result);
-  //                     this.usuario = result;
-  //                     this.voluntario.usuario = this.usuario
-  //                     this.voluntarioService.postVoluntario(this.voluntario).subscribe(
-  //                       dataP => {
-  //                         console.log("personal: " + dataP);
-  //                         Swal.fire({
-  //                           position: 'top-end',
-  //                           icon: 'success',
-  //                           title: 'Registrado Exitosamente',
-  //                           showConfirmButton: false,
-  //                           timer: 1500
-  //                         })
-  //                       }
-  //                     )
-  //                   }
-  //                 )
-  //               }
-  //             )
-  //           } else {
-  //             Swal.fire({
-  //               icon: 'error',
-  //               title: 'El username que eligio ya está en uso!',
-  //               text: 'Cambie su username'
-  //             })
-  //             this.usuario.username = '';
-  //           }
-  //         }
-  //       )
-  //     }
-  //   } else {
-  //     Swal.fire({
-  //       icon: 'error',
-  //       title: 'Contraseñas son distintas!',
-  //       text: 'Verifique su contraseña'
-  //     })
-  //   }
-
-  // }
 
   // IMAGEN
   file: any = '';
@@ -201,7 +147,67 @@ export class RegVoluntarioComponent implements OnInit {
     this.usuario.foto_perfil = this.foto_mascota;
   }
 
-  cargarImagenMascota() {
+  cargarImagenVoluntario() {
     this.fotoService.guararImagenes(this.selectedFile);
   }
+
+  //VALIDACIONES
+
+  // letras y espacios
+  letrasEspace: RegExp = /^[a-zA-Z\s]+$/;
+  letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\s]+$/;
+
+  // Validar que no igrese Guion medio
+  onKeyPress(event: KeyboardEvent) {
+    if (event.key === '-') {
+      event.preventDefault();
+    }
+  }
+
+  ValidarCampos() {
+    console.log("ya esta activo")
+    document.addEventListener('DOMContentLoaded', () => {
+      const forms = document.querySelectorAll('.needs-validation') as NodeListOf<HTMLFormElement>;
+      Array.from(forms).forEach(form => {
+        form.addEventListener('submit', (event: Event) => {
+          if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        });
+      });
+    });
+  }
+
+  limpiarFormulario() {
+    const forms = document.querySelectorAll('.needs-validation') as NodeListOf<HTMLFormElement>;
+    Array.from(forms).forEach(form => {
+      form.classList.remove('was-validated');
+      form.querySelectorAll('.ng-invalid, .ng-dirty').forEach((input) => {
+        input.classList.remove('ng-invalid', 'ng-dirty');
+      });
+      form.reset();
+    });
+  }
+  //
+
+  limpiarCampos() {
+    console.log("Entro a limpiar")
+    this.persona.cedula = '';
+    this.persona.correo = '';
+    this.persona.genero = '';
+    this.persona.fechaNacimiento = new Date;
+    this.persona.direccion = '';
+    this.persona.nombres = '';
+    this.persona.apellidos = '';
+    this.persona.telefono = '';
+    this.voluntario.area_trabajo = '';
+    this.usuario.username = '';
+    this.usuario.password = '';
+    this.verficarPassword = '';
+    this.file = '';
+    this.limpiarFormulario();
+  }
+
 }

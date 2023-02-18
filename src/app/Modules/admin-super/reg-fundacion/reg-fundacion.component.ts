@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { CargarScrpitsService } from 'src/app/cargar-scrpits.service';
 import { Fundacion } from 'src/app/Models/Fundacion';
 import { Persona } from 'src/app/Models/Persona';
 import { Usuario } from 'src/app/Models/Usuario';
@@ -16,25 +18,100 @@ import Swal from 'sweetalert2';
 })
 export class RegFundacionComponent implements OnInit {
 
+
+  //VALIDACIONES
+
+  // letras y espacios
+  letrasEspace: RegExp = /^[a-zA-Z\s]+$/;
+  letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\s]+$/;
+  // letrasEspace: RegExp = /^[a-zA-Z0-9\s^!#$%&*]+$/;
+  // letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\s^!#$%&*-]+$/;
+
+  // Validar que no igrese Guion medio
+  onKeyPress(event: KeyboardEvent) {
+    if (event.key === '-') {
+      event.preventDefault();
+    }
+  }
+
+  expCorreo: RegExp = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
+
+  valCorreo: boolean = true;
+  verfCorreo: string = '';
+
+  validarCorreo() {
+    this.valCorreo = this.expCorreo.test(this.fundacion.correo!);
+    if (this.valCorreo) {
+      console.log("Correo Bueno");
+      // this.verfCorreo = 'form-control is-valid';
+    } else {
+      this.verfCorreo = 'ng-invalid ng-dirty';
+      console.log("Correo malo");
+    }
+  }
+
+  valCorreo2: boolean = true;
+  verfCorreo2: string = '';
+
+  validarCorreo2() {
+    this.valCorreo2 = this.expCorreo.test(this.persona.correo!);
+    if (this.valCorreo2) {
+      console.log("Correo Bueno");
+    } else {
+      this.verfCorreo2 = 'ng-invalid ng-dirty';
+      console.log("Correo malo");
+    }
+  }
+
+  ValidarCampos() {
+    console.log("ya esta activo")
+    document.addEventListener('DOMContentLoaded', () => {
+      const forms = document.querySelectorAll('.needs-validation') as NodeListOf<HTMLFormElement>;
+      Array.from(forms).forEach(form => {
+        form.addEventListener('submit', (event: Event) => {
+          if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        });
+      });
+    });
+  }
+
+  limpiarFormulario() {
+    const forms = document.querySelectorAll('.needs-validation') as NodeListOf<HTMLFormElement>;
+    Array.from(forms).forEach(form => {
+      form.classList.remove('was-validated');
+      form.querySelectorAll('.ng-invalid, .ng-dirty').forEach((input) => {
+        input.classList.remove('ng-invalid', 'ng-dirty');
+      });
+      form.reset();
+    });
+  }
+  //
+
   fundacion: Fundacion = new Fundacion;
   usuario: Usuario = new Usuario;
   persona: Persona = new Persona;
-  verficarPassword:any;
-  
-  constructor(private fundacionService: FundacionService, private personaService: PersonaService, private usuarioService: UsuarioService, private router: Router, private fotoService: FotoService) { }
+  verficarPassword: any;
+
+  constructor(private _CargarScript: CargarScrpitsService, private toastrService: ToastrService, private fundacionService: FundacionService, private personaService: PersonaService, private usuarioService: UsuarioService, private router: Router, private fotoService: FotoService) {
+    this.ValidarCampos();
+    _CargarScript.Cargar(["validaciones"]);
+  }
 
   ngOnInit(): void {
-    this.fundacion.ruc === '';
+    this.ValidarCampos();
   }
 
   registrarFundacion() {
     if ( !this.fundacion.ruc || this.fundacion.ruc === null || !this.fundacion.acronimo || this.fundacion.acronimo === null || this.fundacion.telefono === null || !this.fundacion.direccion || !this.fundacion.correo || this.fundacion.correo === null || !this.fundacion.logo || this.fundacion.logo === null || !this.fundacion.mision || this.fundacion.mision === null || !this.fundacion.nombre_fundacion || this.fundacion.nombre_fundacion === null
       || !this.persona.apellidos  || this.persona.apellidos === null || !this.persona.cedula || this.persona.cedula === null || !this.persona.celular|| this.persona.celular === null || !this.persona.correo|| this.persona.correo === null || !this.persona.celular || this.persona.celular === null || !this.persona.correo|| this.persona.correo === null || !this.persona.direccion || this.persona.direccion === null || !this.persona.nombres || this.persona.nombres === null || !this.persona.telefono  || this.persona.telefono === null
       || !this.usuario.username || this.usuario.username === null || !this.usuario.password || this.usuario.password === null) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Posee campo/s vacio/s en el formulario!'
-      });
+        this.toastrService.error('Uno o más campos vacios', 'Verifique los Campos de texto', {
+          timeOut: 2000,
+        });
     } else {
       this.fundacionService.verfRuc(this.fundacion.ruc).subscribe(
         data => {
@@ -56,13 +133,6 @@ export class RegFundacionComponent implements OnInit {
                             this.fundacionService.postFundacion(this.fundacion).subscribe(
                               result => {
                                 console.log(result)
-                                Swal.fire({
-                                  position: 'top-end',
-                                  icon: 'success',
-                                  title: 'Fundacion registrada correctamente',
-                                  showConfirmButton: false,
-                                  timer: 1500
-                                })
                                 this.fundacion.idFundacion = result.idFundacion;
                                 this.cargarImagenUsuario();
                                 this.usuario.persona = this.persona;
@@ -72,15 +142,10 @@ export class RegFundacionComponent implements OnInit {
                                 this.usuario.foto_perfil = this.foto_usuario;
                                 this.usuarioService.postUsuario(this.usuario).subscribe(
                                   info => {
-                                    console.log(info);
-                                    Swal.fire({
-                                      position: 'top-end',
-                                      icon: 'success',
-                                      title: 'Usuario registrado correctamente',
-                                      showConfirmButton: false,
-                                      timer: 1500
-                                    })
-                                    //this.limpiar();
+                                    this.toastrService.success('Fundación registrada existosamente', 'Registro Exitoso', {
+                                      timeOut: 1500,
+                                    });
+                                    this.limpiarCampos();
                                   }
                                 );
                               }
@@ -88,33 +153,59 @@ export class RegFundacionComponent implements OnInit {
                           }
                         );
                       } else {
-                        Swal.fire({
-                          icon: 'error',
-                          title: 'El username ya está en uso'
+                        this.toastrService.error('Username ya en uso', 'Digite otro username', {
+                          timeOut: 2000,
                         });
+                        this.usuario.username = '';
                       }
                     }
                   )
                 } else {
-                  Swal.fire({
-                    icon: 'error',
-                    title: 'La cédula ingresada ya está registrada!'
+                  this.toastrService.error('La cédula ingresada ya está registrada!', 'Cedula en uso', {
+                    timeOut: 3000,
                   });
+                  this.persona.cedula = '';
                 }
               }
             )
           } else {
-            Swal.fire({
-              icon: 'error',
-              title: 'El ruc ya está en uso'
+            this.toastrService.error('El ruc ya esta gesitrado', 'Ruc en uso', {
+              timeOut: 3000,
             });
+            this.fundacion.ruc = '';
           }
         }
       )
     }
   }
 
-  // IMAGEN
+  // NEVO METODO
+  //carga archivo o foto
+  async convertToBase64(file: File): Promise<string> {
+    const reader = new FileReader();
+    return new Promise<string>((resolve, reject) => {
+      reader.onload = () => {
+        const result = btoa(reader.result as string);
+        resolve(result);
+      };
+      reader.onerror = () => {
+        reject(reader.error);
+      };
+      reader.readAsBinaryString(file);
+    });
+  }
+
+  //foto
+  async loadPictureCategory(event: any) {
+    const file = event.target.files[0];
+    try {
+      this.usuario.foto_perfil = await this.convertToBase64(file);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  // IMAGEN USUARIO
   file: any = '';
   image!: any;
   retrievedImage: any;
@@ -140,7 +231,7 @@ export class RegFundacionComponent implements OnInit {
     this.fotoService.guararImagenes(this.selectedFile);
   }
 
-  // IMAGEN USUARIO
+  // IMAGEN FUDACION
   imagen!: any;
   filem: any = '';
   foto_fundacion: string = "";
@@ -164,4 +255,29 @@ export class RegFundacionComponent implements OnInit {
   cargarImagenFundacion() {
     this.fotoService.guararImagenes(this.selectedFiles);
   }
+
+  limpiarCampos() {
+    this.persona.cedula = '';
+    this.persona.correo = '';
+    this.persona.genero = '';
+    this.persona.fechaNacimiento = new Date;
+    this.persona.direccion = '';
+    this.persona.nombres = '';
+    this.persona.apellidos = '';
+    this.persona.telefono = '';
+    this.fundacion.nombre_fundacion = '';
+    this.fundacion.acronimo = '';
+    this.fundacion.ruc = '';
+    this.fundacion.direccion = '';
+    this.fundacion.mision = '';
+    this.fundacion.telefono = '';
+    this.fundacion.correo = '';
+    this.usuario.username = '';
+    this.usuario.password = '';
+    this.verficarPassword = '';
+    this.file = '';
+    this.filem = '';
+    this.limpiarFormulario();
+  }
+
 }

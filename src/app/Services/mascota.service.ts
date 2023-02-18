@@ -22,6 +22,10 @@ export class MascotaService {
     return this.http.get<Mascota[]>(this.URL+'listarMacotasPorFundacion/' + idFundacion);
   }
 
+  getMascotaPorUsuario(idUsuario: any){
+    return this.http.get<Mascota[]>(this.URL+'listarMacotasPorUsuarios/' + idUsuario);
+  }
+
   getPorId(idMascota: number){
     return this.http.get<Mascota>(this.URL+ 'porId/'+idMascota);
   }
@@ -34,9 +38,24 @@ export class MascotaService {
     return this.http.put<Mascota>(this.URL+`actualizar/${idMascota}`, mascota);
   }
 
+  updateEstadoAdopcion(mascota: Mascota, idMascota: any){
+    return this.http.put<Mascota>(this.URL+`actualizarEstadoMascota/${idMascota}`, mascota);
+  }
+
+  updateDueñoMascota(mascota: Mascota, idMascota: any){
+    return this.http.put<Mascota>(this.URL+`actualizarEstadoMascota/${idMascota}`, mascota);
+  }
+
   deleteMascota(idMascota: number){
     return this.http.delete<boolean>(this.URL+`eliminar/${idMascota}`);
   }
 
+  getAllMascotasEnSeguimiento(){
+    return this.http.get<Mascota[]>(this.URL+'listarMascotasEnSeguimiento');
+  }
+
+  getPorChip(chipMascota: any){
+    return this.http.get<Mascota>(this.URL + `byChipMascota/${chipMascota}`);
+  }
   
 }

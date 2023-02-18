@@ -1,33 +1,39 @@
 <div class="container px-1 py-5 mx-auto p-8 rounded border-gray-200">
 
-    <ul class="nav justify-content-center">
-        <li class="nav-item">
-            <button class="btn btn-primary m-1" type="button">Registrar Voluntario</button>
-            <button class="btn btn-primary m-1" type="button" routerLink="/list-voluntario">Listar Voluntarios</button>
+    <ul class="nav  justify-content-center">
+        <li class="col-md-6">
+            <button type="button" class="btn btnA form-control" >Registrar Voluntario</button>
+        </li>
+        <li class="col-md-6">
+            <button type="button" class="btn btnO form-control" routerLink="/list-voluntario">Listar Voluntarios</button>
         </li>
     </ul>
-    <form class="row g-2 d-flex justify-content-center">
-        <h2 class="form-titulo text-center">.</h2>
+    
+
+    <form class="row  needs-validation g-2 d-flex justify-content-center" novalidate>
         <h2 class="form text-center">Datos del Voluntario</h2>
         <div class="col-12">
             <label for="cedula" class="form-label-p"> Cedula</label>
-            <input type="text" class="form-control" name="cedula" [(ngModel)]="persona.cedula"> 
+            <input id="cedula" type="text" class="form-control" name="cedula"
+            maxlength="10" [(ngModel)]="persona.cedula" [pKeyFilter]="'int'" (keypress)="onKeyPress($event)" required> 
         </div>
         <div class="col-6">
             <label for="nombres" class="form-label-p"> Nombres</label>
-            <input type="text" class="form-control" name="nombres" [(ngModel)]="persona.nombres">
+            <input id="nombres" type="text" class="form-control" name="nombres" 
+            maxlength="30"  [(ngModel)]="persona.nombres" [pKeyFilter]="letrasEspace"  required>
         </div>
         <div class="col-6">
             <label for="apellidos" class="form-label-p"> Apellidos</label>
-            <input type="text" class="form-control" name="apellidos" [(ngModel)]="persona.apellidos">
+            <input id="apellidos" type="text" class="form-control" name="apellidos"
+            maxlength="30"  [(ngModel)]="persona.apellidos" [pKeyFilter]="letrasEspace"  required>
         </div>
         <div class="col-6">
             <label for="fechaNacimiento" class="form-label-p"> Fecha De Nacimiento</label>
-            <input type="date" class="form-control" name="fechaNacimiento" [(ngModel)]="persona.fechaNacimiento">
+            <input id="fechaNacimiento" type="date" class="form-control" name="fechaNacimiento" [(ngModel)]="persona.fechaNacimiento" required>
         </div>
         <div class="col-6">
             <label for="genero" class="form-label-p"> Genero</label>
-            <select id="genero" class="form-control" name="genero" [(ngModel)]="persona.genero">
+            <select id="genero" class="form-control" name="genero" [(ngModel)]="persona.genero" required>
                 <option value="" disabled selected>Selecciona un género</option>
                 <option value="masculino">Masculino</option>
                 <option value="famenino">Femenino</option>
@@ -36,49 +42,54 @@
         </div>
         <div class="col-12">
             <label for="direccion" class="form-label-p"> Direccion</label>
-            <input type="text" class="form-control" name="direccion" [(ngModel)]="persona.direccion">
+            <input id="direccion" type="text" class="form-control" name="direccion" 
+            maxlength="30"  [(ngModel)]="persona.direccion" [pKeyFilter]="letrasEspaceNumbers" required>
         </div>
         <div class="col-md-6">
             <label for="telefono" class="form-label-p"> Telefono</label>
-            <input type="text" class="form-control" name="telefono" [(ngModel)]="persona.telefono">
+            <input id="telefono" type="text" class="form-control" name="telefono" 
+            maxlength="7" [(ngModel)]="persona.telefono" [pKeyFilter]="'int'" (keypress)="onKeyPress($event)"  required>
         </div>
         <div class="col-md-6">
             <label for="celular" class="form-label-p"> Celular</label>
-            <input type="text" class="form-control" name="celular" [(ngModel)]="persona.celular">
+            <input id="celular" type="text" class="form-control" name="celular"
+            maxlength="10"  [(ngModel)]="persona.celular" [pKeyFilter]="'int'" (keypress)="onKeyPress($event)"  required>
         </div>
         <div class="col-12">
             <label for="correo" class="form-label-p"> Correo</label>
-            <input type="email" class="form-control" name="correo" [(ngModel)]="persona.correo">
+            <input id="correo" type="email" class="form-control" name="correo" 
+            maxlength="30"  [(ngModel)]="persona.correo" required>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-12">
             <label for="areatrabajo" class="form-label-p">Área de Trabajo</label>
-            <select id="areatrabajo" class="form-control" name="areatrabajo" [(ngModel)]="voluntario.area_trabajo">
+            <select id="areatrabajo" class="form-control" name="areatrabajo" [(ngModel)]="voluntario.area_trabajo" required>
                 <option value="" disabled selected>Selecciona área de trabajo</option>
-                <option value="masculino">Masculino</option>
-                <option value="famenino">Femenino</option>
+                <option value="Clinica">Clinica</option>
+                <option value="Peluqueria">Peluqueria</option>
                 <option value="otro">Otro</option>
             </select>
         </div>
-        <div class="col-md-6">
+        <!-- <div class="col-md-6">
             <label for="cargo" class="form-label-p"> Cargo</label>
-            <select id="cargo" class="form-control" name="cargo" [(ngModel)]="voluntario.cargo">
+            <select id="cargo" class="form-control" name="cargo" [(ngModel)]="voluntario.cargo" required>
                 <option value="" disabled selected>Selecciona un cargo</option>
-                <option value="masculino">Masculino</option>
-                <option value="famenino">Femenino</option>
+                <option value="masculino">Solictud de Adopcion</option>
+                <option value="famenino">Seguimiento de Mascota</option>
                 <option value="otro">Otro</option>
             </select>
-        </div>
+        </div> -->
         <div class="col-12">
             <label for="username" class="form-label-p"> Username</label>
-            <input type="text" class="form-control" name="username" [(ngModel)]="usuario.username">
+            <input id="username" type="text" class="form-control" name="username" 
+            maxlength="30" [(ngModel)]="usuario.username" required>
         </div>
         <div class="col-md-6">
             <label for="password" class="form-label-p"> Contraseña <i class="uil uil-eye-slash showHidePw"></i></label>
-            <input type="password" class="password form-control" name="password" [(ngModel)]="usuario.password">
+            <input id="password" type="password" class="password form-control" name="password" [(ngModel)]="usuario.password" required>
         </div>
         <div class="col-md-6">
-            <label for="password" class="form-label-p"> Repita su Contraseña</label>
-            <input type="password" class="password form-control" name="password" [(ngModel)]="verficarPassword">
+            <label for="verficarPassword" class="form-label-p"> Repita su Contraseña</label>
+            <input id="verficarPassword" type="password" class="password form-control" name="verficarPassword" [(ngModel)]="verficarPassword" required>
         </div>
         <div class="foto">
             <div class="roww">
@@ -93,6 +104,7 @@
                 </div>
             </div>
         </div>
-        <button type="button" class="btn btn-primary" (click)="registrarVoluntario()">Registrar Voluntario</button>
+        <button type="submit" class="btn btn-primary" (click)="registrarVoluntario()">Registrar Voluntario</button>
+        <button type="button" class="btn " (click)=" limpiarCampos()" style="background-color: #a9cbff; border: #a9cbff;" >Cancelar</button>
     </form>
 </div>

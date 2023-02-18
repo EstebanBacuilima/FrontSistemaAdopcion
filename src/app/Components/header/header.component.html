@@ -2,7 +2,7 @@
   <div class="container">
     <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
       <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-        <div [hidden]="isLogin" style="margin-right: 20px">
+        <div [hidden]="isLogin"  style="margin-right: 20px" >
           <img class="circular--square" src="./assets/Imagenes/logoFundacionesMascotas.png" style="margin: 0 auto"
             routerLink="/welcome" />
         </div>
@@ -10,12 +10,13 @@
       </a>
 
       <a class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-        <div [hidden]="!isLogin" style="margin-right: 20px">
+        <div [hidden]="!isLogin" *ngIf='!isClient' style="margin-right: 20px">
           <img routerLink="/bienvenido" routerLinkActive="active" class="circular--square"
             [src]="'http://localhost:5000/imagen/images/' + nombreLogo" />
         </div>
         <i class="bi bi-house"></i>
       </a>
+      
       <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
         <li>
           <a href="#" class="nav-link text_0 px-2 text-white" routerLink="welcome" routerLinkActive="active"
@@ -32,17 +33,22 @@
 
         <li>
           <a href="#" class="nav-link text_0 px-2 text-white" routerLink="/bienvenido" routerLinkActive="active"
-            *ngIf='isSuperAdmin'>Home</a>
+            *ngIf='isSuperAdmin'><i class="pi pi-home"></i> Home</a>
         </li>
 
         <li>
           <a href="#" class="nav-link text_0 px-2 text-white" routerLink="/bienvenido" routerLinkActive="active"
-            *ngIf='isClient'>Home</a>
+            *ngIf='isClient'><i class="pi pi-home"></i> Home</a>
         </li>
 
         <li>
           <a href="#" class="nav-link text_0 px-2 text-white" routerLink="/bienvenido" routerLinkActive="active"
-            *ngIf='isFundacionAdmin'>Home</a>
+            *ngIf='isFundacionAdmin'><i class="pi pi-home"></i> Home</a>
+        </li>
+
+        <li>
+          <a href="#" class="nav-link text_0 px-2 text-white" routerLink="/bienvenido" routerLinkActive="active"
+            *ngIf='isVoluntario'><i class="pi pi-home"></i> Home</a>
         </li>
 
 
@@ -63,14 +69,41 @@
             *ngIf='isFundacionAdmin'>Voluntario</a>
         </li>
 
+        <!-- <li>
+          <a href="#" class="nav-link text_0 px-2 text-whitee" routerLink="/reportes-admin" routerLinkActive="active"
+            *ngIf='isFundacionAdmin'>Reportes</a>
+        </li> -->
+
+        <!-- Datos a voluntario -->
+
+        
+        <!-- <li>
+          <a href="#" class="nav-link text_0 px-2 text-whitee" routerLink="/reg-mascota" routerLinkActive="active"
+            *ngIf='isVoluntario'>Mascota</a>
+        </li> -->
+
         <li>
-          <a href="#" class="nav-link text_0 px-2 text-whitee" routerLink="/reg-voluntario" routerLinkActive="active"
-            *ngIf='isFundacionAdmin'>Solictud de Adopciones</a>
+          <a href="#" class="nav-link text_0 px-2 text-whitee" routerLink="/panel-solicitudes-admin" routerLinkActive="active"
+            *ngIf='isVoluntario'>Solictudes de Adopciones</a>
         </li>
 
         <li>
-          <a href="#" class="nav-link text_0 px-2 text-whitee" routerLink="/reg-voluntario" routerLinkActive="active"
-            *ngIf='isFundacionAdmin'>Reportes</a>
+          <a href="#" class="nav-link text_0 px-2 text-whitee" routerLink="/panel-seguimiento-admin" routerLinkActive="active"
+            *ngIf='isVoluntario'>Mascotas en Seguimiento</a>
+        </li>
+
+        <!-- CLIENTE -->
+        <li>
+          <a href="#" class="nav-link text_0 px-2 text-whitee" routerLink="/catalogo-mascota" routerLinkActive="active"
+            *ngIf='isClient'>Catalogo</a>
+        </li>
+        <li>
+          <a href="#" class="nav-link text_0 px-2 text-whitee" routerLink="/panel-solicitudes-cliente" routerLinkActive="active"
+            *ngIf='isClient'>Solicitudes</a>
+        </li>
+        <li>
+          <a href="#" class="nav-link text_0 px-2 text-whitee" routerLink="/panel-seguimiento-cliente" routerLinkActive="active"
+            *ngIf='isClient'>Mis Mascotas</a>
         </li>
 
       </ul>
@@ -104,8 +137,11 @@
         <div class="header">
           <div class="cover">
             <div class="perfil-usuario-avatar">
-              <img [src]="'http://localhost:5000/imagen/images/' + usuario.foto_perfil"  alt="img-avatar">
-              <input type="file" id="fileInput" (change)="onFileSelected($event)" style="display: none;">
+              <img *ngIf="!file" [src]="'http://localhost:5000/imagen/images/' + usuario.foto_perfil"  alt="img-avatar">
+
+              <img *ngIf="file" [src]="file"  alt="img-avatar">
+
+              <input type="file" id="fileInput" (change)="imageSelected($event)" style="display: none;">
               <button  (click)="openFileInput()"  type="button" class="boton-avatar">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-image" viewBox="0 0 16 16">
                   <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
@@ -118,49 +154,48 @@
         
         <div class="user-profile-body">
           <div class="user-profile-bio">
-
               <div class="mb-3">
                 <form class="row g-2">
                   <div class="col-md-6">
                       <label for="cedula" class="form-label-p"> Cedula</label>
-                      <input type="text" class="form-control" name="cedula" [(ngModel)]="personas.cedula">
+                      <input type="text" class="form-control" name="cedula" [(ngModel)]="persona.cedula" onmousedown="return false" onkeydown="return false">
                   </div>
                   <div class="col-md-6">
                       <label for="nombres" class="form-label-p"> Nombres</label>
-                      <input type="text" class="form-control" name="nombres" [(ngModel)]="personas.nombres">
+                      <input type="text" class="form-control" name="nombres" [(ngModel)]="persona.nombres">
                   </div>
                   <div class="col-12">
                       <label for="apellidos" class="form-label-p"> Apellidos</label>
-                      <input type="text" class="form-control" name="apellidos" [(ngModel)]="personas.apellidos">
+                      <input type="text" class="form-control" name="apellidos" [(ngModel)]="persona.apellidos">
                   </div>
                   <div class="col-12">
                       <label for="fechaNacimiento" class="form-label-p"> Fecha De Nacimiento</label>
-                      <input type="date" class="form-control" name="fechaNacimiento" [(ngModel)]="personas.fechaNacimiento">
+                      <input type="date" class="form-control" name="fechaNacimiento" [(ngModel)]="persona.fechaNacimiento">
                   </div>
                   <div class="col-md-6">
                       <label for="direccion" class="form-label-p"> Direccion</label>
-                      <input type="text" class="form-control" name="direccion" [(ngModel)]="personas.direccion">
+                      <input type="text" class="form-control" name="direccion" [(ngModel)]="persona.direccion">
                   </div>
                   <div class="col-md-6">
                       <label for="genero" class="form-label-p"> Genero</label>
-                      <select id="genero" class="form-control" name="genero" [(ngModel)]="personas.genero">
+                      <select id="genero" class="form-control" name="genero" [(ngModel)]="persona.genero">
                           <option value="" disabled selected>Selecciona un género</option>
                           <option value="masculino">Masculino</option>
-                          <option value="famenino">Femenino</option>
-                          <option value="otro">Otro</option>
+                          <option value="femenino">Femenino</option>
+                          <option value="Otro">Otro</option>
                       </select>
                   </div>
                   <div class="col-md-6">
                       <label for="telefono" class="form-label-p"> Telefono</label>
-                      <input type="text" class="form-control" name="telefono" [(ngModel)]="personas.telefono">
+                      <input type="text" class="form-control" name="telefono" [(ngModel)]="persona.telefono">
                   </div>
                   <div class="col-md-6">
                       <label for="celular" class="form-label-p"> Celular</label>
-                      <input type="text" class="form-control" name="celular" [(ngModel)]="personas.celular">
+                      <input type="text" class="form-control" name="celular" [(ngModel)]="persona.celular">
                   </div>
                   <div class="col-md-6">
                       <label for="correo" class="form-label-p"> Correo</label>
-                      <input type="email" class="form-control" name="correo" [(ngModel)]="personas.correo">
+                      <input type="email" class="form-control" name="correo" [(ngModel)]="persona.correo">
                   </div>
                   <div class="col-md-6">
                       <label for="username" class="form-label-p"> Username</label>
@@ -171,7 +206,7 @@
                       <input type="password" class="password form-control" name="password" [(ngModel)]="usuario.password">
                   </div>
                   <br><br><br>
-                  <button type="submit" value="Atualizar" class="btnU btn-outline-dark p-5" class="btn btn-primary">Atualizar</button>
+                  <button type="submit" value="Atualizar" class="btnU btn-outline-dark p-5" class="btn btn-primary" (click)="actualizarFundacion()">Atualizar</button>
               </form>
               </div>
 

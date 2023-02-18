@@ -7,7 +7,9 @@ import { FundacionService } from 'src/app/Services/fundacion.service';
 import { FotoService } from 'src/app/Services/imagen.service';
 import { PersonaService } from 'src/app/Services/persona.service';
 import { UsuarioService } from 'src/app/Services/usuario.service';
-import Swal from 'sweetalert2';
+import * as pdfMake from "pdfmake/build/pdfmake";
+import { ToastrService } from 'ngx-toastr';
+import { Header } from 'primeng/api';
 
 @Component({
   selector: 'app-list-fundacio',
@@ -19,14 +21,28 @@ export class ListFundacioComponent implements OnInit {
   usuario: Usuario = new Usuario;
   persona: Persona = new Persona;
   fundacion: Fundacion = new Fundacion;
-  
+  // Validacion de Campos de Caracteres
+  // letras y espacios
+  letrasEspace: RegExp = /^[a-zA-Z\s]+$/;
+  letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\s]+$/;
+    // letrasEspace: RegExp = /^[a-zA-Z0-9\s^!#$%&*]+$/;
+    // letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\s^!#$%&*-]+$/;
+    
+// Validar que no igrese Guion medio
+    onKeyPress(event: KeyboardEvent) {
+      if (event.key === '-') {
+        event.preventDefault();
+      }
+    }
+    
+
   pageActual: number = 1;
   public myCounter: number = 0;
   listaFundaciones: Fundacion[] = [];
   loading: boolean = true;
 
-  constructor(private fundacionService: FundacionService, private personaService: PersonaService, private usuarioService: UsuarioService, private router: Router, private fotoService: FotoService) { }
-  
+  constructor(private toastrService: ToastrService, private fundacionService: FundacionService, private personaService: PersonaService, private usuarioService: UsuarioService, private router: Router, private fotoService: FotoService) { }
+
   ngOnInit(): void {
     this.obtenerFundaciones()
   }
@@ -93,20 +109,72 @@ export class ListFundacioComponent implements OnInit {
   }
 
   actualizarFundacion() {
-    this.personaService.updatePersona(this.persona, this.persona.idPersona).subscribe(data => {
-      console.log(data)
-      this.usuarioService.updateUsuario(this.usuario, this.usuario.idUsuario).subscribe(data => {
+    if (!this.fundacion.ruc || this.fundacion.ruc === null || !this.fundacion.acronimo || this.fundacion.acronimo === null || this.fundacion.telefono === null || !this.fundacion.direccion || !this.fundacion.correo || this.fundacion.correo === null || !this.fundacion.logo || this.fundacion.logo === null || !this.fundacion.mision || this.fundacion.mision === null || !this.fundacion.nombre_fundacion || this.fundacion.nombre_fundacion === null
+      || !this.persona.apellidos || this.persona.apellidos === null || !this.persona.cedula || this.persona.cedula === null || !this.persona.celular || this.persona.celular === null || !this.persona.correo || this.persona.correo === null || !this.persona.celular || this.persona.celular === null || !this.persona.correo || this.persona.correo === null || !this.persona.direccion || this.persona.direccion === null || !this.persona.nombres || this.persona.nombres === null || !this.persona.telefono || this.persona.telefono === null
+      || !this.usuario.username || this.usuario.username === null || !this.usuario.password || this.usuario.password === null) {
+      this.toastrService.error('Uno o más campos vacios', 'Verifique los Campos de texto', {
+        timeOut: 3000,
+      });
+    } else {
+      this.personaService.updatePersona(this.persona, this.persona.idPersona).subscribe(data => {
         console.log(data)
-        this.fundacionService.updateFundacion(this.fundacion, this.fundacion.idFundacion).subscribe(data => {
+        this.usuarioService.updateUsuario(this.usuario, this.usuario.idUsuario).subscribe(data => {
           console.log(data)
-          Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Actualizado Correctamente',
-            showConfirmButton: false,
-            timer: 1500
+          this.fundacionService.updateFundacion(this.fundacion, this.fundacion.idFundacion).subscribe(data => {
+            console.log(data)
+            this.obtenerFundaciones();
+            this.toastrService.success('Cambios realizados con exito', 'Actualizado Correctamente', {
+              timeOut: 1000,
+            });
+            //this.closeModal();
           })
         })
+      })
+    }
+  }
+
+  closeModal() {
+    let modal = document.getElementById('modalUpdate');
+    if (modal) {
+      modal.style.display = 'none';
+      document.body.classList.remove('modal-open');
+      let backdrop = document.querySelector('.modal-backdrop');
+      if (backdrop) {
+        backdrop.remove();
+      }
+    }
+  }
+
+  idFundacionDelete: any;
+
+  descativarFundacion(idFundacion: any) {
+    this.fundacionService.getPorId(idFundacion).subscribe(data => {
+      this.fundacion = data
+      this.idFundacionDelete = this.fundacion.idFundacion;
+      console.log("ES LA ID -> " + this.idFundacionDelete);
+      this.fundacion.estado = false;
+      this.fundacionService.updateFundacion(this.fundacion, idFundacion).subscribe(data => {
+        console.log(data)
+        this.obtenerFundaciones();
+        this.toastrService.warning('La fundaciona sido desactivada!', 'Fundacion Desactivada!', {
+          timeOut: 4000,
+        });
+      })
+    })
+  }
+
+  ativarFundacion(idFundacion: any) {
+    this.fundacionService.getPorId(idFundacion).subscribe(data => {
+      this.fundacion = data
+      this.idFundacionDelete = this.fundacion.idFundacion;
+      console.log("ES LA ID -> " + this.idFundacionDelete);
+      this.fundacion.estado = true;
+      this.fundacionService.updateFundacion(this.fundacion, idFundacion).subscribe(data => {
+        console.log(data)
+        this.obtenerFundaciones();
+        this.toastrService.success('La fundacion se ha habilitado', 'Fundacion Activada', {
+          timeOut: 1000,
+        });
       })
     })
   }
@@ -161,5 +229,156 @@ export class ListFundacioComponent implements OnInit {
   cargarImagenFundacion() {
     this.fotoService.guararImagenes(this.selectedFiles);
   }
+
+
+  fechaAct: Date =new Date();
+  // PDF
+  generarPDF() {
+    const data = this.listaFundaciones;
+    const body = [];
+
+    body.push(["ID", "RUC", "NOMBRE FUDACION", "ACRO", "MISION", "DIRECCION", "CORREO", "TELEFONO"]);
+
+    data.forEach(fundacion => {
+      body.push([fundacion.idFundacion, fundacion.ruc, fundacion.nombre_fundacion, fundacion.acronimo, fundacion.mision, fundacion.direccion, fundacion.correo, fundacion.telefono]);
+    });
+
+    const table = {
+      text: 'Tables',
+      headerRows: 1,
+      body,
+      layout: "lightHorizontalLines",
+      fillColor: '#eeffee',
+      widths: [12, 70, 70, 30, 70, 70, 60, 55]
+    };
+
+    const styles: any = {
+      header: {
+        text: 'Tables',
+        bold: true,
+        fontSize: 8,
+        color: "#000",
+        font: "Roboto-Regular.ttf",
+        margin: [0, 20, 0, 10]
+      },
+      tableHeader: {
+        bold: true,
+        fontSize: 5,
+        color: "#000",
+        fillColor: '#eeffee',
+        font: "Roboto-Regular.ttf"
+      },
+    };
+
+    const cuerpo = [{
+      text: "Título del PDF",
+      style: "header",
+      margin: [0, 0, 0, 20]
+    },
+    ];
+
+    const content = [
+      {
+        cuerpo,
+        table,
+        style: "tableExample"
+      }];
+
+    const documentDefinition = {
+      content,
+      styles,
+      layout: 'lightHorizontalLines',
+    };
+
+    pdfMake.createPdf(documentDefinition).open();
+  }
+
+  openPdfTables() {
+    let tableBody = [];
+    tableBody.push([
+      { text: "ID", bold: true },
+      { text: "RUC", bold: true },
+      { text: "FUNDACION", bold: true },
+      { text: "ACRONIMO", bold: true },
+      { text: "MISION", bold: true },
+      { text: "DIRECCION", bold: true },
+      { text: "CORREO", bold: true },
+      { text: "TELEFONO", bold: true },
+    ]);
+    this.listaFundaciones.forEach(fundacion => {
+      let fila = [];
+      fila.push(fundacion.idFundacion);
+      fila.push(fundacion.ruc);
+      fila.push(fundacion.nombre_fundacion);
+      fila.push(fundacion.acronimo);
+      fila.push(fundacion.mision);
+      fila.push(fundacion.direccion);
+      fila.push(fundacion.correo);
+      fila.push(fundacion.telefono);
+      tableBody.push(fila);
+    });
+
+    const documentDefinition: any = {
+      content: [
+        {
+          text: "Sistema de Adopción de Mascotas",
+          fontSize: 10,
+          style: "header",
+          alignment: 'right',
+          fillColor: 'violet'
+        },
+        "-----------------------------------------------------------------------------------------------------------------------------------------------------------",
+        {
+          text: this.fechaAct,
+          style: "header",
+          alignment: 'right',
+          fillColor: 'lightblue'
+        },
+        {
+          text: '\n\n',
+        },
+        {
+          text: "Reporte de Fundaciones",
+          style: "header",
+          alignment: 'center',
+          fillColor: 'lightblue'
+        },
+        {
+          text: '\n',
+        },
+        {
+          text: 'Listado de fundaciones registradas en el sistema de adopción de mascotas.',
+          alignment: 'center',
+          Color: 'green',
+        },
+        {
+          text: '\n',
+        },
+        {
+          table: {
+            layout: 'landscape',
+            fontSize: 5,
+            headerRows: 1,
+            widths: [12, 65, 70, 65, 67, 65, 65, 64],
+            body: tableBody
+          }
+        }
+      ],
+      styles: {
+        header: {
+          fontSize: 20,
+          bold: true,
+          fillColor: 'white'
+        },
+        tableHeader: {
+          fillColor: 'lightblue'
+        }
+      }
+    };
+
+    pdfMake.createPdf(documentDefinition).open();
+  }
+
+
 }
 

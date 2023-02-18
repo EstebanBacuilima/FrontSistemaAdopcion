@@ -16,7 +16,7 @@
 
 .btnO{
     background-color: #a9cbff;
-}
+}   
 
 .btnA{
     background-color: #32507d;
@@ -32,14 +32,6 @@
     margin-bottom: 12px;
 }
 
-.form-titulo {
-    background-color: #0d6efd;
-    border-radius: 5px;
-    color: #0d6efd;
-    font-weight: 8px;
-    font-size: 20px;
-    font-family: inherit;
-}
 
 /* NUEVO */
 

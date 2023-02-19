@@ -7,7 +7,7 @@
         <div class="col ps-2">
             <div class="row g-0">
             </div>
-            <div class="row cards g-0 mt-3" *ngFor="let solicitudes of solicitudes | filtradoFechas">
+            <div class="row cards g-0 mt-3" *ngFor="let solicitudes of listaSolicitudes | filtradoFechas">
                 <div class="col-md-" *ngIf='obtenerEstado(solicitudes.estado) === "PENDIENTE"'> 
                     <label class="estado" style="background-color: orange;"  >PENDIENTE</label>
                 </div>
@@ -136,6 +136,7 @@
 
                         <h4 class="form-title-sc text-center">Formulario de Adopcion</h4>
 
+                        <!-- <h5>Solicitud{{solicitudCap.estado}}</h5> -->
                         <div class="forma">
                             <div class="forma" *ngFor="let preguntaRespuesta of preguntasRespuestas">
                                 <p class="pregunta" >{{ preguntaRespuesta.pregunta.pregunta }}</p>
@@ -148,10 +149,17 @@
                 </div>
             </div>
             <div class="modal-footer">
+                <button *ngIf='solicitudCap.estado === "E" || solicitudCap.estado === "P"' type="button" class="btn btn-outline-success" (click)="aceptarSolicitud()">Aceptar Solicitud</button>
+                <button *ngIf='solicitudCap.estado === "P"' type="button" class="btn btn-outline-warning" (click)="enEsperaSolicitud()">Pendiente</button>
+                <button *ngIf='solicitudCap.estado === "E" || solicitudCap.estado === "P"' type="button" class="btn btn-outline-danger" (click)="rechazarSolicitud()">Rechazar Solicitud</button>
 
-                <button  type="button" class="btn btn-outline-success" (click)="aceptarSolicitud()">Aceptar Solicitud</button>
-                <button  type="button" class="btn btn-outline-warning" (click)="enEsperaSolicitud()">Pendiente</button>
-                <button  type="button" class="btn btn-outline-danger" (click)="rechazarSolicitud()">Rechazado</button>
+                <div class="col-md-" *ngIf='solicitudCap.estado === "R"'> 
+                    <label class="estado" style="background-color: rgb(212, 51, 27); color: rgb(255, 255, 255);"  >SOLICITUD RECHAZADA</label>
+                </div>
+
+                <div class="col-md-" *ngIf='solicitudCap.estado === "A"'> 
+                    <label class="estado" style="background-color: greenyellow; color: black;"  >ACEPTADO</label>
+                </div>
 
 
             </div>

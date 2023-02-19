@@ -146,18 +146,26 @@ export class ListFundacioComponent implements OnInit {
   }
 
   idFundacionDelete: any;
+  isUsuarioDesactivar: any;
 
   descativarFundacion(idFundacion: any) {
     this.fundacionService.getPorId(idFundacion).subscribe(data => {
       this.fundacion = data
       this.idFundacionDelete = this.fundacion.idFundacion;
       console.log("ES LA ID -> " + this.idFundacionDelete);
+      this.isUsuarioDesactivar =  this.fundacion.persona.idPersona;
       this.fundacion.estado = false;
-      this.fundacionService.updateFundacion(this.fundacion, idFundacion).subscribe(data => {
-        console.log(data)
-        this.obtenerFundaciones();
-        this.toastrService.warning('La fundaciona sido desactivada!', 'Fundacion Desactivada!', {
-          timeOut: 4000,
+      this.fundacionService.descativarFundacion(this.fundacion, idFundacion).subscribe(data => {
+        this.usuarioService.getPorIdPersona(this.isUsuarioDesactivar).subscribe(dataUsuario => {
+          this.usuario = dataUsuario
+          this.usuario.idUsuario = dataUsuario.idUsuario;
+          this.usuario.estado = false;
+          this.usuarioService.descativarUsuario(this.usuario, this.isUsuarioDesactivar).subscribe(data => { 
+            this.obtenerFundaciones();
+            this.toastrService.warning('La fundaciona sido desactivada!', 'Fundacion Desactivada!', {
+              timeOut: 4000,
+            });
+          })
         });
       })
     })
@@ -168,12 +176,19 @@ export class ListFundacioComponent implements OnInit {
       this.fundacion = data
       this.idFundacionDelete = this.fundacion.idFundacion;
       console.log("ES LA ID -> " + this.idFundacionDelete);
+      this.isUsuarioDesactivar =  this.fundacion.persona.idPersona;
       this.fundacion.estado = true;
-      this.fundacionService.updateFundacion(this.fundacion, idFundacion).subscribe(data => {
-        console.log(data)
-        this.obtenerFundaciones();
-        this.toastrService.success('La fundacion se ha habilitado', 'Fundacion Activada', {
-          timeOut: 1000,
+      this.fundacionService.descativarFundacion(this.fundacion, idFundacion).subscribe(data => {
+        this.usuarioService.getPorIdPersona(this.isUsuarioDesactivar).subscribe(dataUsuario => {
+          this.usuario = dataUsuario
+          this.usuario.idUsuario = dataUsuario.idUsuario;
+          this.usuario.estado = true;
+          this.usuarioService.descativarUsuario(this.usuario, this.isUsuarioDesactivar).subscribe(data => { 
+            this.obtenerFundaciones();
+            this.toastrService.success('La fundacion se ha habilitado', 'Fundacion Activada', {
+              timeOut: 1000,
+            });
+          })
         });
       })
     })

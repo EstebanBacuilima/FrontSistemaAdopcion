@@ -31,6 +31,11 @@ export class VoluntarioService {
     return this.http.put<Voluntario>(this.URL+`actualizar/${idVoluntario}`, voluntario);
   }
 
+  descativarVoluntario(voluntario: Voluntario, idVoluntario: any){
+    return this.http.put<Voluntario>(this.URL+`desactivar/${idVoluntario}`, voluntario);
+  }
+
+
   deleteVoluntarioa(idVoluntario: number){
     return this.http.delete<boolean>(this.URL+`eliminar/${idVoluntario}`);
   }

@@ -81,6 +81,7 @@ export class ListMascotaComponent implements OnInit {
             mascota.descripcion = result.descripcion;
             mascota.estado_mascota = result.estado_mascota;
             mascota.estado_adopcion = result.estado_adopcion;
+            mascota.estado = result.estado
             return mascota;
           }
         );
@@ -140,6 +141,40 @@ export class ListMascotaComponent implements OnInit {
         this.obtenerMasotas();
       })
     }
+  }
+
+  idMascotaDelete: any;
+
+  descativarMascota(idMascota: any) {
+    this.mascotaService.getPorId(idMascota).subscribe(data => {
+      this.mascota = data
+      this.idMascotaDelete = this.mascota.idMascota;
+      console.log("ES LA ID -> " + this.idMascotaDelete);
+      this.mascota.estado = false;
+      this.mascotaService.descativarMascota(this.mascota, idMascota).subscribe(data => {
+        console.log(data)
+        this.obtenerMasotas();
+        this.toastrService.warning('La Mascota a sido eliminada!', 'Mascota Eliminada!', {
+          timeOut: 1000,
+        });
+      })
+    })
+  }
+
+  ativarMascota(idMascota: any) {
+    this.mascotaService.getPorId(idMascota).subscribe(data => {
+      this.mascota = data
+      this.idMascotaDelete = this.mascota.idMascota;
+      console.log("ES LA ID -> " + this.idMascotaDelete);
+      this.mascota.estado = true;
+      this.mascotaService.descativarMascota(this.mascota, idMascota).subscribe(data => {
+        console.log(data)
+        this.obtenerMasotas();
+        this.toastrService.success('La mascota se ha restablecido', 'Mascota Restaurada', {
+          timeOut: 1000,
+        });
+      })
+    })
   }
 
   // IMAGEN

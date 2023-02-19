@@ -23,11 +23,11 @@ export class FundacionService {
     return this.http.post<Fundacion>(this.URL+'?', fundacion);
   }
 
-  updateFundacion(fundacion: Fundacion, idFundacion: any){
+  descativarFundacion(fundacion: Fundacion, idFundacion: any){
     return this.http.put<Fundacion>(this.URL+`desactivar/${idFundacion}`, fundacion);
   }
 
-  descativarFundacion(fundacion: Fundacion, idFundacion: any){
+  updateFundacion(fundacion: Fundacion, idFundacion: any){
     return this.http.put<Fundacion>(this.URL+`actualizar/${idFundacion}`, fundacion);
   }
 

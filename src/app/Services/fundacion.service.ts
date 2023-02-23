@@ -10,6 +10,7 @@ export class FundacionService {
   private URL = "http://localhost:5000/api/fundacion/";
 
   constructor(private http: HttpClient) { }
+  
 
   getFundacion(){
     return this.http.get<Fundacion[]>(this.URL+'listar');

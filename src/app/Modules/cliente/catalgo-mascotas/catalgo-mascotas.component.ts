@@ -30,8 +30,6 @@ export class CatalgoMascotasComponent implements OnInit {
   idUsuario: any;
   idFundacion: any;
 
-  
-
   constructor(private _CargarScript: CargarScrpitsService,private toastrService: ToastrService, private solicitudService: SolicitudAdopcionService, private mascotaService: MascotaService, private fundacionService: FundacionService, private personaService: PersonaService, private usuarioService: UsuarioService, private router: Router) {
     // _CargarScript.Cargar(["formulario"]);
   }
@@ -45,55 +43,21 @@ export class CatalgoMascotasComponent implements OnInit {
     this.obtenerPreguntas();
   }
 
-  cargarScrip(){
-    let allStepBtn = document.querySelectorAll('[tab-target]');
-    let allStepItem = document.querySelectorAll('.step-item');
-    let allTabs = document.querySelectorAll('.step-tab');
-    let firstStepItem = document.querySelector('.step-item:nth-child(1)');
 
-    if (firstStepItem) {
-        firstStepItem.classList.add('active');
-    }
-
-    allStepBtn.forEach(item => {
-      item.addEventListener('click', () => {
-        let currentTabId = item.getAttribute('tab-target');
-        let currentTab = document.getElementById(`${currentTabId}`);
-  
-        allStepItem.forEach(item => {
-          item.classList.remove('active');
-        });
-  
-        allTabs.forEach((tab, i) => {
-          if (currentTab && currentTab.id === currentTab.id)  {
-            for (let l = 0; i >= 0; i--) {
-              allStepItem[i].classList.add('active');
-            }
-          }
-        });
-  
-        allTabs.forEach(item => {
-          item.classList.remove('active');
-        });
-  
-        if (currentTab) {
-          currentTab.classList.add('active');
-          item.classList.add('active');
-        }
-        
-      });
-    });
-  }
 
   personas: any;
   persona: Persona = new Persona;
+  fotoUsuario: any;
 
   obtenerUsuario() {
     this.idUsuario = localStorage.getItem('idUsuario');
+    this.fotoUsuario = localStorage.getItem('nameImagen');
+    console.log("img usuario " + this.fotoUsuario)
     if (this.idUsuario != '' && this.idUsuario != undefined) {
       this.usuarioService.getPorId(this.idUsuario).subscribe((data) => {
         console.log(data);
         this.usuario = data;
+        this.usuario.foto_perfil = data.foto_perfil
         this.personas = this.usuario.persona;
         this.persona = this.personas;
       })
@@ -234,4 +198,43 @@ export class CatalgoMascotasComponent implements OnInit {
   }
 
 
+  cargarScrip(){
+    let allStepBtn = document.querySelectorAll('[tab-target]');
+    let allStepItem = document.querySelectorAll('.step-item');
+    let allTabs = document.querySelectorAll('.step-tab');
+    let firstStepItem = document.querySelector('.step-item:nth-child(1)');
+
+    if (firstStepItem) {
+        firstStepItem.classList.add('active');
+    }
+
+    allStepBtn.forEach(item => {
+      item.addEventListener('click', () => {
+        let currentTabId = item.getAttribute('tab-target');
+        let currentTab = document.getElementById(`${currentTabId}`);
+  
+        allStepItem.forEach(item => {
+          item.classList.remove('active');
+        });
+  
+        allTabs.forEach((tab, i) => {
+          if (currentTab && currentTab.id === currentTab.id)  {
+            for (let l = 0; i >= 0; i--) {
+              allStepItem[i].classList.add('active');
+            }
+          }
+        });
+  
+        allTabs.forEach(item => {
+          item.classList.remove('active');
+        });
+  
+        if (currentTab) {
+          currentTab.classList.add('active');
+          item.classList.add('active');
+        }
+        
+      });
+    });
+  }
 }

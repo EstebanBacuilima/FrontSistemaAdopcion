@@ -15,7 +15,7 @@ export class PublicGuardGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     const role = localStorage.getItem('rol');
-    if (role === 'PUBLICO') {
+    if (role === 'PUBLICO' || role === ' ' || role === null) {
       return true;
     } else {
       this.router.navigate(['/bienvenido']);

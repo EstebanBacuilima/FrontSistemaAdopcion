@@ -11,7 +11,7 @@
                             <p>{{mascotas.sexo}}</p>
                             <p>{{mascotas.especie}}</p>
                             <p>{{mascotas.raza}}</p>
-                            <p>{{mascotas.descripcion}}</p>
+                            <!-- <p>{{mascotas.descripcion}}</p> -->
                             <div class="conBtnr">
                                 <button type="button" class="btn boton btn-outline-success" data-bs-toggle="modal"
                                     data-bs-target="#modal-formulario"
@@ -77,19 +77,20 @@
                                             </div>
                                         </div>
 
-                                        <div class="foto">
-                                            <div class="roww">
+                                        <div class="picture" style="align-items: center;">
+                                        <div class="imagePreview" *ngIf="file"  >
+                                            <img [src]="file" class="imagePreview" alt="..." style="text-align: center;" />
+                                        </div>
+                                    </div>
+                                        <div class="foto" >
                                                 <div class="col-md-2 imgUp">
-                                                    <div class="imagePreview" *ngIf="file">
-                                                        <img [src]="file" class="imagePreview" alt="..." />
-                                                    </div>
+                                                    
                                                     <label class="btn btn-primarys rounded-mid">Evidencia
                                                         <input type="file" class="uploadFile img" value="Upload Photo"
                                                             (change)="imageSelected($event)"
-                                                            style="width: 0px;height: 0px;overflow: hidden;">
+                                                            style="width: 0px;height: 0px;">
                                                     </label>
                                                 </div>
-                                            </div>
                                         </div>
 
                                         <div class="form-submit">

@@ -20,14 +20,11 @@ import Swal from 'sweetalert2';
 })
 export class PanelSolicitudAdminComponent implements OnInit {
 
-  listaSolicitudes: SolicitudAdopcion[] = [];
   loading: boolean = true;
 
   // PIPE
   fechaActual = new Date;
   fechaFormateada= this.fechaActual.toISOString().substr(0,10);
-
-  
   //
 
   constructor(private solicitudAdopcionService: SolicitudAdopcionService, private mascotaService: MascotaService, private fundacionService: FundacionService, private usuarioService: UsuarioService, private router: Router, private fotoService: FotoService
@@ -59,11 +56,20 @@ export class PanelSolicitudAdminComponent implements OnInit {
     }
   }
 
-  solicitudes: any
+  solicitudes: SolicitudAdopcion = new SolicitudAdopcion();
+  listaSolicitudes: SolicitudAdopcion[] = [];
+
   obtenerSolicitudes() {
     this.solicitudAdopcionService.getSolicitudesFundacion(this.idFundacion).subscribe(
       data => {
-        this.solicitudes = data
+        this.listaSolicitudes = data.map(
+          result => {
+            let solicitudes = new SolicitudAdopcion;
+            solicitudes = result
+            return solicitudes;
+          }
+        );
+        this.loading = false;
       },
       error => (console.log(error))
     )
@@ -90,10 +96,10 @@ export class PanelSolicitudAdminComponent implements OnInit {
     this.datainicialSolicitud = idSolicitudAdopcion;
     console.log("idSolicitud " + idSolicitudAdopcion)
     this.obtenerRespuestasyPreguntasSolicitante();
-    this. obtenerSolicitudesCapturadas();
+    this.obtenerSolicitudesCapturadas();
   }
 
-  solicitudCap:any
+  solicitudCap: SolicitudAdopcion = new SolicitudAdopcion();
 
   obtenerSolicitudesCapturadas() {
     console.log("entro solo a sus datos")

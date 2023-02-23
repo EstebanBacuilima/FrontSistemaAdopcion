@@ -11,7 +11,7 @@
                             <p>{{mascotas.sexo}}</p>
                             <p>{{mascotas.especie}}</p>
                             <p>{{mascotas.raza}}</p>
-                            <p>{{mascotas.descripcion}}</p>
+                            <!-- <p>{{mascotas.descripcion}}</p> -->
                             <div class="conBtnr">
                                 <button type="button" class="btn boton btn-outline-success" data-bs-toggle="modal"
                                     data-bs-target="#modal-formulario"
@@ -105,12 +105,12 @@
                                     <h3 class="form-title">Detalle del Seguimiento</h3>
                                     <div class="steps">
                                         
-                                        <h5  class="form-title" style="font-size: 15px;">Foto de Evidencia</h5>
                                         <div class="wrapper">
+                                            <h5  class="form-title" style="font-size: 15px;">Foto de Evidencia</h5>
                                             <img [src]="'http://localhost:5000/imagen/images/' + seguimiento.foto_evidencia" [alt]="seguimiento.foto_evidencia" class="image--cover">
                                         </div>
 
-                                        <div class="form-controll">
+                                        <div class="form-controll" style="padding-top: 40px;">
                                             <div class="form-input">
                                                 <textarea type="text" name="descripcion_visita" id="descripcion_visita"
                                                     [(ngModel)]="seguimiento.descripcion_visita"  onmousedown="return false" onkeydown="return false"></textarea>

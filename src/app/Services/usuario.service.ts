@@ -19,7 +19,7 @@ export class UsuarioService {
     return this.http.get<Usuario[]>(this.URL+'listar');
   }
 
-  getPorIdPersona(idPersona: number){
+  getPorIdPersona(idPersona: any){
     return this.http.get<Usuario>(this.URL+'porPersona/'+idPersona);
   }
 
@@ -38,6 +38,11 @@ export class UsuarioService {
   updateUsuario(usuario: Usuario, idUsuario: any){
     return this.http.put<Usuario>(this.URL+`actualizar/${idUsuario}`, usuario);
   }
+
+  descativarUsuario(usuario: Usuario, idUsuario: any){
+    return this.http.put<Usuario>(this.URL+`desactivar/${idUsuario}`, usuario);
+  }
+
 
   deleteUsuario(idUsuario: number){
     return this.http.delete<boolean>(this.URL+`eliminar/${idUsuario}`);

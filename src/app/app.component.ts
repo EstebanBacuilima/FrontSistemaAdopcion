@@ -13,7 +13,7 @@ export class AppComponent {
 
   // isPublico: boolean = false;
 
-
+  // usuarioRol: string = "PUBLICO";
 
   // constructor(
   //   private usuarioService: UsuarioService,
@@ -22,7 +22,8 @@ export class AppComponent {
   // ) { }
 
   // ngOnInit(): void {
-  //   this.isPublico = true;
+  //   localStorage.setItem('rol', String(this.usuarioRol));
+  //   console.log("ROL ->" + localStorage.getItem('rol'))
   // }
   // ngOnDestroy() {
   //   console.log("destruir");

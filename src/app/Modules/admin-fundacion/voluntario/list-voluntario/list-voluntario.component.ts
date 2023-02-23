@@ -137,6 +137,57 @@ export class ListVoluntarioComponent implements OnInit {
     
   }
 
+  idValuntarioDelete: any;
+  isUsuarioDesactivar:any
+  desactivarVoluntario(idVoluntario: any) {
+    this.voluntarioService.getPorId(idVoluntario).subscribe(data => {
+      this.voluntario = data
+      this.idValuntarioDelete = this.voluntario.idVoluntario;
+      console.log("ES LA ID -> " + this.idValuntarioDelete);
+      this.voluntario.estado = false;
+      this.isUsuarioDesactivar =  this.voluntario.usuario?.idUsuario;
+      console.log("ES LA ID USUARIO-> " + this.isUsuarioDesactivar);
+      this.voluntarioService.descativarVoluntario(this.voluntario, this.idValuntarioDelete).subscribe(data => {
+        this.usuarioService.getPorId(this.isUsuarioDesactivar).subscribe(dataUsuario => {
+          this.usuario = dataUsuario
+          this.usuario.idUsuario = dataUsuario.idUsuario;
+          this.usuario.estado = false;
+          this.usuarioService.descativarUsuario(this.usuario, this.isUsuarioDesactivar).subscribe(data => { 
+            this.obtenerVoluntarios();
+            this.toastrService.warning('El voluntario a sido Inhabilitado!', 'Voluntario Desactivado!', {
+              timeOut: 1000,
+            });
+          })
+        });
+      })
+    })
+  }
+
+  activarVoluntario(idVoluntario: any) {
+    this.voluntarioService.getPorId(idVoluntario).subscribe(data => {
+      this.voluntario = data
+      this.idValuntarioDelete = this.voluntario.idVoluntario;
+      console.log("ES LA ID -> " + this.idValuntarioDelete);
+      this.voluntario.estado = true;
+      this.isUsuarioDesactivar =  this.voluntario.usuario?.idUsuario;
+      console.log("ES LA ID USUARIO-> " + this.isUsuarioDesactivar);
+      this.voluntarioService.descativarVoluntario(this.voluntario, this.idValuntarioDelete).subscribe(data => {
+        this.usuarioService.getPorId(this.isUsuarioDesactivar).subscribe(dataUsuario => {
+          this.usuario = dataUsuario
+          this.usuario.idUsuario = dataUsuario.idUsuario;
+          this.usuario.estado = true;
+          this.usuarioService.descativarUsuario(this.usuario, this.isUsuarioDesactivar).subscribe(data => { 
+            this.obtenerVoluntarios();
+            this.toastrService.success('El voluntario se ha restablecido', 'Voluntario Habilitado', {
+              timeOut: 1000,
+            });
+          })
+        });
+      })
+    })
+  }
+
+
   // IMAGEN
   file: any = '';
   image!: any;

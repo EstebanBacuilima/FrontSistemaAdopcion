@@ -198,8 +198,7 @@ export class LoginComponent implements OnInit {
                         timeOut: 1000,
                       });
                       this.limpiarCampos();
-                      this. closeModal();
-                      location.replace('/login');
+                      this.closeModal();
                     }
                   )
                 }
@@ -220,7 +219,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  limpiarCampos(){
+  limpiarCampos() {
     this.persona.cedula = '';
     this.persona.correo = '';
     this.persona.genero = '';
@@ -233,6 +232,7 @@ export class LoginComponent implements OnInit {
     this.usuario.password = '';
     this.verficarPassword = '';
     this.file = '';
+    this.cedulaValidar = '';
   }
 
   closeModal() {
@@ -247,4 +247,93 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  cedulaValidar: any;
+  activarPassword: boolean = false;
+
+  validarCedula() {
+    this.personaService.getPorCedula(this.cedulaValidar).subscribe(
+      result => {
+        if (result != null) {
+          this.toastrService.success('Verificado', 'Cedula Encontrada', {
+            timeOut: 1000,
+          });
+          this.activarPassword = true;
+          this.persona = result;
+          this.persona.idPersona = result.idPersona
+          this.usuarioService.getPorIdPersona(this.persona.idPersona).subscribe( 
+            dataUsuario =>{
+              this.usuario = dataUsuario;
+              this.usuario.username = dataUsuario.username
+              this.usuario.password = this.verficarPassword;
+              console.log("username => " + this.usuario.username)
+              console.log("nueva contra => " + this.verficarPassword)
+          })
+        } else {
+          this.toastrService.error('Verifique el número de cedula', 'Cedula No existente', {
+            timeOut: 1000,
+          });
+          this.cedulaValidar = '';
+          this.activarPassword = false;
+        }
+      }
+    )
+  }
+
+  cambiarConstra(){
+    if (this.verficarPassword == this.usuario.password) {
+      this.personaService.getPorCedula(this.cedulaValidar).subscribe(
+        dataPersona =>{
+          this.persona = dataPersona;
+          this.persona.idPersona = dataPersona.idPersona
+          this.usuarioService.getPorIdPersona(this.persona.idPersona).subscribe( 
+            dataUsuario =>{
+              this.usuario = dataUsuario;
+              this.usuario.username = dataUsuario.username
+              this.usuario.password = this.verficarPassword;
+              this.usuarioService.updateUsuario(this.usuario, this.usuario.idUsuario).subscribe(
+                dataUsuarioCap => { 
+                  this.toastrService.success('Exitosamente', 'Contraseña actualizada', {
+                    timeOut: 1000,
+                  });
+                  this.limpiarRecuContra();
+                  this.activarPassword = false;
+              })
+          })
+      })
+
+    } else {
+      this.toastrService.error('No son similares', 'Verifique su contraseña', {
+        timeOut: 3000,
+      });
+    }
+  }
+  
+  limpiarRecuContra(){
+    this.persona.cedula = '';
+    this.persona.correo = '';
+    this.persona.genero = '';
+    this.persona.fechaNacimiento = new Date;
+    this.persona.direccion = '';
+    this.persona.nombres = '';
+    this.persona.apellidos = '';
+    this.persona.telefono = '';
+    this.usuario.username = '';
+    this.usuario.password = '';
+    this.verficarPassword = '';
+    this.cedulaValidar = '';
+    this.activarPassword = false;
+    this.closeModal2();
+  }
+
+  closeModal2() {
+    let modal = document.getElementById('examplePassword');
+    if (modal) {
+      modal.style.display = 'none';
+      document.body.classList.remove('modal-open');
+      let backdrop = document.querySelector('.modal-backdrop');
+      if (backdrop) {
+        backdrop.remove();
+      }
+    }
+  }
 }

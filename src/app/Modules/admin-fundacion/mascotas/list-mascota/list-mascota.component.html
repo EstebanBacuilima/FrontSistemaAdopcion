@@ -45,11 +45,10 @@
             <td>
               <button (click)="capParaEdicion(mascota.idMascota)" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalUpdate"><i class="pi pi-pencil"></i></button>
             </td>
-          <td>
-              <button class="btn btn-danger"><i class="pi pi-times"></i></button>
-              <!-- <button *ngIf='mascota.estado == true' class="btn btn-danger"><i class="pi pi-times"></i></button> -->
-              <!-- <button *ngIf='mascota.estado == false' (click)=" ativarFundacion(fundacion.idFundacion)"  class="btn btn-success"><i class="pi pi-power-off"></i></button> -->
-          </td>
+            <td>
+              <button *ngIf='mascota.estado == true' (click)=" descativarMascota(mascota.idMascota)"  class="btn btn-danger"><i class="pi pi-times"></i></button>
+              <button *ngIf='mascota.estado == false' (click)=" ativarMascota(mascota.idMascota)"  class="btn btn-success"><i class="pi pi-power-off"></i></button>
+            </td>
         </tbody>
       </table>
     </div>

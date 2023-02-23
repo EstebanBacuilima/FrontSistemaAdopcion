@@ -46,6 +46,10 @@ export class MascotaService {
     return this.http.put<Mascota>(this.URL+`actualizarEstadoMascota/${idMascota}`, mascota);
   }
 
+  descativarMascota(mascota: Mascota, idMascota: any){
+    return this.http.put<Mascota>(this.URL+`desactivar/${idMascota}`, mascota);
+  }
+
   deleteMascota(idMascota: number){
     return this.http.delete<boolean>(this.URL+`eliminar/${idMascota}`);
   }

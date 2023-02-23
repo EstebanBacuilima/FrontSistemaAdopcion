@@ -23,7 +23,6 @@
                         <th scope="col">Direccion</th>
                         <th scope="col">Telefono</th>
                         <th scope="col">Área de Trabajo</th>
-                        <th scope="col">Cargo</th>
                         <th scope="col">&nbsp;</th>
                         <th scope="col">&nbsp;</th>
                     </tr>
@@ -48,9 +47,8 @@
                             </button>
                         </td>
                         <td>
-                            <button class="btn btn-danger">
-                                <i class="pi pi-times"></i>
-                            </button>
+                            <button *ngIf='voluntario.estado == true' (click)=" desactivarVoluntario(voluntario.idVoluntario)"  class="btn btn-danger"><i class="pi pi-times"></i></button>
+                            <button *ngIf='voluntario.estado == false' (click)=" activarVoluntario(voluntario.idVoluntario)"  class="btn btn-success"><i class="pi pi-power-off"></i></button>
                         </td>
                     </tr>
                 </tbody>

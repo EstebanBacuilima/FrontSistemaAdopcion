@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Fundacion } from '../Models/Fundacion';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +11,9 @@ export class FundacionService {
   private URL = "http://localhost:5000/api/fundacion/";
 
   constructor(private http: HttpClient) { }
+  
 
-  getFundacion(){
+  getFundacion(): Observable<Fundacion[]> {
     return this.http.get<Fundacion[]>(this.URL+'listar');
   }
 
@@ -27,7 +29,7 @@ export class FundacionService {
     return this.http.put<Fundacion>(this.URL+`desactivar/${idFundacion}`, fundacion);
   }
 
-  updateFundacion(fundacion: Fundacion, idFundacion: any){
+  updateFundacion(fundacion: Fundacion, idFundacion: any): Observable<Fundacion> {
     return this.http.put<Fundacion>(this.URL+`actualizar/${idFundacion}`, fundacion);
   }
 

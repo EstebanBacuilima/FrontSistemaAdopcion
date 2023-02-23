@@ -119,7 +119,7 @@ export class PanelSeguimientoComponent implements OnInit {
         timeOut: 2000,
       });
     } else {
-      let fechaPrueba: Date = new Date();
+    let fechaPrueba: Date = new Date();
     let fechaFormateada = fechaPrueba.toISOString().substr(0,10);
     console.log("es la fecha de hoy -> " + fechaFormateada);
     this.seguimiento.fecha_seguimiento = fechaPrueba;

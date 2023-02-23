@@ -25,9 +25,9 @@ export class ListFundacioComponent implements OnInit {
   // letras y espacios
   letrasEspace: RegExp = /^[a-zA-Z\s]+$/;
   letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\s]+$/;
-    // letrasEspace: RegExp = /^[a-zA-Z0-9\s^!#$%&*]+$/;
-    // letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\s^!#$%&*-]+$/;
-    
+  // letrasEspace: RegExp = /^[a-zA-Z0-9\s^!#$%&*]+$/;
+  // letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\s^!#$%&*-]+$/;
+
 // Validar que no igrese Guion medio
     onKeyPress(event: KeyboardEvent) {
       if (event.key === '-') {
@@ -126,22 +126,11 @@ export class ListFundacioComponent implements OnInit {
             this.toastrService.success('Cambios realizados con exito', 'Actualizado Correctamente', {
               timeOut: 1000,
             });
-            //this.closeModal();
+            const miModal: any = document.getElementById('modalUpdate');
+            miModal?.modal('hide');
           })
         })
       })
-    }
-  }
-
-  closeModal() {
-    let modal = document.getElementById('modalUpdate');
-    if (modal) {
-      modal.style.display = 'none';
-      document.body.classList.remove('modal-open');
-      let backdrop = document.querySelector('.modal-backdrop');
-      if (backdrop) {
-        backdrop.remove();
-      }
     }
   }
 
@@ -247,68 +236,12 @@ export class ListFundacioComponent implements OnInit {
 
 
   fechaAct: Date =new Date();
+
   // PDF
-  generarPDF() {
-    const data = this.listaFundaciones;
-    const body = [];
-
-    body.push(["ID", "RUC", "NOMBRE FUDACION", "ACRO", "MISION", "DIRECCION", "CORREO", "TELEFONO"]);
-
-    data.forEach(fundacion => {
-      body.push([fundacion.idFundacion, fundacion.ruc, fundacion.nombre_fundacion, fundacion.acronimo, fundacion.mision, fundacion.direccion, fundacion.correo, fundacion.telefono]);
-    });
-
-    const table = {
-      text: 'Tables',
-      headerRows: 1,
-      body,
-      layout: "lightHorizontalLines",
-      fillColor: '#eeffee',
-      widths: [12, 70, 70, 30, 70, 70, 60, 55]
-    };
-
-    const styles: any = {
-      header: {
-        text: 'Tables',
-        bold: true,
-        fontSize: 8,
-        color: "#000",
-        font: "Roboto-Regular.ttf",
-        margin: [0, 20, 0, 10]
-      },
-      tableHeader: {
-        bold: true,
-        fontSize: 5,
-        color: "#000",
-        fillColor: '#eeffee',
-        font: "Roboto-Regular.ttf"
-      },
-    };
-
-    const cuerpo = [{
-      text: "Título del PDF",
-      style: "header",
-      margin: [0, 0, 0, 20]
-    },
-    ];
-
-    const content = [
-      {
-        cuerpo,
-        table,
-        style: "tableExample"
-      }];
-
-    const documentDefinition = {
-      content,
-      styles,
-      layout: 'lightHorizontalLines',
-    };
-
-    pdfMake.createPdf(documentDefinition).open();
-  }
-
   openPdfTables() {
+    let fechaPrueba: Date = new Date();
+    let fechaFormateada = fechaPrueba.toISOString().substr(0,10);
+    console.log("es la fecha de hoy -> " + fechaFormateada);
     let tableBody = [];
     tableBody.push([
       { text: "ID", bold: true },
@@ -340,6 +273,13 @@ export class ListFundacioComponent implements OnInit {
           fontSize: 10,
           style: "header",
           alignment: 'right',
+          fillColor: 'violet'
+        },
+        {
+          text: fechaFormateada,
+          fontSize: 10,
+          style: "header",
+          alignment: 'left',
           fillColor: 'violet'
         },
         "-----------------------------------------------------------------------------------------------------------------------------------------------------------",
@@ -374,10 +314,11 @@ export class ListFundacioComponent implements OnInit {
             layout: 'landscape',
             fontSize: 5,
             headerRows: 1,
-            widths: [12, 65, 70, 65, 67, 65, 65, 64],
+            widths: [12, 65, 70, 65, 67, 65, 65, 60],
             body: tableBody
           }
         }
+        
       ],
       styles: {
         header: {

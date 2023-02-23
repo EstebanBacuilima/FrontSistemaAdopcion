@@ -54,8 +54,8 @@ export class MascotaService {
     return this.http.delete<boolean>(this.URL+`eliminar/${idMascota}`);
   }
 
-  getAllMascotasEnSeguimiento(){
-    return this.http.get<Mascota[]>(this.URL+'listarMascotasEnSeguimiento');
+  getAllMascotasEnSeguimiento(idFundacion: any){
+    return this.http.get<Mascota[]>(this.URL+'listarMascotasEnSeguimiento/' + idFundacion);
   }
 
   getPorChip(chipMascota: any){

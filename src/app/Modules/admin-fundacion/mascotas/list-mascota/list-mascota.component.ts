@@ -19,7 +19,6 @@ export class ListMascotaComponent implements OnInit {
 
   pageActual: number = 1;
   public myCounter: number = 0;
-  listaMascotas: Mascota[] = [];
   loading: boolean = true;
 
   //VALIDACIONES
@@ -64,6 +63,8 @@ export class ListMascotaComponent implements OnInit {
       console.log("Usuario no foun => ")
     }
   }
+
+  listaMascotas: Mascota[] = [];
 
   obtenerMasotas() {
     this.mascotaService.getMascotaFundacion(this.idFundacion).subscribe(

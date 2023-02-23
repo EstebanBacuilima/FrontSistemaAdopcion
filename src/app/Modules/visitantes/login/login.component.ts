@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
     this.valCorreo = this.expCorreo.test(this.persona.correo!);
     if (this.valCorreo) {
       console.log("Correo Bueno");
-      // this.verfCorreo = 'form-control is-valid';
+      this.verfCorreo = 'form-control is-valid';
     } else {
       this.verfCorreo = 'ng-invalid ng-dirty';
       console.log("Correo malo");
@@ -79,12 +79,40 @@ export class LoginComponent implements OnInit {
     console.log("ROL ->" + localStorage.getItem('rol'))
   };
 
+  edad: any;
+  validarEdad: boolean = false;
+
+  calcularEdad() {
+    let fechaPrueba: any = this.persona.fechaNacimiento;
+    let fechaFormateada = fechaPrueba.toISOString().substr(0, 10);
+    let anio = parseInt(fechaFormateada.substr(0, 4));
+    console.log('fecha formateada ->' + fechaFormateada)
+    console.log('año elejido ->' + anio)
+    let fechaHoy: Date = new Date();
+    let fechaFormateadaHoy = fechaHoy.toISOString().substr(0, 10);
+    let anioA = parseInt(fechaFormateadaHoy.substr(0, 4));
+    console.log('año actual ->' + anioA)
+    let edad = anioA - anio;
+    console.log('Edad:' + edad);
+    if (edad < 18) {
+      this.toastrService.error('Prohibido el registro', 'Usted es menor de edad', {
+        timeOut: 3000,
+      });
+      this.validarEdad = false;
+      console.log("dato -> " + this.validarEdad)
+    } else {
+      console.log('El usuario es mayor de edad');
+      this.validarEdad = true;
+      console.log("dato -> " + this.validarEdad)
+    }
+  }
+
   showSpinner: any;
   usuarioRolCapturado: any;
   login() {
     if (!this.usuario.username || !this.usuario.password) {
       this.toastrService.error('Uno o más campos vacios', 'Verifique los Campos de texto', {
-        timeOut: 3000,
+        timeOut: 1000,
       });
     } else {
       this.showSpinner = true;
@@ -170,57 +198,65 @@ export class LoginComponent implements OnInit {
   verficarPassword: any;
 
   registrarUsuario() {
-    if (this.verficarPassword == this.usuario.password) {
-      if (!this.persona.nombres || !this.persona.apellidos || !this.persona.correo || !this.usuario.username || !this.usuario.password
-        || !this.persona.fechaNacimiento || !this.persona.telefono || !this.persona.celular || !this.usuario.username || !this.verficarPassword) {
-        this.toastrService.error('Uno o más campos vacios', 'Verifique los Campos de texto', {
-          timeOut: 3000,
-        });
-      } else {
-        this.usuarioService.verfUsername(this.usuario.username).subscribe(
-          data => {
-            if (!data) {
-              this.personaService.postPersona(this.persona).subscribe(
-                data => {
-                  console.log(data);
-                  this.persona.idPersona = data.idPersona;
-                  this.persona = data;
-                  this.usuario.persona = this.persona;
-                  // this.usuario.fundacion = this.fundacion;
-                  this.usuario.estado = true;
-                  this.usuario.rol = "CLIENTE";
-                  this.cargarImagenUsuario();
-                  this.usuarioService.postUsuario(this.usuario).subscribe(
-                    result => {
-                      console.log(result);
-                      this.usuario = result;
-                      this.toastrService.success('Registrado Exitosamente', 'Bienvenido ', {
-                        timeOut: 1000,
-                      });
-                      this.limpiarCampos();
-                      this. closeModal();
-                      location.replace('/login');
-                    }
-                  )
-                }
-              )
-            } else {
-              this.toastrService.error('Username ya en uso', 'Digite otro username', {
-                timeOut: 3000,
-              });
-              this.usuario.username = '';
-            }
-          }
-        )
-      }
-    } else {
-      this.toastrService.error('No son similares', 'Verifique su contraseña', {
+    console.log("lo q recibo ->" + this.validarEdad)
+    if (!this.persona.nombres || !this.persona.apellidos || !this.persona.correo || !this.usuario.username || !this.usuario.password
+      || !this.persona.fechaNacimiento || !this.persona.telefono || !this.persona.celular || !this.usuario.username || !this.verficarPassword) {
+      this.toastrService.error('Uno o más campos vacios', 'Verifique los Campos de texto', {
         timeOut: 3000,
       });
+    } else {
+      if (this.validarEdad == true) {
+        if (this.verficarPassword == this.usuario.password) {
+          this.usuarioService.verfUsername(this.usuario.username).subscribe(
+            data => {
+              if (!data) {
+                this.personaService.postPersona(this.persona).subscribe(
+                  data => {
+                    console.log(data);
+                    this.persona.idPersona = data.idPersona;
+                    this.persona = data;
+                    this.usuario.persona = this.persona;
+                    // this.usuario.fundacion = this.fundacion;
+                    this.usuario.estado = true;
+                    this.usuario.rol = "CLIENTE";
+                    this.cargarImagenUsuario();
+                    this.usuarioService.postUsuario(this.usuario).subscribe(
+                      result => {
+                        console.log(result);
+                        this.usuario = result;
+                        this.toastrService.success('Registrado Exitosamente', 'Bienvenido ', {
+                          timeOut: 1000,
+                        });
+                        this.limpiarCampos();
+                        this.closeModal();
+                      }
+                    )
+                  }
+                )
+              } else {
+                this.toastrService.error('Username ya en uso', 'Digite otro username', {
+                  timeOut: 1000,
+                });
+                this.usuario.username = '';
+              }
+            }
+          )
+
+        } else {
+          this.toastrService.error('No son similares', 'Verifique su contraseña', {
+            timeOut: 1000,
+          });
+        }
+      } else {
+        this.toastrService.warning('Verifique su fecha de nacimiento!', 'Aviso!', {
+          timeOut: 1000,
+        });
+      }
+
     }
   }
 
-  limpiarCampos(){
+  limpiarCampos() {
     this.persona.cedula = '';
     this.persona.correo = '';
     this.persona.genero = '';
@@ -233,6 +269,7 @@ export class LoginComponent implements OnInit {
     this.usuario.password = '';
     this.verficarPassword = '';
     this.file = '';
+    this.cedulaValidar = '';
   }
 
   closeModal() {
@@ -247,4 +284,93 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  cedulaValidar: any;
+  activarPassword: boolean = false;
+
+  validarCedula() {
+    this.personaService.getPorCedula(this.cedulaValidar).subscribe(
+      result => {
+        if (result != null) {
+          this.toastrService.success('Verificado', 'Cedula Encontrada', {
+            timeOut: 1000,
+          });
+          this.activarPassword = true;
+          this.persona = result;
+          this.persona.idPersona = result.idPersona
+          this.usuarioService.getPorIdPersona(this.persona.idPersona).subscribe(
+            dataUsuario => {
+              this.usuario = dataUsuario;
+              this.usuario.username = dataUsuario.username
+              this.usuario.password = this.verficarPassword;
+              console.log("username => " + this.usuario.username)
+              console.log("nueva contra => " + this.verficarPassword)
+            })
+        } else {
+          this.toastrService.error('Verifique el número de cedula', 'Cedula No existente', {
+            timeOut: 1000,
+          });
+          this.cedulaValidar = '';
+          this.activarPassword = false;
+        }
+      }
+    )
+  }
+
+  cambiarConstra() {
+    if (this.verficarPassword == this.usuario.password) {
+      this.personaService.getPorCedula(this.cedulaValidar).subscribe(
+        dataPersona => {
+          this.persona = dataPersona;
+          this.persona.idPersona = dataPersona.idPersona
+          this.usuarioService.getPorIdPersona(this.persona.idPersona).subscribe(
+            dataUsuario => {
+              this.usuario = dataUsuario;
+              this.usuario.username = dataUsuario.username
+              this.usuario.password = this.verficarPassword;
+              this.usuarioService.updateUsuario(this.usuario, this.usuario.idUsuario).subscribe(
+                dataUsuarioCap => {
+                  this.toastrService.success('Exitosamente', 'Contraseña actualizada', {
+                    timeOut: 1000,
+                  });
+                  this.limpiarRecuContra();
+                  this.activarPassword = false;
+                })
+            })
+        })
+
+    } else {
+      this.toastrService.error('No son similares', 'Verifique su contraseña', {
+        timeOut: 3000,
+      });
+    }
+  }
+
+  limpiarRecuContra() {
+    this.persona.cedula = '';
+    this.persona.correo = '';
+    this.persona.genero = '';
+    this.persona.fechaNacimiento = new Date;
+    this.persona.direccion = '';
+    this.persona.nombres = '';
+    this.persona.apellidos = '';
+    this.persona.telefono = '';
+    this.usuario.username = '';
+    this.usuario.password = '';
+    this.verficarPassword = '';
+    this.cedulaValidar = '';
+    this.activarPassword = false;
+    this.closeModal2();
+  }
+
+  closeModal2() {
+    let modal = document.getElementById('examplePassword');
+    if (modal) {
+      modal.style.display = 'none';
+      document.body.classList.remove('modal-open');
+      let backdrop = document.querySelector('.modal-backdrop');
+      if (backdrop) {
+        backdrop.remove();
+      }
+    }
+  }
 }

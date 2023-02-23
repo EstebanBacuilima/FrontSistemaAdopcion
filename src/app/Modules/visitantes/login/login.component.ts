@@ -196,8 +196,11 @@ export class LoginComponent implements OnInit {
   // REGISTRARSE //
 
   verficarPassword: any;
-
+  cargando = false;
   registrarUsuario() {
+    // Agregar indicador de carga o mensaje de espera aquí
+    this.cargando = true;
+
     console.log("lo q recibo ->" + this.validarEdad)
     if (!this.persona.nombres || !this.persona.apellidos || !this.persona.correo || !this.usuario.username || !this.usuario.password
       || !this.persona.fechaNacimiento || !this.persona.telefono || !this.persona.celular || !this.usuario.username || !this.verficarPassword) {
@@ -227,8 +230,12 @@ export class LoginComponent implements OnInit {
                         this.toastrService.success('Registrado Exitosamente', 'Bienvenido ', {
                           timeOut: 1000,
                         });
-                        this.limpiarCampos();
-                        this.closeModal();
+                        // Limpiar los campos y cerrar el modal con tiempo
+                        setTimeout(() => {
+                          this.limpiarCampos();
+                          this.closeModal();
+                          this.cargando = false;
+                        }, 1000);
                       }
                     )
                   }
@@ -241,7 +248,7 @@ export class LoginComponent implements OnInit {
               }
             }
           )
-
+  
         } else {
           this.toastrService.error('No son similares', 'Verifique su contraseña', {
             timeOut: 1000,
@@ -252,7 +259,7 @@ export class LoginComponent implements OnInit {
           timeOut: 1000,
         });
       }
-
+  
     }
   }
 

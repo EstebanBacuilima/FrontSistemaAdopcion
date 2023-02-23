@@ -90,7 +90,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="fechaNacimiento" class="form-label-p"> Fecha De Nacimiento</label>
-                                    <p-calendar type="date" class="fecha" name="fechaNacimiento" [(ngModel)]="persona.fechaNacimiento" [showIcon]="true" inputId="icon"></p-calendar>
+                                    <p-calendar type="date" class="fecha" name="fechaNacimiento" [(ngModel)]="persona.fechaNacimiento" [showIcon]="true" inputId="icon" (ngModelChange)="calcularEdad()"></p-calendar>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="direccion" class="form-label-p"> Direccion</label>

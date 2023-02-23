@@ -126,22 +126,11 @@ export class ListFundacioComponent implements OnInit {
             this.toastrService.success('Cambios realizados con exito', 'Actualizado Correctamente', {
               timeOut: 1000,
             });
-            //this.closeModal();
+            const miModal: any = document.getElementById('modalUpdate');
+            miModal?.modal('hide');
           })
         })
       })
-    }
-  }
-
-  closeModal() {
-    let modal = document.getElementById('modalUpdate');
-    if (modal) {
-      modal.style.display = 'none';
-      document.body.classList.remove('modal-open');
-      let backdrop = document.querySelector('.modal-backdrop');
-      if (backdrop) {
-        backdrop.remove();
-      }
     }
   }
 

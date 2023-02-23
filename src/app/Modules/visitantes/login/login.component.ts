@@ -81,6 +81,7 @@ export class LoginComponent implements OnInit {
 
   edad: any;
   validarEdad: boolean = false;
+
   calcularEdad() {
     let fechaPrueba: any = this.persona.fechaNacimiento;
     let fechaFormateada = fechaPrueba.toISOString().substr(0, 10);
@@ -197,13 +198,14 @@ export class LoginComponent implements OnInit {
   verficarPassword: any;
 
   registrarUsuario() {
+    console.log("lo q recibo ->" + this.validarEdad)
     if (!this.persona.nombres || !this.persona.apellidos || !this.persona.correo || !this.usuario.username || !this.usuario.password
       || !this.persona.fechaNacimiento || !this.persona.telefono || !this.persona.celular || !this.usuario.username || !this.verficarPassword) {
       this.toastrService.error('Uno o más campos vacios', 'Verifique los Campos de texto', {
         timeOut: 3000,
       });
     } else {
-      if (this.validarEdad = true) {
+      if (this.validarEdad == true) {
         if (this.verficarPassword == this.usuario.password) {
           this.usuarioService.verfUsername(this.usuario.username).subscribe(
             data => {

@@ -202,64 +202,78 @@ export class LoginComponent implements OnInit {
     this.cargando = true;
 
     console.log("lo q recibo ->" + this.validarEdad)
-    if (!this.persona.nombres || !this.persona.apellidos || !this.persona.correo || !this.usuario.username || !this.usuario.password
+    if (!this.persona.nombres || !this.persona.apellidos || !this.persona.cedula || !this.persona.correo || !this.usuario.username || !this.usuario.password
       || !this.persona.fechaNacimiento || !this.persona.telefono || !this.persona.celular || !this.usuario.username || !this.verficarPassword) {
       this.toastrService.error('Uno o más campos vacios', 'Verifique los Campos de texto', {
         timeOut: 3000,
       });
     } else {
       if (this.validarEdad == true) {
-        if (this.verficarPassword == this.usuario.password) {
-          this.usuarioService.verfUsername(this.usuario.username).subscribe(
-            data => {
-              if (!data) {
-                this.personaService.postPersona(this.persona).subscribe(
+
+        this.personaService.getPorCedula(this.persona.cedula).subscribe(
+          result => {
+            if (result === null) {
+
+
+              if (this.verficarPassword == this.usuario.password) {
+                this.usuarioService.verfUsername(this.usuario.username).subscribe(
                   data => {
-                    console.log(data);
-                    this.persona.idPersona = data.idPersona;
-                    this.persona = data;
-                    this.usuario.persona = this.persona;
-                    // this.usuario.fundacion = this.fundacion;
-                    this.usuario.estado = true;
-                    this.usuario.rol = "CLIENTE";
-                    this.cargarImagenUsuario();
-                    this.usuarioService.postUsuario(this.usuario).subscribe(
-                      result => {
-                        console.log(result);
-                        this.usuario = result;
-                        this.toastrService.success('Registrado Exitosamente', 'Bienvenido ', {
-                          timeOut: 1000,
-                        });
-                        // Limpiar los campos y cerrar el modal con tiempo
-                        setTimeout(() => {
-                          this.limpiarCampos();
-                          this.closeModal();
-                          this.cargando = false;
-                        }, 1000);
-                      }
-                    )
+                    if (!data) {
+                      this.personaService.postPersona(this.persona).subscribe(
+                        data => {
+                          console.log(data);
+                          this.persona.idPersona = data.idPersona;
+                          this.persona = data;
+                          this.usuario.persona = this.persona;
+                          // this.usuario.fundacion = this.fundacion;
+                          this.usuario.estado = true;
+                          this.usuario.rol = "CLIENTE";
+                          this.cargarImagenUsuario();
+                          this.usuarioService.postUsuario(this.usuario).subscribe(
+                            result => {
+                              console.log(result);
+                              this.usuario = result;
+                              this.toastrService.success('Registrado Exitosamente', 'Bienvenido ', {
+                                timeOut: 1000,
+                              });
+                              // Limpiar los campos y cerrar el modal con tiempo
+                              setTimeout(() => {
+                                this.limpiarCampos();
+                                this.closeModal();
+                                this.cargando = false;
+                              }, 1000);
+                            }
+                          )
+                        }
+                      )
+                    } else {
+                      this.toastrService.error('Username ya en uso', 'Digite otro username', {
+                        timeOut: 1000,
+                      });
+                      this.usuario.username = '';
+                    }
                   }
                 )
+
               } else {
-                this.toastrService.error('Username ya en uso', 'Digite otro username', {
+                this.toastrService.error('No son similares', 'Verifique su contraseña', {
                   timeOut: 1000,
                 });
-                this.usuario.username = '';
               }
+            } else {
+              this.toastrService.error('La cédula ingresada ya está registrada!', 'Cedula en uso', {
+                timeOut: 3000,
+              });
+              this.persona.cedula = '';
             }
-          )
-  
-        } else {
-          this.toastrService.error('No son similares', 'Verifique su contraseña', {
-            timeOut: 1000,
-          });
-        }
+          }
+        )
       } else {
         this.toastrService.warning('Verifique su fecha de nacimiento!', 'Aviso!', {
           timeOut: 1000,
         });
       }
-  
+
     }
   }
 
@@ -380,4 +394,16 @@ export class LoginComponent implements OnInit {
       }
     }
   }
+  //Validacion de Formulario
+  limpiarFormulario() {
+    const forms = document.querySelectorAll('.needs-validation') as NodeListOf<HTMLFormElement>;
+    Array.from(forms).forEach(form => {
+      form.classList.remove('was-validated');
+      form.querySelectorAll('.ng-invalid, .ng-dirty').forEach((input) => {
+        input.classList.remove('ng-invalid', 'ng-dirty');
+      });
+      form.reset();
+    });
+  }
 }
+

@@ -114,34 +114,37 @@ export class RegFundacionComponent implements OnInit {
         });
     } else {
       this.fundacionService.verfRuc(this.fundacion.ruc).subscribe(
-        data => {
-          if (!data) {
+        dataFundacionRuc => {
+          if (!dataFundacionRuc) {
             this.personaService.getPorCedula(this.persona.cedula).subscribe(
-              result => {
-                if (result === null) {
+              resultPersonaCedula => {
+                if (resultPersonaCedula === null) {
                   this.usuarioService.verfUsername(this.usuario.username).subscribe(
-                    data => {
-                      if (!data) {
+                    dataUsername => {
+                      if (!dataUsername) {
                         this.personaService.postPersona(this.persona).subscribe(
-                          data => {
-                            console.log(data);
-                            this.persona.idPersona = data.idPersona;
+                          dataPersona => {
+                            console.log(dataPersona);
+                            this.persona = dataPersona;
+                            this.persona.idPersona = this.persona.idPersona;
                             this.fundacion.persona = this.persona;
                             this.fundacion.logo = this.foto_fundacion;
                             this.fundacion.estado = true;
                             this.cargarImagenFundacion();
                             this.fundacionService.postFundacion(this.fundacion).subscribe(
-                              result => {
-                                console.log(result)
-                                this.fundacion.idFundacion = result.idFundacion;
-                                this.cargarImagenUsuario();
+                              dataFundacion => {
+                                console.log(dataFundacion)
+                                this.fundacion = dataFundacion;
+                                this.fundacion.idFundacion = this.fundacion.idFundacion;
+                                this.usuario.idUsuario;
                                 this.usuario.persona = this.persona;
                                 this.usuario.fundacion = this.fundacion;
                                 this.usuario.rol = "ADMIN_FUDACION";
                                 this.usuario.estado = true;
                                 this.usuario.foto_perfil = this.foto_usuario;
+                                this.cargarImagenUsuario();
                                 this.usuarioService.postUsuario(this.usuario).subscribe(
-                                  info => {
+                                  dataUsuario => {
                                     this.toastrService.success('Fundación registrada existosamente', 'Registro Exitoso', {
                                       timeOut: 1500,
                                     });

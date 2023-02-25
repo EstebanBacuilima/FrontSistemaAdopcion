@@ -20,13 +20,13 @@
       <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
         <li>
           <a href="#" class="nav-link text_0 px-2 text-white" routerLink="welcome" routerLinkActive="active"
-            *ngIf='isPublico'>HOME</a>
+            *ngIf='isPublico' (click)="home()" >HOME</a>
         </li>
         <li>
-          <a href="#second" class="nav-link text_2 px-2" routerLinkActive="active" *ngIf='isPublico'>FUNDACIONES</a>
+          <a href="#second" class="nav-link text_2 px-2" routerLinkActive="active" *ngIf='isPublico && visibleSeccion == false'>FUNDACIONES</a>
         </li>
         <li>
-          <a href="#third" class="nav-link text_1" routerLinkActive="active" *ngIf='isPublico'>MASCOTAS</a>
+          <a href="#third" class="nav-link text_1" routerLinkActive="active" *ngIf='isPublico && visibleSeccion == false'>MASCOTAS</a>
         </li>
 
         <!-- COMPARTIDOS -->
@@ -108,7 +108,7 @@
 
       </ul>
       <div class="text-center" [hidden]="isLogin">
-        <button type="button" class="btn btn-outline-primary" routerLink="login">Iniciar sesión</button>
+        <button type="button" class="btn btn-outline-primary" routerLink="login" (click)="validarPestLogin()" >Login</button>
       </div>
       <div class="text-center" [hidden]="!isLogin">
         <button type="button" class="btn btn-outline-light me-2" (click)="cerrarSesion()">Cerrar sesión</button>
@@ -180,9 +180,11 @@
                       <label for="genero" class="form-label-p"> Género</label>
                       <select id="genero" class="form-control" name="genero" [(ngModel)]="persona.genero">
                           <option value="" disabled selected>Selecciona un género</option>
-                          <option value="masculino">Masculino</option>
-                          <option value="femenino">Femenino</option>
-                          <option value="Otro">Sin especificar</option>
+
+                          <option value="Masculino">Masculino</option>
+                          <option value="Femenino">Femenino</option>
+                          <option value="Otro">Otro</option>
+
                       </select>
                   </div>
                   <div class="col-md-6">

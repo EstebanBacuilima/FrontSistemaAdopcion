@@ -33,7 +33,6 @@ export class PanelSeguimientoAdminComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.obtenerMasotas();
     this.obtenerUsuario();
   }
 
@@ -46,6 +45,8 @@ export class PanelSeguimientoAdminComponent implements OnInit {
         console.log(data);
         this.usuario = data;
         this.personas = this.usuario.persona;
+        this.idFundacion = data.fundacion?.idFundacion;
+        this.obtenerMasotas();
       })
     } else {
       console.log("Usuario no encontrado => ")
@@ -56,7 +57,7 @@ export class PanelSeguimientoAdminComponent implements OnInit {
   listaMascotas: Mascota[] = [];
 
   obtenerMasotas() {
-    this.mascotaService.getAllMascotasEnSeguimiento().subscribe(
+    this.mascotaService.getAllMascotasEnSeguimiento(this.idFundacion ).subscribe(
       data => {
         this.listaMascotas = data.map(
           result => {

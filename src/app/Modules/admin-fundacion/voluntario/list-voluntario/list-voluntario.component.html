@@ -20,8 +20,8 @@
                         <th scope="col">N</th>
                         <th scope="col">Cédula</th>
                         <th scope="col">Nombres</th>
-                        <th scope="col">Direccion</th>
-                        <th scope="col">Telefono</th>
+                        <th scope="col">Dirección</th>
+                        <th scope="col">Teléfono</th>
                         <th scope="col">Área de Trabajo</th>
                         <th scope="col">Cargo</th>
                         <th scope="col">&nbsp;</th>
@@ -81,7 +81,7 @@
                             </div>
 
                             <div class="col-12">
-                                <label for="cedula" class="form-label-p"> Cedula</label>
+                                <label for="cedula" class="form-label-p"> Cédula</label>
                                 <input type="text" class="form-control" name="cedula" [(ngModel)]="persona.cedula"
                                     readonly onmousedown="return false" onkeydown="return false" />
                             </div>
@@ -102,7 +102,7 @@
                                     [(ngModel)]="persona.fechaNacimiento" />
                             </div>
                             <div class="col-6">
-                                <label for="genero" class="form-label-p"> Genero</label>
+                                <label for="genero" class="form-label-p"> Género</label>
                                 <select id="genero" class="form-control" name="genero" [(ngModel)]="persona.genero">
                                     <option value="" disabled selected>
                                         Selecciona un género
@@ -113,12 +113,12 @@
                                 </select>
                             </div>
                             <div class="col-12">
-                                <label for="direccion" class="form-label-p"> Direccion</label>
+                                <label for="direccion" class="form-label-p"> Dirección</label>
                                 <input type="text" class="form-control" name="direccion"
                                 maxlength="30"    [(ngModel)]="persona.direccion" [pKeyFilter]="letrasEspaceNumbers" />
                             </div>
                             <div class="col-md-6">
-                                <label for="telefono" class="form-label-p"> Telefono</label>
+                                <label for="telefono" class="form-label-p"> Teléfono</label>
                                 <input type="text" class="form-control" name="telefono"
                                 maxlength="10"   [(ngModel)]="persona.telefono" [pKeyFilter]="'int'" (keypress)="onKeyPress($event)" />
                             </div>
@@ -139,8 +139,8 @@
                                     <option value="" disabled selected>
                                         Selecciona área de trabajo
                                     </option>
-                                    <option value="Clinica">Clinica</option>
-                                    <option value="Peluqueria">Peluqueria</option>
+                                    <option value="Clinica">Clínica</option>
+                                    <option value="Peluqueria">Peluquería</option>
                                     <option value="otro">Otro</option>
                                 </select>
                             </div>

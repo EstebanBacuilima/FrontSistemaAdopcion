@@ -2,7 +2,7 @@
     <ul class="nav justify-content-center">
         <li class="col-md-6">
             <button type="button" class="btn btnA form-control">
-                Registrar Fundacion
+                Registrar Fundación
             </button>
         </li>
         <li class="col-md-6">
@@ -16,29 +16,29 @@
     <form class="row needs-validation g-2 d-flex justify-content-center" novalidate>
         <div class="separador">.</div>
 
-        <h2 class="form text-center">Datos Fundacion</h2>
+        <h2 class="form text-center">Datos Fundación</h2>
         <div class="col-md-6">
             <label for="ruc" class="form-label-p"> Ruc</label>
             <input type="text" class="form-control" id="ruc" name="ruc" maxlength="13" [(ngModel)]="fundacion.ruc" [pKeyFilter]="'int'" (keypress)="onKeyPress($event)" required/>
         </div>
         <div class="col-md-6">
-            <label for="nombre_fundacion" class="form-label-p">Nombre Fundacion</label>
+            <label for="nombre_fundacion" class="form-label-p">Nombre Fundación</label>
             <input  type="text" class="form-control"  id="nombre_fundacion" name="nombre_fundacion"  maxlength="25" [(ngModel)]="fundacion.nombre_fundacion" [pKeyFilter]="letrasEspace" required/>
         </div>
         <div class="col-md-6">
-            <label for="acronimo" class="form-label-p"> Acronimo</label>
+            <label for="acronimo" class="form-label-p"> Acrónimo</label>
             <input id="acronimo" type="text" class="form-control" name="acronimo" maxlength="8" [(ngModel)]="fundacion.acronimo" [pKeyFilter]="letrasEspace" required/>
         </div>
         <div class="col-md-6">
-            <label for="mision" class="form-label-p"> Mision</label>
+            <label for="mision" class="form-label-p"> Misión</label>
             <input id="mision" type="text" class="form-control" name="mision" maxlength="30" [(ngModel)]="fundacion.mision" [pKeyFilter]="letrasEspace" required/>
         </div>
         <div class="col-12">
-            <label for="direccion" class="form-label-p"> Direccion</label>
+            <label for="direccion" class="form-label-p"> Dirección</label>
             <input id="direccion" type="text" class="form-control" name="direccion" maxlength="30" [(ngModel)]="fundacion.direccion" [pKeyFilter]="letrasEspaceNumbers" required/>
         </div>
         <div class="col-md-6">
-            <label for="telefono" class="form-label-p"> Telefono</label>
+            <label for="telefono" class="form-label-p"> Teléfono</label>
             <input id="telefono" type="text" class="form-control" name="telefono" maxlength="10" [(ngModel)]="fundacion.telefono"  [pKeyFilter]="'int'" (keypress)="onKeyPress($event)" required/>
         </div>
         <div class="col-md-6">
@@ -51,7 +51,7 @@
                     <div class="imagePreview" *ngIf="filem">
                         <img [src]="filem" class="imagePreview" alt="..." />
                     </div>
-                    <label class="btn btn-primarys rounded-mid">Logo Fundacion
+                    <label class="btn btn-primarys rounded-mid">Logo Fundación
                         <input type="file" class="uploadFile img" value="Upload Photo" (change)="imageSelectedl($event)" style="width: 0px; height: 0px; overflow: hidden" />
                     </label>
                 </div>
@@ -64,7 +64,7 @@
 
         <h2 class="form text-center">Datos Representante</h2>
         <div class="col-md-6">
-            <label for="cedula" class="form-label-p"> Cedula</label>
+            <label for="cedula" class="form-label-p"> Cédula</label>
             <input id="cedula" type="text" class="form-control" name="cedula" maxlength="10" [(ngModel)]="persona.cedula" [pKeyFilter]="'int'" (keypress)="onKeyPress($event)"  required/>
         </div>
         <div class="col-md-6">
@@ -80,11 +80,11 @@
             <input id="fechaNacimiento" type="date" class="form-control" name="fechaNacimiento" [(ngModel)]="persona.fechaNacimiento" required/>
         </div>
         <div class="col-md-6">
-            <label for="direccion" class="form-label-p"> Direccion</label>
+            <label for="direccion" class="form-label-p"> Dirección</label>
             <input id="direccion" type="text" class="form-control" name="direccion" maxlength="30" [(ngModel)]="persona.direccion" [pKeyFilter]="letrasEspaceNumbers" required/>
         </div>
         <div class="col-md-6">
-            <label for="genero" class="form-label-p"> Genero</label>
+            <label for="genero" class="form-label-p"> Género</label>
             <select id="genero" class="form-control" name="genero" [(ngModel)]="persona.genero" required>
                 <option value="" disabled selected>Selecciona un género</option>
                 <option value="masculino">Masculino</option>
@@ -93,7 +93,7 @@
             </select>
         </div>
         <div class="col-md-6">
-            <label for="telefono" class="form-label-p"> Telefono</label>
+            <label for="telefono" class="form-label-p"> Teléfono</label>
             <input id="telefono" type="text" class="form-control" name="telefono" maxlength="7" [(ngModel)]="persona.telefono" [pKeyFilter]="'int'" (keypress)="onKeyPress($event)"  required/>
             
         </div>

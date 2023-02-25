@@ -30,7 +30,7 @@
                             [(ngModel)]="usuario.password" [pKeyFilter]="'alphanum'" maxlength="15" minlength="5"
                             placeholder="**************" />
                         <i class="input-icon uil uil-eye-slash showHidePw"></i>
-                        <small id="password-help">Ingresa mas de 5 digitos</small>
+                        <small id="password-help">Ingresa más de 5 dígitos</small>
                     </div>
 
                     <div class="d-grid text-center">
@@ -44,7 +44,7 @@
                     </ng-container> -->
 
                     <div class="my3 text-center p-1">
-                        <span>Aun no tienes cuenta? <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Registrate aqui</a></span><br>
+                        <span>Aún no tienes cuenta? <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Registrate aquí</a></span><br>
                     </div>
                     <div class="my3">
                         <br>
@@ -72,7 +72,7 @@
                             <h5 class="titulo" id="titulo"  style="text-align: center; padding: 25px;" >FORMULARIO DE REGISTRO</h5>
                             <form class="row g-2">
                                 <div  class="col-md-6">
-                                    <label for="cedula" class="form-label-p"> Cedula</label>
+                                    <label for="cedula" class="form-label-p"> Cédula</label>
                                     <!-- <input type="text" class="form-control" name="cedula" pInputText pKeyFilter="alpha" [(ngModel)]="persona.cedula"> -->
                                     <input id="cedula" type="text" name="cedula" maxlength="10" pInputText [(ngModel)]="persona.cedula" [pKeyFilter]="'int'">
                                 </div>
@@ -91,11 +91,11 @@
                                     <p-calendar type="date" class="fecha" name="fechaNacimiento" [(ngModel)]="persona.fechaNacimiento" [showIcon]="true" inputId="icon"></p-calendar>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="direccion" class="form-label-p"> Direccion</label>
+                                    <label for="direccion" class="form-label-p"> Dirección</label>
                                     <input type="text" class="form-control" name="direccion" maxlength="50" pInputText [(ngModel)]="persona.direccion" [pKeyFilter]="letrasEspaceNumbers">
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="genero" class="form-label-p"> Genero</label>
+                                    <label for="genero" class="form-label-p"> Género</label>
                                     <p-dropdown id="genero" name="genero" [options]="generos" [(ngModel)]="persona.genero" placeholder="Selecciona un género" [showClear]="true"></p-dropdown>
                                     <!-- <select id="genero" class="form-control" id="genero" [(ngModel)]="persona.genero">
                                         <option value="" disabled selected>Selecciona un género</option>
@@ -105,7 +105,7 @@
                                     </select> -->
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="telefono" class="form-label-p"> Telefono</label>
+                                    <label for="telefono" class="form-label-p"> Teléfono</label>
                                     <input type="text" class="form-control" name="telefono" maxlength="7" pInputText [(ngModel)]="persona.telefono" [pKeyFilter]="'int'">
                                 </div>
                                 <div class="col-md-6">

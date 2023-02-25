@@ -13,7 +13,7 @@
     <form class="row  needs-validation g-2 d-flex justify-content-center" novalidate>
         <h2 class="form text-center">Datos del Voluntario</h2>
         <div class="col-12">
-            <label for="cedula" class="form-label-p"> Cedula</label>
+            <label for="cedula" class="form-label-p"> Cédula</label>
             <input id="cedula" type="text" class="form-control" name="cedula"
             maxlength="10" [(ngModel)]="persona.cedula" [pKeyFilter]="'int'" (keypress)="onKeyPress($event)" required> 
         </div>
@@ -32,7 +32,7 @@
             <input id="fechaNacimiento" type="date" class="form-control" name="fechaNacimiento" [(ngModel)]="persona.fechaNacimiento" required>
         </div>
         <div class="col-6">
-            <label for="genero" class="form-label-p"> Genero</label>
+            <label for="genero" class="form-label-p"> Género</label>
             <select id="genero" class="form-control" name="genero" [(ngModel)]="persona.genero" required>
                 <option value="" disabled selected>Selecciona un género</option>
                 <option value="masculino">Masculino</option>
@@ -41,12 +41,12 @@
             </select>
         </div>
         <div class="col-12">
-            <label for="direccion" class="form-label-p"> Direccion</label>
+            <label for="direccion" class="form-label-p"> Dirección</label>
             <input id="direccion" type="text" class="form-control" name="direccion" 
             maxlength="30"  [(ngModel)]="persona.direccion" [pKeyFilter]="letrasEspaceNumbers" required>
         </div>
         <div class="col-md-6">
-            <label for="telefono" class="form-label-p"> Telefono</label>
+            <label for="telefono" class="form-label-p"> Teléfono</label>
             <input id="telefono" type="text" class="form-control" name="telefono" 
             maxlength="7" [(ngModel)]="persona.telefono" [pKeyFilter]="'int'" (keypress)="onKeyPress($event)"  required>
         </div>
@@ -64,8 +64,8 @@
             <label for="areatrabajo" class="form-label-p">Área de Trabajo</label>
             <select id="areatrabajo" class="form-control" name="areatrabajo" [(ngModel)]="voluntario.area_trabajo" required>
                 <option value="" disabled selected>Selecciona área de trabajo</option>
-                <option value="Clinica">Clinica</option>
-                <option value="Peluqueria">Peluqueria</option>
+                <option value="Clinica">Clínica</option>
+                <option value="Peluqueria">Peluquería</option>
                 <option value="otro">Otro</option>
             </select>
         </div>

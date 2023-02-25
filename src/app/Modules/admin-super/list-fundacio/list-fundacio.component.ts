@@ -334,6 +334,33 @@ export class ListFundacioComponent implements OnInit {
 
     pdfMake.createPdf(documentDefinition).open();
   }
+  //Validar Campos
+  // ValidarCampos() {
+  //   console.log("ya esta activo")
+  //   document.addEventListener('DOMContentLoaded', () => {
+  //     const forms = document.querySelectorAll('.needs-validation') as NodeListOf<HTMLFormElement>;
+  //     Array.from(forms).forEach(form => {
+  //       form.addEventListener('submit', (event: Event) => {
+  //         if (!form.checkValidity()) {
+  //           event.preventDefault();
+  //           event.stopPropagation();
+  //         }
+  //         form.classList.add('was-validated');
+  //       });
+  //     });
+  //   });
+  // }
+
+  limpiarFormulario() {
+    const forms = document.querySelectorAll('.needs-validation') as NodeListOf<HTMLFormElement>;
+    Array.from(forms).forEach(form => {
+      form.classList.remove('was-validated');
+      form.querySelectorAll('.ng-invalid, .ng-dirty').forEach((input) => {
+        input.classList.remove('ng-invalid', 'ng-dirty');
+      });
+      form.reset();
+    });
+  }
 
 
 }

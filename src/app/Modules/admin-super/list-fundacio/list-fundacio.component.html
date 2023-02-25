@@ -86,18 +86,18 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="nombre_fundacion" class="form-label-p"> Nombre Fundacion</label>
-                                <input type="text" class="form-control" name="nombre_fundacion"
-                                maxlength="25" [(ngModel)]="fundacion.nombre_fundacion" [pKeyFilter]="letrasEspace"> 
+                                <input type="text" class="form-control" id="nombre_fundacion" name="nombre_fundacion"
+                                maxlength="25" [(ngModel)]="fundacion.nombre_fundacion" [pKeyFilter]="letrasEspace" required> 
                             </div>
                             <div class="col-md-6">
-                                <label for="acronimo" class="form-label-p"> Acronimo</label>
-                                <input type="text" class="form-control" name="acronimo"
-                                maxlength="8" [(ngModel)]="fundacion.acronimo" [pKeyFilter]="letrasEspace">
+                                <label for="" class="form-label-p"> Acronimo</label>
+                                <input type="text" class="form-control" id="acronimo" name="acronimo"
+                                maxlength="8" [(ngModel)]="fundacion.acronimo" [pKeyFilter]="letrasEspace" required>
                             </div>
                             <div class="col-md-6">
                                 <label for="mision" class="form-label-p"> Mision</label>
                                 <input type="text" class="form-control" name="mision" 
-                                maxlength="30" [(ngModel)]="fundacion.mision" [pKeyFilter]="letrasEspace">
+                                maxlength="150" [(ngModel)]="fundacion.mision" [pKeyFilter]="letrasEspace">
                             </div>
                             <div class="col-12">
                                 <label for="direccion" class="form-label-p"> Direccion</label>

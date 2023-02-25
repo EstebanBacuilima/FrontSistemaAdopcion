@@ -220,8 +220,8 @@ export class ListMascotaComponent implements OnInit {
       { text: "RAZA", bold: true },
       { text: "ESPECIE", bold: true },
       { text: "ESTADO DE ADOPCIÓN", bold: true },
-      { text: "ID FUNDACIÓN", bold: true },
-      { text: "ID USUARIO", bold: true },
+      // { text: "ID FUNDACIÓN", bold: true },
+      // { text: "ID USUARIO", bold: true },
     ]);
     this.listaMascota.forEach(mascota => {
       let fila = [];
@@ -231,8 +231,8 @@ export class ListMascotaComponent implements OnInit {
       fila.push(mascota.raza);
       fila.push(mascota.especie);
       fila.push(mascota.estado_adopcion);
-      fila.push(mascota.fundacion);
-      fila.push(mascota.usuario);
+      // fila.push(mascota.fundacion);
+      // fila.push(mascota.usuario);
       tableBody.push(fila);
     });
 

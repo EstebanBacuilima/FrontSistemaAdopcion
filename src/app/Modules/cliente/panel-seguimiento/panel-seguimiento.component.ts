@@ -115,13 +115,13 @@ export class PanelSeguimientoComponent implements OnInit {
 
   realizarSeguimiento() {
     if (!this.seguimiento.descripcion_mascota || !this.seguimiento.descripcion_visita  || !this.seguimiento.estado_comportamiento  || !this.seguimiento.estado_salud) {
-      this.toastrService.error('Uno o más campos vacios', 'Verifique los Campos de texto', {
+      this.toastrService.error('Uno o más campos vacíos', 'Verifique los campos de texto', {
         timeOut: 2000,
       });
     } else {
-      let fechaPrueba: Date = new Date();
+    let fechaPrueba: Date = new Date();
     let fechaFormateada = fechaPrueba.toISOString().substr(0,10);
-    console.log("es la fecha de hoy -> " + fechaFormateada);
+    console.log("Es la fecha de hoy -> " + fechaFormateada);
     this.seguimiento.fecha_seguimiento = fechaPrueba;
     this.seguimiento.mascota = this.mascota;
     this.seguimiento.estado = false;
@@ -131,7 +131,7 @@ export class PanelSeguimientoComponent implements OnInit {
         this.seguimientos = data
         console.log("Data cap -> " + this.seguimientos)
         if (!data) {
-          console.log("no hay datos")
+          console.log("No hay datos")
           this.cargarImagenEvidencia();
           this.seguimientoService.postSeguimiento(this.seguimiento).subscribe(
             info => {
@@ -146,7 +146,7 @@ export class PanelSeguimientoComponent implements OnInit {
           console.log("Si hay datos")
           Swal.fire({
             icon: 'error',
-            title: 'Registro del Día ya completado!',
+            title: 'Registro del día completado',
             text: 'Ya se realizo el seguimiento diario'
           })
         }

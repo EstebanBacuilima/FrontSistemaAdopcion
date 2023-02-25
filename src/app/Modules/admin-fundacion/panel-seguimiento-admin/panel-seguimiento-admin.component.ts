@@ -48,7 +48,7 @@ export class PanelSeguimientoAdminComponent implements OnInit {
         this.personas = this.usuario.persona;
       })
     } else {
-      console.log("Usuario no foun => ")
+      console.log("Usuario no encontrado => ")
     }
   }
 

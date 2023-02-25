@@ -16,7 +16,7 @@
 
                 <form action="#">
                     <div class="mb-4">
-                        <label for="username" class="form-label"> Username <i class="uil uil-user"></i></label>
+                        <label for="username" class="form-label"> Usuario <i class="uil uil-user"></i></label>
                         <input id="username" class="form-control" name="username" type="username"
                             [(ngModel)]="usuario.username" [pKeyFilter]="'alphanum'" maxlength="30" minlength="3"
                             pInputText placeholder="Ingresa tu nombre de usuario" />
@@ -24,13 +24,15 @@
 
                     </div>
                     <div class="mb-4 input-wrapper input-field">
-                        <label for="password" class="password form-label"> Password <i
+                        <label for="password" class="password form-label"> Contraseña <i
                                 class="uil uil-lock icon"></i></label>
                         <input id="password" class="password form-control" name="password" type="password"
                             [(ngModel)]="usuario.password" [pKeyFilter]="'alphanum'" maxlength="15" minlength="5"
                             placeholder="**************" />
                         <i class="input-icon uil uil-eye-slash showHidePw"></i>
+
                         <small id="password-help">Ingresa más de 5 dígitos</small>
+
                     </div>
 
                     <div class="d-grid text-center">
@@ -44,8 +46,12 @@
                     </ng-container> -->
 
                     <div class="my3 text-center p-1">
-                        <span>Aún no tienes cuenta? <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Registrate aquí</a></span><br>
+
+                        <span>¿Aún no tienes cuenta? <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Registrate aquí</a></span><br>
+                        <span>¿Olvidó su contraseña? <a href="#" data-bs-toggle="modal" data-bs-target="#examplePassword">Click aquí</a></span><br>
+
                     </div>
+                    
                     <div class="my3">
                         <br>
                         <br>
@@ -87,7 +93,7 @@
                                     <input type="text" class="form-control" name="apellidos"  maxlength="30" pInputText [(ngModel)]="persona.apellidos" [pKeyFilter]="letrasEspace">
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="fechaNacimiento" class="form-label-p"> Fecha De Nacimiento</label>
+                                    <label for="fechaNacimiento" class="form-label-p"> Fecha de nacimiento</label>
                                     <p-calendar type="date" class="fecha" name="fechaNacimiento" [(ngModel)]="persona.fechaNacimiento" [showIcon]="true" inputId="icon"></p-calendar>
                                 </div>
                                 <div class="col-md-6">
@@ -109,7 +115,7 @@
                                     <input type="text" class="form-control" name="telefono" maxlength="7" pInputText [(ngModel)]="persona.telefono" [pKeyFilter]="'int'">
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="celular" class="form-label-p"> Celular</label>
+                                    <label for="celular" class="form-label-p"> Célular</label>
                                     <p-inputMask mask="0999999999"  name="celular" [(ngModel)]="persona.celular"></p-inputMask>
                                     <!-- <input type="text" class="form-control" name="celular" maxlength="10" pInputText [(ngModel)]="persona.celular"> -->
                                 </div>
@@ -119,7 +125,7 @@
                                     <!-- <input type="email" class="form-control" name="correo" [(ngModel)]="persona.correo"> -->
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="username" class="form-label-p"> Username</label>
+                                    <label for="username" class="form-label-p"> Usuario</label>
                                     <input type="text" class="form-control" name="username" maxlength="15" pInputText [(ngModel)]="usuario.username">
                                 </div>
                                 <div class="col-md-6">
@@ -129,7 +135,7 @@
                                         [(ngModel)]="usuario.password"> -->
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="password" class="form-label-p"> Repita su Contraseña</label>
+                                    <label for="password" class="form-label-p"> Repita su contraseña</label>
                                     <p-password name="password" [(ngModel)]="verficarPassword" [toggleMask]="true"></p-password>
                                     <!-- <input type="password" class="password form-control" name="password"
                                         [(ngModel)]="verficarPassword"> -->
@@ -155,6 +161,48 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)=" limpiarCampos()">Cancelar</button>
                     <button type="button" class="btn btn-primary" (click)="registrarUsuario()">Registrarse</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="examplePassword" tabindex="-5" aria-labelledby="examplePassword" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="text-align: center;">
+                    <button type="button" (click)="limpiarRecuContra()" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="closeModal"></button>
+                </div>
+                <div class="container w-75 mt-25 me-25 mt-5 shadown">
+                    <div class="row align-items-strech">
+                        <div class="col bg-white mt-25 p-25 grid p-fluid ">
+
+                            <h5 class="titulo" id="titulo"  style="text-align: center; padding: 25px;" >Recuperación de constraseña</h5>
+                            <form class="row g-2">
+                                <div  class="col-md-12" *ngIf='activarPassword == false'>
+                                    <label for="cedula" class="form-label-p"> Cédula</label>
+                                    <input id="cedula" type="text" name="cedula" maxlength="10" pInputText [(ngModel)]="cedulaValidar" [pKeyFilter]="'int'">
+                                </div>
+                                <button *ngIf='activarPassword == false' type="button" class="btn btn-primary" (click)="validarCedula()">Validar</button>
+                                <h5 *ngIf='activarPassword == true' class="titulo" id="titulo"  style="text-align: center; padding: 25px;" >Usuario: {{usuario.username}} </h5>
+                                <div class="col-md-6" *ngIf='activarPassword == true' >
+                                    <label for="password" class="form-label-p"> Contraseña</label>
+                                    <p-password name="password" [(ngModel)]="usuario.password" [toggleMask]="true"></p-password>
+                                </div>
+                                <div class="col-md-6" *ngIf='activarPassword == true' >
+                                    <label for="password" class="form-label-p"> Repita su contraseña</label>
+                                    <p-password name="password" [(ngModel)]="verficarPassword" [toggleMask]="true"></p-password>
+                                </div>      
+                                <button *ngIf='activarPassword == true' type="button" class="btn btn-primary" (click)="cambiarConstra()">Cambiar constraseña</button>     
+                                <div class="col-md-6" style="padding-bottom: 30px;">
+                                </div>           
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="limpiarRecuContra()">Cancelar</button>
                 </div>
             </div>
         </div>

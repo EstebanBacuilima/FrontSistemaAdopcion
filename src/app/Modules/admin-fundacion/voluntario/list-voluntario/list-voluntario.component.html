@@ -22,7 +22,9 @@
                         <th scope="col">Nombres</th>
                         <th scope="col">Dirección</th>
                         <th scope="col">Teléfono</th>
-                        <th scope="col">Área de Trabajo</th>
+
+                        <th scope="col">Área de trabajo</th>
+
                         <th scope="col">Cargo</th>
                         <th scope="col">&nbsp;</th>
                         <th scope="col">&nbsp;</th>
@@ -48,9 +50,8 @@
                             </button>
                         </td>
                         <td>
-                            <button class="btn btn-danger">
-                                <i class="pi pi-times"></i>
-                            </button>
+                            <button *ngIf='voluntario.estado == true' (click)=" desactivarVoluntario(voluntario.idVoluntario)"  class="btn btn-danger"><i class="pi pi-times"></i></button>
+                            <button *ngIf='voluntario.estado == false' (click)=" activarVoluntario(voluntario.idVoluntario)"  class="btn btn-success"><i class="pi pi-power-off"></i></button>
                         </td>
                     </tr>
                 </tbody>
@@ -58,6 +59,12 @@
         </div>
         <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
     </div>
+    <div class="contendor p-25" style="text-align: center; padding-bottom: 8px;">
+        <!-- <button pButton type="button" (click)="generarPDF()" style="background-color: red;" label="Generar Reporte" icon="pi pi-file-pdf"></button> -->
+        <button type="button" style="background-color: red;" class="btn btn-primary" (click)="openPdfTables()"><i class="pi pi-file-pdf"></i> Generar Reporte</button>
+        <!-- <button pButton type="button" (click)="openPdfTables()"  label="Generar Reporte" icon="pi pi-file-pdf"></button> -->
+    </div>
+
     <h2 class="form-titulo text-center">.</h2>
 </div>
 
@@ -97,7 +104,7 @@
                             </div>
                             <div class="col-6">
                                 <label for="fechaNacimiento" class="form-label-p">
-                                    Fecha De Nacimiento</label>
+                                    Fecha de nacimiento</label>
                                 <input type="date" class="form-control" name="fechaNacimiento"
                                     [(ngModel)]="persona.fechaNacimiento" />
                             </div>
@@ -109,7 +116,7 @@
                                     </option>
                                     <option value="masculino">Masculino</option>
                                     <option value="famenino">Femenino</option>
-                                    <option value="otro">Otro</option>
+                                    <option value="otro">Sin especificar</option>
                                 </select>
                             </div>
                             <div class="col-12">
@@ -156,7 +163,7 @@
                                 </select>
                             </div> -->
                             <div class="col-12">
-                                <label for="username" class="form-label-p"> Username</label>
+                                <label for="username" class="form-label-p"> Usuario</label>
                                 <input type="text" class="form-control" name="username"
                                 maxlength="30"  [(ngModel)]="usuario.username" />
                             </div>

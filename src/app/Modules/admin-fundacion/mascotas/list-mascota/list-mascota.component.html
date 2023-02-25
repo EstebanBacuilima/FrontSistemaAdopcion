@@ -39,24 +39,30 @@
             <td>{{mascota.especie}}</td>
             <!-- <td>{{mascota.descripcion}}</td> -->
             <td style="text-align: center;">
-              <div *ngIf='obtenerEstado(mascota.estado_adopcion) === "NOADOPTAOD"'><b style="text-align: center; color: orange;"><i class="pi pi-thumbs-down-fill"></i></b></div>
+              <div *ngIf='obtenerEstado(mascota.estado_adopcion) === "NO ADOPTADO"'><b style="text-align: center; color: orange;"><i class="pi pi-thumbs-down-fill"></i></b></div>
               <div *ngIf='obtenerEstado(mascota.estado_adopcion) === "ADOPTADO"'><b style="color: rgb(77, 255, 0);"><i class="pi pi-thumbs-up-fill"></i></b></div>
             </td>
             <td>
               <button (click)="capParaEdicion(mascota.idMascota)" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalUpdate"><i class="pi pi-pencil"></i></button>
             </td>
-          <td>
-              <button class="btn btn-danger"><i class="pi pi-times"></i></button>
-              <!-- <button *ngIf='mascota.estado == true' class="btn btn-danger"><i class="pi pi-times"></i></button> -->
-              <!-- <button *ngIf='mascota.estado == false' (click)=" ativarFundacion(fundacion.idFundacion)"  class="btn btn-success"><i class="pi pi-power-off"></i></button> -->
-          </td>
+            <td>
+              <button *ngIf='mascota.estado == true' (click)=" descativarMascota(mascota.idMascota)"  class="btn btn-danger"><i class="pi pi-times"></i></button>
+              <button *ngIf='mascota.estado == false' (click)=" ativarMascota(mascota.idMascota)"  class="btn btn-success"><i class="pi pi-power-off"></i></button>
+            </td>
         </tbody>
       </table>
     </div>
     <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
   </div>
+
+  <div class="contendor p-25" style="text-align: center; padding-bottom: 8px;">
+    <!-- <button pButton type="button" (click)="generarPDF()" style="background-color: red;" label="Generar Reporte" icon="pi pi-file-pdf"></button> -->
+    <button type="button" style="background-color: red;" class="btn btn-primary" (click)="openPdfTables()"><i class="pi pi-file-pdf"></i> Generar Reporte</button>
+    <!-- <button pButton type="button" (click)="openPdfTables()"  label="Generar Reporte" icon="pi pi-file-pdf"></button> -->
+  </div>
   <h2 class="form-titulo text-center">.</h2>
 </div>
+
 
 <!-- Modal -->
 <div class="modal " id="modalUpdate" tabindex="-5" aria-labelledby="modalUpdateLabel" aria-hidden="true">
@@ -99,7 +105,6 @@
                   <option value="" disabled selected>Selecciona un sexo</option>
                   <option value="Macho">Macho</option>
                   <option value="Hembra">Hembra</option>
-                  <option value="otro">Otro</option>
                 </select>
               </div>
               <div class="col-md-6">

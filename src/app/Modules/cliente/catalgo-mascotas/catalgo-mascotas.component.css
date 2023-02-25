@@ -1,52 +1,80 @@
-/* Estilos de Macota */
 .container-fluid {
     margin-top: 30px;
 }
 
-.box {
+/* NEUVO */
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+
+.container {
+    max-width: 1376px;
+    margin: auto;
+    padding: 2rem 1.5rem;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.card {
+    cursor: pointer;
+    background-color: transparent;
     height: 300px;
-    width: 300px;
-    background-color: lightblue;
+    perspective: 1000px;
+    margin: 1rem;
+}
+
+.card h3 {
+    border-bottom: 1px #fff solid;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 1.6rem;
+    word-spacing: 3px;
+}
+
+.card p {
+    opacity: 0.75;
+    font-size: 0.8rem;
+    line-height: 1.4;
+}
+
+.card img {
+    width: 360px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 3px;
+}
+
+.card-inner {
     position: relative;
-    overflow: hidden;
-    border-radius: 10px;
-}
-
-.modal-dialog {
-    max-width: 1350px !important
-}
-
-.box img {
-    width: 100%;
-    height: 100%
-}
-
-.content {
-    background-color: black;
-    color: white;
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
+    width: 360px;
     height: 100%;
-    transition: all 0.7s;
-    opacity: 0.7
+    transition: transform 0.9s;
+    transform-style: preserve-3d;
 }
 
-.box:hover .content {
-    left: 0
+.card:hover .card-inner {
+    transform: rotateY(180deg);
 }
 
-.content h3 {
-    text-align: center;
-    border-bottom: 1px solid white;
-
-
+.card-front,
+.card-back {
+    position: absolute;
+    width: 360px;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
-.content p {
-    text-align: center;
-    padding-top: 5px;
+.card-back {
+    background-color: #222;
+    color: #fff;
+    padding: 1.5rem;
+    transform: rotateY(180deg);
 }
 
 
@@ -83,6 +111,9 @@
 
 /* FOMRULARIO */
 
+.modal-dialog {
+    max-width: 1350px !important
+}
 
 .form-title {
     color: #a9b7e2;
@@ -125,13 +156,13 @@
 
 .form-input {
     position: relative;
-    width:100%;
+    width: 100%;
 }
 
 .form-input input,
 .form-input textarea {
     position: relative;
-    width:100%;
+    width: 100%;
     padding: 8px 0px;
     outline: 1px solid transparent;
     border: 1px solid transparent;
@@ -141,7 +172,7 @@
     color: #2c3638;
 }
 
-.form-controll label  {
+.form-controll label {
     position: absolute;
     left: 0px;
     bottom: 10px;
@@ -151,10 +182,10 @@
     transition: all 0.1s ease-in;
 }
 
-input:focus + label,
-input:valid + label,
-textarea:focus + label,
-textarea:valid + label {
+input:focus+label,
+input:valid+label,
+textarea:focus+label,
+textarea:valid+label {
     bottom: 100%;
     z-index: 9;
     transition: all 0.1s ease-in-out;
@@ -172,12 +203,12 @@ input:focus {
 
 .form-submit {
     position: relative;
-    width:100%;
+    width: 100%;
     margin: 14px 0px;
 }
 
 .form-submit .form-btn {
-    width:100%;
+    width: 100%;
     padding: 8px;
     background: #a9b7e2;
     font-weight: 500;
@@ -202,7 +233,7 @@ input:focus {
 
 .grid-2 {
     position: relative;
-    width:100%;
+    width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 30px;
@@ -269,6 +300,7 @@ input:focus {
     align-items: center;
     align-content: center;
 }
+
 .perfil-usuario-avatar img {
     width: 180px;
     height: 180px;

@@ -146,7 +146,7 @@
                                 maxlength="30" [(ngModel)]="persona.apellidos" [pKeyFilter]="letrasEspace" >
                             </div>
                             <div class="col-6">
-                                <label for="fechaNacimiento" class="form-label-p"> Fecha De Nacimiento</label>
+                                <label for="fechaNacimiento" class="form-label-p"> Fecha de nacimiento</label>
                                 <input type="date" class="form-control" name="fechaNacimiento"
                                     [(ngModel)]="persona.fechaNacimiento">
                             </div>
@@ -161,7 +161,7 @@
                                     <option value="" disabled selected>Selecciona un género</option>
                                     <option value="masculino">Masculino</option>
                                     <option value="famenino">Femenino</option>
-                                    <option value="otro">Otro</option>
+                                    <option value="otro">Sin especificar</option>
                                 </select>
                             </div>
                             <div class="col-md-6">
@@ -179,7 +179,7 @@
                                 <input type="email" class="form-control" name="correo" [(ngModel)]="persona.correo">
                             </div>
                             <div class="col-md-6">
-                                <label for="username" class="form-label-p"> Username</label>
+                                <label for="username" class="form-label-p"> Usuario</label>
                                 <input type="text" class="form-control" name="username" 
                                 maxlength="30" [(ngModel)]="usuario.username">
                             </div>

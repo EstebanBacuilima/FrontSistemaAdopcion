@@ -25,9 +25,9 @@ export class ListFundacioComponent implements OnInit {
   // letras y espacios
   letrasEspace: RegExp = /^[a-zA-Z\s]+$/;
   letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\s]+$/;
-    // letrasEspace: RegExp = /^[a-zA-Z0-9\s^!#$%&*]+$/;
-    // letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\s^!#$%&*-]+$/;
-    
+  // letrasEspace: RegExp = /^[a-zA-Z0-9\s^!#$%&*]+$/;
+  // letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\s^!#$%&*-]+$/;
+
 // Validar que no igrese Guion medio
     onKeyPress(event: KeyboardEvent) {
       if (event.key === '-') {
@@ -146,18 +146,26 @@ export class ListFundacioComponent implements OnInit {
   }
 
   idFundacionDelete: any;
+  isUsuarioDesactivar: any;
 
   descativarFundacion(idFundacion: any) {
     this.fundacionService.getPorId(idFundacion).subscribe(data => {
       this.fundacion = data
       this.idFundacionDelete = this.fundacion.idFundacion;
       console.log("ES LA ID -> " + this.idFundacionDelete);
+      this.isUsuarioDesactivar =  this.fundacion.persona.idPersona;
       this.fundacion.estado = false;
-      this.fundacionService.updateFundacion(this.fundacion, idFundacion).subscribe(data => {
-        console.log(data)
-        this.obtenerFundaciones();
-        this.toastrService.warning('La fundaciona sido desactivada!', 'Fundacion Desactivada!', {
-          timeOut: 4000,
+      this.fundacionService.descativarFundacion(this.fundacion, idFundacion).subscribe(data => {
+        this.usuarioService.getPorIdPersona(this.isUsuarioDesactivar).subscribe(dataUsuario => {
+          this.usuario = dataUsuario
+          this.usuario.idUsuario = dataUsuario.idUsuario;
+          this.usuario.estado = false;
+          this.usuarioService.descativarUsuario(this.usuario, this.isUsuarioDesactivar).subscribe(data => { 
+            this.obtenerFundaciones();
+            this.toastrService.warning('La fundación ha sido desactivada!', 'Fundación Desactivada!', {
+              timeOut: 4000,
+            });
+          })
         });
       })
     })
@@ -168,12 +176,19 @@ export class ListFundacioComponent implements OnInit {
       this.fundacion = data
       this.idFundacionDelete = this.fundacion.idFundacion;
       console.log("ES LA ID -> " + this.idFundacionDelete);
+      this.isUsuarioDesactivar =  this.fundacion.persona.idPersona;
       this.fundacion.estado = true;
-      this.fundacionService.updateFundacion(this.fundacion, idFundacion).subscribe(data => {
-        console.log(data)
-        this.obtenerFundaciones();
-        this.toastrService.success('La fundacion se ha habilitado', 'Fundacion Activada', {
-          timeOut: 1000,
+      this.fundacionService.descativarFundacion(this.fundacion, idFundacion).subscribe(data => {
+        this.usuarioService.getPorIdPersona(this.isUsuarioDesactivar).subscribe(dataUsuario => {
+          this.usuario = dataUsuario
+          this.usuario.idUsuario = dataUsuario.idUsuario;
+          this.usuario.estado = true;
+          this.usuarioService.descativarUsuario(this.usuario, this.isUsuarioDesactivar).subscribe(data => { 
+            this.obtenerFundaciones();
+            this.toastrService.success('La fundación se ha habilitado', 'Fundación Activada', {
+              timeOut: 1000,
+            });
+          })
         });
       })
     })
@@ -232,12 +247,14 @@ export class ListFundacioComponent implements OnInit {
 
 
   fechaAct: Date =new Date();
+
   // PDF
+
   generarPDF() {
     const data = this.listaFundaciones;
     const body = [];
 
-    body.push(["ID", "RUC", "NOMBRE FUDACION", "ACRO", "MISION", "DIRECCION", "CORREO", "TELEFONO"]);
+    body.push(["ID", "RUC", "NOMBRE FUDACIÓN", "ACRÓNIMO", "MISIÓN", "DIRECCIÓN", "CORREO", "TELÉFONO"]);
 
     data.forEach(fundacion => {
       body.push([fundacion.idFundacion, fundacion.ruc, fundacion.nombre_fundacion, fundacion.acronimo, fundacion.mision, fundacion.direccion, fundacion.correo, fundacion.telefono]);
@@ -257,15 +274,17 @@ export class ListFundacioComponent implements OnInit {
         text: 'Tables',
         bold: true,
         fontSize: 8,
-        color: "#000",
+        color: "#a9cbff",
+        background: 'lightblue',
         font: "Roboto-Regular.ttf",
         margin: [0, 20, 0, 10]
       },
       tableHeader: {
         bold: true,
         fontSize: 5,
-        color: "#000",
-        fillColor: '#eeffee',
+        color: "#a9cbff",
+        background: 'lightblue',
+        fillColor: '#a9cbff',
         font: "Roboto-Regular.ttf"
       },
     };
@@ -293,17 +312,21 @@ export class ListFundacioComponent implements OnInit {
     pdfMake.createPdf(documentDefinition).open();
   }
 
+
   openPdfTables() {
+    let fechaPrueba: Date = new Date();
+    let fechaFormateada = fechaPrueba.toISOString().substr(0,10);
+    console.log("es la fecha de hoy -> " + fechaFormateada);
     let tableBody = [];
     tableBody.push([
-      { text: "ID", bold: true },
-      { text: "RUC", bold: true },
-      { text: "FUNDACION", bold: true },
-      { text: "ACRONIMO", bold: true },
-      { text: "MISION", bold: true },
-      { text: "DIRECCION", bold: true },
-      { text: "CORREO", bold: true },
-      { text: "TELEFONO", bold: true },
+      { text: "ID", bold: true, background: 'lightblue' },
+      { text: "RUC", bold: true, background: 'lightblue'},
+      { text: "FUNDACIÓN", bold: true, background: 'lightblue'},
+      { text: "ACRÓNIMO", bold: true, background: 'lightblue'},
+      { text: "MISIÓN", bold: true, background: 'lightblue'},
+      { text: "DIRECCIÓN", bold: true, background: 'lightblue'},
+      { text: "CORREO", bold: true, background: 'lightblue'},
+      { text: "TELÉFONO", bold: true, background: 'lightblue'},
     ]);
     this.listaFundaciones.forEach(fundacion => {
       let fila = [];
@@ -325,6 +348,13 @@ export class ListFundacioComponent implements OnInit {
           fontSize: 10,
           style: "header",
           alignment: 'right',
+          fillColor: 'violet'
+        },
+        {
+          text: fechaFormateada,
+          fontSize: 10,
+          style: "header",
+          alignment: 'left',
           fillColor: 'violet'
         },
         "-----------------------------------------------------------------------------------------------------------------------------------------------------------",
@@ -359,10 +389,11 @@ export class ListFundacioComponent implements OnInit {
             layout: 'landscape',
             fontSize: 5,
             headerRows: 1,
-            widths: [12, 65, 70, 65, 67, 65, 65, 64],
+            widths: [12, 65, 70, 65, 67, 65, 65, 60],
             body: tableBody
           }
         }
+        
       ],
       styles: {
         header: {

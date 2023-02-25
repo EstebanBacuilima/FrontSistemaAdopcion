@@ -22,7 +22,8 @@
             <input type="text" class="form-control" id="ruc" name="ruc" maxlength="13" [(ngModel)]="fundacion.ruc" [pKeyFilter]="'int'" (keypress)="onKeyPress($event)" required/>
         </div>
         <div class="col-md-6">
-            <label for="nombre_fundacion" class="form-label-p">Nombre Fundación</label>
+
+            <label for="nombre_fundacion" class="form-label-p">Nombre fundación</label>
             <input  type="text" class="form-control"  id="nombre_fundacion" name="nombre_fundacion"  maxlength="25" [(ngModel)]="fundacion.nombre_fundacion" [pKeyFilter]="letrasEspace" required/>
         </div>
         <div class="col-md-6">
@@ -51,7 +52,8 @@
                     <div class="imagePreview" *ngIf="filem">
                         <img [src]="filem" class="imagePreview" alt="..." />
                     </div>
-                    <label class="btn btn-primarys rounded-mid">Logo Fundación
+                    <label class="btn btn-primarys rounded-mid">Logo fundación
+
                         <input type="file" class="uploadFile img" value="Upload Photo" (change)="imageSelectedl($event)" style="width: 0px; height: 0px; overflow: hidden" />
                     </label>
                 </div>
@@ -76,7 +78,7 @@
             <input id="apellidos" type="text" class="form-control" name="apellidos" maxlength="30" [(ngModel)]="persona.apellidos" [pKeyFilter]="letrasEspace" required/>
         </div>
         <div class="col-12">
-            <label for="fechaNacimiento" class="form-label-p">Fecha De Nacimiento</label>
+            <label for="fechaNacimiento" class="form-label-p">Fecha de nacimiento</label>
             <input id="fechaNacimiento" type="date" class="form-control" name="fechaNacimiento" [(ngModel)]="persona.fechaNacimiento" required/>
         </div>
         <div class="col-md-6">
@@ -89,7 +91,7 @@
                 <option value="" disabled selected>Selecciona un género</option>
                 <option value="masculino">Masculino</option>
                 <option value="famenino">Femenino</option>
-                <option value="otro">Otro</option>
+                <option value="otro">Sin especificar</option>
             </select>
         </div>
         <div class="col-md-6">
@@ -101,21 +103,21 @@
             <label for="celular" class="form-label-p"> Celular</label>
             <input id="cedular" type="text" class="form-control" name="celular" maxlength="10" [(ngModel)]="persona.celular" [pKeyFilter]="'int'" (keypress)="onKeyPress($event)"  required/>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-12">
             <label for="correo" class="form-label-p"> Correo</label>
             <input id="correo" type="email" class="form-control" name="correo" [(ngModel)]="persona.correo" class={{verfCorreo2}}  (ngModelChange)="validarCorreo2()" required/>
         </div>
-        <div class="col-md-6">
-            <label for="username" class="form-label-p"> Username</label>
-            <input id="username" type="text" class="form-control" name="username" maxlength="30" [(ngModel)]="usuario.username" required/>
+        <div class="col-md-4">
+            <label for="username" class="form-label-p"> Usuario</label>
+            <input id="username" type="text" class="form-control datosUser" name="username" maxlength="30" [(ngModel)]="usuario.username" required/>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
             <label for="password" class="form-label-p"> Contraseña <i class="uil uil-eye-slash showHidePw"></i></label>
-            <input id="password" type="password" class="password form-control" name="password" [(ngModel)]="usuario.password" required/>
+            <input id="password" type="password" class="password form-control datosUser" name="password" [(ngModel)]="usuario.password" required/>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
             <label for="password" class="form-label-p"> Repita su Contraseña</label>
-            <input id="password" type="password" class="password form-control" name="password" [(ngModel)]="verficarPassword" required/>
+            <input id="password" type="password" class="password form-control datosUser" name="password" [(ngModel)]="verficarPassword" required/>
         </div>
         <div class="foto">
             <div class="roww">

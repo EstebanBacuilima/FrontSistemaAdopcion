@@ -151,7 +151,7 @@ export class ListFundacioComponent implements OnInit {
           this.usuario.estado = false;
           this.usuarioService.descativarUsuario(this.usuario, this.isUsuarioDesactivar).subscribe(data => { 
             this.obtenerFundaciones();
-            this.toastrService.warning('La fundaciona sido desactivada!', 'Fundacion Desactivada!', {
+            this.toastrService.warning('La fundación ha sido desactivada!', 'Fundación Desactivada!', {
               timeOut: 4000,
             });
           })
@@ -174,7 +174,7 @@ export class ListFundacioComponent implements OnInit {
           this.usuario.estado = true;
           this.usuarioService.descativarUsuario(this.usuario, this.isUsuarioDesactivar).subscribe(data => { 
             this.obtenerFundaciones();
-            this.toastrService.success('La fundacion se ha habilitado', 'Fundacion Activada', {
+            this.toastrService.success('La fundación se ha habilitado', 'Fundación Activada', {
               timeOut: 1000,
             });
           })
@@ -238,20 +238,84 @@ export class ListFundacioComponent implements OnInit {
   fechaAct: Date =new Date();
 
   // PDF
+
+  generarPDF() {
+    const data = this.listaFundaciones;
+    const body = [];
+
+    body.push(["ID", "RUC", "NOMBRE FUDACIÓN", "ACRÓNIMO", "MISIÓN", "DIRECCIÓN", "CORREO", "TELÉFONO"]);
+
+    data.forEach(fundacion => {
+      body.push([fundacion.idFundacion, fundacion.ruc, fundacion.nombre_fundacion, fundacion.acronimo, fundacion.mision, fundacion.direccion, fundacion.correo, fundacion.telefono]);
+    });
+
+    const table = {
+      text: 'Tables',
+      headerRows: 1,
+      body,
+      layout: "lightHorizontalLines",
+      fillColor: '#eeffee',
+      widths: [12, 70, 70, 30, 70, 70, 60, 55]
+    };
+
+    const styles: any = {
+      header: {
+        text: 'Tables',
+        bold: true,
+        fontSize: 8,
+        color: "#a9cbff",
+        background: 'lightblue',
+        font: "Roboto-Regular.ttf",
+        margin: [0, 20, 0, 10]
+      },
+      tableHeader: {
+        bold: true,
+        fontSize: 5,
+        color: "#a9cbff",
+        background: 'lightblue',
+        fillColor: '#a9cbff',
+        font: "Roboto-Regular.ttf"
+      },
+    };
+
+    const cuerpo = [{
+      text: "Título del PDF",
+      style: "header",
+      margin: [0, 0, 0, 20]
+    },
+    ];
+
+    const content = [
+      {
+        cuerpo,
+        table,
+        style: "tableExample"
+      }];
+
+    const documentDefinition = {
+      content,
+      styles,
+      layout: 'lightHorizontalLines',
+    };
+
+    pdfMake.createPdf(documentDefinition).open();
+  }
+
+
   openPdfTables() {
     let fechaPrueba: Date = new Date();
     let fechaFormateada = fechaPrueba.toISOString().substr(0,10);
     console.log("es la fecha de hoy -> " + fechaFormateada);
     let tableBody = [];
     tableBody.push([
-      { text: "ID", bold: true },
-      { text: "RUC", bold: true },
-      { text: "FUNDACION", bold: true },
-      { text: "ACRONIMO", bold: true },
-      { text: "MISION", bold: true },
-      { text: "DIRECCION", bold: true },
-      { text: "CORREO", bold: true },
-      { text: "TELEFONO", bold: true },
+      { text: "ID", bold: true, background: 'lightblue' },
+      { text: "RUC", bold: true, background: 'lightblue'},
+      { text: "FUNDACIÓN", bold: true, background: 'lightblue'},
+      { text: "ACRÓNIMO", bold: true, background: 'lightblue'},
+      { text: "MISIÓN", bold: true, background: 'lightblue'},
+      { text: "DIRECCIÓN", bold: true, background: 'lightblue'},
+      { text: "CORREO", bold: true, background: 'lightblue'},
+      { text: "TELÉFONO", bold: true, background: 'lightblue'},
     ]);
     this.listaFundaciones.forEach(fundacion => {
       let fila = [];

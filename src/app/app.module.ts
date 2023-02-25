@@ -90,6 +90,7 @@ PdfMakeWrapper.setFonts(pdfFonts);
     DropdownModule,
     MatTabsModule,
     CalendarModule,
+    ReactiveFormsModule
 
   ],
   providers: [

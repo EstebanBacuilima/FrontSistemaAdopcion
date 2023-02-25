@@ -70,4 +70,7 @@ body {
     margin:0px auto;
 }
 
-/*ALERTAs */
+/*NEUVO*/
+.campo-invalido .ui-dropdown-label {
+    border: 1px solid red;
+}

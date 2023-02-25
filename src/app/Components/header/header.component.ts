@@ -178,7 +178,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
           Swal.fire({
             position: 'top-end',
             icon: 'success',
-            title: 'Perfil Actualizado Correctamente',
+            title: 'Perfil actualizado correctamente',
             showConfirmButton: false,
             timer: 1500
           })

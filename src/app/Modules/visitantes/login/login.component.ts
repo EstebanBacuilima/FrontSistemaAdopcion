@@ -8,7 +8,9 @@ import { Usuario } from 'src/app/Models/Usuario';
 import { FotoService } from 'src/app/Services/imagen.service';
 import { PersonaService } from 'src/app/Services/persona.service';
 import { UsuarioService } from 'src/app/Services/usuario.service';
-
+// NUEVOS
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -35,10 +37,10 @@ export class LoginComponent implements OnInit {
   validarCorreo() {
     this.valCorreo = this.expCorreo.test(this.persona.correo!);
     if (this.valCorreo) {
-      console.log("Correo Bueno");
-      this.verfCorreo = 'form-control is-valid';
+      console.log("Correo bueno");
+      // this.verfCorreo = 'form-control is-valid';
     } else {
-      this.verfCorreo = 'ng-invalid ng-dirty';
+      // this.verfCorreo = 'ng-invalid ng-dirty';
       console.log("Correo malo");
     }
   }
@@ -66,7 +68,8 @@ export class LoginComponent implements OnInit {
     private fotoService: FotoService,
     private toastrService: ToastrService
   ) {
-    _CargarScript.Cargar(["loginFunciones"]);
+    this.ValidarCampos();
+    _CargarScript.Cargar(["validaciones"]);
   }
 
   usuarioRol: string = "PUBLICO";
@@ -111,8 +114,10 @@ export class LoginComponent implements OnInit {
   usuarioRolCapturado: any;
   login() {
     if (!this.usuario.username || !this.usuario.password) {
+
       this.toastrService.error('Uno o más campos vacios', 'Verifique los Campos de texto', {
         timeOut: 1000,
+
       });
     } else {
       this.showSpinner = true;
@@ -121,7 +126,7 @@ export class LoginComponent implements OnInit {
           console.log(data);
           if (data != null) {
             if (data == null) {
-              this.toastrService.warning('Usuario deshabilitado!', 'Aviso!', {
+              this.toastrService.warning('Usuario deshabilitado', 'Aviso!', {
                 timeOut: 4000,
               });
             } else {
@@ -154,8 +159,8 @@ export class LoginComponent implements OnInit {
               }
             }
           } else {
-            console.log("no encontrado")
-            this.toastrService.warning('Username o password incorrectos!', 'Aviso!', {
+            console.log("No encontrado")
+            this.toastrService.warning('Usuario o contraseña incorrectos', 'Aviso!', {
               timeOut: 4000,
             });
             this.usuario = new Usuario;
@@ -198,23 +203,20 @@ export class LoginComponent implements OnInit {
   verficarPassword: any;
   cargando = false;
   registrarUsuario() {
+    this.validarGenero();
     // Agregar indicador de carga o mensaje de espera aquí
     this.cargando = true;
-
     console.log("lo q recibo ->" + this.validarEdad)
     if (!this.persona.nombres || !this.persona.apellidos || !this.persona.cedula || !this.persona.correo || !this.usuario.username || !this.usuario.password
-      || !this.persona.fechaNacimiento || !this.persona.telefono || !this.persona.celular || !this.usuario.username || !this.verficarPassword) {
+      || !this.persona.fechaNacimiento || !this.persona.telefono || !this.persona.celular || !this.usuario.username || !this.verficarPassword || !this.persona.genero) {
       this.toastrService.error('Uno o más campos vacios', 'Verifique los Campos de texto', {
         timeOut: 3000,
       });
     } else {
       if (this.validarEdad == true) {
-
         this.personaService.getPorCedula(this.persona.cedula).subscribe(
           result => {
             if (result === null) {
-
-
               if (this.verficarPassword == this.usuario.password) {
                 this.usuarioService.verfUsername(this.usuario.username).subscribe(
                   data => {
@@ -225,7 +227,6 @@ export class LoginComponent implements OnInit {
                           this.persona.idPersona = data.idPersona;
                           this.persona = data;
                           this.usuario.persona = this.persona;
-                          // this.usuario.fundacion = this.fundacion;
                           this.usuario.estado = true;
                           this.usuario.rol = "CLIENTE";
                           this.cargarImagenUsuario();
@@ -254,15 +255,16 @@ export class LoginComponent implements OnInit {
                     }
                   }
                 )
-
               } else {
                 this.toastrService.error('No son similares', 'Verifique su contraseña', {
                   timeOut: 1000,
                 });
               }
             } else {
+
               this.toastrService.error('La cédula ingresada ya está registrada!', 'Cedula en uso', {
-                timeOut: 3000,
+                timeOut: 1000,
+
               });
               this.persona.cedula = '';
             }
@@ -291,6 +293,7 @@ export class LoginComponent implements OnInit {
     this.verficarPassword = '';
     this.file = '';
     this.cedulaValidar = '';
+    this.limpiarFormulario();
   }
 
   closeModal() {
@@ -305,6 +308,8 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  // RECUPERACION DE CONTRASEÑA
+
   cedulaValidar: any;
   activarPassword: boolean = false;
 
@@ -312,7 +317,7 @@ export class LoginComponent implements OnInit {
     this.personaService.getPorCedula(this.cedulaValidar).subscribe(
       result => {
         if (result != null) {
-          this.toastrService.success('Verificado', 'Cedula Encontrada', {
+          this.toastrService.success('Verificado', 'Cédula encontrada', {
             timeOut: 1000,
           });
           this.activarPassword = true;
@@ -327,7 +332,7 @@ export class LoginComponent implements OnInit {
               console.log("nueva contra => " + this.verficarPassword)
             })
         } else {
-          this.toastrService.error('Verifique el número de cedula', 'Cedula No existente', {
+          this.toastrService.error('Verifique el número de cedula', 'Cédula no existente', {
             timeOut: 1000,
           });
           this.cedulaValidar = '';
@@ -394,7 +399,38 @@ export class LoginComponent implements OnInit {
       }
     }
   }
-  //Validacion de Formulario
+
+  // OTRAS VALIDACIONES
+  generoValido:boolean = false;
+  verfGenero: string = '';
+  validarGenero() {
+    console.log("hola genero")
+    this.valCorreo = this.expCorreo.test(this.persona.genero!);
+    if (this.valCorreo) {
+      console.log("SI TIENE");
+    } else {
+      this.verfCorreo = 'ng-invalid ng-dirty';
+      console.log("VACIO");
+    }
+  }
+
+  // VALIDAR CAMPOS
+  ValidarCampos() {
+    console.log("ya esta activo")
+    document.addEventListener('DOMContentLoaded', () => {
+      const forms = document.querySelectorAll('.needs-validation') as NodeListOf<HTMLFormElement>;
+      Array.from(forms).forEach(form => {
+        form.addEventListener('submit', (event: Event) => {
+          if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        });
+      });
+    });
+  }
+
   limpiarFormulario() {
     const forms = document.querySelectorAll('.needs-validation') as NodeListOf<HTMLFormElement>;
     Array.from(forms).forEach(form => {

@@ -55,7 +55,14 @@
     <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
   </div>
   <h2 class="form-titulo text-center">.</h2>
+
+  <div class="contendor p-25" style="text-align: center; padding-bottom: 8px;">
+    <!-- <button pButton type="button" (click)="generarPDF()" style="background-color: red;" label="Generar Reporte" icon="pi pi-file-pdf"></button> -->
+    <button type="button" style="background-color: red;" class="btn btn-primary" (click)="openPdfTables()"><i class="pi pi-file-pdf"></i> Generar Reporte</button>
+    <!-- <button pButton type="button" (click)="openPdfTables()"  label="Generar Reporte" icon="pi pi-file-pdf"></button> -->
+  </div>
 </div>
+
 
 <!-- Modal -->
 <div class="modal " id="modalUpdate" tabindex="-5" aria-labelledby="modalUpdateLabel" aria-hidden="true">

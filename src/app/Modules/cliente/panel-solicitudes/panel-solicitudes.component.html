@@ -100,14 +100,18 @@
                     <label class="mensaje" style="background-color: rgb(177, 255, 132); color: black;">Felicidades tu solicitud ha sido Aprobada</label>
                     <label class="mensaje" style="background-color: rgb(177, 255, 132); color: black;">La solicitud tiene una validez de 24 horas</label>
                     <label class="mensaje" style="background-color: rgb(177, 255, 132);color: black;">Gracias por tu Adopción de parte de {{solicitudes.mascota.fundacion.nombre_fundacion}}</label>
+
                     <label class="mensaje" style="background-color: rgb(177, 255, 132); color: black;">Puedes acercarte a nuestras instalaciones ubicada en  {{solicitudes.mascota.fundacion.direccion}} </label>
+
                     <label class="mensaje" style="background-color: rgb(177, 255, 132); color: black;"> Telf: {{solicitudes.mascota.fundacion.telefono}} Correo: {{solicitudes.mascota.fundacion.correo}}</label>
                 </div>
                 <div class="col-md-" *ngIf='obtenerEstado(solicitudes.estado) === "EN PROCESO"'> 
                     <label class="mensaje" style="background-color: rgb(252, 255, 56);">Su solicitud esta en proceso de revisión</label>
                 </div>
                 <div class="col-md-" *ngIf='obtenerEstado(solicitudes.estado) === "SOLICITUD RECHAZADA"'> 
+
                     <label class="mensaje" style="background-color: rgb(255, 44, 44); color: rgb(255, 255, 255);">Su solicitud de adopción fue rechazada por la fundación {{solicitudes.mascota.fundacion.nombre_fundacion}} </label>
+
                 </div>
             </div>
         </div>

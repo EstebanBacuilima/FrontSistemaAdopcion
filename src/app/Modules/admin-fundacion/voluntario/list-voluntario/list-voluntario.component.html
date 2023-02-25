@@ -22,7 +22,10 @@
                         <th scope="col">Nombres</th>
                         <th scope="col">Dirección</th>
                         <th scope="col">Teléfono</th>
+
                         <th scope="col">Área de trabajo</th>
+
+                        <th scope="col">Cargo</th>
                         <th scope="col">&nbsp;</th>
                         <th scope="col">&nbsp;</th>
                     </tr>
@@ -122,7 +125,7 @@
                                 maxlength="30"    [(ngModel)]="persona.direccion" [pKeyFilter]="letrasEspaceNumbers" />
                             </div>
                             <div class="col-md-6">
-                                <label for="telefono" class="form-label-p"> Telefono</label>
+                                <label for="telefono" class="form-label-p"> Teléfono</label>
                                 <input type="text" class="form-control" name="telefono"
                                 maxlength="10"   [(ngModel)]="persona.telefono" [pKeyFilter]="'int'" (keypress)="onKeyPress($event)" />
                             </div>

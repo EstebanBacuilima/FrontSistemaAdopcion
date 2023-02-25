@@ -108,6 +108,7 @@
                                                 <input type="text" name="cedula" id="cedula"
                                                     [(ngModel)]="persona.cedula" onmousedown="return false"
                                                     onkeydown="return false">
+
                                                 <label for="cedula">Cédula</label>
                                             </div>
                                         </div>
@@ -133,6 +134,7 @@
                                         </div>
 
                                         <div class="grid-2">
+
                                             <div class="form-controll">
                                                 <div class="form-input">
                                                     <input type="text" name="telefono" id="telefono"
@@ -140,6 +142,7 @@
                                                         onkeydown="return false">
                                                     <label for="telefono">Teléfono</label>
                                                 </div>
+
                                             </div>
                                             <div class="form-controll">
                                                 <div class="form-input">
@@ -153,9 +156,11 @@
 
                                         <div class="form-controll">
                                             <div class="form-input">
+
                                                 <input type="text" name="direccion" id="direccion"
                                                     [(ngModel)]="persona.direccion" onmousedown="return false"
                                                     onkeydown="return false">
+
                                                 <label for="direccion">Dirección</label>
                                             </div>
                                         </div>
@@ -221,6 +226,7 @@
 
                                         <div class="form-controll">
                                             <div class="form-input">
+
                                                 <input type="text" name="descripcion" id="descripcion"
                                                     [(ngModel)]="mascota.descripcion" onmousedown="return false"
                                                     onkeydown="return false">
@@ -232,6 +238,9 @@
                                             <button type="button" class="form-btn" tab-target="step-01">Atrás</button>
                                             <button type="button" class="form-btn"
                                                 tab-target="step-03">Siguiente</button>
+
+                                                tab-target="step-01">Atrás</button>
+
                                         </div>
                                     </div>
                                     <div class="step-tab" id="step-03">
@@ -248,10 +257,12 @@
                                         </div>
 
                                         <div class="form-submit grid-2">
+
                                             <button type="button" class="form-btn" tab-target="step-02">Atrás</button>
                                             <button type="submit" class="form-btn"
                                                 (click)="enviarSolicitud()">Enviar</button>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>

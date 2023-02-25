@@ -45,6 +45,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.visibleSeccion = false
     this.isPublico = true;
     this.obtenerUsuario();
     this.nombreFoto = localStorage.getItem('nameImagen');
@@ -185,6 +186,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
     })
   }
 
+  visibleSeccion:boolean = false;
+
+  validarPestLogin(){
+    console.log("estoy en el login")
+    this.visibleSeccion = true
+  }
+
+  home(){
+    console.log("estoy en el login")
+    this.visibleSeccion = false
+  }
 
 }
 

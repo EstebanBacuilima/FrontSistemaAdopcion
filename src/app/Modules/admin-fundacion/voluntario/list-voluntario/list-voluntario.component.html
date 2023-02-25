@@ -20,9 +20,9 @@
                         <th scope="col">N</th>
                         <th scope="col">Cédula</th>
                         <th scope="col">Nombres</th>
-                        <th scope="col">Direccion</th>
-                        <th scope="col">Telefono</th>
-                        <th scope="col">Área de Trabajo</th>
+                        <th scope="col">Dirección</th>
+                        <th scope="col">Teléfono</th>
+                        <th scope="col">Área de trabajo</th>
                         <th scope="col">&nbsp;</th>
                         <th scope="col">&nbsp;</th>
                     </tr>
@@ -56,6 +56,12 @@
         </div>
         <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
     </div>
+    <div class="contendor p-25" style="text-align: center; padding-bottom: 8px;">
+        <!-- <button pButton type="button" (click)="generarPDF()" style="background-color: red;" label="Generar Reporte" icon="pi pi-file-pdf"></button> -->
+        <button type="button" style="background-color: red;" class="btn btn-primary" (click)="openPdfTables()"><i class="pi pi-file-pdf"></i> Generar Reporte</button>
+        <!-- <button pButton type="button" (click)="openPdfTables()"  label="Generar Reporte" icon="pi pi-file-pdf"></button> -->
+    </div>
+
     <h2 class="form-titulo text-center">.</h2>
 </div>
 
@@ -79,7 +85,7 @@
                             </div>
 
                             <div class="col-12">
-                                <label for="cedula" class="form-label-p"> Cedula</label>
+                                <label for="cedula" class="form-label-p"> Cédula</label>
                                 <input type="text" class="form-control" name="cedula" [(ngModel)]="persona.cedula"
                                     readonly onmousedown="return false" onkeydown="return false" />
                             </div>
@@ -95,23 +101,23 @@
                             </div>
                             <div class="col-6">
                                 <label for="fechaNacimiento" class="form-label-p">
-                                    Fecha De Nacimiento</label>
+                                    Fecha de nacimiento</label>
                                 <input type="date" class="form-control" name="fechaNacimiento"
                                     [(ngModel)]="persona.fechaNacimiento" />
                             </div>
                             <div class="col-6">
-                                <label for="genero" class="form-label-p"> Genero</label>
+                                <label for="genero" class="form-label-p"> Género</label>
                                 <select id="genero" class="form-control" name="genero" [(ngModel)]="persona.genero">
                                     <option value="" disabled selected>
                                         Selecciona un género
                                     </option>
                                     <option value="masculino">Masculino</option>
                                     <option value="famenino">Femenino</option>
-                                    <option value="otro">Otro</option>
+                                    <option value="otro">Sin especificar</option>
                                 </select>
                             </div>
                             <div class="col-12">
-                                <label for="direccion" class="form-label-p"> Direccion</label>
+                                <label for="direccion" class="form-label-p"> Dirección</label>
                                 <input type="text" class="form-control" name="direccion"
                                 maxlength="30"    [(ngModel)]="persona.direccion" [pKeyFilter]="letrasEspaceNumbers" />
                             </div>
@@ -137,8 +143,8 @@
                                     <option value="" disabled selected>
                                         Selecciona área de trabajo
                                     </option>
-                                    <option value="Clinica">Clinica</option>
-                                    <option value="Peluqueria">Peluqueria</option>
+                                    <option value="Clinica">Clínica</option>
+                                    <option value="Peluqueria">Peluquería</option>
                                     <option value="otro">Otro</option>
                                 </select>
                             </div>
@@ -154,7 +160,7 @@
                                 </select>
                             </div> -->
                             <div class="col-12">
-                                <label for="username" class="form-label-p"> Username</label>
+                                <label for="username" class="form-label-p"> Usuario</label>
                                 <input type="text" class="form-control" name="username"
                                 maxlength="30"  [(ngModel)]="usuario.username" />
                             </div>

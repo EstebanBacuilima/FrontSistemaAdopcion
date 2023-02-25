@@ -3,7 +3,7 @@
     <ul class="nav justify-content-center">
         <li class="col-md-6">
             <button type="button" class="btn btnO form-control" routerLink="/register-fundacion">Registrar
-                Fundacion</button>
+                Fundación</button>
         </li>
         <li class="col-md-6">
             <button type="button" class="btn btnA form-control">Listar Fundaciones</button>
@@ -19,11 +19,11 @@
                         <th scope="col">Ruc</th>
                         <th scope="col">Representante</th>
                         <th scope="col">Nombre</th>
-                        <th scope="col">Mision</th>
-                        <th scope="col">Acronimo</th>
+                        <th scope="col">Misión</th>
+                        <th scope="col">Acrónimo</th>
                         <th scope="col">Correo</th>
-                        <th scope="col">Telefono</th>
-                        <th scope="col">Direccion</th>
+                        <th scope="col">Teléfono</th>
+                        <th scope="col">Dirección</th>
                         <!-- <th scope="col">Estado</th> -->
                         <th scope="col">&nbsp;</th>
                         <th scope="col">&nbsp;</th>
@@ -79,33 +79,33 @@
 
                         <form class="row g-2">
                             <h2 class="form-titulo text-center">.</h2>
-                            <h2 class="form text-center">Datos Fundacion</h2>
+                            <h2 class="form text-center">Datos Fundación</h2>
                             <div class="col-md-6">
                                 <label for="ruc" class="form-label-p"> Ruc</label>
                                 <input type="text" class="form-control" name="ruc" [(ngModel)]="fundacion.ruc" readonly onmousedown="return false" onkeydown="return false">
                             </div>
                             <div class="col-md-6">
-                                <label for="nombre_fundacion" class="form-label-p"> Nombre Fundacion</label>
+                                <label for="nombre_fundacion" class="form-label-p"> Nombre Fundación</label>
                                 <input type="text" class="form-control" name="nombre_fundacion"
                                 maxlength="25" [(ngModel)]="fundacion.nombre_fundacion" [pKeyFilter]="letrasEspace"> 
                             </div>
                             <div class="col-md-6">
-                                <label for="acronimo" class="form-label-p"> Acronimo</label>
+                                <label for="acronimo" class="form-label-p"> Acrónimo</label>
                                 <input type="text" class="form-control" name="acronimo"
                                 maxlength="8" [(ngModel)]="fundacion.acronimo" [pKeyFilter]="letrasEspace">
                             </div>
                             <div class="col-md-6">
-                                <label for="mision" class="form-label-p"> Mision</label>
+                                <label for="mision" class="form-label-p"> Misión</label>
                                 <input type="text" class="form-control" name="mision" 
                                 maxlength="30" [(ngModel)]="fundacion.mision" [pKeyFilter]="letrasEspace">
                             </div>
                             <div class="col-12">
-                                <label for="direccion" class="form-label-p"> Direccion</label>
+                                <label for="direccion" class="form-label-p"> Dirección</label>
                                 <input type="text" class="form-control" name="direccions"
                                 maxlength="30" [(ngModel)]="fundacion.direccion" [pKeyFilter]="letrasEspaceNumbers">
                             </div>
                             <div class="col-md-6">
-                                <label for="telefono" class="form-label-p"> Telefono</label>
+                                <label for="telefono" class="form-label-p"> Teléfono</label>
                                 <input type="text" class="form-control" name="telefono"
                                 maxlength="10" [(ngModel)]="fundacion.telefono" [pKeyFilter]="'int'" (keypress)="onKeyPress($event)" >
                             </div>
@@ -131,7 +131,7 @@
                             <h2 class="form-titulo text-center">.</h2>
                             <h2 class="form text-center">Datos Representante</h2>
                             <div class="col-md-6">
-                                <label for="cedula" class="form-label-p"> Cedula</label>
+                                <label for="cedula" class="form-label-p"> Cédula</label>
                                 <input type="text" class="form-control" name="cedula" readonly
                                     [(ngModel)]="persona.cedula">
                             </div>
@@ -146,26 +146,26 @@
                                 maxlength="30" [(ngModel)]="persona.apellidos" [pKeyFilter]="letrasEspace" >
                             </div>
                             <div class="col-6">
-                                <label for="fechaNacimiento" class="form-label-p"> Fecha De Nacimiento</label>
+                                <label for="fechaNacimiento" class="form-label-p"> Fecha de nacimiento</label>
                                 <input type="date" class="form-control" name="fechaNacimiento"
                                     [(ngModel)]="persona.fechaNacimiento">
                             </div>
                             <div class="col-md-12">
-                                <label for="direccion" class="form-label-p"> Direccion</label>
+                                <label for="direccion" class="form-label-p"> Dirección</label>
                                 <input type="text" class="form-control" name="direccion"
                                 maxlength="30" [(ngModel)]="persona.direccion" [pKeyFilter]="letrasEspaceNumbers">
                             </div>
                             <div class="col-md-6">
-                                <label for="genero" class="form-label-p"> Genero</label>
+                                <label for="genero" class="form-label-p"> Género</label>
                                 <select id="genero" class="form-control" name="genero" [(ngModel)]="persona.genero">
                                     <option value="" disabled selected>Selecciona un género</option>
                                     <option value="masculino">Masculino</option>
                                     <option value="famenino">Femenino</option>
-                                    <option value="otro">Otro</option>
+                                    <option value="otro">Sin especificar</option>
                                 </select>
                             </div>
                             <div class="col-md-6">
-                                <label for="telefono" class="form-label-p"> Telefono</label>
+                                <label for="telefono" class="form-label-p"> Teléfono</label>
                                 <input type="text" class="form-control" name="telefonos" 
                                 maxlength="7" [(ngModel)]="persona.telefono" [pKeyFilter]="'int'" (keypress)="onKeyPress($event)">
                             </div>
@@ -179,7 +179,7 @@
                                 <input type="email" class="form-control" name="correo" [(ngModel)]="persona.correo">
                             </div>
                             <div class="col-md-6">
-                                <label for="username" class="form-label-p"> Username</label>
+                                <label for="username" class="form-label-p"> Usuario</label>
                                 <input type="text" class="form-control" name="username" 
                                 maxlength="30" [(ngModel)]="usuario.username">
                             </div>

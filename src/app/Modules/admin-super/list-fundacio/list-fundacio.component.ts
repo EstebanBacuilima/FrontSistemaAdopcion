@@ -162,7 +162,7 @@ export class ListFundacioComponent implements OnInit {
           this.usuario.estado = false;
           this.usuarioService.descativarUsuario(this.usuario, this.isUsuarioDesactivar).subscribe(data => { 
             this.obtenerFundaciones();
-            this.toastrService.warning('La fundaciona sido desactivada!', 'Fundacion Desactivada!', {
+            this.toastrService.warning('La fundación ha sido desactivada!', 'Fundación Desactivada!', {
               timeOut: 4000,
             });
           })
@@ -185,7 +185,7 @@ export class ListFundacioComponent implements OnInit {
           this.usuario.estado = true;
           this.usuarioService.descativarUsuario(this.usuario, this.isUsuarioDesactivar).subscribe(data => { 
             this.obtenerFundaciones();
-            this.toastrService.success('La fundacion se ha habilitado', 'Fundacion Activada', {
+            this.toastrService.success('La fundación se ha habilitado', 'Fundación Activada', {
               timeOut: 1000,
             });
           })
@@ -254,7 +254,7 @@ export class ListFundacioComponent implements OnInit {
     const data = this.listaFundaciones;
     const body = [];
 
-    body.push(["ID", "RUC", "NOMBRE FUDACION", "ACRO", "MISION", "DIRECCION", "CORREO", "TELEFONO"]);
+    body.push(["ID", "RUC", "NOMBRE FUDACIÓN", "ACRÓNIMO", "MISIÓN", "DIRECCIÓN", "CORREO", "TELÉFONO"]);
 
     data.forEach(fundacion => {
       body.push([fundacion.idFundacion, fundacion.ruc, fundacion.nombre_fundacion, fundacion.acronimo, fundacion.mision, fundacion.direccion, fundacion.correo, fundacion.telefono]);
@@ -321,12 +321,12 @@ export class ListFundacioComponent implements OnInit {
     tableBody.push([
       { text: "ID", bold: true, background: 'lightblue' },
       { text: "RUC", bold: true, background: 'lightblue'},
-      { text: "FUNDACION", bold: true, background: 'lightblue'},
-      { text: "ACRONIMO", bold: true, background: 'lightblue'},
-      { text: "MISION", bold: true, background: 'lightblue'},
-      { text: "DIRECCION", bold: true, background: 'lightblue'},
+      { text: "FUNDACIÓN", bold: true, background: 'lightblue'},
+      { text: "ACRÓNIMO", bold: true, background: 'lightblue'},
+      { text: "MISIÓN", bold: true, background: 'lightblue'},
+      { text: "DIRECCIÓN", bold: true, background: 'lightblue'},
       { text: "CORREO", bold: true, background: 'lightblue'},
-      { text: "TELEFONO", bold: true, background: 'lightblue'},
+      { text: "TELÉFONO", bold: true, background: 'lightblue'},
     ]);
     this.listaFundaciones.forEach(fundacion => {
       let fila = [];

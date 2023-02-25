@@ -11,6 +11,7 @@ import { takeWhile } from 'rxjs';
 import { PersonaService } from 'src/app/Services/persona.service';
 import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
+import * as pdfMake from "pdfmake/build/pdfmake";
 
 @Component({
   selector: 'app-list-voluntario',
@@ -24,6 +25,7 @@ export class ListVoluntarioComponent implements OnInit {
   voluntario: Voluntario = new Voluntario;
   pageActual: number = 1;
   loading: boolean = true;
+  listaVoluntarios: Voluntario[] = [];
   public myCounter: number = 0;
 
 
@@ -116,7 +118,7 @@ export class ListVoluntarioComponent implements OnInit {
   actualizarVoluntarios() {
     if (!this.persona.cedula || !this.persona.apellidos || !this.persona.correo || !this.persona.direccion || !this.persona.telefono || !this.persona.celular
       || !this.voluntario.area_trabajo || !this.persona.nombres || !this.persona.fechaNacimiento || !this.persona.genero || !this.usuario.username || !this.usuario.password) {
-      this.toastrService.error('Uno o más campos vacios', 'Verifique los Campos de texto', {
+      this.toastrService.error('Uno o más campos vacíos', 'Verifique los campos de texto', {
         timeOut: 2000,
       });
     } else {
@@ -126,7 +128,7 @@ export class ListVoluntarioComponent implements OnInit {
           console.log(data)
           this.voluntarioService.updateVoluntario(this.voluntario, this.voluntario.idVoluntario).subscribe(data => {
             this.cargarImagenUsuario();
-            this.toastrService.success('Su ha modificado el voluntario', 'Voluntario Actualizado', {
+            this.toastrService.success('Se ha modificado el voluntario', 'Voluntario actualizado', {
               timeOut: 1500,
             });
             this.obtenerVoluntarios();
@@ -154,7 +156,7 @@ export class ListVoluntarioComponent implements OnInit {
           this.usuario.estado = false;
           this.usuarioService.descativarUsuario(this.usuario, this.isUsuarioDesactivar).subscribe(data => { 
             this.obtenerVoluntarios();
-            this.toastrService.warning('El voluntario a sido Inhabilitado!', 'Voluntario Desactivado!', {
+            this.toastrService.warning('El voluntario ha sido Inhabilitado!', 'Voluntario Desactivado!', {
               timeOut: 1000,
             });
           })
@@ -216,4 +218,94 @@ export class ListVoluntarioComponent implements OnInit {
   }
 
 
+  fechaAct: Date =new Date();
+
+  openPdfTables() {
+    let fechaPrueba: Date = new Date();
+    let fechaFormateada = fechaPrueba.toISOString().substr(0,10);
+    console.log("es la fecha de hoy -> " + fechaFormateada);
+    let tableBody = [];
+    tableBody.push([
+      { text: "ID", bold: true },
+      { text: "USUARIO", bold: true },
+      { text: "ESTADO", bold: true },
+      { text: "ÁREA DE TRABAJO", bold: true },
+    ]);
+    this.listaVoluntarios.forEach(voluntario => {
+      let fila = [];
+      fila.push(voluntario.idVoluntario);
+      fila.push(voluntario.usuario);
+      fila.push(voluntario.estado);
+      fila.push(voluntario.area_trabajo);
+      tableBody.push(fila);
+    });
+
+    const documentDefinition: any = {
+      content: [
+        {
+          text: "Sistema de Adopción de Mascotas",
+          fontSize: 10,
+          style: "header",
+          alignment: 'right',
+          fillColor: 'violet'
+        },
+        {
+          text: fechaFormateada,
+          fontSize: 10,
+          style: "header",
+          alignment: 'left',
+          fillColor: 'violet'
+        },
+        "-----------------------------------------------------------------------------------------------------------------------------------------------------------",
+        {
+          text: this.fechaAct,
+          style: "header",
+          alignment: 'right',
+          fillColor: 'lightblue'
+        },
+        {
+          text: '\n\n',
+        },
+        {
+          text: "Reporte de Voluntarios",
+          style: "header",
+          alignment: 'center',
+          fillColor: 'lightblue'
+        },
+        {
+          text: '\n',
+        },
+        {
+          text: 'Listado de voluntarios registradas en el sistema de adopción de mascotas.',
+          alignment: 'center',
+          Color: 'green',
+        },
+        {
+          text: '\n',
+        },
+        {
+          table: {
+            layout: 'landscape',
+            fontSize: 5,
+            headerRows: 1,
+            widths: [12, 65, 70, 65, 67, 65, 65, 60],
+            body: tableBody
+          }
+        }
+        
+      ],
+      styles: {
+        header: {
+          fontSize: 20,
+          bold: true,
+          fillColor: 'white'
+        },
+        tableHeader: {
+          fillColor: 'lightblue'
+        }
+      }
+    };
+
+    pdfMake.createPdf(documentDefinition).open();
+  }
 }

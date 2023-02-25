@@ -39,7 +39,7 @@
             <td>{{mascota.especie}}</td>
             <!-- <td>{{mascota.descripcion}}</td> -->
             <td style="text-align: center;">
-              <div *ngIf='obtenerEstado(mascota.estado_adopcion) === "NOADOPTAOD"'><b style="text-align: center; color: orange;"><i class="pi pi-thumbs-down-fill"></i></b></div>
+              <div *ngIf='obtenerEstado(mascota.estado_adopcion) === "NO ADOPTADO"'><b style="text-align: center; color: orange;"><i class="pi pi-thumbs-down-fill"></i></b></div>
               <div *ngIf='obtenerEstado(mascota.estado_adopcion) === "ADOPTADO"'><b style="color: rgb(77, 255, 0);"><i class="pi pi-thumbs-up-fill"></i></b></div>
             </td>
             <td>
@@ -54,13 +54,13 @@
     </div>
     <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
   </div>
-  <h2 class="form-titulo text-center">.</h2>
 
   <div class="contendor p-25" style="text-align: center; padding-bottom: 8px;">
     <!-- <button pButton type="button" (click)="generarPDF()" style="background-color: red;" label="Generar Reporte" icon="pi pi-file-pdf"></button> -->
     <button type="button" style="background-color: red;" class="btn btn-primary" (click)="openPdfTables()"><i class="pi pi-file-pdf"></i> Generar Reporte</button>
     <!-- <button pButton type="button" (click)="openPdfTables()"  label="Generar Reporte" icon="pi pi-file-pdf"></button> -->
   </div>
+  <h2 class="form-titulo text-center">.</h2>
 </div>
 
 
@@ -105,7 +105,6 @@
                   <option value="" disabled selected>Selecciona un sexo</option>
                   <option value="Macho">Macho</option>
                   <option value="Hembra">Hembra</option>
-                  <option value="otro">Otro</option>
                 </select>
               </div>
               <div class="col-md-6">
@@ -116,7 +115,7 @@
               <div class="col-md-6">
                 <label for="especie" class="form-label-p"> Especie</label>
                 <select id="especie" class="form-control" name="especie" [(ngModel)]="mascota.especie">
-                  <option value="" disabled selected>Selecciona uns especie</option>
+                  <option value="" disabled selected>Selecciona una especie</option>
                   <option value="canino">Canino</option>
                   <option value="felino">Felino</option>
                 </select>
@@ -124,7 +123,7 @@
               <div class="col-md-12">
                 <label for="especie" class="form-label-p"> Esterelizado</label>
                 <select id="especie" class="form-control" name="estado_mascota" [(ngModel)]="mascota.estado_mascota">
-                  <option value="" disabled selected>Selecciona una opcion</option>
+                  <option value="" disabled selected>Selecciona una opción</option>
                   <option value="true">Si</option>
                   <option value="false">No</option>
                 </select>

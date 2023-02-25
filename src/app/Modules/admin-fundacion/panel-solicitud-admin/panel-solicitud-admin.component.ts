@@ -52,7 +52,7 @@ export class PanelSolicitudAdminComponent implements OnInit {
         this.obtenerSolicitudes();
       })
     } else {
-      console.log("Usuario no foun => ")
+      console.log("Usuario no encontrado => ")
     }
   }
 
@@ -139,10 +139,10 @@ export class PanelSolicitudAdminComponent implements OnInit {
           this.mascota.estado_seguimiento = true;
           this.solicitud.mascota = this.mascota;
           this.solicitud.usuario = this.usuario;
-          console.log("Estado mascota adopcion antes " + this.idSolicitud);
+          console.log("Estado mascota adopción antes " + this.idSolicitud);
           this.solicitudAdopcionService.updateEstadoSolicitud(this.solicitud, this.idSolicitud).subscribe(
             data => {
-              console.log("Estado mascota adopcion antes " + data.mascota?.estado_adopcion);
+              console.log("Estado mascota adopción antes " + data.mascota?.estado_adopcion);
               this.mascotaService.updateEstadoAdopcion(this.mascota, this.mascota.idMascota).subscribe(
                 dataM => {
                   console.log("Se cambio a " + dataM.estado_adopcion);
@@ -182,7 +182,7 @@ export class PanelSolicitudAdminComponent implements OnInit {
               Swal.fire({
                 position: 'top-end',
                 icon: 'success',
-                title: 'Solicitud Puesta en Espera',
+                title: 'Solicitud puesta en espera',
                 timer: 1500
               })
               this.obtenerSolicitudes();
@@ -190,7 +190,7 @@ export class PanelSolicitudAdminComponent implements OnInit {
             error => (console.log(error))
           )
         } else {
-          console.log("no hay esa solicitud")
+          console.log("No hay esa solicitud")
         }
       },
       error => (console.log(error))
@@ -215,10 +215,10 @@ export class PanelSolicitudAdminComponent implements OnInit {
           this.mascota.estado_adopcion = true;
           this.solicitud.mascota = this.mascota;
           this.solicitud.usuario = this.usuario;
-          console.log("Estado mascota adopcion antes " + this.idSolicitud);
+          console.log("Estado mascota adopción antes " + this.idSolicitud);
           this.solicitudAdopcionService.updateEstadoSolicitud(this.solicitud, this.idSolicitud).subscribe(
             data => {
-              console.log("Estado mascota adopcion antes " + data.mascota?.estado_adopcion);
+              console.log("Estado mascota adopción antes " + data.mascota?.estado_adopcion);
               this.mascotaService.updateEstadoAdopcion(this.mascota, this.mascota.idMascota).subscribe(
                 data => {
                   console.log("Se cambio a " + data.estado_adopcion);

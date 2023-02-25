@@ -16,7 +16,7 @@
 
                 <form action="#">
                     <div class="mb-4">
-                        <label for="username" class="form-label"> Username <i class="uil uil-user"></i></label>
+                        <label for="username" class="form-label"> Username<i class="uil uil-user"></i></label>
                         <input id="username" class="form-control" name="username" type="username"
                             [(ngModel)]="usuario.username" [pKeyFilter]="'alphanum'" maxlength="30" minlength="3"
                             pInputText placeholder="Ingresa tu nombre de usuario" />
@@ -45,8 +45,7 @@
                     </ng-container> -->
 
                     <div class="my3 text-center p-1">
-                        <span>Aun no tienes cuenta? <a href="#" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">Registrate aqui</a></span><br>
+                        <span>Aun no tienes cuenta? <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Registrate aqui</a></span><br>
                         <span>Olvido su contraseña? <a href="#" data-bs-toggle="modal"
                                 data-bs-target="#examplePassword">Click aqui</a></span><br>
                     </div>
@@ -67,97 +66,77 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header" style="text-align: center;">
-                    <!-- <h5 class="modal-title" id="exampleModalLabel"  style="text-align: center;">Registrate</h5> -->
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-                        id="closeModal"></button>
+                        id="closeModal" (click)=" limpiarCampos()"></button>
                 </div>
                 <div class="container w-75 mt-25 me-25 mt-5 shadown">
                     <div class="row align-items-strech">
                         <div class="col bg-white mt-25 p-25 grid p-fluid ">
 
-                            <h5 class="titulo" id="titulo" style="text-align: center; padding: 25px;">FORMULARIO DE
-                                REGISTRO</h5>
-                            <form class="row g-2">
+                            <h5 class="titulo" id="titulo" style="text-align: center; padding: 25px;">FORMULARIO DE REGISTRO</h5>
+                            <form class="row needs-validation g-2" novalidate>
+                                
                                 <div class="col-md-6">
-                                    <label for="cedula" class="form-label-p"> Cedula</label>
-                                    <!-- <input type="text" class="form-control" name="cedula" pInputText pKeyFilter="alpha" [(ngModel)]="persona.cedula"> -->
-                                    <input id="cedula" type="text" name="cedula" maxlength="10" pInputText
-                                        [(ngModel)]="persona.cedula" [pKeyFilter]="'int'" required>
+                                    <label for="cedula" class="form-label-p">Cedula</label> <label for="cedula" class="form-label-p" style="color: rgb(255, 0, 0); padding-left: 2px;"> *</label>
+                                    <input id="cedula" class="form-control" type="text" name="cedula" maxlength="10" pInputText [(ngModel)]="persona.cedula" [pKeyFilter]="'int'" required>
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="nombres" class="form-label-p"> Nombres</label>
-                                    <input type="text" class="form-control" name="nombres" maxlength="30" pInputText
-                                        [(ngModel)]="persona.nombres" [pKeyFilter]="letrasEspace"
-                                        (keyup)="formatInput(persona.nombres)">
+                                    <label for="nombres" class="form-label-p">Nombres</label><label for="cedula" class="form-label-p" style="color: rgb(255, 0, 0); padding-left: 2px;"> *</label>
+                                    <input id="nombres" type="text" class="form-control" name="nombres" maxlength="30" pInputText [(ngModel)]="persona.nombres" [pKeyFilter]="letrasEspace"(keyup)="formatInput(persona.nombres)" required>
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="apellidos" class="form-label-p"> Apellidos</label>
-                                    <input type="text" class="form-control" name="apellidos" maxlength="30" pInputText
-                                        [(ngModel)]="persona.apellidos" [pKeyFilter]="letrasEspace">
+                                    <label for="apellidos" class="form-label-p"> Apellidos</label><label for="cedula" class="form-label-p" style="color: rgb(255, 0, 0); padding-left: 2px;"> *</label>
+                                    <input id="apellidos" type="text" class="form-control" name="apellidos" maxlength="30" pInputText [(ngModel)]="persona.apellidos" [pKeyFilter]="letrasEspace" required>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="fechaNacimiento" class="form-label-p"> Fecha De Nacimiento</label>
-                                    <p-calendar type="date" class="fecha" name="fechaNacimiento"
+                                    <label for="fechaNacimiento" class="form-label-p"> Fecha De Nacimiento</label><label for="cedula" class="form-label-p" style="color: rgb(255, 0, 0); padding-left: 2px;"> *</label>
+                                    <p-calendar id="fechaNacimiento" type="date" class="fecha" name="fechaNacimiento" 
                                         [(ngModel)]="persona.fechaNacimiento" [showIcon]="true" inputId="icon"
                                         (ngModelChange)="calcularEdad()"></p-calendar>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="direccion" class="form-label-p"> Direccion</label>
-                                    <input type="text" class="form-control" name="direccion" maxlength="50" pInputText
-                                        [(ngModel)]="persona.direccion" [pKeyFilter]="letrasEspaceNumbers">
+                                    <label for="direccion" class="form-label-p"> Direccion</label><label for="cedula" class="form-label-p" style="color: rgb(255, 0, 0); padding-left: 2px;"> *</label>
+                                    <input id="direccion" type="text" class="form-control" name="direccion" maxlength="50" pInputText
+                                        [(ngModel)]="persona.direccion" [pKeyFilter]="letrasEspaceNumbers" required>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="genero" class="form-label-p"> Genero</label>
-                                    <p-dropdown id="genero" name="genero" [options]="generos"
+                                    <label for="genero" class="form-label-p"> Genero</label><label for="cedula" class="form-label-p" style="color: rgb(255, 0, 0); padding-left: 2px;"> *</label>
+                                    <p-dropdown id="genero" name="genero" [options]="generos" 
                                         [(ngModel)]="persona.genero" placeholder="Selecciona un género"
-                                        [showClear]="true"></p-dropdown>
-                                    <!-- <select id="genero" class="form-control" id="genero" [(ngModel)]="persona.genero">
-                                        <option value="" disabled selected>Selecciona un género</option>
-                                        <option value="masculino">Masculino</option>
-                                        <option value="famenino">Femenino</option>
-                                        <option value="otro">Otro</option>
-                                    </select> -->
+                                        [showClear]="false"[ngClass]="{'is-invalid': !generoValido}" ></p-dropdown>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="telefono" class="form-label-p"> Telefono</label>
-                                    <input type="text" class="form-control" name="telefono" maxlength="7" pInputText
-                                        [(ngModel)]="persona.telefono" [pKeyFilter]="'int'">
+                                    <label for="telefono" class="form-label-p"> Telefono</label><label for="cedula" class="form-label-p" style="color: rgb(255, 0, 0); padding-left: 2px;"> *</label>
+                                    <input id="telefono" type="text" class="form-control" name="telefono" maxlength="7" pInputText
+                                        [(ngModel)]="persona.telefono" [pKeyFilter]="'int'" required>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="celular" class="form-label-p"> Celular</label>
+                                    <label for="celular" class="form-label-p"> Celular</label><label for="cedula" class="form-label-p" style="color: rgb(255, 0, 0); padding-left: 2px;"> *</label>
                                     <input type="text" class="form-control" id="celular" name="celular" maxlength="10"
-                                        pInputText [(ngModel)]="persona.celular" [pKeyFilter]="'int'">
-
-                                    <!-- <p-inputMask mask="0999999999"  name="celular" [(ngModel)]="persona.celular"></p-inputMask> -->
-                                    <!-- <input type="text" class="form-control" name="celular" maxlength="10" pInputText [(ngModel)]="persona.celular"> -->
+                                        pInputText [(ngModel)]="persona.celular" [pKeyFilter]="'int'" required>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="correo" class="form-label-p"> Correo</label>
+                                    <label for="correo" class="form-label-p"> Correo</label><label for="cedula" class="form-label-p" style="color: rgb(255, 0, 0); padding-left: 2px;"> *</label>
                                     <input id="correo" type="text" class="form-control" name="correo" maxlength="30"
                                         pInputText [(ngModel)]="persona.correo" class={{verfCorreo}}
-                                        (ngModelChange)="validarCorreo()">
-                                    <!-- <input type="email" class="form-control" name="correo" [(ngModel)]="persona.correo"> -->
+                                        (ngModelChange)="validarCorreo()" required> 
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="username" class="form-label-p"> Username</label>
-                                    <input type="text" class="form-control" name="username" maxlength="15" pInputText
-                                        [(ngModel)]="usuario.username">
+                                    <label for="username" class="form-label-p"> Username</label><label for="cedula" class="form-label-p" style="color: rgb(255, 0, 0); padding-left: 2px;"> *</label>
+                                    <input id="username" type="text" class="form-control" name="username" maxlength="15" pInputText
+                                        [(ngModel)]="usuario.username" required>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="password" class="form-label-p"> Contraseña</label>
-                                    <p-password name="password" [(ngModel)]="usuario.password"
-                                        [toggleMask]="true"></p-password>
-                                    <!-- <input type="password" class="password form-control" name="password"
-                                        [(ngModel)]="usuario.password"> -->
+                                    <label for="password" class="form-label-p"> Contraseña</label><label for="cedula" class="form-label-p" style="color: rgb(255, 0, 0); padding-left: 2px;"> *</label>
+                                    <p-password id="password" name="password" [(ngModel)]="usuario.password"
+                                        [toggleMask]="true" required></p-password>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="password" class="form-label-p"> Repita su Contraseña</label>
-                                    <p-password name="password" [(ngModel)]="verficarPassword"
-                                        [toggleMask]="true"></p-password>
-                                    <!-- <input type="password" class="password form-control" name="password"
-                                        [(ngModel)]="verficarPassword"> -->
+                                    <label for="password" class="form-label-p"> Repita su Contraseña</label><label for="cedula" class="form-label-p" style="color: rgb(255, 0, 0); padding-left: 2px;"> *</label>
+                                    <p-password id="password" name="password" [(ngModel)]="verficarPassword"
+                                        [toggleMask]="true" required></p-password>
                                 </div>
                                 <div class="foto">
                                     <div class="roww">
@@ -166,22 +145,24 @@
                                                 <img [src]="file" class="imagePreview" alt="..." />
                                             </div>
                                             <label class="btn btn-primarys rounded-mid">Foto de Perfil
-                                                <input type="file" class="uploadFile img" value="Upload Photo"
+                                                <input id="file" type="file" class="uploadFile img" value="Upload Photo"
                                                     (change)="imageSelected($event)"
-                                                    style="width: 0px;height: 0px;overflow: hidden;">
+                                                    style="width: 0px;height: 0px;overflow: hidden;" required>
                                             </label>
                                         </div>
                                     </div>
                                 </div>
+                                
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                        (click)=" limpiarCampos()">Cancelar</button>
+                                    <button type="submit" class="btn btn-primary" (click)="registrarUsuario()">Registrarse</button>
+                                </div>
+
                             </form>
 
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                        (click)=" limpiarCampos()">Cancelar</button>
-                    <button type="button" class="btn btn-primary" (click)="registrarUsuario()">Registrarse</button>
                 </div>
             </div>
         </div>
@@ -198,10 +179,8 @@
                 <div class="container w-75 mt-25 me-25 mt-5 shadown">
                     <div class="row align-items-strech">
                         <div class="col bg-white mt-25 p-25 grid p-fluid ">
-
                             <h5 class="titulo" id="titulo" style="text-align: center; padding: 25px;">Recuperaración de
                                 constraseña</h5>
-                            <div *ngIf="cargando">Cargando...</div>
                             <form class="row g-2">
                                 <div class="col-md-12" *ngIf='activarPassword == false'>
                                     <label for="cedula" class="form-label-p"> Cedula</label>

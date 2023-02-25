@@ -8,6 +8,7 @@ import { FundacionService } from 'src/app/Services/fundacion.service';
 import { FotoService } from 'src/app/Services/imagen.service';
 import { MascotaService } from 'src/app/Services/mascota.service';
 import { UsuarioService } from 'src/app/Services/usuario.service';
+import * as pdfMake from "pdfmake/build/pdfmake";
 import Swal from 'sweetalert2';
 
 @Component({
@@ -19,6 +20,7 @@ export class ListMascotaComponent implements OnInit {
 
   pageActual: number = 1;
   public myCounter: number = 0;
+  listaMascota: Mascota[] = [];
   loading: boolean = true;
 
   //VALIDACIONES
@@ -60,7 +62,7 @@ export class ListMascotaComponent implements OnInit {
         this.obtenerMasotas();
       })
     } else {
-      console.log("Usuario no foun => ")
+      console.log("Usuario no encontrado => ")
     }
   }
 
@@ -94,7 +96,7 @@ export class ListMascotaComponent implements OnInit {
   obtenerEstado(estado_adopcion: any): string {
     let estado: string = '';
     if (estado_adopcion == true) {
-      estado = 'NOADOPTAOD';
+      estado = 'NO ADOPTADO';
     } else if (estado_adopcion == false) {
       estado = 'ADOPTADO';
     }
@@ -129,7 +131,7 @@ export class ListMascotaComponent implements OnInit {
 
   actualizarMascota() {
     if (!this.mascota.chipMascota || this.mascota.chipMascota === null || !this.mascota.nombre_mascota || !this.mascota.sexo || !this.mascota.raza || !this.mascota.color || !this.mascota.especie || !this.mascota.descripcion || !this.mascota.estado_mascota) {
-      this.toastrService.error('Uno o más campos vacios', 'Verifique los Campos de texto', {
+      this.toastrService.error('Uno o más campos vacíos', 'Verifique los campos de texto', {
         timeOut: 2000,
       });
     } else {
@@ -155,7 +157,7 @@ export class ListMascotaComponent implements OnInit {
       this.mascotaService.descativarMascota(this.mascota, idMascota).subscribe(data => {
         console.log(data)
         this.obtenerMasotas();
-        this.toastrService.warning('La Mascota a sido eliminada!', 'Mascota Eliminada!', {
+        this.toastrService.warning('La mascota ha sido eliminada!', 'Mascota Eliminada!', {
           timeOut: 1000,
         });
       })
@@ -202,5 +204,104 @@ export class ListMascotaComponent implements OnInit {
 
   cargarImagenMascota() {
     this.fotoService.guararImagenes(this.selectedFile);
+  }
+
+  fechaAct: Date =new Date();
+
+  openPdfTables() {
+    let fechaPrueba: Date = new Date();
+    let fechaFormateada = fechaPrueba.toISOString().substr(0,10);
+    console.log("es la fecha de hoy -> " + fechaFormateada);
+    let tableBody = [];
+    tableBody.push([
+      { text: "ID", bold: true },
+      { text: "CHIP", bold: true },
+      { text: "NOMBRE", bold: true },
+      { text: "RAZA", bold: true },
+      { text: "ESPECIE", bold: true },
+      { text: "ESTADO DE ADOPCIÓN", bold: true },
+      { text: "ID FUNDACIÓN", bold: true },
+      { text: "ID USUARIO", bold: true },
+    ]);
+    this.listaMascota.forEach(mascota => {
+      let fila = [];
+      fila.push(mascota.idMascota);
+      fila.push(mascota.chipMascota);
+      fila.push(mascota.nombre_mascota);
+      fila.push(mascota.raza);
+      fila.push(mascota.especie);
+      fila.push(mascota.estado_adopcion);
+      fila.push(mascota.fundacion);
+      fila.push(mascota.usuario);
+      tableBody.push(fila);
+    });
+
+    const documentDefinition: any = {
+      content: [
+        {
+          text: "Sistema de Adopción de Mascotas",
+          fontSize: 10,
+          style: "header",
+          alignment: 'right',
+          fillColor: 'violet'
+        },
+        {
+          text: fechaFormateada,
+          fontSize: 10,
+          style: "header",
+          alignment: 'left',
+          fillColor: 'violet'
+        },
+        "-----------------------------------------------------------------------------------------------------------------------------------------------------------",
+        {
+          text: this.fechaAct,
+          style: "header",
+          alignment: 'right',
+          fillColor: 'lightblue'
+        },
+        {
+          text: '\n\n',
+        },
+        {
+          text: "Reporte de Mascotas",
+          style: "header",
+          alignment: 'center',
+          fillColor: 'lightblue'
+        },
+        {
+          text: '\n',
+        },
+        {
+          text: 'Listado de mascotas registradas en el sistema de adopción de mascotas.',
+          alignment: 'center',
+          Color: 'green',
+        },
+        {
+          text: '\n',
+        },
+        {
+          table: {
+            layout: 'landscape',
+            fontSize: 5,
+            headerRows: 1,
+            widths: [12, 65, 70, 65, 67, 65, 65, 60],
+            body: tableBody
+          }
+        }
+        
+      ],
+      styles: {
+        header: {
+          fontSize: 20,
+          bold: true,
+          fillColor: 'white'
+        },
+        tableHeader: {
+          fillColor: 'lightblue'
+        }
+      }
+    };
+
+    pdfMake.createPdf(documentDefinition).open();
   }
 }

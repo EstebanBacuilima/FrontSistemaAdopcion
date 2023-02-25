@@ -47,7 +47,7 @@ export class PanelSolicitudesComponent implements OnInit {
         this.obtenerSolicitudes();
       })
     } else {
-      console.log("Usuario no foun => ")
+      console.log("Usuario no encontrado => ")
     }
   }
 

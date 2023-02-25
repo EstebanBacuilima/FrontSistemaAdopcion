@@ -49,7 +49,7 @@ export class PanelSeguimientoAdminComponent implements OnInit {
         this.obtenerMasotas();
       })
     } else {
-      console.log("Usuario no foun => ")
+      console.log("Usuario no encontrado => ")
     }
   }
 

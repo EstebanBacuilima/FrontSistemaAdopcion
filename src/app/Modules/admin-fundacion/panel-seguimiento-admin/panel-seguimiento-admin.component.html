@@ -15,7 +15,7 @@
                             <div class="conBtnr">
                                 <button type="button" class="btn boton btn-outline-success" data-bs-toggle="modal"
                                     data-bs-target="#modal-formulario"
-                                    (click)="capParaSeguimiento(mascotas.idMascota)">Ver Seguimineto</button>
+                                    (click)="capParaSeguimiento(mascotas.idMascota)">Ver seguimiento</button>
                             </div>
                         </div>
                     </div>
@@ -75,8 +75,6 @@
                                     </tr>
 
                                 </table>
-
-
                     </div>
                 </div>
             </div>
@@ -102,11 +100,11 @@
 
 
                                 <form action="#" method="POST" class="row">
-                                    <h3 class="form-title">Detalle del Seguimiento</h3>
+                                    <h3 class="form-title">Detalle del seguimiento</h3>
                                     <div class="steps">
                                         
                                         <div class="wrapper">
-                                            <h5  class="form-title" style="font-size: 15px;">Foto de Evidencia</h5>
+                                            <h5  class="form-title" style="font-size: 15px;">Foto de evidencia</h5>
                                             <img [src]="'http://localhost:5000/imagen/images/' + seguimiento.foto_evidencia" [alt]="seguimiento.foto_evidencia" class="image--cover">
                                         </div>
 
@@ -114,7 +112,7 @@
                                             <div class="form-input">
                                                 <textarea type="text" name="descripcion_visita" id="descripcion_visita"
                                                     [(ngModel)]="seguimiento.descripcion_visita"  onmousedown="return false" onkeydown="return false"></textarea>
-                                                <label for="descripcion_visita">Descripcion General </label>
+                                                <label for="descripcion_visita">Descripción general </label>
                                             </div>
                                         </div>
 
@@ -124,7 +122,7 @@
                                                 <textarea type="text" name="descripcion_mascota"
                                                     id="descripcion_mascota"
                                                     [(ngModel)]="seguimiento.descripcion_mascota"  onmousedown="return false" onkeydown="return false"></textarea>
-                                                    <label for="descripcion_mascota">Descripcion de la Mascota</label>
+                                                    <label for="descripcion_mascota">Descripción de la mascota</label>
                                             </div>
                                         </div>
 
@@ -134,7 +132,7 @@
                                                 <textarea type="text" name="estado_comportamiento"
                                                     id="estado_comportamiento"
                                                     [(ngModel)]="seguimiento.estado_comportamiento"  onmousedown="return false" onkeydown="return false"></textarea>
-                                                    <label for="estado_comportamiento">Comportamiento de la Mascota</label>
+                                                    <label for="estado_comportamiento">Comportamiento de la mascota</label>
                                             </div>
                                         </div>
 
@@ -142,12 +140,12 @@
                                             <div class="form-input">
                                                 <textarea type="text" name="estado_salud" id="estado_salud"
                                                     [(ngModel)]="seguimiento.estado_salud"  onmousedown="return false" onkeydown="return false"></textarea>
-                                                    <label for="estado_salud">Estado de Salud de la Mascota</label>
+                                                    <label for="estado_salud">Estado de salud de la mascota</label>
                                             </div>
                                         </div>
 
                                         <div class="form-submit">
-                                            <button class="form-btn" type="button" tab-target="step-02" (click)="actualizarEstadoSeguimiento()" >Aprobar Seguimiento</button>
+                                            <button class="form-btn" type="button" tab-target="step-02" (click)="actualizarEstadoSeguimiento()" >Aprobar seguimiento</button>
                                         </div>
                                     </div>
                                 </form>

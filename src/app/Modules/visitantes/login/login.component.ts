@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
   validarCorreo() {
     this.valCorreo = this.expCorreo.test(this.persona.correo!);
     if (this.valCorreo) {
-      console.log("Correo Bueno");
+      console.log("Correo bueno");
       // this.verfCorreo = 'form-control is-valid';
     } else {
       // this.verfCorreo = 'ng-invalid ng-dirty';
@@ -114,8 +114,10 @@ export class LoginComponent implements OnInit {
   usuarioRolCapturado: any;
   login() {
     if (!this.usuario.username || !this.usuario.password) {
+
       this.toastrService.error('Uno o más campos vacios', 'Verifique los Campos de texto', {
         timeOut: 1000,
+
       });
     } else {
       this.showSpinner = true;
@@ -124,7 +126,7 @@ export class LoginComponent implements OnInit {
           console.log(data);
           if (data != null) {
             if (data == null) {
-              this.toastrService.warning('Usuario deshabilitado!', 'Aviso!', {
+              this.toastrService.warning('Usuario deshabilitado', 'Aviso!', {
                 timeOut: 4000,
               });
             } else {
@@ -157,8 +159,8 @@ export class LoginComponent implements OnInit {
               }
             }
           } else {
-            console.log("no encontrado")
-            this.toastrService.warning('Username o password incorrectos!', 'Aviso!', {
+            console.log("No encontrado")
+            this.toastrService.warning('Usuario o contraseña incorrectos', 'Aviso!', {
               timeOut: 4000,
             });
             this.usuario = new Usuario;
@@ -259,8 +261,10 @@ export class LoginComponent implements OnInit {
                 });
               }
             } else {
+
               this.toastrService.error('La cédula ingresada ya está registrada!', 'Cedula en uso', {
                 timeOut: 1000,
+
               });
               this.persona.cedula = '';
             }
@@ -313,7 +317,7 @@ export class LoginComponent implements OnInit {
     this.personaService.getPorCedula(this.cedulaValidar).subscribe(
       result => {
         if (result != null) {
-          this.toastrService.success('Verificado', 'Cedula Encontrada', {
+          this.toastrService.success('Verificado', 'Cédula encontrada', {
             timeOut: 1000,
           });
           this.activarPassword = true;
@@ -328,7 +332,7 @@ export class LoginComponent implements OnInit {
               console.log("nueva contra => " + this.verficarPassword)
             })
         } else {
-          this.toastrService.error('Verifique el número de cedula', 'Cedula No existente', {
+          this.toastrService.error('Verifique el número de cedula', 'Cédula no existente', {
             timeOut: 1000,
           });
           this.cedulaValidar = '';

@@ -138,7 +138,7 @@ export class RegFundacionComponent implements OnInit {
   //Validacion de los campos
   registrarFundacion() {
     // || !this.fundacion.logo || this.fundacion.logo === null 
-    if (!this.fundacion.ruc || this.fundacion.ruc === null || !this.fundacion.acronimo || this.fundacion.acronimo === null || this.fundacion.telefono === null || !this.fundacion.direccion || !this.fundacion.correo || this.fundacion.correo === null || !this.fundacion.mision || this.fundacion.mision === null || !this.fundacion.nombre_fundacion || this.fundacion.nombre_fundacion === null
+    if (!this.fundacion.ruc || this.fundacion.ruc === null || !this.fundacion.acronimo || this.fundacion.acronimo === null || !this.fundacion.telefono || !this.fundacion.direccion || !this.fundacion.correo || this.fundacion.correo === null || !this.fundacion.mision || this.fundacion.mision === null || !this.fundacion.nombre_fundacion || this.fundacion.nombre_fundacion === null
       || !this.persona.apellidos || this.persona.apellidos === null || !this.persona.cedula || this.persona.cedula === null || !this.persona.celular || this.persona.celular === null || !this.persona.correo || this.persona.correo === null || !this.persona.celular || this.persona.celular === null || !this.persona.correo || this.persona.correo === null || !this.persona.direccion || this.persona.direccion === null || !this.persona.nombres || this.persona.nombres === null || !this.persona.telefono || this.persona.telefono === null
       || !this.usuario.username || this.usuario.username === null || !this.usuario.password || this.usuario.password === null) {
       this.toastrService.error('Uno o más campos vacios', 'Verifique los Campos de texto', {

@@ -30,7 +30,7 @@ export class CatalgoMascotasComponent implements OnInit {
   idUsuario: any;
   idFundacion: any;
 
-  constructor(private _CargarScript: CargarScrpitsService,private toastrService: ToastrService, private solicitudService: SolicitudAdopcionService, private mascotaService: MascotaService, private fundacionService: FundacionService, private personaService: PersonaService, private usuarioService: UsuarioService, private router: Router) {
+  constructor(private _CargarScript: CargarScrpitsService, private toastrService: ToastrService, private solicitudService: SolicitudAdopcionService, private mascotaService: MascotaService, private fundacionService: FundacionService, private personaService: PersonaService, private usuarioService: UsuarioService, private router: Router) {
     // _CargarScript.Cargar(["formulario"]);
   }
 
@@ -102,6 +102,8 @@ export class CatalgoMascotasComponent implements OnInit {
     this.optenerDatos();
   }
 
+  capIdFundacion:any;
+  capIdRepresentante:any;
   optenerDatos() {
     this.mascotaService.getPorId(this.datainicialMascota).subscribe(data => {
       this.mascota = data
@@ -117,6 +119,16 @@ export class CatalgoMascotasComponent implements OnInit {
       this.mascota.estado_adopcion;
       this.mascota.foto;
       this.mascota.usuario;
+      this.capIdFundacion = this.mascota.fundacion?.idFundacion;
+      this.fundacionService.getPorId(this.capIdFundacion).subscribe(data =>{
+        this.fundacion = data;
+        this.fundacion.nombre_fundacion;
+        this.fundacion.logo;
+        this.capIdRepresentante = this.fundacion.persona.idPersona;
+        this.personaService.getPorId(this.capIdRepresentante).subscribe(dataP =>{
+          this.persona = dataP;
+        })
+      })
       console.log("img = " + this.mascota.foto)
     })
   }
@@ -124,40 +136,54 @@ export class CatalgoMascotasComponent implements OnInit {
   solicitudAdopcion: SolicitudAdopcion = new SolicitudAdopcion;
   capIdSolicitud: any;
 
-  pregunta:any;
+  validarRespuestas(): boolean {
+    for (const pregunta of this.listaPreguntas) {
+        if (!pregunta.respuesta) {
+            return false;
+        }
+    }
+    return true;
+  }
+
+  limpiarInputs() {
+    this.listaPreguntas.forEach(pregunta => {
+      pregunta.respuesta = '';
+    });
+  }
 
   enviarSolicitud() {
-
-    // if (!this.pregunta.respuestas) {
-    //   this.toastrService.error('Revise las preguntas!', 'Preguntas Vacias', {
-    //     timeOut: 2000,
-    //   });
-    // } else {
-      let fechaPrueba: Date = new Date();
-      this.solicitudAdopcion.estado = 'P';
-      this.solicitudAdopcion.fecha_solicitud_adopcion = fechaPrueba;
-      this.solicitudAdopcion.mascota = this.mascota;
-      this.solicitudAdopcion.usuario = this.usuario;
-      this.mascota.estado_adopcion = false;
-      console.log("Mascota enviar -> " + this.mascota.nombre_mascota);
-      console.log("Usuario enviar -> " + this.usuario.persona?.nombres);
-      this.solicitudService.postSolicitud(this.solicitudAdopcion).subscribe(
-        info => {
-          this.mascotaService.updateEstadoAdopcion(this.mascota, this.mascota.idMascota).subscribe(
-            data => {
-              console.log("Se cambio a " + data.estado_adopcion);
-              this.capIdSolicitud = info.idSolicitudAdopcion;
-              this.enviarRespuestas();
-              console.log(info);
-              this.obtenerMasotas();
-              this.toastrService.success('Espera la respuesta', 'Formualario Enviado', {
-                timeOut: 1500,
-              });
-              // this.limpiar();
-            })
-        }
-      );
-    // }
+    if (!this.validarRespuestas()) {
+      this.toastrService.error('Revise las preguntas!', 'Preguntas Vacias', {
+        timeOut: 2000,
+      });
+    } else {
+      console.log("todo lleno")
+    let fechaPrueba: Date = new Date();
+    this.solicitudAdopcion.estado = 'P';
+    this.solicitudAdopcion.fecha_solicitud_adopcion = fechaPrueba;
+    this.solicitudAdopcion.mascota = this.mascota;
+    this.solicitudAdopcion.usuario = this.usuario;
+    this.mascota.estado_adopcion = false;
+    console.log("Mascota enviar -> " + this.mascota.nombre_mascota);
+    console.log("Usuario enviar -> " + this.usuario.persona?.nombres);
+    this.solicitudService.postSolicitud(this.solicitudAdopcion).subscribe(
+      info => {
+        this.mascotaService.updateEstadoAdopcion(this.mascota, this.mascota.idMascota).subscribe(
+          data => {
+            console.log("Se cambio a " + data.estado_adopcion);
+            this.capIdSolicitud = info.idSolicitudAdopcion;
+            this.enviarRespuestas();
+            console.log(info);
+            this.obtenerMasotas();
+            this.toastrService.success('Espera la respuesta', 'Formualario Enviado', {
+              timeOut: 1500,
+            });
+            this.reiniciarSteps()
+            this.limpiarInputs();
+          })
+      }
+    );
+    }
   }
 
   // FORMULARIO
@@ -197,44 +223,58 @@ export class CatalgoMascotasComponent implements OnInit {
     });
   }
 
+  cargarScrip() {
+    // for form steps
+    const allStepBtn = document.querySelectorAll('[tab-target]');
+    const allStepItem = document.querySelectorAll('.step-item');
+    const allTabs = document.querySelectorAll('.step-tab');
 
-  cargarScrip(){
-    let allStepBtn = document.querySelectorAll('[tab-target]');
-    let allStepItem = document.querySelectorAll('.step-item');
-    let allTabs = document.querySelectorAll('.step-tab');
-    let firstStepItem = document.querySelector('.step-item:nth-child(1)');
-
-    if (firstStepItem) {
-        firstStepItem.classList.add('active');
-    }
-
-    allStepBtn.forEach(item => {
+    allStepBtn.forEach((item: Element) => {
       item.addEventListener('click', () => {
-        let currentTabId = item.getAttribute('tab-target');
+        const currentTabId = item.getAttribute('tab-target');
         let currentTab = document.getElementById(`${currentTabId}`);
-  
-        allStepItem.forEach(item => {
+        allStepItem.forEach((item: Element) => {
           item.classList.remove('active');
         });
-  
-        allTabs.forEach((tab, i) => {
-          if (currentTab && currentTab.id === currentTab.id)  {
+
+        allTabs.forEach((tab: Element, i: number) => {
+          if (tab.id === currentTab!.id) {
             for (let l = 0; i >= 0; i--) {
               allStepItem[i].classList.add('active');
             }
           }
         });
-  
-        allTabs.forEach(item => {
+
+        allTabs.forEach((item: Element) => {
           item.classList.remove('active');
         });
-  
-        if (currentTab) {
-          currentTab.classList.add('active');
-          item.classList.add('active');
-        }
-        
+
+        currentTab!.classList.add('active');
+        item.classList.add('active');
       });
     });
   }
+
+  reiniciarSteps() {
+    this.limpiarInputs();
+    const allStepItem = document.querySelectorAll('.step-item');
+    const allTabs = document.querySelectorAll('.step-tab');
+    
+    allStepItem.forEach((item: Element, i: number) => {
+      if (i === 0) {
+        item.classList.add('active');
+      } else {
+        item.classList.remove('active');
+      }
+    });
+  
+    allTabs.forEach((item: Element, i: number) => {
+      if (i === 0) {
+        item.classList.add('active');
+      } else {
+        item.classList.remove('active');
+      }
+    });
+  }
+
 }

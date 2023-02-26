@@ -1,14 +1,3 @@
-.black-border {
-    border: 1px solid black;
-  }
-  
-  /* .container-fluid{
-    margin-top: 20px;
-    border: 1px solid;
-    border-radius: 5px;
-    width: 1200px;
-  } */
-  
   img {
     width: 225px;
     height: 210px;
@@ -22,10 +11,7 @@
     border-radius: 10px;
     background-color: #cfd7ef;
   }
-  /* .cards:hover{
-    background-color: rgb(166, 182, 228);
-  } */
-  
+
   
   table {
     width: 90%;

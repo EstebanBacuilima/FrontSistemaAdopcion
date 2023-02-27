@@ -44,7 +44,7 @@
                                 <td>{{solicitudes.usuario.persona?.cedula}}</td>
                             </tr>
                             <tr>
-                                <td>Gmail</td>
+                                <td>Correo</td>
                                 <td>{{solicitudes.usuario.persona?.correo}}</td>
                             </tr>
                             <tr>
@@ -135,12 +135,12 @@
                         </form> -->
 
 
-                        <h4 class="form-title-sc text-center">Formulario de adopción</h4>
+                        <h4 class="form-title-sc text-center"><b><u>Formulario de adopción</u></b></h4>
 
                         <!-- <h5>Solicitud{{solicitudCap.estado}}</h5> -->
                         <div class="forma">
                             <div class="forma" *ngFor="let preguntaRespuesta of preguntasRespuestas">
-                                <p class="pregunta" >{{ preguntaRespuesta.pregunta.pregunta }}</p>
+                                <p class="pregunta" ><b>{{ preguntaRespuesta.pregunta.pregunta }}</b></p>
                                 <p class="respuesta">{{ preguntaRespuesta.respuestas }}</p>
                             </div>
                         </div>

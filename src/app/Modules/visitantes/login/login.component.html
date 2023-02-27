@@ -32,12 +32,12 @@
                             placeholder="**************" />
                         <i class="input-icon uil uil-eye-slash showHidePw"></i>
 
-                        <small id="password-help">Ingresa más de 5 dígitos</small>
+                        <small id="password-help" class="small" style="color: lightgray;"><i>Ingresa más de 5 dígitos</i></small>
 
                     </div>
 
-                    <div class="d-grid text-center">
-                        <button type="submit" class="btn btn-primary p-button-rounded" style="text-align: center;"
+                    <div class="md-6 d-grid text-center">
+                        <button type="submit" class="btn btn-primarys p-button-rounded" style="text-align: center;"
                             (click)="login()" value="Iniciar Sesión">Iniciar Sesión</button>
                     </div>
 
@@ -47,11 +47,11 @@
                         </div>
                     </ng-container> -->
 
-                    <div class="my3 text-center p-1">
+                    <div class="my3 text-center p-1 ">
 
-                        <span>Aun no tienes cuenta? <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Registrate aqui</a></span><br>
-                        <span>Olvido su contraseña? <a href="#" data-bs-toggle="modal"
-                                data-bs-target="#examplePassword">Click aqui</a></span><br>
+                        <span>¿Aún no tienes cuenta? <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn-reg"><b>Registrate aquí</b></a></span><br>
+                        <span>¿Olvidó su contraseña? <a href="#" data-bs-toggle="modal"
+                                data-bs-target="#examplePassword" class="btn-reg"><b>Click aquí</b></a></span><br>
 
                     </div>
 
@@ -102,24 +102,24 @@
                                     <input id="apellidos" type="text" class="form-control" name="apellidos" maxlength="30" pInputText [(ngModel)]="persona.apellidos" [pKeyFilter]="letrasEspace" required>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="fechaNacimiento" class="form-label-p"> Fecha De Nacimiento</label><label for="cedula" class="form-label-p" style="color: rgb(255, 0, 0); padding-left: 2px;"> *</label>
+                                    <label for="fechaNacimiento" class="form-label-p"> Fecha de nacimiento</label><label for="cedula" class="form-label-p" style="color: rgb(255, 0, 0); padding-left: 2px;"> *</label>
                                     <p-calendar id="fechaNacimiento" type="date" class="fecha" name="fechaNacimiento" 
                                         [(ngModel)]="persona.fechaNacimiento" [showIcon]="true" inputId="icon"
                                         (ngModelChange)="calcularEdad()"></p-calendar>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="direccion" class="form-label-p"> Direccion</label><label for="cedula" class="form-label-p" style="color: rgb(255, 0, 0); padding-left: 2px;"> *</label>
+                                    <label for="direccion" class="form-label-p"> Dirección</label><label for="cedula" class="form-label-p" style="color: rgb(255, 0, 0); padding-left: 2px;"> *</label>
                                     <input id="direccion" type="text" class="form-control" name="direccion" maxlength="50" pInputText
                                         [(ngModel)]="persona.direccion" [pKeyFilter]="letrasEspaceNumbers" required>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="genero" class="form-label-p"> Genero</label><label for="cedula" class="form-label-p" style="color: rgb(255, 0, 0); padding-left: 2px;"> *</label>
+                                    <label for="genero" class="form-label-p"> Género</label><label for="cedula" class="form-label-p" style="color: rgb(255, 0, 0); padding-left: 2px;"> *</label>
                                     <p-dropdown id="genero" name="genero" [options]="generos" 
                                         [(ngModel)]="persona.genero" placeholder="Selecciona un género"
                                         [showClear]="false"[ngClass]="{'is-invalid': !generoValido}" ></p-dropdown>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="telefono" class="form-label-p"> Telefono</label><label for="cedula" class="form-label-p" style="color: rgb(255, 0, 0); padding-left: 2px;"> *</label>
+                                    <label for="telefono" class="form-label-p"> Teléfono</label><label for="cedula" class="form-label-p" style="color: rgb(255, 0, 0); padding-left: 2px;"> *</label>
                                     <input id="telefono" type="text" class="form-control" name="telefono" maxlength="7" pInputText
                                         [(ngModel)]="persona.telefono" [pKeyFilter]="'int'" required>
                                         

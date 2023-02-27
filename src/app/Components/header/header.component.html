@@ -20,7 +20,7 @@
       <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
         <li>
           <a href="#" class="nav-link text_0 px-2 text-white" routerLink="welcome" routerLinkActive="active"
-            *ngIf='isPublico' (click)="home()" >HOME</a>
+            *ngIf='isPublico' (click)="home()" >INICIO</a>
         </li>
         <li>
           <a href="#second" class="nav-link text_2 px-2" routerLinkActive="active" *ngIf='isPublico && visibleSeccion == false'>FUNDACIONES</a>
@@ -33,22 +33,22 @@
 
         <li>
           <a href="#" class="nav-link text_0 px-2 text-white" routerLink="/bienvenido" routerLinkActive="active"
-            *ngIf='isSuperAdmin'><i class="pi pi-home"></i> Home</a>
+            *ngIf='isSuperAdmin'><i class="pi pi-home"></i> Inicio</a>
         </li>
 
         <li>
           <a href="#" class="nav-link text_0 px-2 text-white" routerLink="/bienvenido" routerLinkActive="active"
-            *ngIf='isClient'><i class="pi pi-home"></i> Home</a>
+            *ngIf='isClient'><i class="pi pi-home"></i> Inicio</a>
         </li>
 
         <li>
           <a href="#" class="nav-link text_0 px-2 text-white" routerLink="/bienvenido" routerLinkActive="active"
-            *ngIf='isFundacionAdmin'><i class="pi pi-home"></i> Home</a>
+            *ngIf='isFundacionAdmin'><i class="pi pi-home"></i> Inicio</a>
         </li>
 
         <li>
           <a href="#" class="nav-link text_0 px-2 text-white" routerLink="/bienvenido" routerLinkActive="active"
-            *ngIf='isVoluntario'><i class="pi pi-home"></i> Home</a>
+            *ngIf='isVoluntario'><i class="pi pi-home"></i> Inicio</a>
         </li>
 
 
@@ -108,7 +108,7 @@
 
       </ul>
       <div class="text-center" [hidden]="isLogin">
-        <button type="button" class="btn btn-outline-primary" routerLink="login" (click)="validarPestLogin()" >Login</button>
+        <button type="button" class="btn btn-primarys1" routerLink="login" (click)="validarPestLogin()" >Inicir sesión</button>
       </div>
       <div class="text-center" [hidden]="!isLogin">
         <button type="button" class="btn btn-outline-light me-2" (click)="cerrarSesion()">Cerrar sesión</button>
@@ -183,7 +183,7 @@
 
                           <option value="Masculino">Masculino</option>
                           <option value="Femenino">Femenino</option>
-                          <option value="Otro">Otro</option>
+                          <option value="Otro">Sin especificar</option>
 
                       </select>
                   </div>
@@ -208,7 +208,7 @@
                       <input type="password" class="password form-control" name="password" [(ngModel)]="usuario.password">
                   </div>
                   <br><br><br>
-                  <button type="submit" value="Atualizar" class="btnU btn-outline-dark p-5" class="btn btn-primary" (click)="actualizarFundacion()">Atualizar</button>
+                  <button type="submit" value="Atualizar" class="btnU btn-outline-dark p-5" class="btn btn-primarys" (click)="actualizarFundacion()">Atualizar</button>
               </form>
               </div>
 

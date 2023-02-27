@@ -28,7 +28,7 @@
             maxlength="30"  [(ngModel)]="persona.apellidos" [pKeyFilter]="letrasEspace"  required>
         </div>
         <div class="col-6">
-            <label for="fechaNacimiento" class="form-label-p"> Fecha De Nacimiento</label>
+            <label for="fechaNacimiento" class="form-label-p"> Fecha de nacimiento</label>
             <input id="fechaNacimiento" type="date" class="form-control" name="fechaNacimiento" [(ngModel)]="persona.fechaNacimiento" required>
         </div>
         <div class="col-6">
@@ -37,7 +37,7 @@
                 <option value="" disabled selected>Selecciona un género</option>
                 <option value="masculino">Masculino</option>
                 <option value="famenino">Femenino</option>
-                <option value="otro">Otro</option>
+                <option value="otro">Sin especificar</option>
             </select>
         </div>
         <div class="col-12">
@@ -66,8 +66,8 @@
                 <option value="" disabled selected>Selecciona área de trabajo</option>
                 <option value="Clinica">Clínica</option>
                 <option value="Peluqueria">Peluquería</option>
-                <option value="Peluqueria">Limpieza</option>
-                <option value="Peluqueria">Recreacional y adiestramiento</option>
+                <option value="Limpieza">Limpieza</option>
+                <option value="Recreacional y adiestramiento">Recreacional y adiestramiento</option>
                 <option value="otro">Otro</option>
             </select>
         </div>

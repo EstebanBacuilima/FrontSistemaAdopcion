@@ -60,20 +60,20 @@ export class RegVoluntarioComponent implements OnInit {
         this.fundacion = data;
       })
     } else {
-      console.log("Fundacion no found o esta vacio esa variable=> ")
+      console.log("Fundación no encontrada o esta vacío esa variable=> ")
     }
   }
 
   registrarVoluntario() {
     if (!this.persona.cedula || !this.persona.apellidos || !this.persona.correo || !this.persona.direccion || !this.persona.telefono || !this.persona.celular
       || !this.voluntario.area_trabajo || !this.persona.nombres || !this.persona.fechaNacimiento || !this.persona.genero || !this.usuario.username || !this.usuario.password) {
-      this.toastrService.error('Uno o más campos vacios', 'Verifique los Campos de texto', {
+      this.toastrService.error('Uno o más campos vacíos', 'Verifique los campos de texto', {
         timeOut: 2000,
       });
       return;
     }
     if (this.usuario.password !== this.verficarPassword) {
-      this.toastrService.error('Contraseñas son distintas!', 'Verifique su contraseñ', {
+      this.toastrService.error('Contraseñas son distintas', 'Verifique su contraseña', {
         timeOut: 2000,
       });
       return;
@@ -82,7 +82,7 @@ export class RegVoluntarioComponent implements OnInit {
     this.usuarioService.verfUsername(this.usuario.username).subscribe(
       data => {
         if (data) {
-          this.toastrService.error('Username ya en uso', 'Digite otro username', {
+          this.toastrService.error('Usuario ya en uso', 'Digite otro usuario', {
             timeOut: 3000,
           });
           this.usuario.username = '';
@@ -92,7 +92,7 @@ export class RegVoluntarioComponent implements OnInit {
         this.personaService.getPorCedula(this.persona.cedula).subscribe(
           result => {
             if (result != null) {
-              this.toastrService.error('Digite otra cedula', 'Cedula Existente', {
+              this.toastrService.error('Digite otra cédula', 'Cédula Existente', {
                 timeOut: 3000,
               });
               this.persona.cedula = '';
@@ -111,7 +111,7 @@ export class RegVoluntarioComponent implements OnInit {
                 this.voluntario.usuario = this.usuario;
                 this.cargarImagenVoluntario();
                 this.voluntarioService.postVoluntario(this.voluntario).subscribe(() => {
-                  this.toastrService.success('Su ha guardado el voluntario', 'Voluntario Registrada Exitosamente', {
+                  this.toastrService.success('Su ha guardado el voluntario', 'Voluntario Registrado Exitosamente', {
                     timeOut: 1500,
                   });
                   this.limpiarCampos();
@@ -165,7 +165,7 @@ export class RegVoluntarioComponent implements OnInit {
   }
 
   ValidarCampos() {
-    console.log("ya esta activo")
+    console.log("Ya esta activo")
     document.addEventListener('DOMContentLoaded', () => {
       const forms = document.querySelectorAll('.needs-validation') as NodeListOf<HTMLFormElement>;
       Array.from(forms).forEach(form => {

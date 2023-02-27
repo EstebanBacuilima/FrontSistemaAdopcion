@@ -13,16 +13,12 @@
                 <h2 class="fw-bold text-center py-1"> Bienvenido</h2>
 
                 <!-- LOGIN -->
-
                 <form action="#">
                     <div class="mb-4">
-
                         <label for="username" class="form-label"> Usuario <i class="uil uil-user"></i></label>
                         <input id="username" class="form-control" name="username" type="username"
                             [(ngModel)]="usuario.username" [pKeyFilter]="'alphanum'" maxlength="30" minlength="3"
                             pInputText placeholder="Ingresa tu nombre de usuario" />
-
-
                     </div>
                     <div class="mb-4 input-wrapper input-field">
                         <label for="password" class="password form-label"> Contraseña <i
@@ -78,7 +74,7 @@
                     <div class="row align-items-strech">
                         <div class="col bg-white mt-25 p-25 grid p-fluid ">
 
-                            <h5 class="titulo" id="titulo"  style="text-align: center; padding: 25px;" >FORMULARIO DE REGISTRO</h5>
+                            <h5 class="titulo" id="titulo"  style="text-align: center; padding: 25px;" ><b>FORMULARIO DE REGISTRO</b></h5>
                             <form class="row g-2">
                                 <div  class="col-md-6">
                                     <label for="cedula" class="form-label-p"> Cédula</label>
@@ -159,19 +155,24 @@
                                             <div class="imagePreview" *ngIf="file">
                                                 <img [src]="file" class="imagePreview" alt="..." />
                                             </div>
-                                            <label class="btn btn-primarys rounded-mid">Foto de Perfil
+
+                                            <!--label class="btn btn-primarys rounded-mid">Foto de Perfil
                                                 <input id="file" type="file" class="uploadFile img" value="Upload Photo"
                                                     (change)="imageSelected($event)"
-                                                    style="width: 0px;height: 0px;overflow: hidden;" required>
+                                                    style="width: 0px;height: 0px;overflow: hidden;" required-->
+                                                <label class="btn btn-primarys rounded-mid">Foto de perfil
+                                                <input type="file" class="uploadFile img" value="Upload Photo" (change)="imageSelected($event)"
+                                                    style="width: 0px;height: 0px;overflow: hidden;">
+
                                             </label>
                                         </div>
                                     </div>
                                 </div>
                                 
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                    <button type="button" class="btn btn-primaryss" data-bs-dismiss="modal"
                                         (click)=" limpiarCampos()">Cancelar</button>
-                                    <button type="submit" class="btn btn-primary" (click)="registrarUsuario()">Registrarse</button>
+                                    <button type="submit" class="btn btn-primarys1" (click)="registrarUsuario()">Registrarse</button>
                                 </div>
 
                             </form>

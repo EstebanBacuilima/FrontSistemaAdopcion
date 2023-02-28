@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { CargarScrpitsService } from 'src/app/cargar-scrpits.service';
 import { Persona } from 'src/app/Models/Persona';
 import { Usuario } from 'src/app/Models/Usuario';
@@ -21,7 +22,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   idUsuario: any;
   nombreUsuario: any;
   nombreFoto: any;
-  nombreLogo: any ;
+  nombreLogo: any;
 
   isSuperAdmin: boolean = false;
   isFundacionAdmin: boolean = false;
@@ -39,7 +40,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private usuarioService: UsuarioService,
     private fotoService: FotoService,
     private router: Router,
-    private http: HttpClient
+    private http: HttpClient,
+    private toastrService: ToastrService
   ) {
     _CargarScript.Cargar(["header"]);
   }
@@ -170,30 +172,41 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   // ACTULIZAR PERFIL DE USUARIO
   actualizarFundacion() {
-    this.personaService.updatePersona(this.persona, this.persona.idPersona).subscribe(data => {
-      console.log(data)
-      this.cargarImagenUsuario();
-      this.usuarioService.updateUsuario(this.usuario, this.usuario.idUsuario).subscribe(data => {
-        console.log(data)
-          Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Perfil actualizado correctamente',
-            showConfirmButton: false,
-            timer: 1500
+    this.usuarioService.verfUsername(this.usuario.username).subscribe(
+      data => {
+        if (!data) {
+          this.personaService.updatePersona(this.persona, this.persona.idPersona).subscribe(data => {
+            console.log(data)
+            this.cargarImagenUsuario();
+            this.usuarioService.updateUsuario(this.usuario, this.usuario.idUsuario).subscribe(data => {
+              console.log(data)
+              Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Perfil actualizado correctamente',
+                showConfirmButton: false,
+                timer: 1500
+              })
+            })
           })
-      })
-    })
+        } else {
+          this.toastrService.error('Username ya en uso', 'Digite otro username', {
+            timeOut: 1000,
+          });
+          this.usuario.username = '';
+        }
+      }
+    )
   }
 
-  visibleSeccion:boolean = false;
+  visibleSeccion: boolean = false;
 
-  validarPestLogin(){
+  validarPestLogin() {
     console.log("estoy en el login")
     this.visibleSeccion = true
   }
 
-  home(){
+  home() {
     console.log("estoy en el login")
     this.visibleSeccion = false
   }

@@ -80,14 +80,14 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="reiniciarSteps()" ></button>
             </div>
             <div class="container w-75 mt-25 me-25 mt-5 shadown">
                 <div class="rows align-items-strech">
                     <div class="col bg-white mt-25 p-25 ">
 
                         <form action="#" method="POST" class="row">
-                            <h3 class="form-title">Formulario</h3>
+                            <h3 class="form-title" style="text-align: center;" >Formulario</h3>
                             <div class="steps">
                                 <ul class="step-tab-items">
                                     <li class="step-item active">1</li>
@@ -226,11 +226,44 @@
 
                                         <div class="form-controll">
                                             <div class="form-input">
-
                                                 <input type="text" name="descripcion" id="descripcion"
                                                     [(ngModel)]="mascota.descripcion" onmousedown="return false"
                                                     onkeydown="return false">
                                                 <label for="descripcion">Descripción</label>
+                                            </div>
+                                        </div>
+
+                                        <h4 class="form-title-sc">Datos de la Fundación</h4>
+
+                                        <div class="perfil-usuario-avatar text-center">
+                                            <img [src]="'http://localhost:5000/imagen/images/' + fundacion.logo"
+                                                alt="img-avatar">
+                                        </div>
+                                        <br>
+                                        <div class="grid-2">
+                                            <div class="form-controll">
+                                                <div class="form-input">
+                                                    <input type="text" name="nombre_mascota" id="nombre_mascota"
+                                                        [(ngModel)]="persona.nombres + ' ' + persona.apellidos"  onmousedown="return false"
+                                                        onkeydown="return false">
+                                                    <label for="nombre_mascota">Representante</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-controll">
+                                                <div class="form-input">
+                                                    <input type="text" name="raza" id="raza" [(ngModel)]="fundacion.nombre_fundacion"
+                                                        onmousedown="return false" onkeydown="return false">
+                                                    <label for="raza">Nombre de la Fundación</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-controll">
+                                            <div class="form-input">
+                                                <input type="text" name="descripcion" id="descripcion" style="text-align: center;"
+                                                    [(ngModel)]="'Telf: ' + fundacion.telefono + '      Correo: ' + fundacion.correo" onmousedown="return false"
+                                                    onkeydown="return false">
+                                                <label for="descripcion"> Contactos</label>
                                             </div>
                                         </div>
 
@@ -240,7 +273,7 @@
                                         </div>
                                     </div>
                                     <div class="step-tab" id="step-03">
-                                        <h4 class="form-title-sc">Formulario</h4>
+                                        <h4 class="form-title-sc">Queremos saber de usted</h4>
 
                                         <div class="form-controll" *ngFor="let pregunta of listaPreguntas">
                                             <div class="form-input">

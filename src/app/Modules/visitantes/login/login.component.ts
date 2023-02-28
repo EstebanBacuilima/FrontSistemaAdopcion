@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
     private toastrService: ToastrService
   ) {
     this.ValidarCampos();
-    _CargarScript.Cargar(['validaciones']);
+    _CargarScript.Cargar(["loginFunciones"]);
   }
 
   usuarioRol: string = 'PUBLICO';

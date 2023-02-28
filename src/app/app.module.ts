@@ -30,6 +30,7 @@ import { PanelSolicitudAdminComponent } from './Modules/admin-fundacion/panel-so
 import { PanelSeguimientoAdminComponent } from './Modules/admin-fundacion/panel-seguimiento-admin/panel-seguimiento-admin.component';
 // NUEVOS
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
 // PRIMENG
 import {InputMaskModule} from 'primeng/inputmask';
 import {KeyFilterModule } from 'primeng/keyfilter';

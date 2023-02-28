@@ -24,14 +24,14 @@ export class RegMascotaComponent implements OnInit {
   idUsuario: any;
   idFundacion: any;
 
-  constructor(private _CargarScript: CargarScrpitsService,private toastrService: ToastrService,private mascotaService: MascotaService, private fundacionService: FundacionService, private usuarioService: UsuarioService, private router: Router, private fotoService: FotoService
-  ) {_CargarScript.Cargar(["validaciones"]); }
+  constructor(private _CargarScript: CargarScrpitsService, private toastrService: ToastrService, private mascotaService: MascotaService, private fundacionService: FundacionService, private usuarioService: UsuarioService, private router: Router, private fotoService: FotoService
+  ) { _CargarScript.Cargar(["validaciones"]); }
 
   ngOnInit(): void {
     this.obtenerUsuario();
     this.limpiarCampos();
     this.ValidarCampos();
-    this.limpiarFormulario(); 
+    this.limpiarFormulario();
   }
   obtenerUsuario() {
     this.idUsuario = localStorage.getItem('idUsuario');
@@ -59,29 +59,42 @@ export class RegMascotaComponent implements OnInit {
   }
 
   registraMascota() {
-    if (!this.mascota.chipMascota  || this.mascota.chipMascota === null || !this.mascota.nombre_mascota  || !this.mascota.sexo  || !this.mascota.raza || !this.mascota.color  || !this.mascota.especie || !this.mascota.descripcion || !this.mascota.estado_mascota) {
-        this.toastrService.error('Uno o más campos vacios', 'Verifique los Campos de texto', {
-          timeOut: 2000,
-        });
+    if (!this.mascota.chipMascota || this.mascota.chipMascota === null || !this.mascota.nombre_mascota || !this.mascota.sexo || !this.mascota.raza || !this.mascota.color || !this.mascota.especie || !this.mascota.descripcion || !this.mascota.estado_mascota) {
+      this.toastrService.error('Uno o más campos vacios', 'Verifique los Campos de texto', {
+        timeOut: 2000,
+      });
     } else {
       this.mascotaService.getPorChip(this.mascota.chipMascota).subscribe(
+
+
         result => {
           if (result === null) {
-            this.mascota.foto = this.foto_mascota;
-            this.mascota.estado_adopcion = true;
-            this.mascota.fundacion = this.fundacion;
-            this.mascota.usuario = this.usuario;
-            this.mascota.estado_seguimiento = false;
-            this.mascota.estado = true;
-            this.mascotaService.postMascota(this.mascota).subscribe(
-              info => {
-                this.cargarImagenMascota();
-                this.toastrService.success('Su ha guardado la mascota', 'Mascota Registrada Exitosamente', {
-                  timeOut: 1500,
-                });
-                this.limpiarCampos();
-              }
-            );
+
+            if (this.mascota.chipMascota?.length === 10) {
+              this.mascota.foto = this.foto_mascota;
+              this.mascota.estado_adopcion = true;
+              this.mascota.fundacion = this.fundacion;
+              this.mascota.usuario = this.usuario;
+              this.mascota.estado_seguimiento = false;
+              this.mascota.estado = true;
+              this.mascotaService.postMascota(this.mascota).subscribe(
+                info => {
+                  this.cargarImagenMascota();
+                  this.toastrService.success('Su ha guardado la mascota', 'Mascota Registrada Exitosamente', {
+                    timeOut: 1500,
+                  });
+                  this.limpiarCampos();
+                }
+              );
+
+            }else {
+              this.toastrService.error('El chip de la mascota debe contener 10 dígitos', 'Chip no procesado', {
+                timeOut: 2000,
+              });
+              this.mascota.chipMascota = ''
+            }
+
+                 
           } else {
             this.toastrService.error('Digite un nuevo chip!', 'Chip ya Existente', {
               timeOut: 2000,
@@ -132,17 +145,19 @@ export class RegMascotaComponent implements OnInit {
   }
 
   //VALIDACIONES
-  
+
   // letras y espacios
   letrasEspace: RegExp = /^[a-zA-Z\s]+$/;
   letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\s]+$/;
+  letrasEspeciales: RegExp = /^[a-zA-Z0-9\s.,]+$/;
 
- // Validar que no igrese Guion medio
- onKeyPress(event: KeyboardEvent) {
-  if (event.key === '-') {
-    event.preventDefault();
+
+  // Validar que no igrese Guion medio
+  onKeyPress(event: KeyboardEvent) {
+    if (event.key === '-') {
+      event.preventDefault();
+    }
   }
-}
 
   ValidarCampos() {
     console.log("ya esta activo")

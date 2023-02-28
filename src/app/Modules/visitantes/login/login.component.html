@@ -85,6 +85,8 @@
                                     <input id="cedula" class="form-control" type="text" name="cedula" maxlength="10" pInputText [(ngModel)]="persona.cedula" [pKeyFilter]="'int'" required>
                                 </div>
 
+                                
+
                                 <div class="col-md-6">
                                     <label for="nombres" class="form-label-p">Nombres</label><label for="cedula" class="form-label-p" style="color: rgb(255, 0, 0); padding-left: 2px;"> *</label>
                                     <input id="nombres" type="text" class="form-control" name="nombres" maxlength="30" pInputText [(ngModel)]="persona.nombres" [pKeyFilter]="letrasEspace"(keyup)="formatInput(persona.nombres)" required>

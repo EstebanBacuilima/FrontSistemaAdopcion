@@ -111,8 +111,8 @@
                                         <div class="form-controll" style="padding-top: 40px;">
                                             <div class="form-input">
                                                 <textarea type="text" name="descripcion_visita" id="descripcion_visita"
-                                                    [(ngModel)]="seguimiento.descripcion_visita"  onmousedown="return false" onkeydown="return false"></textarea>
-                                                <label for="descripcion_visita">Descripción general </label>
+                                                    [(ngModel)]="seguimiento.descripcion_visita"  onmousedown="return false" onkeydown="return false" ></textarea>
+                                                <label for="descripcion_visita"  (keypress)="validarCaracteresEspeciales($event)">Descripción general </label>
                                             </div>
                                         </div>
 

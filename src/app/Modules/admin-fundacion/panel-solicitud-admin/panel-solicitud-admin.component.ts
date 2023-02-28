@@ -27,6 +27,7 @@ export class PanelSolicitudAdminComponent implements OnInit {
   fechaFormateada= this.fechaActual.toISOString().substr(0,10);
   //
 
+
   constructor(private solicitudAdopcionService: SolicitudAdopcionService, private mascotaService: MascotaService, private fundacionService: FundacionService, private usuarioService: UsuarioService, private router: Router, private fotoService: FotoService
   ) { }
 
@@ -41,6 +42,8 @@ export class PanelSolicitudAdminComponent implements OnInit {
   solicitud: SolicitudAdopcion = new SolicitudAdopcion;
   idUsuario: any;
   idFundacion: any;
+  //Validacion
+letrasEspeciales: RegExp = /^[a-zA-Z0-9\s.,]+$/;
 
   obtenerUsuario() {
     this.idUsuario = localStorage.getItem('idUsuario');

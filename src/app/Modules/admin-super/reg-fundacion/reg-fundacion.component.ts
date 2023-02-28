@@ -26,19 +26,28 @@ export class RegFundacionComponent implements OnInit {
   // letras y espacios
   letrasEspace: RegExp = /^[a-zA-Z\s]+$/;
   letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\s]+$/;
+  letrasEspeciales: RegExp = /^[a-zA-Z0-9\s.,]+$/;
+
   // letrasEspace: RegExp = /^[a-zA-Z0-9\s^!#$%&*]+$/;
   // letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\s^!#$%&*-]+$/;
-
   // Validar que no igrese Guion medio
   onKeyPress(event: KeyboardEvent) {
     if (event.key === '-') {
       event.preventDefault();
     }
   }
+
   //Validar Edad en el Campo de De fecha
   edad: any;
   validarEdad: boolean = false;
 //Validacion mas tarde
+// validarMayorDeEdad(): boolean {
+//   const fechaNacimiento = new Date(this.persona.fechaNacimiento);
+//   const fechaLimite = new Date();
+//   fechaLimite.setFullYear(fechaLimite.getFullYear() - 18);
+//   return fechaNacimiento <= fechaLimite;
+// }
+
   calcularEdad() {
     let fechaPrueba: any = this.persona.fechaNacimiento;
     let fechaFormateada = fechaPrueba.toISOString().substr(0, 10);
@@ -120,7 +129,7 @@ export class RegFundacionComponent implements OnInit {
       form.reset();
     });
   }
-  //
+  
 
   fundacion: Fundacion = new Fundacion;
   usuario: Usuario = new Usuario;
@@ -161,7 +170,7 @@ export class RegFundacionComponent implements OnInit {
 
 
                       //                    Validar la edad
-                      if (this.validarEdad == true) {
+                      // if (this.validarEdad == true) {
 
 
                         this.usuarioService.verfUsername(this.usuario.username).subscribe(
@@ -208,11 +217,11 @@ export class RegFundacionComponent implements OnInit {
                             }
                           }
                         )
-                      } else {
-                        this.toastrService.warning('Verifique su fecha de nacimiento!', 'Aviso!', {
-                          timeOut: 1000,
-                        });
-                      }
+                      // } else {
+                      //   this.toastrService.warning('Verifique su fecha de nacimiento!', 'Aviso!', {
+                      //     timeOut: 1000,
+                      //   });
+                      // }
                     } else {
                       this.toastrService.error('La cédula debe de tener 10 dígitos', 'cédula no procesada', {
                         timeOut: 3000,
@@ -344,5 +353,4 @@ export class RegFundacionComponent implements OnInit {
     this.filem = '';
     this.limpiarFormulario();
   }
-
 }

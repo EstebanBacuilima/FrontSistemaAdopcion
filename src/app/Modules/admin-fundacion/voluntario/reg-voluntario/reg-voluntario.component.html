@@ -94,13 +94,30 @@
         <div class="foto">
             <div class="roww">
                 <div class="col-md-2 imgUp">
+
+
+
                     <div class="imagePreview" *ngIf="file">
+                        <img [src]="file" class="imagePreview" alt="..." />
+                      </div>
+                      <div class="imagePreview" *ngIf="!file">
+                        <img src="./assets/Imagenes/usuario_2.jpg" class="imagePreview" alt="..." />
+                      </div>
+                      <label class="btn btn-primarys rounded-mid">Foto
+                        <input type="file" class="uploadFile img" value="Upload Photo" (change)="imageSelected($event)"
+                          style="width: 0px;height: 0px;overflow: hidden;">
+                      </label>
+                      
+
+
+
+                    <!-- <div class="imagePreview" *ngIf="file">
                         <img [src]="file" class="imagePreview" alt="..." />
                     </div>
                     <label class="btn btn-primarys rounded-mid">Foto
                         <input type="file" class="uploadFile img" value="Upload Photo" (change)="imageSelected($event)"
                             style="width: 0px;height: 0px;overflow: hidden;">
-                    </label>
+                    </label> -->
                 </div>
             </div>
         </div>

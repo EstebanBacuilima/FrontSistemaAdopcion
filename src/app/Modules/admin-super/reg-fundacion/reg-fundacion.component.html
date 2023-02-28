@@ -35,7 +35,7 @@
         <div class="col-md-6">
             <label for="mision" class="form-label-p"> Misión</label>
             <input id="mision" type="text" class="form-control" name="mision" maxlength="150"
-                [(ngModel)]="fundacion.mision" [pKeyFilter]="letrasEspace" required />
+                [(ngModel)]="fundacion.mision" [pKeyFilter]="letrasEspeciales" required />
         </div>
         <div class="col-12">
             <label for="direccion" class="form-label-p"> Dirección</label>
@@ -128,7 +128,7 @@
 
             <label for="fechaNacimiento" class="form-label-p">Fecha De Nacimiento</label>
             <input id="fechaNacimiento" type="date" class="form-control" name="fechaNacimiento"
-                [(ngModel)]="persona.fechaNacimiento" (ngChange)="calcularEdad()" required />
+                [(ngModel)]="persona.fechaNacimiento" (ngModelChange)="calcularEdad()" required />
         </div>
 
 

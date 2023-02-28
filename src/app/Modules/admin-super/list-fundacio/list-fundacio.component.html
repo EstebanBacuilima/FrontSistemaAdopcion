@@ -78,8 +78,7 @@
                     <div class="col bg-white mt-25 p-25 ">
 
                         <form class="row g-2">
-                            <h2 class="form-titulo text-center">.</h2>
-                            <h2 class="form text-center">Datos Fundación</h2>
+                            <h2 class="form text-center"><b>Datos Fundación</b></h2>
                             <div class="col-md-6">
                                 <label for="ruc" class="form-label-p"> Ruc</label>
                                 <input type="text" class="form-control" name="ruc" [(ngModel)]="fundacion.ruc" readonly onmousedown="return false" onkeydown="return false">
@@ -131,7 +130,7 @@
                             <!-- DISTINTOS -->
 
                             <h2 class="form-titulo text-center">.</h2>
-                            <h2 class="form text-center">Datos Representante</h2>
+                            <h2 class="form text-center"><b>Datos Representante</b></h2>
                             <div class="col-md-6">
                                 <label for="cedula" class="form-label-p"> Cédula</label>
                                 <input type="text" class="form-control" name="cedula" readonly
@@ -180,6 +179,7 @@
                                 <label for="correo" class="form-label-p"> Correo</label>
                                 <input type="email" class="form-control" name="correo" [(ngModel)]="persona.correo">
                             </div>
+                            <h2 class="form-titulo text-center">.</h2>
                             <div class="col-md-6">
                                 <label for="username" class="form-label-p"> Usuario</label>
                                 <input type="text" class="form-control" name="username" 
@@ -209,8 +209,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" (click)="actualizarFundacion()">Actualizar</button>
+                <button type="button" class="btn btn-primarys" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primarys1" (click)="actualizarFundacion()">Actualizar</button>
             </div>
         </div>
     </div>

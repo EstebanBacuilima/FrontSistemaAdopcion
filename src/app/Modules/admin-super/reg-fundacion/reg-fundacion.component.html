@@ -14,9 +14,11 @@
 
 
     <form class="row needs-validation g-2 d-flex justify-content-center" novalidate>
-        <div class="separador">.</div>
+        <br>
 
-        <h2 class="form text-center">Datos Fundación</h2>
+        <!--div class="separador">.</div-->
+
+        <h2 class="form text-center"><b>Datos Fundación</b></h2>
         <div class="col-md-6">
             <label for="ruc" class="form-label-p"> RUC</label>
             <input type="text" class="form-control" id="ruc" name="ruc" maxlength="13" [(ngModel)]="fundacion.ruc"
@@ -76,7 +78,7 @@
                     <div class="imagePreview" *ngIf="filem">
                         <img [src]="filem" class="imagePreview" alt="..." />
                     </div>
-                    <label class="btn btn-primarys rounded-mid">Logo fundación
+                    <label class="btn2 btn-primarys rounded-mid">Logo fundación
 
                         <input type="file" class="uploadFile img" value="Upload Photo" (change)="imageSelectedl($event)" style="width: 0px; height: 0px; overflow: hidden" />
                     </label>
@@ -88,11 +90,8 @@
 
         <!-- DISTINTOS -->
 
-        <h2 class="form text-center">Datos Representante</h2>
 
-
-
-
+        <h2 class="form text-center"><b>Datos Representante</b></h2>
         <div class="col-md-6">
             <label for="cedula" class="form-label-p"> Cédula</label>
             <input id="cedula" type="text" class="form-control" name="cedula" maxlength="10"
@@ -164,9 +163,10 @@
             <input id="correo" type="email" class="form-control" name="correo" [(ngModel)]="persona.correo"
                 class={{verfCorreo2}} (ngModelChange)="validarCorreo2()" required />
         </div>
+        <div class="separador">.</div>
         <div class="col-md-4">
             <label for="username" class="form-label-p"> Usuario</label>
-            <input id="username" type="text" class="form-control datosUser" name="username" maxlength="30" [(ngModel)]="usuario.username" required/>
+            <input id="username" type="text" class="form-control " name="username" maxlength="30" [(ngModel)]="usuario.username" required/>
         </div>
         <div class="col-md-4">
             <label for="password" class="form-label-p"> Contraseña <i class="uil uil-eye-slash showHidePw"></i></label>
@@ -191,7 +191,7 @@
                     <div class="imagePreview" *ngIf="!file">
                         <img src="./assets/Imagenes/usuario_2.jpg" class="imagePreview" alt="Foto de perfil" />
                     </div>
-                    <label class="btn btn-primarys rounded-mid">Foto de Perfil
+                    <label class="btn2 btn-primarys rounded-mid">Foto de Perfil
                         <input type="file" class="uploadFile img" value="Upload Photo" (change)="imageSelected($event)"
                             style="width: 0px; height: 0px; overflow: hidden" />
                     </label>
@@ -209,8 +209,12 @@
                 </div> -->
             </div>
         </div>
-        <button type="button" class="btn btn-info" (click)=" limpiarCampos()">Cancelar</button>
-        <button type="submit" class="btn btn-primary" style="background-color: #32507d;"
-            (click)="registrarFundacion()">Registrarse</button>
+
+        <br>
+        <br>
+            <button type="submit" class="btn btn-primarys1" (click)="registrarFundacion()">Registrarse</button>
+            <br>
+            <br>
+            <button type="button" class="btn btn-primarys" (click)=" limpiarCampos()">Cancelar</button>
     </form>
 </div>

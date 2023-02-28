@@ -39,8 +39,9 @@ export class RegFundacionComponent implements OnInit {
   edad: any;
   validarEdad: boolean = false;
 //Validacion mas tarde
-  calcularEdad() {
-    let fechaPrueba: any = this.persona.fechaNacimiento;
+calcularEdad() {
+  if (this.persona && this.persona.fechaNacimiento) {
+    let fechaPrueba: any = new Date(this.persona.fechaNacimiento);
     let fechaFormateada = fechaPrueba.toISOString().substr(0, 10);
     let anio = parseInt(fechaFormateada.substr(0, 4));
     console.log('fecha formateada ->' + fechaFormateada)
@@ -63,6 +64,7 @@ export class RegFundacionComponent implements OnInit {
       console.log("dato -> " + this.validarEdad)
     }
   }
+}
 
   //Validacion de Correo
   expCorreo: RegExp = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;

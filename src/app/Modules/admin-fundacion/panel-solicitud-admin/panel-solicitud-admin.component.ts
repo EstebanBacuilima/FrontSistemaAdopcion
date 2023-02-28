@@ -59,6 +59,55 @@ export class PanelSolicitudAdminComponent implements OnInit {
   solicitudes: SolicitudAdopcion = new SolicitudAdopcion();
   listaSolicitudes: SolicitudAdopcion[] = [];
 
+  todos() {
+    console.log("El usuario hizo clic en el botón 'Todos'");
+    this.obtenerSolicitudes();
+  }
+
+  capEstado:any;
+
+  pendientes() {
+    this.capEstado = 'P'
+    console.log("El usuario hizo clic en el botón 'Pendientes'", this.capEstado);
+    this.obtenerSocitudesFiltrado(this.capEstado);
+  }
+
+  Proceso() {
+    this.capEstado = 'E'
+    console.log("El usuario hizo clic en el botón 'Proceso'", this.capEstado);
+    this.obtenerSocitudesFiltrado(this.capEstado);
+  }
+
+  Aceptadas() {
+    this.capEstado = 'A'
+    console.log("El usuario hizo clic en el botón 'Aceptadas'", this.capEstado);
+    this.obtenerSocitudesFiltrado(this.capEstado);
+  }
+
+  Rechazadas() {
+    this.capEstado = 'R'
+    console.log("El usuario hizo clic en el botón 'Rechazadas'", this.capEstado);
+    this.obtenerSocitudesFiltrado(this.capEstado);
+  }
+
+
+
+  obtenerSocitudesFiltrado(capEstadoSelecionado:any){
+    this.solicitudAdopcionService.getSolicitudesFiltrado(capEstadoSelecionado,this.idFundacion).subscribe( 
+      data => {
+        this.listaSolicitudes = data.map(
+          result => {
+            let solicitudes = new SolicitudAdopcion;
+            solicitudes = result
+            return solicitudes;
+          }
+        );
+        this.loading = false;
+      },
+      error => (console.log(error))
+    )
+  }
+
   obtenerSolicitudes() {
     this.solicitudAdopcionService.getSolicitudesFundacion(this.idFundacion).subscribe(
       data => {

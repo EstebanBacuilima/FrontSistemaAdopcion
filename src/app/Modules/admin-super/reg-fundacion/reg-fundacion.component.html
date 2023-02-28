@@ -128,7 +128,7 @@
 
             <label for="fechaNacimiento" class="form-label-p">Fecha De Nacimiento</label>
             <input id="fechaNacimiento" type="date" class="form-control" name="fechaNacimiento"
-                [(ngModel)]="persona.fechaNacimiento" (ngChange)="calcularEdad()" required />
+                [(ngModel)]="persona.fechaNacimiento" (ngModelChange)="calcularEdad()" required />
         </div>
 
 

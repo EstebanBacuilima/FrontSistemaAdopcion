@@ -2,12 +2,6 @@
   border: 1px solid black;
 }
 
-/* .container-fluid{
-  margin-top: 20px;
-  border: 1px solid;
-  border-radius: 5px;
-  width: 1200px;
-} */
 
 img {
   width: 225px;
@@ -22,10 +16,6 @@ img {
   border-radius: 10px;
   background-color: #cfd7ef;
 }
-/* .cards:hover{
-  background-color: rgb(166, 182, 228);
-} */
-
 
 table {
   width: 90%;
@@ -101,4 +91,57 @@ button {
   border-radius: 1px;
   width: 100%;
   text-align: center;
+}
+
+/* BOTONES */
+.boton{
+  text-align:center;
+  text-decoration: none;
+  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  display:inline-block;
+  color: #FFF;
+  background: #7F8C8D;
+  padding: 15px 30px;
+  white-space: nowrap;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  margin: 10px 5px;
+  -webkit-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+  
+.azul{
+background: #3498DB;
+}
+
+.azul:hover{
+background: #2980B9;
+}
+
+.verde{
+background: #2ECC71;
+}
+
+.verde:hover{
+background: #27AE60;
+}
+
+.rojo{
+background: #E74C3C;
+}
+
+.rojo:hover{
+background: #C0392B;
+}
+
+.naranja{
+background: #E67E22;
+}
+
+.naranja:hover{
+background: #D35400;
 }

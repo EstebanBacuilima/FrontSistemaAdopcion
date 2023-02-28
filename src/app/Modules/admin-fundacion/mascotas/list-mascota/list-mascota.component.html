@@ -32,7 +32,9 @@
             *ngFor="let mascota of listaMascotas | paginate: {itemsPerPage: 5, currentPage: pageActual}; index as i ">
             <th scope="row">{{i+1}}</th>
             <td>{{mascota.chipMascota}}</td>
-            <td>{{mascota.nombre_mascota}}</td>
+            <td>
+              {{mascota.nombre_mascota}}
+            </td>
             <td>{{mascota.color}}</td>
             <td>{{mascota.sexo}}</td>
             <td>{{mascota.raza}}</td>

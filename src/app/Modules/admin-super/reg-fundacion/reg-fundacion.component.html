@@ -11,7 +11,7 @@
             </button>
         </li>
     </ul>
-    
+
 
     <form class="row needs-validation g-2 d-flex justify-content-center" novalidate>
         <br>
@@ -20,37 +20,61 @@
 
         <h2 class="form text-center"><b>Datos Fundación</b></h2>
         <div class="col-md-6">
-            <label for="ruc" class="form-label-p"> Ruc</label>
-            <input type="text" class="form-control" id="ruc" name="ruc" maxlength="13" [(ngModel)]="fundacion.ruc" [pKeyFilter]="'int'" (keypress)="onKeyPress($event)" required/>
+            <label for="ruc" class="form-label-p"> RUC</label>
+            <input type="text" class="form-control" id="ruc" name="ruc" maxlength="13" [(ngModel)]="fundacion.ruc"
+                [pKeyFilter]="'int'" (keypress)="onKeyPress($event)" required />
         </div>
         <div class="col-md-6">
-
-            <label for="nombre_fundacion" class="form-label-p">Nombre fundación</label>
-            <input  type="text" class="form-control"  id="nombre_fundacion" name="nombre_fundacion"  maxlength="25" [(ngModel)]="fundacion.nombre_fundacion" [pKeyFilter]="letrasEspace" required/>
+            <label for="nombre_fundacion" class="form-label-p">Nombre Fundación</label>
+            <input type="text" class="form-control" id="nombre_fundacion" name="nombre_fundacion" maxlength="25"
+                [(ngModel)]="fundacion.nombre_fundacion" [pKeyFilter]="letrasEspace" required />
         </div>
         <div class="col-md-6">
             <label for="acronimo" class="form-label-p"> Acrónimo</label>
-            <input id="acronimo" type="text" class="form-control" name="acronimo" maxlength="8" [(ngModel)]="fundacion.acronimo" [pKeyFilter]="letrasEspace" required/>
+            <input id="acronimo" type="text" class="form-control" name="acronimo" maxlength="8"
+                [(ngModel)]="fundacion.acronimo" [pKeyFilter]="letrasEspace" required />
         </div>
         <div class="col-md-6">
             <label for="mision" class="form-label-p"> Misión</label>
-            <input id="mision" type="text" class="form-control" name="mision" maxlength="30" [(ngModel)]="fundacion.mision" [pKeyFilter]="letrasEspace" required/>
+            <input id="mision" type="text" class="form-control" name="mision" maxlength="150"
+                [(ngModel)]="fundacion.mision" [pKeyFilter]="letrasEspeciales" required />
         </div>
         <div class="col-12">
             <label for="direccion" class="form-label-p"> Dirección</label>
-            <input id="direccion" type="text" class="form-control" name="direccion" maxlength="30" [(ngModel)]="fundacion.direccion" [pKeyFilter]="letrasEspaceNumbers" required/>
+            <input id="direccion" type="text" class="form-control" name="direccion" maxlength="30"
+                [(ngModel)]="fundacion.direccion" [pKeyFilter]="letrasEspaceNumbers" required />
         </div>
         <div class="col-md-6">
             <label for="telefono" class="form-label-p"> Teléfono</label>
-            <input id="telefono" type="text" class="form-control" name="telefono" maxlength="10" [(ngModel)]="fundacion.telefono"  [pKeyFilter]="'int'" (keypress)="onKeyPress($event)" required/>
+            <input id="telefono" type="text" class="form-control" name="telefono" maxlength="10"
+                [(ngModel)]="fundacion.telefono" [pKeyFilter]="'int'" (keypress)="onKeyPress($event)" required />
         </div>
         <div class="col-md-6">
             <label for="correo" class="form-label-p"> Correo</label>
-            <input id="correo" type="email" class="form-control" name="correo" maxlength="30" [(ngModel)]="fundacion.correo" class={{verfCorreo}}  (ngModelChange)="validarCorreo()" required/>
+            <input id="correo" type="email" class="form-control" name="correo" maxlength="30"
+                [(ngModel)]="fundacion.correo" class={{verfCorreo}} (ngModelChange)="validarCorreo()" required />
         </div>
         <div class="foto">
             <div class="roww">
                 <div class="col-md-2 imgUp">
+                    <div class="imagePreview" *ngIf="filem">
+                        <img [src]="filem" class="imagePreview" alt="Logo Fundación" />
+                    </div>
+                    <div class="imagePreview" *ngIf="!filem">
+                        <img src="./assets/Imagenes/usuario_2.jpg" class="imagePreview" alt="Logo Fundación" />
+                    </div>
+                    <label class="btn btn-primarys rounded-mid">Logo Fundación
+                        <input type="file" class="uploadFile img" value="Upload Photo" (change)="imageSelectedl($event)"
+                            style="width: 0px; height: 0px; overflow: hidden" />
+                    </label>
+                </div>
+
+
+
+
+
+
+                <!-- <div class="col-md-2 imgUp">
                     <div class="imagePreview" *ngIf="filem">
                         <img [src]="filem" class="imagePreview" alt="..." />
                     </div>
@@ -58,7 +82,7 @@
 
                         <input type="file" class="uploadFile img" value="Upload Photo" (change)="imageSelectedl($event)" style="width: 0px; height: 0px; overflow: hidden" />
                     </label>
-                </div>
+                </div> -->
             </div>
         </div>
 
@@ -66,26 +90,53 @@
 
         <!-- DISTINTOS -->
 
+
         <h2 class="form text-center"><b>Datos Representante</b></h2>
         <div class="col-md-6">
             <label for="cedula" class="form-label-p"> Cédula</label>
-            <input id="cedula" type="text" class="form-control" name="cedula" maxlength="10" [(ngModel)]="persona.cedula" [pKeyFilter]="'int'" (keypress)="onKeyPress($event)"  required/>
+            <input id="cedula" type="text" class="form-control" name="cedula" maxlength="10"
+               [(ngModel)]="persona.cedula" [pKeyFilter]="'int'" (keypress)="onKeyPress($event)" required />
         </div>
+
+
+
+
+
         <div class="col-md-6">
             <label for="nombres" class="form-label-p"> Nombres</label>
-            <input id="nombres" type="text" class="form-control" name="nombres" maxlength="30" [(ngModel)]="persona.nombres" [pKeyFilter]="letrasEspace" required/>
+            <input id="nombres" type="text" class="form-control" name="nombres" maxlength="30"
+                [(ngModel)]="persona.nombres" [pKeyFilter]="letrasEspace" required />
         </div>
         <div class="col-12">
             <label for="apellidos" class="form-label-p"> Apellidos</label>
-            <input id="apellidos" type="text" class="form-control" name="apellidos" maxlength="30" [(ngModel)]="persona.apellidos" [pKeyFilter]="letrasEspace" required/>
+            <input id="apellidos" type="text" class="form-control" name="apellidos" maxlength="30"
+                [(ngModel)]="persona.apellidos" [pKeyFilter]="letrasEspace" required />
         </div>
+
+        <!-- El que voy A usar para validar -->
+        
+        <!-- <div class="col-md-6">
+            <label for="fechaNacimiento" class="form-label-p"> Fecha De Nacimiento</label>
+            <p-calendar type="date" class="fecha" name="fechaNacimiento"
+                [(ngModel)]="persona.fechaNacimiento" [showIcon]="true" inputId="icon"
+                (ngModelChange)="calcularEdad()"></p-calendar>
+        </div> -->
+
+        <!-- *EL que voy a validar -->
         <div class="col-12">
-            <label for="fechaNacimiento" class="form-label-p">Fecha de nacimiento</label>
-            <input id="fechaNacimiento" type="date" class="form-control" name="fechaNacimiento" [(ngModel)]="persona.fechaNacimiento" required/>
+
+            <label for="fechaNacimiento" class="form-label-p">Fecha De Nacimiento</label>
+            <input id="fechaNacimiento" type="date" class="form-control" name="fechaNacimiento"
+                [(ngModel)]="persona.fechaNacimiento" (ngModelChange)="calcularEdad()" required />
         </div>
+
+
+        <!-- !No meter -->
         <div class="col-md-6">
             <label for="direccion" class="form-label-p"> Dirección</label>
-            <input id="direccion" type="text" class="form-control" name="direccion" maxlength="30" [(ngModel)]="persona.direccion" [pKeyFilter]="letrasEspaceNumbers" required/>
+
+            <input id="direccion" type="text" class="form-control" name="direccion" maxlength="30"
+                [(ngModel)]="persona.direccion" [pKeyFilter]="letrasEspaceNumbers" required />
         </div>
         <div class="col-md-6">
             <label for="genero" class="form-label-p"> Género</label>
@@ -98,16 +149,19 @@
         </div>
         <div class="col-md-6">
             <label for="telefono" class="form-label-p"> Teléfono</label>
-            <input id="telefono" type="text" class="form-control" name="telefono" maxlength="7" [(ngModel)]="persona.telefono" [pKeyFilter]="'int'" (keypress)="onKeyPress($event)"  required/>
-            
+            <input id="telefono" type="text" class="form-control" name="telefono" maxlength="7"
+                [(ngModel)]="persona.telefono" [pKeyFilter]="'int'" (keypress)="onKeyPress($event)" required />
+
         </div>
         <div class="col-md-6">
             <label for="celular" class="form-label-p"> Celular</label>
-            <input id="cedular" type="text" class="form-control" name="celular" maxlength="10" [(ngModel)]="persona.celular" [pKeyFilter]="'int'" (keypress)="onKeyPress($event)"  required/>
+            <input id="cedular" type="text" class="form-control" name="celular" maxlength="10"
+                [(ngModel)]="persona.celular" [pKeyFilter]="'int'" (keypress)="onKeyPress($event)" required />
         </div>
         <div class="col-md-12">
             <label for="correo" class="form-label-p"> Correo</label>
-            <input id="correo" type="email" class="form-control" name="correo" [(ngModel)]="persona.correo" class={{verfCorreo2}}  (ngModelChange)="validarCorreo2()" required/>
+            <input id="correo" type="email" class="form-control" name="correo" [(ngModel)]="persona.correo"
+                class={{verfCorreo2}} (ngModelChange)="validarCorreo2()" required />
         </div>
         <div class="separador">.</div>
         <div class="col-md-4">
@@ -116,25 +170,46 @@
         </div>
         <div class="col-md-4">
             <label for="password" class="form-label-p"> Contraseña <i class="uil uil-eye-slash showHidePw"></i></label>
-            <input id="password" type="password" class="password form-control" name="password" [(ngModel)]="usuario.password" required/>
+
+            <input id="password" type="password" class="password form-control datosUser" name="password" [(ngModel)]="usuario.password" required/>
+
         </div>
         <div class="col-md-4">
             <label for="password" class="form-label-p"> Repita su Contraseña</label>
-            <input id="password" type="password" class="password form-control" name="password" [(ngModel)]="verficarPassword" required/>
+
+            <input id="password" type="password" class="password form-control datosUser" name="password" [(ngModel)]="verficarPassword" required/>
+
         </div>
         <div class="foto">
             <div class="roww">
+
+
                 <div class="col-md-2 imgUp">
                     <div class="imagePreview" *ngIf="file">
-                        <img [src]="file" class="imagePreview" alt="..." />
+                        <img [src]="file" class="imagePreview" alt="Foto de perfil" />
+                    </div>
+                    <div class="imagePreview" *ngIf="!file">
+                        <img src="./assets/Imagenes/usuario_2.jpg" class="imagePreview" alt="Foto de perfil" />
                     </div>
                     <label class="btn2 btn-primarys rounded-mid">Foto de Perfil
                         <input type="file" class="uploadFile img" value="Upload Photo" (change)="imageSelected($event)"
                             style="width: 0px; height: 0px; overflow: hidden" />
                     </label>
                 </div>
+
+
+                <!-- <div class="col-md-2 imgUp">
+                    <div class="imagePreview" *ngIf="file">
+                        <img [src]="file" class="imagePreview" alt="..." />
+                    </div>
+                    <label class="btn btn-primarys rounded-mid">Foto de Perfil
+                        <input type="file" class="uploadFile img" value="Upload Photo" (change)="imageSelected($event)"
+                            style="width: 0px; height: 0px; overflow: hidden" />
+                    </label>
+                </div> -->
             </div>
         </div>
+
         <br>
         <br>
             <button type="submit" class="btn btn-primarys1" (click)="registrarFundacion()">Registrarse</button>

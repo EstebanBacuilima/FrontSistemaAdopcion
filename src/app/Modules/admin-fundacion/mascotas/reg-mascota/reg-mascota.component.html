@@ -1,84 +1,198 @@
-<div class="container px-1 ">
+<div class="container px-1">
+  <ul class="nav justify-content-center">
+    <li class="col-md-6">
+      <button type="button" class="btn btnA form-control">
+        Registrar Mascota
+      </button>
+    </li>
+    <li class="col-md-6">
+      <button
+        type="button"
+        class="btn btnO form-control"
+        routerLink="/list-mascota"
+      >
+        Listar Mascotas
+      </button>
+    </li>
+  </ul>
 
-    <ul class="nav justify-content-center">
-        <li class="col-md-6">
-            <button type="button" class="btn btnA form-control" >Registrar Mascota</button>
-        </li>
-        <li class="col-md-6">
-            <button type="button" class="btn btnO form-control" routerLink="/list-mascota">Listar Mascotas</button>
-        </li>
-    </ul>
+  <form
+    class="row needs-validation g-2 d-flex justify-content-center"
+    novalidate
+  >
+    <h2 class="form-label-p text-center">Datos Mascota</h2>
 
-    <form class="row needs-validation g-2 d-flex justify-content-center" novalidate>
+    <div class="col-md-6">
+      <label for="chipMascota" class="form-label-p"> Chip</label>
+      <input
+        id="chipMascota"
+        type="text"
+        class="form-control"
+        name="chipMascota"
+        maxlength="10"
+        [(ngModel)]="mascota.chipMascota"
+        [pKeyFilter]="'int'"
+        (keypress)="onKeyPress($event)"
+        required
+      />
+    </div>
+    <div class="col-md-6">
+      <label for="nombre_mascota" class="form-label-p"> Nombre</label>
+      <input
+        id="nombre_mascota"
+        type="text"
+        class="form-control"
+        name="nombre_mascota"
+        maxlength="30"
+        [(ngModel)]="mascota.nombre_mascota"
+        [pKeyFilter]="letrasEspace"
+        required
+      />
+    </div>
+    <div class="col-md-6">
+      <label for="color" class="form-label-p"> Color</label>
+      <input
+        id="color"
+        type="text"
+        class="form-control"
+        name="color"
+        maxlength="20"
+        [(ngModel)]="mascota.color"
+        [pKeyFilter]="letrasEspace"
+        required
+      />
+    </div>
+    <div class="col-md-6">
+      <label for="sexo" class="form-label-p"> Sexo</label>
+      <select
+        id="sexo"
+        class="form-control"
+        name="sexo"
+        [(ngModel)]="mascota.sexo"
+        required
+      >
+        <option value="" disabled selected>Selecciona un sexo</option>
+        <option value="Macho">Macho</option>
+        <option value="Hembra">Hembra</option>
+        <option value="otro">Otro</option>
+      </select>
+    </div>
+    <div class="col-md-6">
+      <label for="raza" class="form-label-p"> Raza</label>
+      <input
+        id="raza"
+        type="text"
+        class="form-control"
+        name="raza"
+        maxlength="30"
+        [(ngModel)]="mascota.raza"
+        [pKeyFilter]="letrasEspace"
+        required
+      />
+    </div>
+    <div class="col-md-6">
+      <label for="especie" class="form-label-p"> Especie</label>
+      <select
+        id="especie"
+        class="form-control"
+        name="especie"
+        placeholder="Selecciona una especie"
+        [(ngModel)]="mascota.especie"
+        required
+      >
+        <option value="" disabled selected>Selecciona una especie</option>
+        <option value="canino">Canino</option>
+        <option value="felino">Felino</option>
+      </select>
+    </div>
+    <div class="col-md-12">
+      <label for="especie" class="form-label-p"> Esterelizado</label>
+      <select
+        id="especie"
+        class="form-control"
+        name="estado_mascota"
+        placeholder="Selecciona una opcion"
+        [(ngModel)]="mascota.estado_mascota"
+        required
+      >
+        <option value="" disabled selected>Selecciona una opción</option>
+        <option value="true">Si</option>
+        <option value="false">No</option>
+      </select>
+    </div>
+    <div class="col-md-12">
+      <label for="descripcion" class="form-label-p"> Descripción</label>
+      <textarea
+        id="descripcion"
+        pInputTextarea
+        class="form-control"
+        aria-label="With textarea"
+        name="descripcion"
+        maxlength="250"
+        [(ngModel)]="mascota.descripcion"
+        [pKeyFilter]="letrasEspeciales"
+        required
+      ></textarea>
+    </div>
 
-        <h2 class="form-label-p text-center">Datos Mascota</h2>
+    <br />
+    <div class="foto">
+      <div class="roww">
+        <div class="col-md-2 imgUp">
 
-        <div class="col-md-6">
-            <label for="chipMascota" class="form-label-p"> Chip</label>
-            <input id="chipMascota" type="text" class="form-control" name="chipMascota"
-             maxlength="10"  [(ngModel)]="mascota.chipMascota" [pKeyFilter]="'int'" (keypress)="onKeyPress($event)"  required>
-        </div>
-        <div class="col-md-6">
-            <label for="nombre_mascota" class="form-label-p"> Nombre</label>
-            <input id="nombre_mascota" type="text" class="form-control" name="nombre_mascota" 
-            maxlength="30" [(ngModel)]="mascota.nombre_mascota" [pKeyFilter]="letrasEspace" required>
-        </div>
-        <div class="col-md-6">
-            <label for="color" class="form-label-p"> Color</label>
-            <input id="color" type="text" class="form-control" name="color" 
-            maxlength="20"  [(ngModel)]="mascota.color" [pKeyFilter]="letrasEspace" required>
-        </div>
-        <div class="col-md-6">
-            <label for="sexo" class="form-label-p"> Sexo</label>
-            <select id="sexo" class="form-control" name="sexo" [(ngModel)]="mascota.sexo" required>
-                <option value="" disabled selected>Selecciona un sexo</option>
-                <option value="Macho">Macho</option>
-                <option value="Hembra">Hembra</option>
-                <option value="otro">Otro</option>
-            </select>
-        </div>
-        <div class="col-md-6">
-            <label for="raza" class="form-label-p"> Raza</label>
-            <input id="raza" type="text" class="form-control" name="raza" 
-            maxlength="30" [(ngModel)]="mascota.raza" [pKeyFilter]="letrasEspace" required>
-        </div>
-        <div class="col-md-6">
-            <label for="especie" class="form-label-p"> Especie</label>
-            <select id="especie" class="form-control" name="especie" placeholder="Selecciona una especie" [(ngModel)]="mascota.especie" required>
-                <option value="" disabled selected>Selecciona una especie</option>
-                <option value="canino">Canino</option>
-                <option value="felino">Felino</option>
-            </select>
-        </div>
-        <div class="col-md-12">
-            <label for="especie" class="form-label-p"> Esterelizado</label>
-            <select id="especie" class="form-control" name="estado_mascota" placeholder="Selecciona una opcion" [(ngModel)]="mascota.estado_mascota" required>
-                <option value="" disabled selected>Selecciona una opción</option>
-                <option value="true">Si</option>
-                <option value="false">No</option>
-            </select>
-        </div>
-        <div class="col-md-12">
-            <label for="descripcion" class="form-label-p"> Descripción</label>
-            <textarea id="descripcion" pInputTextarea class="form-control" aria-label="With textarea" name="descripcion"
-            maxlength="30"  [(ngModel)]="mascota.descripcion" [pKeyFilter]="letrasEspaceNumbers" required></textarea>
-        </div>
-
-        <br>
-        <div class="foto">
-            <div class="roww">
-                <div class="col-md-2 imgUp">
-                    <div class="imagePreview" *ngIf="file">
-                        <img [src]="file" class="imagePreview" alt="..." />
-                    </div>
-                    <label class="btn btn-primarys rounded-mid">Foto
-                        <input type="file" class="uploadFile img" value="Upload Photo" (change)="imageSelected($event)"
-                            style="width: 0px;height: 0px;overflow: hidden;" required>
-                    </label>
-                </div>
+            <!-- <div class="imagePreview" *ngIf="filem">
+                <img [src]="filem" class="imagePreview" alt="Logo Fundación" />
             </div>
+            <div class="imagePreview" *ngIf="!filem">
+                <img src="./assets/Imagenes/usuario_2.jpg" class="imagePreview" alt="Logo Fundación" />
+            </div>
+            <label class="btn btn-primarys rounded-mid">Logo Fundación
+                <input type="file" class="uploadFile img" value="Upload Photo" (change)="imageSelectedl($event)"
+                    style="width: 0px; height: 0px; overflow: hidden" />
+            </label> -->
+
+            <ng-container *ngIf="!file">
+                <img src="./assets/Imagenes/perro_gato_usuario.png" class="imagePreview" alt="..." />
+              </ng-container>
+              <ng-container *ngIf="file">
+                <div class="imagePreview">
+                  <img [src]="file" class="imagePreview" alt="..." />
+                </div>
+              </ng-container>
+              
+              <label class="btn btn-primarys rounded-mid">Foto
+                <input type="file" class="uploadFile img" (change)="imageSelected($event)"
+                  style="width: 0px; height: 0px; overflow: hidden" required />
+              </label>
+<!--            
+          <div class="imagePreview" *ngIf="file">
+            <img [src]="file" class="imagePreview" alt="Imagen de Mascota" />
+          </div>
+          <label class="btn btn-primarys rounded-mid"
+            >Foto
+            <input
+              type="file"
+              class="uploadFile img"
+              value="Upload Photo"
+              (change)="imageSelected($event)"
+              style="width: 0px; height: 0px; overflow: hidden"
+              required
+            />
+          </label> -->
+
         </div>
-        <button type="submit" class="btn btn-primary" (click)="registraMascota()">Registrar Mascota</button>
-        <button type="button" class="btn " (click)=" limpiarCampos()" style="background-color: #a9cbff; border: #a9cbff;" >Cancelar</button>
-    </form>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" (click)="registraMascota()">
+      Registrar Mascota
+    </button>
+    <button
+      type="button"
+      class="btn"
+      (click)="limpiarCampos()"
+      style="background-color: #a9cbff; border: #a9cbff"
+    >
+      Cancelar
+    </button>
+  </form>
 </div>

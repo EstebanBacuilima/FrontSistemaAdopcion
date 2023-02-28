@@ -16,23 +16,31 @@ import { VoluntarioService } from 'src/app/Services/voluntario.service';
 @Component({
   selector: 'app-reg-voluntario',
   templateUrl: './reg-voluntario.component.html',
-  styleUrls: ['./reg-voluntario.component.css']
+  styleUrls: ['./reg-voluntario.component.css'],
 })
 export class RegVoluntarioComponent implements OnInit {
-
-  voluntario: Voluntario = new Voluntario;
-  fundacion: Fundacion = new Fundacion;
-  usuario: Usuario = new Usuario;
-  user: any
-  persona: Persona = new Persona;
+  voluntario: Voluntario = new Voluntario();
+  fundacion: Fundacion = new Fundacion();
+  usuario: Usuario = new Usuario();
+  user: any;
+  persona: Persona = new Persona();
   idUsuario: any;
   idFundacion: any;
   verficarPassword: any;
 
-
-
-  constructor(private _CargarScript: CargarScrpitsService, private toastrService: ToastrService, private voluntarioService: VoluntarioService, private personaService: PersonaService, private mascotaService: MascotaService, private fundacionService: FundacionService, private usuarioService: UsuarioService, private router: Router, private fotoService: FotoService
-  ) { _CargarScript.Cargar(["validaciones"]) }
+  constructor(
+    private _CargarScript: CargarScrpitsService,
+    private toastrService: ToastrService,
+    private voluntarioService: VoluntarioService,
+    private personaService: PersonaService,
+    private mascotaService: MascotaService,
+    private fundacionService: FundacionService,
+    private usuarioService: UsuarioService,
+    private router: Router,
+    private fotoService: FotoService
+  ) {
+    _CargarScript.Cargar(['validaciones']);
+  }
 
   ngOnInit(): void {
     this.obtenerUsuario();
@@ -47,9 +55,9 @@ export class RegVoluntarioComponent implements OnInit {
         this.user = data;
         this.idFundacion = data.fundacion?.idFundacion;
         this.obtenerFundacionDelUsuario(this.idFundacion);
-      })
+      });
     } else {
-      console.log("Usuario no foun => ")
+      console.log('Usuario no foun => ');
     }
   }
 
@@ -58,29 +66,50 @@ export class RegVoluntarioComponent implements OnInit {
       this.fundacionService.getPorId(this.idFundacion).subscribe((data) => {
         console.log(data);
         this.fundacion = data;
-      })
+      });
     } else {
       console.log("Fundación no encontrada o esta vacío esa variable=> ")
     }
   }
 
   registrarVoluntario() {
-    if (!this.persona.cedula || !this.persona.apellidos || !this.persona.correo || !this.persona.direccion || !this.persona.telefono || !this.persona.celular
-      || !this.voluntario.area_trabajo || !this.persona.nombres || !this.persona.fechaNacimiento || !this.persona.genero || !this.usuario.username || !this.usuario.password) {
-      this.toastrService.error('Uno o más campos vacíos', 'Verifique los campos de texto', {
-        timeOut: 2000,
-      });
+    if (
+      !this.persona.cedula ||
+      !this.persona.apellidos ||
+      !this.persona.correo ||
+      !this.persona.direccion ||
+      !this.persona.telefono ||
+      !this.persona.celular ||
+      !this.voluntario.area_trabajo ||
+      !this.persona.nombres ||
+      !this.persona.fechaNacimiento ||
+      !this.persona.genero ||
+      !this.usuario.username ||
+      !this.usuario.password
+    ) {
+      this.toastrService.error(
+        'Uno o más campos vacios',
+        'Verifique los Campos de texto',
+        {
+          timeOut: 2000,
+        }
+      );
       return;
     }
     if (this.usuario.password !== this.verficarPassword) {
-      this.toastrService.error('Contraseñas son distintas', 'Verifique su contraseña', {
-        timeOut: 2000,
-      });
+      this.toastrService.error(
+        'Contraseñas son distintas!',
+        'Verifique su contraseñ',
+        {
+          timeOut: 2000,
+        }
+      );
       return;
     }
 
-    this.usuarioService.verfUsername(this.usuario.username).subscribe(
-      data => {
+    this.usuarioService
+      .verfUsername(this.usuario.username)
+      .subscribe((data) => {
         if (data) {
           this.toastrService.error('Usuario ya en uso', 'Digite otro usuario', {
             timeOut: 3000,
@@ -89,47 +118,66 @@ export class RegVoluntarioComponent implements OnInit {
           return;
         }
 
-        this.personaService.getPorCedula(this.persona.cedula).subscribe(
-          result => {
-            if (result != null) {
-              this.toastrService.error('Digite otra cédula', 'Cédula Existente', {
+        this.personaService
+          .getPorCedula(this.persona.cedula)
+          .subscribe((result) => {
+            if (this.persona.cedula?.length === 10) {
+              if (result != null) {
+                this.toastrService.error(
+                  'Digite otra cedula',
+                  'Cedula Existente',
+                  {
+                    timeOut: 3000,
+                  }
+                );
+                this.persona.cedula = '';
+                return;
+              }
+
+              this.personaService
+                .postPersona(this.persona)
+                .subscribe((personaData) => {
+                  this.persona.idPersona = personaData.idPersona;
+                  this.usuario.persona = this.persona;
+                  this.usuario.fundacion = this.fundacion;
+                  this.usuario.estado = true;
+                  this.usuario.rol = 'VOLUNTARIO';
+                  this.voluntario.estado = true;
+                  this.usuarioService
+                    .postUsuario(this.usuario)
+                    .subscribe((usuarioData) => {
+                      this.usuario = usuarioData;
+                      this.voluntario.usuario = this.usuario;
+                      this.cargarImagenVoluntario();
+                      this.voluntarioService
+                        .postVoluntario(this.voluntario)
+                        .subscribe(() => {
+                          this.toastrService.success(
+                            'Su ha guardado el voluntario',
+                            'Voluntario Registrada Exitosamente',
+                            {
+                              timeOut: 1500,
+                            }
+                          );
+                          this.limpiarCampos();
+                        });
+                    });
+                });
+            }else {
+              this.toastrService.error('La cédula debe de tener 10 dígitos', 'cédula no procesada', {
                 timeOut: 3000,
               });
               this.persona.cedula = '';
-              return;
             }
-
-            this.personaService.postPersona(this.persona).subscribe(personaData => {
-              this.persona.idPersona = personaData.idPersona;
-              this.usuario.persona = this.persona;
-              this.usuario.fundacion = this.fundacion;
-              this.usuario.estado = true;
-              this.usuario.rol = "VOLUNTARIO";
-              this.voluntario.estado = true;
-              this.usuarioService.postUsuario(this.usuario).subscribe(usuarioData => {
-                this.usuario = usuarioData;
-                this.voluntario.usuario = this.usuario;
-                this.cargarImagenVoluntario();
-                this.voluntarioService.postVoluntario(this.voluntario).subscribe(() => {
-                  this.toastrService.success('Su ha guardado el voluntario', 'Voluntario Registrado Exitosamente', {
-                    timeOut: 1500,
-                  });
-                  this.limpiarCampos();
-                });
-              });
-            });
-
-          }
-        )
-      }
-    );
+          });
+      });
   }
 
   // IMAGEN
   file: any = '';
   image!: any;
   retrievedImage: any;
-  foto_mascota: string = "";
+  foto_mascota: string = '';
   cap_nombre_archivo: any;
   selectedFile!: File;
   public imageSelected(event: any) {
@@ -143,7 +191,7 @@ export class RegVoluntarioComponent implements OnInit {
     };
     this.cap_nombre_archivo = event.target.value;
     this.foto_mascota = this.cap_nombre_archivo.slice(12);
-    console.log("Nombre imagen original => " + this.foto_mascota);
+    console.log('Nombre imagen original => ' + this.foto_mascota);
     this.usuario.foto_perfil = this.foto_mascota;
   }
 
@@ -167,8 +215,10 @@ export class RegVoluntarioComponent implements OnInit {
   ValidarCampos() {
     console.log("Ya esta activo")
     document.addEventListener('DOMContentLoaded', () => {
-      const forms = document.querySelectorAll('.needs-validation') as NodeListOf<HTMLFormElement>;
-      Array.from(forms).forEach(form => {
+      const forms = document.querySelectorAll(
+        '.needs-validation'
+      ) as NodeListOf<HTMLFormElement>;
+      Array.from(forms).forEach((form) => {
         form.addEventListener('submit', (event: Event) => {
           if (!form.checkValidity()) {
             event.preventDefault();
@@ -181,8 +231,10 @@ export class RegVoluntarioComponent implements OnInit {
   }
 
   limpiarFormulario() {
-    const forms = document.querySelectorAll('.needs-validation') as NodeListOf<HTMLFormElement>;
-    Array.from(forms).forEach(form => {
+    const forms = document.querySelectorAll(
+      '.needs-validation'
+    ) as NodeListOf<HTMLFormElement>;
+    Array.from(forms).forEach((form) => {
       form.classList.remove('was-validated');
       form.querySelectorAll('.ng-invalid, .ng-dirty').forEach((input) => {
         input.classList.remove('ng-invalid', 'ng-dirty');
@@ -193,11 +245,11 @@ export class RegVoluntarioComponent implements OnInit {
   //
 
   limpiarCampos() {
-    console.log("Entro a limpiar")
+    console.log('Entro a limpiar');
     this.persona.cedula = '';
     this.persona.correo = '';
     this.persona.genero = '';
-    this.persona.fechaNacimiento = new Date;
+    this.persona.fechaNacimiento = new Date();
     this.persona.direccion = '';
     this.persona.nombres = '';
     this.persona.apellidos = '';
@@ -209,5 +261,4 @@ export class RegVoluntarioComponent implements OnInit {
     this.file = '';
     this.limpiarFormulario();
   }
-
 }

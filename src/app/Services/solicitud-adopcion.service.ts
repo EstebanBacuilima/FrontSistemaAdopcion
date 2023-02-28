@@ -17,6 +17,10 @@ export class SolicitudAdopcionService {
     return this.http.get<SolicitudAdopcion[]>(this.URL+'listarSolicitudesPorFundacion/' + idFundacion);
   }
 
+  getSolicitudesFiltrado(estado: any,idFundacion:any){
+    return this.http.get<SolicitudAdopcion[]>(this.URL+'listarPorEstados/' + estado + '/'+ idFundacion);
+  }
+
   getSolicitudesUsuario(idUsuario: any){
     return this.http.get<SolicitudAdopcion[]>(this.URL+'listarSolicitudesPorUsuario/' + idUsuario);
   }

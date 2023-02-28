@@ -32,15 +32,15 @@
                 </thead>
                 <tbody>
                     <tr style="text-align: center" *ngFor="
-              let voluntario of voluntarios
+              let voluntario of listaVoluntarios
                 | paginate : { itemsPerPage: 10, currentPage: pageActual };
               index as i
             ">
                         <th scope="row">{{ i + 1 }}</th>
-                        <td>{{ voluntario.usuario.persona.cedula}}</td>
-                        <td>{{ voluntario.usuario.persona.nombres }} {{ voluntario.usuario.persona.apellidos }}</td>
-                        <td>{{ voluntario.usuario.persona.direccion }}</td>
-                        <td>{{ voluntario.usuario.persona.telefono }}</td>
+                        <td>{{ voluntario.usuario!.persona!.cedula}}</td>
+                        <td>{{ voluntario.usuario!.persona!.nombres }} {{ voluntario.usuario?.persona?.apellidos }}</td>
+                        <td>{{ voluntario.usuario!.persona!.direccion }}</td>
+                        <td>{{ voluntario.usuario!.persona!.telefono }}</td>
                         <td>{{ voluntario.area_trabajo }}</td>
                         <!-- <td>{{ voluntario.cargo }}</td> -->
                         <td>

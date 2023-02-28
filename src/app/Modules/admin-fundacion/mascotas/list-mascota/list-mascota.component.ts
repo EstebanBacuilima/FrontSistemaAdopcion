@@ -60,6 +60,10 @@ export class ListMascotaComponent implements OnInit {
         this.usuario = data;
         this.idFundacion = data.fundacion?.idFundacion;
         this.obtenerMasotas();
+        this.fundacionService.getPorId(this.idFundacion).subscribe((dataF) => {
+          this.fundacion = dataF;
+          console.log("fundacion name -> " + this.fundacion.nombre_fundacion)
+        })
       })
     } else {
       console.log("Usuario no encontrado => ")
@@ -208,10 +212,20 @@ export class ListMascotaComponent implements OnInit {
 
   fechaAct: Date =new Date();
 
-  openPdfTables() {
+  async openPdfTables() {
+    // console.log("nombre imagen ->" + this.fundacion.logo)
+    // let imagenFundacion = await new Promise((resolve, reject) => {
+    //   let imagen = new Image();
+    //   imagen.onload = () => resolve(imagen);
+    //   imagen.onerror = reject;
+    //   imagen.src = 'http://localhost:5000/imagen/images/' + this.fundacion.logo;
+    // });
+  
     let fechaPrueba: Date = new Date();
     let fechaFormateada = fechaPrueba.toISOString().substr(0,10);
     console.log("es la fecha de hoy -> " + fechaFormateada);
+    console.log("nombre empresa -> " + this.fundacion.nombre_fundacion)
+
     let tableBody = [];
     tableBody.push([
       { text: "ID", bold: true },
@@ -219,25 +233,45 @@ export class ListMascotaComponent implements OnInit {
       { text: "NOMBRE", bold: true },
       { text: "RAZA", bold: true },
       { text: "ESPECIE", bold: true },
+      { text: "DESCRIPCION", bold: true },
       { text: "ESTADO DE ADOPCIÓN", bold: true },
-      { text: "ID FUNDACIÓN", bold: true },
-      { text: "ID USUARIO", bold: true },
     ]);
-    this.listaMascota.forEach(mascota => {
+    this.listaMascotas.forEach(mascota => {
+      let estadoAdopcion 
+      if (mascota.estado_adopcion == true) {
+        estadoAdopcion = "No"
+      } else {
+        estadoAdopcion = "Si"
+      }
+
       let fila = [];
       fila.push(mascota.idMascota);
       fila.push(mascota.chipMascota);
       fila.push(mascota.nombre_mascota);
       fila.push(mascota.raza);
       fila.push(mascota.especie);
-      fila.push(mascota.estado_adopcion);
-      fila.push(mascota.fundacion);
-      fila.push(mascota.usuario);
+      fila.push(mascota.descripcion);
+      fila.push(estadoAdopcion);
       tableBody.push(fila);
     });
 
     const documentDefinition: any = {
+      // image: () => {
+      //   return imagenFundacion.then((imagen) => {
+      //     return {
+      //       image: imagen,
+      //       width: 200, // ajuste el ancho según sea necesario
+      //       alignment: 'center'
+      //     };
+      //   });
+      // },
       content: [
+        // {
+        //   image: await imagenFundacion,
+        //   width: 100,
+        //   alignment: 'center',
+        //   margin: [0, 20]
+        // },
         {
           text: "Sistema de Adopción de Mascotas",
           fontSize: 10,
@@ -266,15 +300,16 @@ export class ListMascotaComponent implements OnInit {
           text: "Reporte de Mascotas",
           style: "header",
           alignment: 'center',
-          fillColor: 'lightblue'
+          fillColor: 'lightblue',
+          color: 'green'
         },
         {
           text: '\n',
         },
         {
-          text: 'Listado de mascotas registradas en el sistema de adopción de mascotas.',
+          text: 'Listado de mascotas registradas de la fundación ' + this.fundacion.nombre_fundacion + 'en el sistema de adopción de mascotas.',
           alignment: 'center',
-          Color: 'green',
+          color: 'black',
         },
         {
           text: '\n',
@@ -282,9 +317,10 @@ export class ListMascotaComponent implements OnInit {
         {
           table: {
             layout: 'landscape',
+            alignment: 'center',
             fontSize: 5,
             headerRows: 1,
-            widths: [12, 65, 70, 65, 67, 65, 65, 60],
+            widths: [12, 70, 65, 65, 60, 100, 80],
             body: tableBody
           }
         }
@@ -301,7 +337,6 @@ export class ListMascotaComponent implements OnInit {
         }
       }
     };
-
     pdfMake.createPdf(documentDefinition).open();
   }
 }

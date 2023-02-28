@@ -84,6 +84,7 @@
                                 <input type="text" class="form-control" name="ruc" [(ngModel)]="fundacion.ruc" readonly onmousedown="return false" onkeydown="return false">
                             </div>
                             <div class="col-md-6">
+
                                 <label for="nombre_fundacion" class="form-label-p"> Nombre Fundación</label>
                                 <input type="text" class="form-control" name="nombre_fundacion"
                                 maxlength="25" [(ngModel)]="fundacion.nombre_fundacion" [pKeyFilter]="letrasEspace"> 
@@ -92,11 +93,12 @@
                                 <label for="acronimo" class="form-label-p"> Acrónimo</label>
                                 <input type="text" class="form-control" name="acronimo"
                                 maxlength="8" [(ngModel)]="fundacion.acronimo" [pKeyFilter]="letrasEspace">
+
                             </div>
                             <div class="col-md-6">
                                 <label for="mision" class="form-label-p"> Misión</label>
                                 <input type="text" class="form-control" name="mision" 
-                                maxlength="30" [(ngModel)]="fundacion.mision" [pKeyFilter]="letrasEspace">
+                                maxlength="150" [(ngModel)]="fundacion.mision" [pKeyFilter]="letrasEspace">
                             </div>
                             <div class="col-12">
                                 <label for="direccion" class="form-label-p"> Dirección</label>

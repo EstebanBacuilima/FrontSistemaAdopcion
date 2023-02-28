@@ -27,6 +27,7 @@ export class PanelSolicitudAdminComponent implements OnInit {
   fechaFormateada= this.fechaActual.toISOString().substr(0,10);
   //
 
+
   constructor(private solicitudAdopcionService: SolicitudAdopcionService, private mascotaService: MascotaService, private fundacionService: FundacionService, private usuarioService: UsuarioService, private router: Router, private fotoService: FotoService
   ) { }
 
@@ -41,6 +42,8 @@ export class PanelSolicitudAdminComponent implements OnInit {
   solicitud: SolicitudAdopcion = new SolicitudAdopcion;
   idUsuario: any;
   idFundacion: any;
+  //Validacion
+letrasEspeciales: RegExp = /^[a-zA-Z0-9\s.,]+$/;
 
   obtenerUsuario() {
     this.idUsuario = localStorage.getItem('idUsuario');
@@ -58,6 +61,55 @@ export class PanelSolicitudAdminComponent implements OnInit {
 
   solicitudes: SolicitudAdopcion = new SolicitudAdopcion();
   listaSolicitudes: SolicitudAdopcion[] = [];
+
+  todos() {
+    console.log("El usuario hizo clic en el botón 'Todos'");
+    this.obtenerSolicitudes();
+  }
+
+  capEstado:any;
+
+  pendientes() {
+    this.capEstado = 'P'
+    console.log("El usuario hizo clic en el botón 'Pendientes'", this.capEstado);
+    this.obtenerSocitudesFiltrado(this.capEstado);
+  }
+
+  Proceso() {
+    this.capEstado = 'E'
+    console.log("El usuario hizo clic en el botón 'Proceso'", this.capEstado);
+    this.obtenerSocitudesFiltrado(this.capEstado);
+  }
+
+  Aceptadas() {
+    this.capEstado = 'A'
+    console.log("El usuario hizo clic en el botón 'Aceptadas'", this.capEstado);
+    this.obtenerSocitudesFiltrado(this.capEstado);
+  }
+
+  Rechazadas() {
+    this.capEstado = 'R'
+    console.log("El usuario hizo clic en el botón 'Rechazadas'", this.capEstado);
+    this.obtenerSocitudesFiltrado(this.capEstado);
+  }
+
+
+
+  obtenerSocitudesFiltrado(capEstadoSelecionado:any){
+    this.solicitudAdopcionService.getSolicitudesFiltrado(capEstadoSelecionado,this.idFundacion).subscribe( 
+      data => {
+        this.listaSolicitudes = data.map(
+          result => {
+            let solicitudes = new SolicitudAdopcion;
+            solicitudes = result
+            return solicitudes;
+          }
+        );
+        this.loading = false;
+      },
+      error => (console.log(error))
+    )
+  }
 
   obtenerSolicitudes() {
     this.solicitudAdopcionService.getSolicitudesFundacion(this.idFundacion).subscribe(

@@ -1,24 +1,23 @@
-
 <!---Section--->
 
 
-<section >
+<section>
   <div id="c-contenido">
     <div id="c-caja">
-        <div class="c-elemento">
-            <img class="imagenes" src="./assets/Imagenes/mascotas.png" >
-        </div>
-        <div class="c-elemento" >
-          <img class="imagenes" src="./assets/Imagenes/Adopcionmascota.jpg" >   
-        </div>
-        <div class="c-elemento">   
-            <img class="imagenes" src="./assets/Imagenes/BMascota.jpg">                        
-        </div>
-        <div class="c-elemento">   
-          <img class="imagenes" src="./assets/Imagenes/MascotaN.jpg">                        
+      <div class="c-elemento">
+        <img class="imagenes" src="./assets/Imagenes/mascotas.png">
+      </div>
+      <div class="c-elemento">
+        <img class="imagenes" src="./assets/Imagenes/Adopcionmascota.jpg">
+      </div>
+      <div class="c-elemento">
+        <img class="imagenes" src="./assets/Imagenes/BMascota.jpg">
+      </div>
+      <div class="c-elemento">
+        <img class="imagenes" src="./assets/Imagenes/MascotaN.jpg">
       </div>
     </div>
-</div>
+  </div>
 
 </section>
 
@@ -27,19 +26,21 @@
 <hr style="color: rgb(113, 10, 209); height: 10px;">
 
 <!---Section--->
-<section  href="#proceso">
+<section href="#proceso">
   <div class="card">
     <img src="./assets/Imagenes/Banneradopta.png" alt="Imagen">
     <div class="info">
-      <h2 >PROCESO PARA ADOPTAR UNA MASCOTA</h2>
+      <h2>PROCESO PARA ADOPTAR UNA MASCOTA</h2>
       <br>
       <p>> Entrar al listado para ver las mascotas disponibles y escoger al que quisieran adoptar.</p>
       <br>
       <p>> Una vez escogido, llenar el formulario de adopción.</p>
       <br>
-      <p>> Después de llenar el formulario y haber mandado llegará directamente a la fundación, quienes analizarán cada caso.</p>
+      <p>> Después de llenar el formulario y haber mandado llegará directamente a la fundación, quienes analizarán cada
+        caso.</p>
       <br>
-      <p>> Después de haber sido aprobado, recibirá una respuesta para coordinar con la fundación para los papeles de la mascota.</p>
+      <p>> Después de haber sido aprobado, recibirá una respuesta para coordinar con la fundación para los papeles de la
+        mascota.</p>
       <br>
       <h6>Finalizamos con una nueva mascota :)</h6>
     </div>
@@ -50,160 +51,129 @@
 
 <!---Section--->
 
-  <section id="second" href="#fundacion" class="testimonials">
-    <div class="heading text-center">
-        <h2>Fundaciones</h2><br>
-    </div>
-    
-    <div class="containere">
-        <div class="row text-center">
-            <div class="col-md-12">
-                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner">
-                      
-                      <div class = "container">
-                        <!-- Item-1 -->
-                        <div *ngFor="let fundacion of listaFundaciones; let first = first" class="carousel-item  text-center" [ngClass]="{'active': first}">
-                          <img
-                          [src]="'http://localhost:5000/imagen/images/' + fundacion.logo" 
-                          alt="Foto de Gino" class="center-block team"
-                        />
-                        <p >{{fundacion.nombre_fundacion}}</p>
-                        <p >
-                          {{fundacion.acronimo}}
-                        </p>
-                        <p >
-                          {{fundacion.mision}}
-                        </p>
-                        <p >{{fundacion.correo}}</p>
-                        <p >{{fundacion.telefono}}</p>
-                        <p >{{fundacion.direccion}}</p>
+<section id="second" href="#fundacion" class="testimonials">
+  <div class="heading text-center">
+    <h2>Fundaciones</h2><br>
+  </div>
 
-                      </div> 
-                    </div>
-                    </div>
-                    <button
-                    class="carousel-control-prev"
-                    type="button"
-                    data-bs-target="#carouselExampleIndicators"
-                    data-bs-slide="prev"
-                  >
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Anterior</span>
-                  </button>
-                  <button
-                    class="carousel-control-next"
-                    type="button"
-                    data-bs-target="#carouselExampleIndicators"
-                    data-bs-slide="next"
-                  >
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Siguiente</span>
-                  </button>
-                </div>
+  <div class="containere">
+    <div class="row text-center">
+      <div class="col-md-12">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner">
+
+            <div class="container">
+              <!-- Item-1 -->
+              <div *ngFor="let fundacion of listaFundaciones; let first = first" class="carousel-item  text-center"
+                [ngClass]="{'active': first}">
+                <img [src]="'http://localhost:5000/imagen/images/' + fundacion.logo" alt="Foto de Gino"
+                  class="center-block team" />
+                <p>{{fundacion.nombre_fundacion}}</p>
+                <p>
+                  {{fundacion.acronimo}}
+                </p>
+                <p>
+                  {{fundacion.mision}}
+                </p>
+                <p>{{fundacion.correo}}</p>
+                <p>{{fundacion.telefono}}</p>
+                <p>{{fundacion.direccion}}</p>
+
+              </div>
             </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Anterior</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Siguiente</span>
+          </button>
         </div>
+      </div>
     </div>
+  </div>
 </section>
 
-
-    <!-- END OF TESTIMONIALS -->
-<!--<section id="second" href="#fundacion">
-  <div class="second containers">
-    <section id="testimonios" class="testimonios seccion-clara">
-      <h2 class="seccion-titulo">Fundaciones</h2>
-      <h3 class="seccion-descripcion">
-        Estas son la fundaciones de la ciudad de Cuenca
-      </h3>
-
-      
-      
-      <div
-        id="testimonios-carrusel"
-        class="carousel carousel-dark slides"
-        data-bs-ride="carousel"
-      >
-      <div class="carousel-inner">
-        <div *ngFor="let fundacion of listaFundaciones; let first = first" class="carousel-item" [ngClass]="{'active': first}">
-          <div class="container">
-            <img
-              class="testimonio-imagen rounded-circle"
-              [src]="'http://localhost:5000/imagen/images/' + fundacion.logo" 
-              alt="Foto de Gino"
-            />
-            <p class="testimonio-texto">{{fundacion.nombre_fundacion}} </p>
-            <p class="testimonio-texto">
-              {{fundacion.acronimo}}
-            </p>
-            <p class="testimonio-texto">
-              {{fundacion.mision}}
-            </p>
-            <p class="testimonio-texto">{{fundacion.correo}}</p>
-            <p class="testimonio-texto">{{fundacion.telefono}}</p>
-            <div class="testimonio-info">
-              <p class="cargo">{{fundacion.direccion}}</p>
+<hr style="color: rgb(113, 10, 209); height: 10px;">
+<!---Section--->
+<!-- <section id="third" href="#mascota">
+  <div class="conta">
+    <div class="heading text-center">
+      <h2>Mascotas en Adopción</h2><br>
+    </div>
+    <div class="container-fluid">
+      <div class="px-lg-5">
+        <div class="row">
+          <div class="cards">
+            <div class="carde" *ngFor="let mascotas of listaMascotas">
+              <div class="box">
+              <h2 class="card-title">{{mascotas.nombre_mascota}}</h2>
+              <img [src]="'http://localhost:5000/imagen/images/' + mascotas.foto" [alt]="mascotas.foto"
+                class="mascotas_foto" />
+              <p class="card-desc">
+                Sexo: {{mascotas.sexo}}<br>
+                Especie: {{mascotas.especie}}<br>
+                Raza: {{mascotas.raza}}<br>
+                Descripción: {{mascotas.descripcion}}<br>
+              </p>
+              <div class="co">
+                <a class="details" href="login" routerLink="/login">ADOPTAR</a>
+              </div>
+            </div>
             </div>
           </div>
         </div>
       </div>
-
-        <button
-          class="carousel-control-prev"
-          type="button"
-          data-bs-target="#testimonios-carrusel"
-          data-bs-slide="prev"
-        >
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Anterior</span>
-        </button>
-        <button
-          class="carousel-control-next"
-          type="button"
-          data-bs-target="#testimonios-carrusel"
-          data-bs-slide="next"
-        >
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Siguiente</span>
-        </button>
-      </div>
-    </section>
+    </div>
   </div>
-</section>-->
-<!--End Section-->
-<hr style="color: rgb(113, 10, 209); height: 10px;">
+</section> -->
+
 <!---Section--->
 <section id="third" href="#mascota">
-  <div class="heading text-center">
-        <h2>Mascotas en Adopción</h2><br>
+  <h1 class="">MASCOTAS EN ADOPCION</h1>
+  <!-- <div class="container-fluid"> -->
+    <div class="px-lg-5">
+      <div class="row">
+        <div class="carta col-xl-3 col-lg-4 col-md-6 mb-4 p-25" *ngFor="let mascotas of listaMascotas">
+          <div class="container-mascota rounded ">
+            <div class="box">
+              <img [src]="'http://localhost:5000/imagen/images/' + mascotas.foto" [alt]="mascotas.foto"
+                class="mascotas_foto" />
+              <div class="content p-4">
+                <h3>{{mascotas.nombre_mascota}}</h3>
+                <p>{{mascotas.sexo}}</p>
+                <p>{{mascotas.especie}}</p>
+                <p>{{mascotas.raza}}</p>
+                <p>{{mascotas.descripcion}}</p>
+                <a class="details" href="login" routerLink="/login">ADOPTAR</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      <!-- </div> -->
     </div>
 
-  <div class="cards">
-  
-  <div class="carde" *ngFor="let mascotas of listaMascotas">
-    <h2 class="card-title">{{mascotas.nombre_mascota}}</h2>
-    <img [src]="'http://localhost:5000/imagen/images/' + mascotas.foto" [alt]="mascotas.foto" class="mascotas_foto"/>
-    <p class="card-desc">
-      Sexo:  {{mascotas.sexo}}<br>
-      Especie:  {{mascotas.especie}}<br>
-      Raza:  {{mascotas.raza}}<br>
-      Descripción:  {{mascotas.descripcion}}<br>      
-    </p>
-    <div class="co">
-      <a class="details" href="login" routerLink="/login">ADOPTAR</a>
-    </div>
   </div>
-  
-</div>
+
 </section>
+
+
+<!--End Section-->
+
 <hr style="color: rgb(113, 10, 209); height: 10px;">
 <section>
   <div class="card">
     <img src="./assets/Imagenes/misionbanner.jpg" alt="Imagen">
     <div class="info">
-      <h2 >¿CÚAL ES EL OBJETIVO DE "ADOPTA NO COMPRES"?</h2>
+      <h2>¿CÚAL ES EL OBJETIVO DE "ADOPTA NO COMPRES"?</h2>
       <br>
       <p>"ADOPTA NO COMPRES" tiene el objetivo de que varias fundaciones puedan registrarse con la funcionalidad de que
-        ingresen a las mascotas que van teniendo en su establecimiento y así poder que varios usuarios puedan adoptar a una de las
+        ingresen a las mascotas que van teniendo en su establecimiento y así poder que varios usuarios puedan adoptar a
+        una de las
         mascotas para que puedan tener una vida mejor de la que tuvieron antes.</p>
       <br>
       <h6>¡¡Y RECUERDA PREFERIBLE ADOPTAR ANTES QUE COMPRAR!!</h6>

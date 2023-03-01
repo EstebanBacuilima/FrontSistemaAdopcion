@@ -31,7 +31,6 @@ export class PanelSeguimientoAdminComponent implements OnInit {
   constructor(private fotoService: FotoService, private seguimientoService: SeguimientoService, private _CargarScript: CargarScrpitsService, private solicitudService: SolicitudAdopcionService, private mascotaService: MascotaService, private fundacionService: FundacionService, private personaService: PersonaService, private usuarioService: UsuarioService, private router: Router) {
   }
 
- 
   ngOnInit(): void {
     this.obtenerUsuario();
   }
@@ -67,7 +66,7 @@ export class PanelSeguimientoAdminComponent implements OnInit {
   listaMascotas: Mascota[] = [];
 
   obtenerMasotas() {
-    this.mascotaService.getAllMascotasEnSeguimiento(this.idFundacion ).subscribe(
+    this.mascotaService.getAllMascotasEnSeguimiento(this.idFundacion).subscribe(
       data => {
         this.listaMascotas = data.map(
           result => {
@@ -111,12 +110,30 @@ export class PanelSeguimientoAdminComponent implements OnInit {
         this.seguimiento.foto_evidencia = result.foto_evidencia;
         this.seguimiento.fecha_seguimiento = result.fecha_seguimiento;
         this.seguimiento.estado = result.estado;
+        this.seguimiento.estadoInforme = result.estadoInforme;
         this.seguimiento.mascota = result.mascota;
       })
   }
 
   actualizarEstadoSeguimiento(){
     this.seguimiento.estado = true;
+    this.seguimiento.estadoInforme = 'A';
+    this.seguimientoService.updateEstadoSeguimiento(this.seguimiento, this.seguimiento.idSeguimiento).subscribe(data => {
+      console.log(data)
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Seguimiento Aprobado',
+        showConfirmButton: false,
+        timer: 1500
+      })
+      this.optenerDatosSeguimiento();
+    })
+  }
+
+  actualizarEstadoSeguimientoRechazado(){
+    this.seguimiento.estado = true;
+    this.seguimiento.estadoInforme = 'P';
     this.seguimientoService.updateEstadoSeguimiento(this.seguimiento, this.seguimiento.idSeguimiento).subscribe(data => {
       console.log(data)
       Swal.fire({

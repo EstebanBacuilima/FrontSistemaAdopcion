@@ -31,12 +31,22 @@ export class PanelSeguimientoAdminComponent implements OnInit {
   constructor(private fotoService: FotoService, private seguimientoService: SeguimientoService, private _CargarScript: CargarScrpitsService, private solicitudService: SolicitudAdopcionService, private mascotaService: MascotaService, private fundacionService: FundacionService, private personaService: PersonaService, private usuarioService: UsuarioService, private router: Router) {
   }
 
-
+ 
   ngOnInit(): void {
     this.obtenerUsuario();
   }
 
   personas: any;
+  //Validacio de Caracteres
+  letrasEspeciales: RegExp = /^[a-zA-Z0-9\s.,]+$/;
+  validarCaracteresEspeciales(event: KeyboardEvent) {
+    const pattern = /^[a-zA-Z0-9]*$/;
+    const inputChar = String.fromCharCode(event.keyCode);
+  
+    if (!pattern.test(inputChar)) {
+      event.preventDefault();
+    }
+  }
 
   obtenerUsuario() {
     this.idUsuario = localStorage.getItem('idUsuario');

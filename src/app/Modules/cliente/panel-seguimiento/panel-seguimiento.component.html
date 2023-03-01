@@ -38,17 +38,18 @@
             <div class="container w-75 mt-25 me-20 mt-5 ">
                 <div class="rows align-items-strech">
                     <div class="col bg-white mt-25 p-25 ">
-                        <mat-tab-group preserveContent dynamicHeight>
-                            <mat-tab routerLinkActive="active" label="Panel Seguimiento">
+                        
+                        <mat-tab-group preserveContent dynamicHeight fitInkBarToContent >
+                            <mat-tab class="matTab" routerLinkActive="active" label="Panel Seguimiento" style="color: #a9b7e2;">
                                 <form action="#" method="POST" class="row">
-                                    <h3 class="form-title">Formulario de seguimiento</h3>
+                                    <h3 class="form-title">Formulario de seguimiento</h3><br>
                                     <div class="steps">
 
                                         <div class="form-controll">
                                             <div class="form-input">
                                                 <textarea type="text" name="descripcion_visita" id="descripcion_visita"
                                                     [(ngModel)]="seguimiento.descripcion_visita"></textarea>
-                                                <label for="descripcion_visita">Descripción General </label>
+                                                <label for="descripcion_visita">Descripción general </label>
                                             </div>
                                         </div>
 
@@ -57,7 +58,7 @@
                                                 <textarea type="text" name="descripcion_mascota"
                                                     id="descripcion_mascota"
                                                     [(ngModel)]="seguimiento.descripcion_mascota"></textarea>
-                                                <label for="descripcion_mascota">Descripción de la Mascota</label>
+                                                <label for="descripcion_mascota">Descripción de la mascota</label>
                                             </div>
                                         </div>
 
@@ -67,7 +68,7 @@
                                                     id="estado_comportamiento"
                                                     [(ngModel)]="seguimiento.estado_comportamiento"></textarea>
                                                 <label for="estado_comportamiento">Describa el comportamiento de la
-                                                    Mascota</label>
+                                                    mascota</label>
                                             </div>
                                         </div>
 
@@ -75,7 +76,7 @@
                                             <div class="form-input">
                                                 <textarea type="text" name="estado_salud" id="estado_salud"
                                                     [(ngModel)]="seguimiento.estado_salud"></textarea>
-                                                <label for="estado_salud">Estado de Salud de la Mascota</label>
+                                                <label for="estado_salud">Estado de salud de la mascota</label>
                                             </div>
                                         </div>
 
@@ -97,7 +98,7 @@
 
                                         <div class="form-submit">
                                             <button class="form-btn" type="button" tab-target="step-02"
-                                                (click)="realizarSeguimiento()">Realizar Seguimiento</button>
+                                                (click)="realizarSeguimiento()">Realizar seguimiento</button>
                                         </div>
                                     </div>
                                 </form>

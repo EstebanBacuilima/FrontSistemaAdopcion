@@ -12,6 +12,7 @@ import { PersonaService } from 'src/app/Services/persona.service';
 import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
 import * as pdfMake from "pdfmake/build/pdfmake";
+import { Fundacion } from 'src/app/Models/Fundacion';
 
 @Component({
   selector: 'app-list-voluntario',
@@ -20,6 +21,7 @@ import * as pdfMake from "pdfmake/build/pdfmake";
 })
 export class ListVoluntarioComponent implements OnInit {
 
+  fundacion: Fundacion = new Fundacion;
   usuario: Usuario = new Usuario;
   persona: Persona = new Persona;
   voluntario: Voluntario = new Voluntario;
@@ -62,17 +64,31 @@ export class ListVoluntarioComponent implements OnInit {
         this.usuario = data;
         this.idFundacion = data.fundacion?.idFundacion;
         this.obtenerVoluntarios();
+        this.fundacionService.getPorId(this.idFundacion).subscribe((dataF) => {
+          this.fundacion = dataF;
+          console.log("fundacion name -> " + this.fundacion.nombre_fundacion)
+        })
       })
     } else {
       console.log("Usuario not found => ")
     }
   }
 
-  voluntarios: any
   obtenerVoluntarios() {
     this.voluntarioService.getVoluntariosFundacion(this.idFundacion).subscribe(
       data => {
-        this.voluntarios = data
+        this.listaVoluntarios = data.map(
+          result => {
+            let voluntario = new Voluntario;
+            voluntario.idVoluntario = result.idVoluntario;
+            voluntario.estado = result.estado;
+            voluntario.area_trabajo = result.area_trabajo;
+            voluntario.usuario = result.usuario;
+            voluntario.usuario!.persona!.cedula = result.usuario?.persona?.cedula;
+            return voluntario;
+          }
+        );
+        this.loading = false;
       },
       error => (console.log(error))
     )
@@ -227,15 +243,21 @@ export class ListVoluntarioComponent implements OnInit {
     let tableBody = [];
     tableBody.push([
       { text: "ID", bold: true },
-      { text: "USUARIO", bold: true },
-      { text: "ESTADO", bold: true },
+      { text: "CEDULA", bold: true },
+      { text: "NOMBRE/APELLIDOS", bold: true },
+      { text: "TELEFONO", bold: true },
+      { text: "CORREO", bold: true },
+      { text: "DIRECCIÓN", bold: true },
       { text: "ÁREA DE TRABAJO", bold: true },
     ]);
     this.listaVoluntarios.forEach(voluntario => {
       let fila = [];
       fila.push(voluntario.idVoluntario);
-      fila.push(voluntario.usuario);
-      fila.push(voluntario.estado);
+      fila.push(voluntario.usuario!.persona!.cedula);
+      fila.push(voluntario.usuario!.persona!.nombres + ' ' + voluntario.usuario!.persona!.apellidos);
+      fila.push(voluntario.usuario!.persona!.telefono);
+      fila.push(voluntario.usuario!.persona!.correo);
+      fila.push(voluntario.usuario!.persona!.direccion);
       fila.push(voluntario.area_trabajo);
       tableBody.push(fila);
     });
@@ -276,7 +298,7 @@ export class ListVoluntarioComponent implements OnInit {
           text: '\n',
         },
         {
-          text: 'Listado de voluntarios registradas en el sistema de adopción de mascotas.',
+          text: 'Listado de voluntarios registrados en la fundación ' + this.fundacion.nombre_fundacion + ' en el sistema de adopción de mascotas.',
           alignment: 'center',
           Color: 'green',
         },
@@ -288,7 +310,7 @@ export class ListVoluntarioComponent implements OnInit {
             layout: 'landscape',
             fontSize: 5,
             headerRows: 1,
-            widths: [12, 65, 70, 65, 67, 65, 65, 60],
+            widths: [12, 68, 120, 64, 70, 65, 65, 60],
             body: tableBody
           }
         }

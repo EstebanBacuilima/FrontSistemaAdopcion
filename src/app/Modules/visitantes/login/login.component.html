@@ -13,16 +13,12 @@
                 <h2 class="fw-bold text-center py-1"> Bienvenido</h2>
 
                 <!-- LOGIN -->
-
                 <form action="#">
                     <div class="mb-4">
-
                         <label for="username" class="form-label"> Usuario <i class="uil uil-user"></i></label>
                         <input id="username" class="form-control" name="username" type="username"
                             [(ngModel)]="usuario.username" [pKeyFilter]="'alphanum'" maxlength="30" minlength="3"
                             pInputText placeholder="Ingresa tu nombre de usuario" />
-
-
                     </div>
                     <div class="mb-4 input-wrapper input-field">
                         <label for="password" class="password form-label"> Contraseña <i
@@ -32,12 +28,12 @@
                             placeholder="**************" />
                         <i class="input-icon uil uil-eye-slash showHidePw"></i>
 
-                        <small id="password-help">Ingresa más de 5 dígitos</small>
+                        <small id="password-help" class="small" style="color: lightgray;"><i>Ingresa más de 5 dígitos</i></small>
 
                     </div>
 
-                    <div class="d-grid text-center">
-                        <button type="submit" class="btn btn-primary p-button-rounded" style="text-align: center;"
+                    <div class="md-6 d-grid text-center">
+                        <button type="submit" class="btn btn-primarys p-button-rounded" style="text-align: center;"
                             (click)="login()" value="Iniciar Sesión">Iniciar Sesión</button>
                     </div>
 
@@ -47,11 +43,11 @@
                         </div>
                     </ng-container> -->
 
-                    <div class="my3 text-center p-1">
+                    <div class="my3 text-center p-1 ">
 
-                        <span>¿Aún no tienes cuenta? <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Registrate aquí</a></span><br>
+                        <span>¿Aún no tienes cuenta? <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn-reg"><b>Registrate aquí</b></a></span><br>
                         <span>¿Olvidó su contraseña? <a href="#" data-bs-toggle="modal"
-                                data-bs-target="#examplePassword">Click aquí</a></span><br>
+                                data-bs-target="#examplePassword" class="btn-reg"><b>Click aquí</b></a></span><br>
 
                     </div>
 
@@ -78,12 +74,14 @@
                     <div class="row align-items-strech">
                         <div class="col bg-white mt-25 p-25 grid p-fluid ">
 
-                            <h5 class="titulo" id="titulo"  style="text-align: center; padding: 25px;" >FORMULARIO DE REGISTRO</h5>
+                            <h5 class="titulo" id="titulo"  style="text-align: center; padding: 25px;" ><b>FORMULARIO DE REGISTRO</b></h5>
                             <form class="row g-2">
                                 <div class="col-md-6">
                                     <label for="cedula" class="form-label-p">Cédula</label> <label for="cedula" class="form-label-p" style="color: rgb(255, 0, 0); padding-left: 2px;"> *</label>
                                     <input id="cedula" class="form-control" type="text" name="cedula" maxlength="10" pInputText [(ngModel)]="persona.cedula" [pKeyFilter]="'int'" required>
                                 </div>
+
+                                
 
                                 <div class="col-md-6">
                                     <label for="nombres" class="form-label-p">Nombres</label><label for="cedula" class="form-label-p" style="color: rgb(255, 0, 0); padding-left: 2px;"> *</label>
@@ -96,7 +94,7 @@
                                     <input id="apellidos" type="text" class="form-control" name="apellidos" maxlength="30" pInputText [(ngModel)]="persona.apellidos" [pKeyFilter]="letrasEspace" required>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="fechaNacimiento" class="form-label-p"> Fecha De Nacimiento</label><label for="cedula" class="form-label-p" style="color: rgb(255, 0, 0); padding-left: 2px;"> *</label>
+                                    <label for="fechaNacimiento" class="form-label-p"> Fecha de nacimiento</label><label for="cedula" class="form-label-p" style="color: rgb(255, 0, 0); padding-left: 2px;"> *</label>
                                     <p-calendar id="fechaNacimiento" type="date" class="fecha" name="fechaNacimiento" 
                                         [(ngModel)]="persona.fechaNacimiento" [showIcon]="true" inputId="icon"
                                         (ngModelChange)="calcularEdad()"></p-calendar>
@@ -153,19 +151,24 @@
                                             <div class="imagePreview" *ngIf="file">
                                                 <img [src]="file" class="imagePreview" alt="..." />
                                             </div>
-                                            <label class="btn btn-primarys rounded-mid">Foto de Perfil
+
+                                            <!--label class="btn btn-primarys rounded-mid">Foto de Perfil
                                                 <input id="file" type="file" class="uploadFile img" value="Upload Photo"
                                                     (change)="imageSelected($event)"
-                                                    style="width: 0px;height: 0px;overflow: hidden;" required>
+                                                    style="width: 0px;height: 0px;overflow: hidden;" required-->
+                                                <label class="btn btn-primarys rounded-mid">Foto de perfil
+                                                <input type="file" class="uploadFile img" value="Upload Photo" (change)="imageSelected($event)"
+                                                    style="width: 0px;height: 0px;overflow: hidden;">
+
                                             </label>
                                         </div>
                                     </div>
                                 </div>
                                 
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                    <button type="button" class="btn btn-primaryss" data-bs-dismiss="modal"
                                         (click)=" limpiarCampos()">Cancelar</button>
-                                    <button type="submit" class="btn btn-primary" (click)="registrarUsuario()">Registrarse</button>
+                                    <button type="submit" class="btn btn-primarys1" (click)="registrarUsuario()">Registrarse</button>
                                 </div>
 
                             </form>

@@ -6,71 +6,32 @@
       </button>
     </li>
     <li class="col-md-6">
-      <button
-        type="button"
-        class="btn btnO form-control"
-        routerLink="/list-mascota"
-      >
-        Listar Mascotas
-      </button>
+      <button type="button" class="btn btnO form-control" routerLink="/list-mascota">Listar Mascotas</button>
     </li>
   </ul>
 
-  <form
-    class="row needs-validation g-2 d-flex justify-content-center"
-    novalidate
-  >
-    <h2 class="form-label-p text-center">Datos Mascota</h2>
+  <form class="row needs-validation g-2 d-flex justify-content-center" novalidate>
+    <h2 class="form-label-p text-center"><b>Datos Mascota</b></h2>
 
     <div class="col-md-6">
       <label for="chipMascota" class="form-label-p"> Chip</label>
-      <input
-        id="chipMascota"
-        type="text"
-        class="form-control"
-        name="chipMascota"
-        maxlength="10"
-        [(ngModel)]="mascota.chipMascota"
-        [pKeyFilter]="'int'"
-        (keypress)="onKeyPress($event)"
-        required
-      />
+      <input id="chipMascota" type="text" class="form-control" name="chipMascota" maxlength="10" 
+      [(ngModel)]="mascota.chipMascota" [pKeyFilter]="'int'" (keypress)="onKeyPress($event)" required/>
     </div>
     <div class="col-md-6">
       <label for="nombre_mascota" class="form-label-p"> Nombre</label>
-      <input
-        id="nombre_mascota"
-        type="text"
-        class="form-control"
-        name="nombre_mascota"
-        maxlength="30"
-        [(ngModel)]="mascota.nombre_mascota"
-        [pKeyFilter]="letrasEspace"
-        required
-      />
+      <input id="nombre_mascota" type="text" class="form-control" name="nombre_mascota" maxlength="30"
+        [(ngModel)]="mascota.nombre_mascota" [pKeyFilter]="letrasEspace" required/>
     </div>
     <div class="col-md-6">
       <label for="color" class="form-label-p"> Color</label>
-      <input
-        id="color"
-        type="text"
-        class="form-control"
-        name="color"
-        maxlength="20"
-        [(ngModel)]="mascota.color"
-        [pKeyFilter]="letrasEspace"
-        required
-      />
+      <input id="color" type="text" class="form-control" name="color" maxlength="20"
+        [(ngModel)]="mascota.color" [pKeyFilter]="letrasEspace" required />
     </div>
     <div class="col-md-6">
       <label for="sexo" class="form-label-p"> Sexo</label>
-      <select
-        id="sexo"
-        class="form-control"
-        name="sexo"
-        [(ngModel)]="mascota.sexo"
-        required
-      >
+      <select id="sexo" class="form-control" name="sexo"
+        [(ngModel)]="mascota.sexo" required >
         <option value="" disabled selected>Selecciona un sexo</option>
         <option value="Macho">Macho</option>
         <option value="Hembra">Hembra</option>
@@ -79,27 +40,13 @@
     </div>
     <div class="col-md-6">
       <label for="raza" class="form-label-p"> Raza</label>
-      <input
-        id="raza"
-        type="text"
-        class="form-control"
-        name="raza"
-        maxlength="30"
-        [(ngModel)]="mascota.raza"
-        [pKeyFilter]="letrasEspace"
-        required
-      />
+      <input id="raza" type="text" class="form-control" name="raza" maxlength="30"
+        [(ngModel)]="mascota.raza" [pKeyFilter]="letrasEspace" required/>
     </div>
     <div class="col-md-6">
       <label for="especie" class="form-label-p"> Especie</label>
-      <select
-        id="especie"
-        class="form-control"
-        name="especie"
-        placeholder="Selecciona una especie"
-        [(ngModel)]="mascota.especie"
-        required
-      >
+      <select id="especie" class="form-control" name="especie" placeholder="Selecciona una especie"
+        [(ngModel)]="mascota.especie" required>
         <option value="" disabled selected>Selecciona una especie</option>
         <option value="canino">Canino</option>
         <option value="felino">Felino</option>
@@ -107,14 +54,8 @@
     </div>
     <div class="col-md-12">
       <label for="especie" class="form-label-p"> Esterelizado</label>
-      <select
-        id="especie"
-        class="form-control"
-        name="estado_mascota"
-        placeholder="Selecciona una opcion"
-        [(ngModel)]="mascota.estado_mascota"
-        required
-      >
+      <select id="especie" class="form-control" name="estado_mascota" placeholder="Selecciona una opcion"
+        [(ngModel)]="mascota.estado_mascota" required>
         <option value="" disabled selected>Selecciona una opción</option>
         <option value="true">Si</option>
         <option value="false">No</option>
@@ -122,17 +63,8 @@
     </div>
     <div class="col-md-12">
       <label for="descripcion" class="form-label-p"> Descripción</label>
-      <textarea
-        id="descripcion"
-        pInputTextarea
-        class="form-control"
-        aria-label="With textarea"
-        name="descripcion"
-        maxlength="250"
-        [(ngModel)]="mascota.descripcion"
-        [pKeyFilter]="letrasEspeciales"
-        required
-      ></textarea>
+      <textarea id="descripcion" pInputTextarea class="form-control" aria-label="With textarea"
+        name="descripcion" maxlength="250" [(ngModel)]="mascota.descripcion" [pKeyFilter]="letrasEspeciales" required></textarea>
     </div>
 
     <br />
@@ -179,20 +111,15 @@
               required
             />
           </label> -->
-
+          </div>
         </div>
-      </div>
     </div>
-    <button type="submit" class="btn btn-primary" (click)="registraMascota()">
-      Registrar Mascota
-    </button>
-    <button
-      type="button"
-      class="btn"
-      (click)="limpiarCampos()"
-      style="background-color: #a9cbff; border: #a9cbff"
-    >
-      Cancelar
-    </button>
-  </form>
+        <br>
+
+        <button type="submit" class="btn btn-primarys1" (click)="registraMascota()">Registrar</button>
+        <br>
+        <br>
+        <button type="button" class="btn btn-primarys" (click)=" limpiarCampos()">Cancelar</button>
+      </form>
 </div>
+

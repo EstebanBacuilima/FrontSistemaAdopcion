@@ -308,14 +308,14 @@ export class ListFundacioComponent implements OnInit {
     console.log("es la fecha de hoy -> " + fechaFormateada);
     let tableBody = [];
     tableBody.push([
-      { text: "ID", bold: true, background: 'lightblue' },
-      { text: "RUC", bold: true, background: 'lightblue'},
-      { text: "FUNDACIÓN", bold: true, background: 'lightblue'},
-      { text: "ACRÓNIMO", bold: true, background: 'lightblue'},
-      { text: "MISIÓN", bold: true, background: 'lightblue'},
-      { text: "DIRECCIÓN", bold: true, background: 'lightblue'},
-      { text: "CORREO", bold: true, background: 'lightblue'},
-      { text: "TELÉFONO", bold: true, background: 'lightblue'},
+      { text: "ID", bold: true, background: '' },
+      { text: "RUC", bold: true, background: ''},
+      { text: "FUNDACIÓN", bold: true, background: ''},
+      { text: "ACRÓNIMO", bold: true, background: ''},
+      { text: "MISIÓN", bold: true, background: ''},
+      { text: "DIRECCIÓN", bold: true, background: ''},
+      { text: "CORREO", bold: true, background: ''},
+      { text: "TELÉFONO", bold: true, background: ''},
     ]);
     this.listaFundaciones.forEach(fundacion => {
       let fila = [];

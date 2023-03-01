@@ -62,7 +62,6 @@
     <button type="button" style="background-color: red;" class="btn btn-primary" (click)="openPdfTables()"><i class="pi pi-file-pdf"></i> Generar Reporte</button>
     <!-- <button pButton type="button" (click)="openPdfTables()"  label="Generar Reporte" icon="pi pi-file-pdf"></button> -->
   </div>
-  <h2 class="form-titulo text-center">.</h2>
 </div>
 
 
@@ -71,7 +70,6 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Actualizar</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="container w-75 mt-25 me-25 mt-5 shadown">
@@ -80,7 +78,7 @@
 
             <form class="row g-2 d-flex justify-content-center">
 
-              <h2 class="form-label-p text-center">Datos Mascota</h2>
+              <h2 class="form-label-p text-center"><b>Datos Mascota</b></h2>
 
               <div class="perfil-usuario-avatar text-center">
                 <img [src]="'http://localhost:5000/imagen/images/' + mascota.foto" alt="img-avatar">
@@ -156,8 +154,8 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" (click)="actualizarMascota()" class="btn btn-primary">Actualizar</button>
+        <button type="button" class="btn btn-primarys" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" (click)="actualizarMascota()" class="btn btn-primarys1">Actualizar</button>
       </div>
     </div>
   </div>

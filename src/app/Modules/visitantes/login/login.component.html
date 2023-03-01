@@ -49,9 +49,9 @@
 
                     <div class="my3 text-center p-1">
 
-                        <span>Aun no tienes cuenta? <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Registrate aqui</a></span><br>
-                        <span>Olvido su contraseña? <a href="#" data-bs-toggle="modal"
-                                data-bs-target="#examplePassword">Click aqui</a></span><br>
+                        <span>¿Aún no tienes cuenta? <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Registrate aquí</a></span><br>
+                        <span>¿Olvidó su contraseña? <a href="#" data-bs-toggle="modal"
+                                data-bs-target="#examplePassword">Click aquí</a></span><br>
 
                     </div>
 
@@ -81,7 +81,7 @@
                             <h5 class="titulo" id="titulo"  style="text-align: center; padding: 25px;" >FORMULARIO DE REGISTRO</h5>
                             <form class="row g-2">
                                 <div class="col-md-6">
-                                    <label for="cedula" class="form-label-p">Cedula</label> <label for="cedula" class="form-label-p" style="color: rgb(255, 0, 0); padding-left: 2px;"> *</label>
+                                    <label for="cedula" class="form-label-p">Cédula</label> <label for="cedula" class="form-label-p" style="color: rgb(255, 0, 0); padding-left: 2px;"> *</label>
                                     <input id="cedula" class="form-control" type="text" name="cedula" maxlength="10" pInputText [(ngModel)]="persona.cedula" [pKeyFilter]="'int'" required>
                                 </div>
 
@@ -102,18 +102,18 @@
                                         (ngModelChange)="calcularEdad()"></p-calendar>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="direccion" class="form-label-p"> Direccion</label><label for="cedula" class="form-label-p" style="color: rgb(255, 0, 0); padding-left: 2px;"> *</label>
+                                    <label for="direccion" class="form-label-p"> Dirección</label><label for="cedula" class="form-label-p" style="color: rgb(255, 0, 0); padding-left: 2px;"> *</label>
                                     <input id="direccion" type="text" class="form-control" name="direccion" maxlength="50" pInputText
                                         [(ngModel)]="persona.direccion" [pKeyFilter]="letrasEspaceNumbers" required>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="genero" class="form-label-p"> Genero</label><label for="cedula" class="form-label-p" style="color: rgb(255, 0, 0); padding-left: 2px;"> *</label>
+                                    <label for="genero" class="form-label-p"> Género</label><label for="cedula" class="form-label-p" style="color: rgb(255, 0, 0); padding-left: 2px;"> *</label>
                                     <p-dropdown id="genero" name="genero" [options]="generos" 
                                         [(ngModel)]="persona.genero" placeholder="Selecciona un género"
                                         [showClear]="false"[ngClass]="{'is-invalid': !generoValido}" ></p-dropdown>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="telefono" class="form-label-p"> Telefono</label><label for="cedula" class="form-label-p" style="color: rgb(255, 0, 0); padding-left: 2px;"> *</label>
+                                    <label for="telefono" class="form-label-p"> Teléfono</label><label for="cedula" class="form-label-p" style="color: rgb(255, 0, 0); padding-left: 2px;"> *</label>
                                     <input id="telefono" type="text" class="form-control" name="telefono" maxlength="7" pInputText
                                         [(ngModel)]="persona.telefono" [pKeyFilter]="'int'" required>
                                         

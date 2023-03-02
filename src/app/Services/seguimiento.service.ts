@@ -28,6 +28,11 @@ export class SeguimientoService {
     return this.http.get<Seguimiento[]>(this.URL+'listarSeguimientosPorMascota/' + idMascota);
   }
 
+  getAllSeguimientosInformesPorMascota(idMascota: any){
+    return this.http.get<Seguimiento[]>(this.URL+'listarSeguimientosInformesPorMascota/' + idMascota);
+  }
+
+
   verficarRegistro(idMascota: any, fechaSeguimiento:any){
     console.log("entro al service de verficar Registro")
     console.log("ruta => " + this.URL+'validarRegistros/' + idMascota + '/' + fechaSeguimiento)

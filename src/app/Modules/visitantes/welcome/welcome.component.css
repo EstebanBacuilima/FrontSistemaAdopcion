@@ -39,22 +39,25 @@ body {
     height: auto;
   }
 
-.containeres {
-    min-height: 100vh;
-    width: 100%;
-    display: flex;
-    align-items: center;
-}
-
-
 
 .container {
-    position: absolute;
-    top: 50%;
-    right: 5%;
+    margin: 0 auto;
     align-items: center;
     justify-content: center;
     display: flex;
+    width: 50%;
+    height: 60%;
+    background-color: #897af8;
+}
+
+.cont {
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    width: 50%;
+    height: 60%;
+    background-color: #897af8;
 }
 
 
@@ -119,7 +122,6 @@ body {
 
 
 #third {
-    background-image: url('/assets/Imagenes/pets.png');
     background-color:rgb(114, 125, 226);
     background-position: top center;
     background-size: cover;
@@ -131,8 +133,8 @@ body {
     position: absolute;
     left: 0;
     top: 0;
-    height: 100%;
-    width: 100%;
+    height: auto;
+    width: auto;
     z-index: -1;
 }
 
@@ -146,6 +148,7 @@ body {
     overflow: hidden;
     background-color: #897af8;
   }
+  
   
   .card img {
     width: 100%;
@@ -194,7 +197,7 @@ body {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      align-items: center;
+      align-items: normal;
     }
   }
 /* Estilos de Fundaciones */
@@ -208,15 +211,6 @@ body {
 }
 
 
-
-.carousel-item .container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
 
 .testimonio-imagen {
     height: 200px;
@@ -317,12 +311,10 @@ body {
     padding-top: 10px ;    
 }
 .details{
-    color: #2306ff;
+    color: #ffffff;
     text-decoration: underline;
     cursor: pointer;
     text-align: center;
-    padding: 95px;
-    padding-top:20px ;
 }
 .titulo-mascota{
     padding-top: 30px;
@@ -341,7 +333,7 @@ body {
    
 }
 
-#carrusel-caja {
+#c-caja {
     -moz-animation: automatizacion 15s infinite linear;
     -o-animation: automatizacion 15s infinite linear;
     -webkit-animation: automatizacion 15s infinite linear;
@@ -354,7 +346,7 @@ body {
     height: 500px;
     width: 400%;
 }
-#carrusel-contenido {
+#c-contenido {
     margin: 0 auto;
     overflow: hidden;
     text-align: left;
@@ -363,7 +355,7 @@ body {
     height: 550px;
     width: 100%;
 }
-.carrusel-elemento {
+.c-elemento {
     float: left;
     width: 25%;
 }
@@ -460,3 +452,187 @@ body {
         margin-right: -100%;
     }
 }
+
+.heading {
+    position: relative;
+}
+.testimonials {
+    background: url('/assets/Imagenes/banner.jpeg') center center no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    padding: 130px 0 150px;
+    color: #ffffff;
+    position: relative;
+}
+.testimonials:before {
+    content: "";
+    background: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    position: absolute;
+    left: 0;
+}
+.testimonials .heading h2 {
+    font-size: 25px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.testimonials .heading h2 span {
+    color: #ff0000;
+}
+
+.testimonials p {
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.7;
+    color: #0f0f0f;
+    margin: 20px 0;
+    padding: 0;
+}
+
+.testimonials #carouselExampleIndicators{
+    overflow: hidden;
+}
+
+/* Image */
+.testimonials .carousel-inner .carousel-item .team {
+    width: 100px;
+    height: 100px;
+    border: 2px solid #ff0000;
+    border-radius: 100%;
+    padding: 5px;
+    margin: 50px 0 15px;
+}
+
+.testimonials .carousel-inner .carousel-item h3 {
+    font-size: 20px;
+    color: #ffffff;
+    font-weight: 600;
+    
+}
+
+.testimonials .carousel-inner .carousel-item{
+    overflow: hidden;
+}
+
+.testimonials .carousel-inner .carousel-item h4 {
+    font-size: 14px;
+    font-weight: 300;
+    color: #e2e1e1;
+    margin-bottom: 20px;
+}
+
+.testimonials .carousel-indicators {
+    bottom: -30px;
+}
+
+.testimonials .carousel-indicators li {
+    background-color: #b8b7b7;
+    border-radius: 30px;
+    height: 4px;
+    width: 40px;
+}
+
+.testimonials .carousel-indicators .active {
+    background-color: #ff0000;
+}
+
+.testimonials .control span {
+    cursor: pointer;
+}
+
+.testimonials .icon {
+    height: 40px;
+    width: 40px;
+    background-size: 100%, 100%;
+    border-radius: 50%;
+    font-size: 30px;
+    background-image: none;
+    color: #ffffff;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #34495e;
+  }
+  
+  .cards {
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  
+  .carde {
+    margin: 40px;
+    position: relative;
+    max-width: 200px;
+    max-height: 200px;
+    box-shadow: 0 40px 60px -6px black;
+  }
+  
+  .card-title {
+    display: block;
+    text-align: center;
+    color: #fff;
+    background-color: #6253d3;
+    padding: 2%;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+  }
+  
+  .carde img {
+    width: 100%;
+    height: 98%;
+    object-fit: cover;
+    display: block;
+    position: relative;
+  }
+  
+  .card-desc {
+    display: block;
+    font-size: 1.2rem;
+    position: absolute;
+    height: 0;
+    top: 0;
+    opacity: 0;
+    padding: 18px 8%;
+    background-color: #897af8;
+    overflow-y: hidden;
+    transition: 0.8s ease;
+  }
+  
+  .carde:hover .card-desc {
+    opacity: 1;
+    height: 100%;
+  }
+  
+  h1 {
+    font-size: 2.8rem;
+    color: #fff;
+    margin: 40px 0 20px 0;
+    text-align: center;
+  }
+
+  .co{
+    background-color: #6253d3;
+    text-align: center;
+    align-items: center;
+  }
+
+  /* NEVO */
+  .container {
+    padding-top: 80px; 
+    padding-bottom: 100px;
+  }
+  .container a{
+    text-decoration: none;
+    outline: none;
+  }
+

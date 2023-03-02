@@ -37,51 +37,58 @@
                 <div class="rows align-items-strech">
                     <div class="col bg-white mt-25 p-25 ">
 
-                            <h3 class="form-title">Registro de Seguimientos</h3>
+                        <h3 class="form-title">Registro de Seguimientos</h3>
 
-                                <table class="responstable">
+                        <table class="responstable">
 
-                                    <tr style="text-align: center;">
-                                        <th>N</th>
-                                        <th>Fecha</th>
-                                        <th>Chip</th>
-                                        <th>Mascota</th>
-                                        <th>Estado</th>
-                                        <th scope="col">&nbsp;</th>
-                                    </tr>
+                            <tr style="text-align: center;">
+                                <th>N</th>
+                                <th>Fecha</th>
+                                <th>Chip</th>
+                                <th>Mascota</th>
+                                <th>Estado</th>
+                                <th scope="col">&nbsp;</th>
+                            </tr>
 
-                                    <tr class="text-center" style="text-align: center;" *ngFor="let seguimiento of listaSeguimientos | paginate: {itemsPerPage: 5, currentPage: pageActual}; index as i">
-                                        <td scope="row"> {{i+1}}</td>
-                                        <td>{{seguimiento.fecha_seguimiento | date: 'dd-MM-yyyy' }}</td>
-                                        <td>{{seguimiento.mascota.chipMascota}}</td>
-                                        <td>{{seguimiento.mascota.nombre_mascota}}</td>
-                                        <td style="text-align: center;">
-                                            <div *ngIf='seguimiento.estadoInforme === "P"'><b
-                                                style="text-align: center; color: orange;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-send-check-fill" viewBox="0 0 16 16">
-                                                    <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 1.59 2.498C8 14 8 13 8 12.5a4.5 4.5 0 0 1 5.026-4.47L15.964.686Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z"/>
-                                                    <path d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm-1.993-1.679a.5.5 0 0 0-.686.172l-1.17 1.95-.547-.547a.5.5 0 0 0-.708.708l.774.773a.75.75 0 0 0 1.174-.144l1.335-2.226a.5.5 0 0 0-.172-.686Z"/>
-                                                </svg></b></div>
-                                        <div *ngIf='seguimiento.estadoInforme ===  "A"'><b
-                                                style="color: rgb(77, 255, 0);"><svg
-                                                    xmlns="http://www.w3.org/2000/svg" width="45" height="45"
-                                                    fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
-                                                </svg></b></div>
-                                                <div *ngIf='seguimiento.estadoInforme ===  "R"'><b
-                                                    style="color: rgb(251, 13, 0);"><svg
-                                                        xmlns="http://www.w3.org/2000/svg" width="45" height="45"
-                                                        fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                                                        <path
-                                                            d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
-                                                    </svg></b></div>
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDetalle" (click)="capParaAprobarSeguimiento(seguimiento.idSeguimiento)">Detalles</button>
-                                        </td>
-                                    </tr>
+                            <tr class="text-center" style="text-align: center;"
+                                *ngFor="let seguimiento of listaSeguimientos | paginate: {itemsPerPage: 5, currentPage: pageActual}; index as i">
+                                <td scope="row"> {{i+1}}</td>
+                                <td>{{seguimiento.fecha_seguimiento | date: 'dd-MM-yyyy' }}</td>
+                                <td>{{seguimiento.mascota.chipMascota}}</td>
+                                <td>{{seguimiento.mascota.nombre_mascota}}</td>
+                                <td style="text-align: center;">
+                                    <div *ngIf='seguimiento.estadoInforme === "P"'><b
+                                            style="text-align: center; color: orange;"><svg
+                                                xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                fill="currentColor" class="bi bi-send-check-fill" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 1.59 2.498C8 14 8 13 8 12.5a4.5 4.5 0 0 1 5.026-4.47L15.964.686Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z" />
+                                                <path
+                                                    d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm-1.993-1.679a.5.5 0 0 0-.686.172l-1.17 1.95-.547-.547a.5.5 0 0 0-.708.708l.774.773a.75.75 0 0 0 1.174-.144l1.335-2.226a.5.5 0 0 0-.172-.686Z" />
+                                            </svg></b></div>
+                                    <div *ngIf='seguimiento.estadoInforme ===  "A"'><b
+                                            style="color: rgb(77, 255, 0);"><svg xmlns="http://www.w3.org/2000/svg"
+                                                width="45" height="45" fill="currentColor" class="bi bi-check"
+                                                viewBox="0 0 16 16">
+                                                <path
+                                                    d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                                            </svg></b></div>
+                                    <div *ngIf='seguimiento.estadoInforme ===  "R"'><b
+                                            style="color: rgb(251, 13, 0);"><b><i class="pi pi-times"></i></b></b></div>
+                                </td>
+                                <td>
+                                    <button class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#modalDetalle"
+                                        (click)="capParaAprobarSeguimiento(seguimiento.idSeguimiento)">Detalles</button>
+                                </td>
+                            </tr>
 
-                                </table>
+                        </table>
+                        <br>
+                        <div class="form-submit">
+                            <button class="form-btn" type="button" style="background-color: rgb(227, 2, 2);"
+                            *ngIf='conteoMalas ===  2' (click)="invalidarAdopcionDeMascota()">Invalidar Adopción</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -106,59 +113,69 @@
                     <div class="col bg-white mt-25 p-25 ">
 
 
-                                <form action="#" method="POST" class="row">
-                                    <h3 class="form-title">Detalle del seguimiento</h3>
-                                    <h3 *ngIf='seguimiento.estadoInforme ===  "P"' class="form-title">Se nego este informe de seguimiento</h3>
-                                    <div class="steps">
-                                        
-                                        <div class="wrapper">
-                                            <h5  class="form-title" style="font-size: 15px;">Foto de evidencia</h5>
-                                            <img [src]="'http://localhost:5000/imagen/images/' + seguimiento.foto_evidencia" [alt]="seguimiento.foto_evidencia" class="image--cover">
-                                        </div>
+                        <form action="#" method="POST" class="row">
+                            <h3 class="form-title">Detalle del seguimiento</h3>
+                            <h3 *ngIf='seguimiento.estadoInforme ===  "P"' class="form-title">Se rechazo este informe de
+                                seguimiento</h3>
+                            <div class="steps">
 
-                                        <div class="form-controll" style="padding-top: 40px;">
-                                            <div class="form-input">
-                                                <textarea type="text" name="descripcion_visita" id="descripcion_visita"
-                                                    [(ngModel)]="seguimiento.descripcion_visita"  onmousedown="return false" onkeydown="return false" ></textarea>
-                                                <label for="descripcion_visita"  (keypress)="validarCaracteresEspeciales($event)">Descripción general </label>
-                                            </div>
-                                        </div>
+                                <div class="wrapper">
+                                    <h5 class="form-title" style="font-size: 15px;">Foto de evidencia</h5>
+                                    <img [src]="'http://localhost:5000/imagen/images/' + seguimiento.foto_evidencia"
+                                        [alt]="seguimiento.foto_evidencia" class="image--cover">
+                                </div>
 
-                                        <div class="form-controll">
-                                            <div class="form-input">
-                                                
-                                                <textarea type="text" name="descripcion_mascota"
-                                                    id="descripcion_mascota"
-                                                    [(ngModel)]="seguimiento.descripcion_mascota"  onmousedown="return false" onkeydown="return false"></textarea>
-                                                    <label for="descripcion_mascota">Descripción de la mascota</label>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-controll">
-                                            <div class="form-input">
-
-                                                <textarea type="text" name="estado_comportamiento"
-                                                    id="estado_comportamiento"
-                                                    [(ngModel)]="seguimiento.estado_comportamiento"  onmousedown="return false" onkeydown="return false"></textarea>
-                                                    <label for="estado_comportamiento">Comportamiento de la mascota</label>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-controll">
-                                            <div class="form-input">
-                                                <textarea type="text" name="estado_salud" id="estado_salud"
-                                                    [(ngModel)]="seguimiento.estado_salud"  onmousedown="return false" onkeydown="return false"></textarea>
-                                                    <label for="estado_salud">Estado de salud de la mascota</label>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-submit">
-                                            <button *ngIf='seguimiento.estadoInforme ===  "P"' class="form-btn" type="button" tab-target="step-02" (click)="actualizarEstadoSeguimiento()" >Aprobar Informe de Seguimiento</button>
-                                            <br>
-                                            <button *ngIf='seguimiento.estadoInforme ===  "P"' class="form-btn" type="button" tab-target="step-02" (click)="actualizarEstadoSeguimientoRechazado()" >Rechazar Informe de Seguimiento</button>
-                                        </div>
+                                <div class="form-controll" style="padding-top: 40px;">
+                                    <div class="form-input">
+                                        <textarea type="text" name="descripcion_visita" id="descripcion_visita"
+                                            [(ngModel)]="seguimiento.descripcion_visita" onmousedown="return false"
+                                            onkeydown="return false"></textarea>
+                                        <label for="descripcion_visita"
+                                            (keypress)="validarCaracteresEspeciales($event)">Descripción general
+                                        </label>
                                     </div>
-                                </form>
+                                </div>
+
+                                <div class="form-controll">
+                                    <div class="form-input">
+
+                                        <textarea type="text" name="descripcion_mascota" id="descripcion_mascota"
+                                            [(ngModel)]="seguimiento.descripcion_mascota" onmousedown="return false"
+                                            onkeydown="return false"></textarea>
+                                        <label for="descripcion_mascota">Descripción de la mascota</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-controll">
+                                    <div class="form-input">
+
+                                        <textarea type="text" name="estado_comportamiento" id="estado_comportamiento"
+                                            [(ngModel)]="seguimiento.estado_comportamiento" onmousedown="return false"
+                                            onkeydown="return false"></textarea>
+                                        <label for="estado_comportamiento">Comportamiento de la mascota</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-controll">
+                                    <div class="form-input">
+                                        <textarea type="text" name="estado_salud" id="estado_salud"
+                                            [(ngModel)]="seguimiento.estado_salud" onmousedown="return false"
+                                            onkeydown="return false"></textarea>
+                                        <label for="estado_salud">Estado de salud de la mascota</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-submit">
+                                    <button *ngIf='seguimiento.estadoInforme ===  "P"' class="form-btn" type="button"
+                                        tab-target="step-02" (click)="actualizarEstadoSeguimiento()">Aprobar Informe de
+                                        Seguimiento</button>
+                                    <br>
+                                    <button *ngIf='seguimiento.estadoInforme ===  "P"' class="form-btn" type="button"
+                                        tab-target="step-02" (click)="actualizarEstadoSeguimientoRechazado()">Rechazar
+                                        Informe de Seguimiento</button>
+                                </div>
+                            </div>
+                        </form>
 
                     </div>
                 </div>

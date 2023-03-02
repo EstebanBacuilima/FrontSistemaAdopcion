@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { CargarScrpitsService } from 'src/app/cargar-scrpits.service';
 import { Fundacion } from 'src/app/Models/Fundacion';
 import { Mascota } from 'src/app/Models/Mascota';
 import { Seguimiento } from 'src/app/Models/Seguimiento';
+import { SolicitudAdopcion } from 'src/app/Models/SolicitudAdopcion';
 import { Usuario } from 'src/app/Models/Usuario';
 import { FundacionService } from 'src/app/Services/fundacion.service';
 import { FotoService } from 'src/app/Services/imagen.service';
@@ -28,7 +30,7 @@ export class PanelSeguimientoAdminComponent implements OnInit {
   idUsuario: any;
   idFundacion: any;
 
-  constructor(private fotoService: FotoService, private seguimientoService: SeguimientoService, private _CargarScript: CargarScrpitsService, private solicitudService: SolicitudAdopcionService, private mascotaService: MascotaService, private fundacionService: FundacionService, private personaService: PersonaService, private usuarioService: UsuarioService, private router: Router) {
+  constructor(private toastrService: ToastrService, private fotoService: FotoService, private solicitudAdopcionService: SolicitudAdopcionService, private seguimientoService: SeguimientoService, private _CargarScript: CargarScrpitsService, private solicitudService: SolicitudAdopcionService, private mascotaService: MascotaService, private fundacionService: FundacionService, private personaService: PersonaService, private usuarioService: UsuarioService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -41,7 +43,7 @@ export class PanelSeguimientoAdminComponent implements OnInit {
   validarCaracteresEspeciales(event: KeyboardEvent) {
     const pattern = /^[a-zA-Z0-9]*$/;
     const inputChar = String.fromCharCode(event.keyCode);
-  
+
     if (!pattern.test(inputChar)) {
       event.preventDefault();
     }
@@ -115,7 +117,7 @@ export class PanelSeguimientoAdminComponent implements OnInit {
       })
   }
 
-  actualizarEstadoSeguimiento(){
+  actualizarEstadoSeguimiento() {
     this.seguimiento.estado = true;
     this.seguimiento.estadoInforme = 'A';
     this.seguimientoService.updateEstadoSeguimiento(this.seguimiento, this.seguimiento.idSeguimiento).subscribe(data => {
@@ -131,7 +133,7 @@ export class PanelSeguimientoAdminComponent implements OnInit {
     })
   }
 
-  actualizarEstadoSeguimientoRechazado(){
+  actualizarEstadoSeguimientoRechazado() {
     this.seguimiento.estado = true;
     this.seguimiento.estadoInforme = 'P';
     this.seguimientoService.updateEstadoSeguimiento(this.seguimiento, this.seguimiento.idSeguimiento).subscribe(data => {
@@ -155,6 +157,7 @@ export class PanelSeguimientoAdminComponent implements OnInit {
     this.datainicialMascota = idMascota;
     console.log("idMascota " + idMascota)
     this.listarSeguimientosPorMasocta();
+    this.listarSeguimientosInformesPorMasocta();
   }
 
   seguimiento: Seguimiento = new Seguimiento;
@@ -184,7 +187,72 @@ export class PanelSeguimientoAdminComponent implements OnInit {
     )
   }
 
+  // INVALIDAR ADOPCION
+  listaSeguimientos3: Seguimiento[] = [];
+  seguimiento3: Seguimiento = new Seguimiento;
 
+  conteoMalas: any;
+  listarSeguimientosInformesPorMasocta() {
+    this.seguimientoService.getAllSeguimientosInformesPorMascota(this.datainicialMascota).subscribe(
+      data => {
+        this.conteoMalas = data.length;
+        console.log("conteo malas-> " + this.conteoMalas);
+      }
+    )
+  }
+
+  capIdDueñoFundacion: any;
+  capIdDueñoActual: any;
+  solicitud: SolicitudAdopcion = new SolicitudAdopcion;
+  idSolicitud: any;
+  idSeguimiento: any;
+  listaSolicitudInvalidados: SolicitudAdopcion[] = [];
+  listaSeguimientosInvalidados: Seguimiento[] = [];
+
+  invalidarAdopcionDeMascota() {
+    this.mascotaService.getPorId(this.datainicialMascota).subscribe(dataP => {
+      this.mascota = dataP
+      this.capIdDueñoActual = this.mascota.usuario?.idUsuario;
+      console.log("DUEÑO ACTUAL ->" + this.capIdDueñoActual)
+      this.seguimientoService.getAllSeguimientosPorMascota(this.datainicialMascota).subscribe(
+        dataSM => {
+          this.listaSeguimientosInvalidados = dataSM.map(
+            result => {
+              this.seguimiento = result;
+              this.seguimiento = this.seguimiento;
+              this.idSeguimiento = this.seguimiento.idSeguimiento;
+              return this.seguimiento;
+            }
+          );
+          this.listaSeguimientosInvalidados.forEach((seg: Seguimiento) => {
+            seg.estado = false;
+            this.seguimientoService.updateEstadoSeguimiento(seg, seg.idSeguimiento).subscribe();
+          });
+          console.log("Cambio los estados de seguimiento ->")
+          this.capIdDueñoFundacion = this.mascota.fundacion?.persona.idPersona;
+          this.usuarioService.getPorIdPersona(this.capIdDueñoFundacion).subscribe(dataU => {
+            this.usuario = dataU
+            this.mascota.estado_adopcion = true;
+            this.mascota.estado_seguimiento = false;
+            console.log("Dueño de la fundacion -> " + this.capIdDueñoFundacion);
+            this.mascotaService.updateEstadoAdopcion(this.mascota, this.mascota.idMascota).subscribe(
+              dataM => {
+                console.log("Se cambio a " + dataM.estado_adopcion);
+                this.mascota = dataM
+                this.mascota.usuario = this.usuario
+                this.mascotaService.updateDueñoMascota(this.mascota, this.mascota.idMascota).subscribe(
+                  dataMD => {
+                    console.log("Volvio a la fundacion la mascota")
+                    this.toastrService.error('Se realizo la invalidación de esta adopción', 'Invalidacion de Adopción', {
+                      timeOut: 2000,
+                    });
+                    this.obtenerUsuario();
+                  })
+              })
+          })
+        })
+    })
+  }
 
   limpiarCampos() {
     console.log("Entro a limpiar")
@@ -195,4 +263,59 @@ export class PanelSeguimientoAdminComponent implements OnInit {
   }
 
 
+  // ANTERIOR SOLO FALTABA LA SOLICITUD
+  /*invalidarAdopcionDeMascota() {
+    this.mascotaService.getPorId(this.datainicialMascota).subscribe(dataP => {
+      this.mascota = dataP
+      this.capIdDueñoActual = this.mascota.usuario?.idUsuario;
+      console.log("DUEÑO ACTUAL ->" + this.capIdDueñoActual)
+      this.seguimientoService.getAllSeguimientosPorMascota(this.datainicialMascota).subscribe(
+        dataSM =>{
+          this.listaSeguimientosInvalidados = dataSM.map(
+                  result => {
+                    this.seguimiento = result;
+                    this.seguimiento = this.seguimiento;
+                    return this.seguimiento;
+                  }
+                );
+      // this.solicitudAdopcionService.getSolicitudesUsuarioDos(this.capIdDueñoActual).subscribe(
+      //   dataS => {
+      //     this.listaSeguimientosInvalidados = dataS.map(
+      //       result => {
+      //         this.solicitud = result;
+      //         this.solicitud = this.solicitud;
+      //         return this.solicitud;
+      //       }
+      //     );
+      //     this.idSolicitud = this.solicitud.idSolicitudAdopcion;
+      //     this.solicitud.estado = 'RR';
+      //     console.log("id solicitud -> " + this.idSolicitud)
+      //     this.solicitudAdopcionService.updateEstadoSolicitud(this.solicitud, this.idSolicitud).subscribe(
+      //       dataUs => {
+              this.capIdDueñoFundacion = this.mascota.fundacion?.persona.idPersona;
+              this.usuarioService.getPorIdPersona(this.capIdDueñoFundacion).subscribe(dataU => {
+                this.usuario = dataU
+                this.mascota.estado_adopcion = true;
+                this.mascota.estado_seguimiento = false;
+                console.log("Dueño de la fundacion -> " + this.capIdDueñoFundacion);
+                this.mascotaService.updateEstadoAdopcion(this.mascota, this.mascota.idMascota).subscribe(
+                  dataM => {
+                    console.log("Se cambio a " + dataM.estado_adopcion);
+                    this.mascota = dataM
+                    this.mascota.usuario = this.usuario
+                    this.mascotaService.updateDueñoMascota(this.mascota, this.mascota.idMascota).subscribe(
+                      dataMD => {
+                        console.log("Volvio a la fundacion la mascota")
+                        this.toastrService.error('Se realizo la invalidación de esta adopción', 'Invalidacion de Adopción', {
+                          timeOut: 2000,
+                        });
+                        this.obtenerUsuario();
+                      })
+                  })
+              })
+            })
+        })
+    //     })
+    // })
+  }*/
 }

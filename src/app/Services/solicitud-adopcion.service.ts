@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Pregunta } from '../Models/Pregunta';
 import { Respuesta } from '../Models/Respuesta';
 import { SolicitudAdopcion } from '../Models/SolicitudAdopcion';
@@ -21,7 +22,11 @@ export class SolicitudAdopcionService {
     return this.http.get<SolicitudAdopcion[]>(this.URL+'listarPorEstados/' + estado + '/'+ idFundacion);
   }
 
-  getSolicitudesUsuario(idUsuario: any){
+  getSolicitudesUsuario(idUsuario: any):Observable<SolicitudAdopcion[]>{
+    return this.http.get<SolicitudAdopcion[]>(this.URL+'listarSolicitudesPorUsuario/' + idUsuario);
+  }
+
+  getSolicitudesUsuarioDos(idUsuario: any){
     return this.http.get<SolicitudAdopcion[]>(this.URL+'listarSolicitudesPorUsuario/' + idUsuario);
   }
 

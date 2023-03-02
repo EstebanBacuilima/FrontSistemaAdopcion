@@ -6,7 +6,7 @@
             <div class="col bg d-none d-lg-block col-md-5 col-lg-5 col-xl-6 rounded">
 
             </div>
-            <div class="col bg-white mt-30 p-20 rounded-end">
+            <div class="col bg-white mt-30 p-20 rounded-end" >
                 <div class="imagen text-end">
                     <img class="imgen" src="./assets/Imagenes/logoFundacionesMascotas.png" width="85" alt="logo">
                 </div>
@@ -199,7 +199,7 @@
                                     <label for="cedula" class="form-label-p"> Cédula</label>
                                     <input id="cedula" type="text" name="cedula" maxlength="10" pInputText [(ngModel)]="cedulaValidar" [pKeyFilter]="'int'">
                                 </div>
-                                <button *ngIf='activarPassword == false' type="button" class="btn btn-primary" (click)="validarCedula()">Validar</button>
+                                <button *ngIf='activarPassword == false' type="button" class="btn btn-primarys" (click)="validarCedula()">Validar</button>
                                 <h5 *ngIf='activarPassword == true' class="titulo" id="titulo"  style="text-align: center; padding: 25px;" >Usuario: {{usuario.username}} </h5>
                                 <div class="col-md-6" *ngIf='activarPassword == true' >
 
@@ -221,7 +221,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                    <button type="button" class="btn btn-primaryss" data-bs-dismiss="modal"
                         (click)="limpiarRecuContra()">Cancelar</button>
                 </div>
             </div>

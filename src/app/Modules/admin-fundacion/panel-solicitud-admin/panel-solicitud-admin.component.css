@@ -36,13 +36,20 @@ button {
   background-color: #32507d;
   color: white;
 }
+
+
 .col-md-{
   padding: 10px;
 }
 .btn{
-  background-color: #32507d;
+  background-color: rgb(114, 125, 226);
   color: white;
 }
+.modal-header{
+  background-color: #a9b7e2;
+  color: #000;
+}
+
 .modal-dialog {
   max-width: 900px !important
 }

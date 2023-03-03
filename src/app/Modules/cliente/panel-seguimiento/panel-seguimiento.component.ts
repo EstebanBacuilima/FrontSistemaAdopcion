@@ -13,7 +13,6 @@ import { PersonaService } from 'src/app/Services/persona.service';
 import { SeguimientoService } from 'src/app/Services/seguimiento.service';
 import { SolicitudAdopcionService } from 'src/app/Services/solicitud-adopcion.service';
 import { UsuarioService } from 'src/app/Services/usuario.service';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-panel-seguimiento',
@@ -146,11 +145,14 @@ export class PanelSeguimientoComponent implements OnInit {
           );
         } else{
           console.log("Si hay datos")
-          Swal.fire({
-            icon: 'error',
-            title: 'Registro del día completado',
-            text: 'Ya se realizo el seguimiento diario'
-          })
+          // Swal.fire({
+          //   icon: 'error',
+          //   title: 'Registro del día completado',
+          //   text: 'Ya se realizo el seguimiento diario'
+          // })
+          this.toastrService.success('Registro del día completado', 'Ya se realizo el seguimiento diario', {
+            timeOut: 1500,
+          });
         }
       }
     );

@@ -14,7 +14,6 @@ import { MascotaService } from 'src/app/Services/mascota.service';
 import { PersonaService } from 'src/app/Services/persona.service';
 import { SolicitudAdopcionService } from 'src/app/Services/solicitud-adopcion.service';
 import { UsuarioService } from 'src/app/Services/usuario.service';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-catalgo-mascotas',

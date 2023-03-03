@@ -9,7 +9,6 @@ import { FundacionService } from 'src/app/Services/fundacion.service';
 import { FotoService } from 'src/app/Services/imagen.service';
 import { MascotaService } from 'src/app/Services/mascota.service';
 import { UsuarioService } from 'src/app/Services/usuario.service';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-reg-mascota',

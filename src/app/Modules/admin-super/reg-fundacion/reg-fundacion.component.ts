@@ -9,7 +9,7 @@ import { FundacionService } from 'src/app/Services/fundacion.service';
 import { FotoService } from 'src/app/Services/imagen.service';
 import { PersonaService } from 'src/app/Services/persona.service';
 import { UsuarioService } from 'src/app/Services/usuario.service';
-import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-reg-fundacion',
@@ -20,7 +20,6 @@ export class RegFundacionComponent implements OnInit {
 
 
   //VALIDACIONES
-  //  val: regex = /^[0-9]{10}$/;
 
 
   // letras y espacios

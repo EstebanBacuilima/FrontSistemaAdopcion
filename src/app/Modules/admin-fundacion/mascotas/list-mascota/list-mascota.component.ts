@@ -9,7 +9,6 @@ import { FotoService } from 'src/app/Services/imagen.service';
 import { MascotaService } from 'src/app/Services/mascota.service';
 import { UsuarioService } from 'src/app/Services/usuario.service';
 import * as pdfMake from "pdfmake/build/pdfmake";
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-list-mascota',

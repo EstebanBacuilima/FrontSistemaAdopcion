@@ -156,6 +156,8 @@ export class ListFundacioComponent implements OnInit {
             this.fundacionService.updateFundacion(this.fundacion, this.fundacion.idFundacion).subscribe(data => {
               console.log(data)
               this.obtenerFundaciones();
+              this.cargarImagenFundacion();
+              this.cargarImagenUsuario();
               this.toastrService.success('Cambios realizados con exito', 'Actualizado Correctamente', {
                 timeOut: 1000,
               });

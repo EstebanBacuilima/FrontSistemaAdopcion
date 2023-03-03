@@ -136,7 +136,7 @@ export class PanelSeguimientoComponent implements OnInit {
           this.cargarImagenEvidencia();
           this.seguimientoService.postSeguimiento(this.seguimiento).subscribe(
             info => {
-              this.toastrService.success('Seguimiento realizado con exito', 'Enviado', {
+              this.toastrService.success('Seguimiento realizado con éxito', 'Enviado', {
                 timeOut: 1500,
               });
               this.listarSeguimientosPorMasocta();
@@ -150,8 +150,8 @@ export class PanelSeguimientoComponent implements OnInit {
           //   title: 'Registro del día completado',
           //   text: 'Ya se realizo el seguimiento diario'
           // })
-          this.toastrService.success('Registro del día completado', 'Ya se realizo el seguimiento diario', {
-            timeOut: 1500,
+          this.toastrService.error('Registro del día completado', 'Ya se realizó el seguimiento diario', {
+            timeOut: 3000,
           });
         }
       }

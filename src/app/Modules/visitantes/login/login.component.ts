@@ -27,8 +27,8 @@ export class LoginComponent implements OnInit {
   }
 
   // letras y espacios
-  letrasEspace: RegExp = /^[a-zA-Z\s]+$/;
-  letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\s]+$/;
+  letrasEspace: RegExp = /^[a-zA-Z\sñáéíóúÁÉÍÓÚ]+$/;
+  letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\sñáéíóúÁÉÍÓÚ]+$/;
   expCorreo: RegExp =
     /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
   valCorreo: boolean = true;

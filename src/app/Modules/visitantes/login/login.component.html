@@ -72,7 +72,7 @@
                 </div>
                 <div class="container w-75 mt-25 me-25 mt-5 shadown">
                     <div class="row align-items-strech">
-                        <div class="col bg-white mt-25 p-25 grid p-fluid ">
+                        <div class="col  mt-25 p-25 grid p-fluid ">
 
                             <h5 class="titulo" id="titulo"  style="text-align: center; padding: 25px;" ><b>FORMULARIO DE REGISTRO</b></h5>
                             <form class="row g-2">
@@ -80,9 +80,6 @@
                                     <label for="cedula" class="form-label-p">Cédula</label> <label for="cedula" class="form-label-p" style="color: rgb(255, 0, 0); padding-left: 2px;"> *</label>
                                     <input id="cedula" class="form-control" type="text" name="cedula" maxlength="10" pInputText [(ngModel)]="persona.cedula" [pKeyFilter]="'int'" required>
                                 </div>
-
-                                
-
                                 <div class="col-md-6">
                                     <label for="nombres" class="form-label-p">Nombres</label><label for="cedula" class="form-label-p" style="color: rgb(255, 0, 0); padding-left: 2px;"> *</label>
                                     <input id="nombres" type="text" class="form-control" name="nombres" maxlength="30" pInputText [(ngModel)]="persona.nombres" [pKeyFilter]="letrasEspace"(keyup)="formatInput(persona.nombres)" required>

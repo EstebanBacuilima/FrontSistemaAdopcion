@@ -33,7 +33,7 @@
                 <tbody>
                     <tr style="text-align: center" *ngFor="
               let voluntario of listaVoluntarios
-                | paginate : { itemsPerPage: 10, currentPage: pageActual };
+                | paginate : { itemsPerPage: 5, currentPage: pageActual };
               index as i
             ">
                         <th scope="row">{{ i + 1 }}</th>

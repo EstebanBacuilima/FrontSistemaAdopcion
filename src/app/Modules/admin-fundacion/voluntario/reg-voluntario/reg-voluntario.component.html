@@ -29,7 +29,8 @@
         </div>
         <div class="col-6">
             <label for="fechaNacimiento" class="form-label-p"> Fecha De Nacimiento</label>
-            <input id="fechaNacimiento" type="date" class="form-control" name="fechaNacimiento" [(ngModel)]="persona.fechaNacimiento" required>
+            <input id="fechaNacimiento" type="date" class="form-control" name="fechaNacimiento" [(ngModel)]="persona.fechaNacimiento"
+            (ngModelChange)="calcularEdad()" required>
         </div>
         <div class="col-6">
             <label for="genero" class="form-label-p"> Género</label>
@@ -43,7 +44,7 @@
         <div class="col-12">
             <label for="direccion" class="form-label-p"> Dirección</label>
             <input id="direccion" type="text" class="form-control" name="direccion" 
-            maxlength="30"  [(ngModel)]="persona.direccion" [pKeyFilter]="letrasEspaceNumbers" required>
+            maxlength="30"  [(ngModel)]="persona.direccion" [pKeyFilter]="letrasEspeciales" required>
         </div>
         <div class="col-md-6">
             <label for="telefono" class="form-label-p"> Teléfono</label>

@@ -37,6 +37,7 @@ export class PanelSeguimientoComponent implements OnInit {
     this.obtenerMasotas();
     this.obtenerUsuario();
   }
+  
 
   personas: any;
 

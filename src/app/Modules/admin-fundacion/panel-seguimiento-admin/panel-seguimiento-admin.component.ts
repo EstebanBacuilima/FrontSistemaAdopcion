@@ -14,7 +14,6 @@ import { PersonaService } from 'src/app/Services/persona.service';
 import { SeguimientoService } from 'src/app/Services/seguimiento.service';
 import { SolicitudAdopcionService } from 'src/app/Services/solicitud-adopcion.service';
 import { UsuarioService } from 'src/app/Services/usuario.service';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-panel-seguimiento-admin',
@@ -122,13 +121,16 @@ export class PanelSeguimientoAdminComponent implements OnInit {
     this.seguimiento.estadoInforme = 'A';
     this.seguimientoService.updateEstadoSeguimiento(this.seguimiento, this.seguimiento.idSeguimiento).subscribe(data => {
       console.log(data)
-      Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: 'Seguimiento Aprobado',
-        showConfirmButton: false,
-        timer: 1500
-      })
+      // Swal.fire({
+      //   position: 'top-end',
+      //   icon: 'success',
+      //   title: 'Seguimiento Aprobado',
+      //   showConfirmButton: false,
+      //   timer: 1500
+      // })
+      this.toastrService.success('Seguimiento Aprobado', '', {
+        timeOut: 1500,
+      });
       this.optenerDatosSeguimiento();
     })
   }
@@ -138,13 +140,16 @@ export class PanelSeguimientoAdminComponent implements OnInit {
     this.seguimiento.estadoInforme = 'P';
     this.seguimientoService.updateEstadoSeguimiento(this.seguimiento, this.seguimiento.idSeguimiento).subscribe(data => {
       console.log(data)
-      Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: 'Seguimiento Aprobado',
-        showConfirmButton: false,
-        timer: 1500
-      })
+      // Swal.fire({
+      //   position: 'top-end',
+      //   icon: 'success',
+      //   title: 'Seguimiento Aprobado',
+      //   showConfirmButton: false,
+      //   timer: 1500
+      // })
+      this.toastrService.success('Seguimiento Aprobado', '', {
+        timeOut: 1500,
+      });
       this.optenerDatosSeguimiento();
     })
   }

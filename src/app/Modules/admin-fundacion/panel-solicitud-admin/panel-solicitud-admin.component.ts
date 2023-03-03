@@ -138,6 +138,8 @@ letrasEspeciales: RegExp = /^[a-zA-Z0-9\s.,]+$/;
       estado = 'EN PROCESO';
     } else if (estados == 'R') {
       estado = 'SOLICITUD RECHAZADA';
+    } else if (estados == 'Q') {
+      estado = 'QUITADO';
     }
     return estado;
   }

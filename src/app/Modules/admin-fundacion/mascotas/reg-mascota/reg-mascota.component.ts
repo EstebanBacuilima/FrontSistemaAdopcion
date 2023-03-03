@@ -149,7 +149,10 @@ export class RegMascotaComponent implements OnInit {
   // letras y espacios
   letrasEspace: RegExp = /^[a-zA-Z\s]+$/;
   letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\s]+$/;
-  letrasEspeciales: RegExp = /^[a-zA-Z0-9\s.,]+$/;
+  // letrasEspeciales: RegExp = /^[a-zA-Z0-9\s.,]+$/;
+  letrasEspeciales: RegExp = /^[a-zA-Z0-9\s.,áéíóúÁÉÍÓÚ]+$/;
+
+
 
 
   // Validar que no igrese Guion medio

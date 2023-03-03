@@ -26,7 +26,7 @@ export class RegFundacionComponent implements OnInit {
   // letras y espacios
   letrasEspace: RegExp = /^[a-zA-Z\s]+$/;
   letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\s]+$/;
-  letrasEspeciales: RegExp = /^[a-zA-Z0-9\s.,]+$/;
+  letrasEspeciales: RegExp = /^[a-zA-Z0-9\s.,áéíóúÁÉÍÓÚ]+$/;
 
   // letrasEspace: RegExp = /^[a-zA-Z0-9\s^!#$%&*]+$/;
   // letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\s^!#$%&*-]+$/;
@@ -166,7 +166,7 @@ calcularEdad() {
 
 
                       //                    Validar la edad
-                      // if (this.validarEdad == true) {
+                      if (this.validarEdad == true) {
 
 
                         this.usuarioService.verfUsername(this.usuario.username).subscribe(
@@ -213,11 +213,11 @@ calcularEdad() {
                             }
                           }
                         )
-                      // } else {
-                      //   this.toastrService.warning('Verifique su fecha de nacimiento!', 'Aviso!', {
-                      //     timeOut: 1000,
-                      //   });
-                      // }
+                      } else {
+                        this.toastrService.warning('Verifique su fecha de nacimiento!', 'Aviso!', {
+                          timeOut: 1000,
+                        });
+                      }
                     } else {
                       this.toastrService.error('La cédula debe de tener 10 dígitos', 'cédula no procesada', {
                         timeOut: 3000,

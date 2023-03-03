@@ -39,14 +39,6 @@ body {
     height: auto;
   }
 
-.containeres {
-    min-height: 100vh;
-    width: 100%;
-    display: flex;
-    align-items: center;
-}
-
-
 
 .container {
     margin: 0 auto;
@@ -351,7 +343,7 @@ body {
     -ms-transition: all 0.75s ease;
     -o-transition: all 0.75s ease;
     transition: all 0.75s ease;
-    height: 500px;
+    height: 650px;
     width: 400%;
 }
 #c-contenido {
@@ -360,7 +352,7 @@ body {
     text-align: left;
 }
 .imagenes{
-    height: 550px;
+    height: 650px;
     width: 100%;
 }
 .c-elemento {
@@ -612,7 +604,7 @@ body {
     opacity: 0;
     padding: 18px 8%;
     background-color: #897af8;
-    overflow-y: scroll;
+    overflow-y: hidden;
     transition: 0.8s ease;
   }
   
@@ -633,3 +625,14 @@ body {
     text-align: center;
     align-items: center;
   }
+
+  /* NEVO */
+  .container {
+    padding-top: 80px; 
+    padding-bottom: 100px;
+  }
+  .container a{
+    text-decoration: none;
+    outline: none;
+  }
+

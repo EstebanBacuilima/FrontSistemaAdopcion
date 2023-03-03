@@ -28,13 +28,44 @@ export class ListFundacioComponent implements OnInit {
   // letrasEspace: RegExp = /^[a-zA-Z0-9\s^!#$%&*]+$/;
   // letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\s^!#$%&*-]+$/;
 
-// Validar que no igrese Guion medio
-    onKeyPress(event: KeyboardEvent) {
-      if (event.key === '-') {
-        event.preventDefault();
+  // Validar que no igrese Guion medio
+  onKeyPress(event: KeyboardEvent) {
+    if (event.key === '-') {
+      event.preventDefault();
+    }
+  }
+  //Validar Edad en el Campo de De fecha
+  edad: any;
+  validarEdad: boolean = false;
+  //Validar Edad
+
+  calcularEdad() {
+    if (this.persona && this.persona.fechaNacimiento) {
+      let fechaPrueba: any = new Date(this.persona.fechaNacimiento);
+      let fechaFormateada = fechaPrueba.toISOString().substr(0, 10);
+      let anio = parseInt(fechaFormateada.substr(0, 4));
+      console.log('fecha formateada ->' + fechaFormateada)
+      console.log('año elejido ->' + anio)
+      let fechaHoy: Date = new Date();
+      let fechaFormateadaHoy = fechaHoy.toISOString().substr(0, 10);
+      let anioA = parseInt(fechaFormateadaHoy.substr(0, 4));
+      console.log('año actual ->' + anioA)
+      let edad = anioA - anio;
+      console.log('Edad:' + edad);
+      if (edad < 18) {
+        this.toastrService.error('Prohibido el registro', 'Usted es menor de edad', {
+          timeOut: 3000,
+        });
+        this.validarEdad = false;
+        console.log("dato -> " + this.validarEdad)
+      } else {
+        console.log('El usuario es mayor de edad');
+        this.validarEdad = true;
+        console.log("dato -> " + this.validarEdad)
       }
     }
-    
+  }
+
 
   pageActual: number = 1;
   public myCounter: number = 0;
@@ -116,21 +147,28 @@ export class ListFundacioComponent implements OnInit {
         timeOut: 3000,
       });
     } else {
-      this.personaService.updatePersona(this.persona, this.persona.idPersona).subscribe(data => {
-        console.log(data)
-        this.usuarioService.updateUsuario(this.usuario, this.usuario.idUsuario).subscribe(data => {
+      // if (this.validarEdad == true) {
+
+        this.personaService.updatePersona(this.persona, this.persona.idPersona).subscribe(data => {
           console.log(data)
-          this.fundacionService.updateFundacion(this.fundacion, this.fundacion.idFundacion).subscribe(data => {
+          this.usuarioService.updateUsuario(this.usuario, this.usuario.idUsuario).subscribe(data => {
             console.log(data)
-            this.obtenerFundaciones();
-            this.toastrService.success('Cambios realizados con exito', 'Actualizado Correctamente', {
-              timeOut: 1000,
-            });
-            const miModal: any = document.getElementById('modalUpdate');
-            miModal?.modal('hide');
+            this.fundacionService.updateFundacion(this.fundacion, this.fundacion.idFundacion).subscribe(data => {
+              console.log(data)
+              this.obtenerFundaciones();
+              this.toastrService.success('Cambios realizados con exito', 'Actualizado Correctamente', {
+                timeOut: 1000,
+              });
+              const miModal: any = document.getElementById('modalUpdate');
+              miModal?.modal('hide');
+            })
           })
         })
-      })
+      // } else {
+      //   this.toastrService.warning('Verifique su fecha de nacimiento!', 'Aviso!', {
+      //     timeOut: 1000,
+      //   });
+      // }
     }
   }
 
@@ -142,14 +180,14 @@ export class ListFundacioComponent implements OnInit {
       this.fundacion = data
       this.idFundacionDelete = this.fundacion.idFundacion;
       console.log("ES LA ID -> " + this.idFundacionDelete);
-      this.isUsuarioDesactivar =  this.fundacion.persona.idPersona;
+      this.isUsuarioDesactivar = this.fundacion.persona.idPersona;
       this.fundacion.estado = false;
       this.fundacionService.descativarFundacion(this.fundacion, idFundacion).subscribe(data => {
         this.usuarioService.getPorIdPersona(this.isUsuarioDesactivar).subscribe(dataUsuario => {
           this.usuario = dataUsuario
           this.usuario.idUsuario = dataUsuario.idUsuario;
           this.usuario.estado = false;
-          this.usuarioService.descativarUsuario(this.usuario, this.isUsuarioDesactivar).subscribe(data => { 
+          this.usuarioService.descativarUsuario(this.usuario, this.isUsuarioDesactivar).subscribe(data => {
             this.obtenerFundaciones();
             this.toastrService.warning('La fundación ha sido desactivada!', 'Fundación Desactivada!', {
               timeOut: 4000,
@@ -165,14 +203,14 @@ export class ListFundacioComponent implements OnInit {
       this.fundacion = data
       this.idFundacionDelete = this.fundacion.idFundacion;
       console.log("ES LA ID -> " + this.idFundacionDelete);
-      this.isUsuarioDesactivar =  this.fundacion.persona.idPersona;
+      this.isUsuarioDesactivar = this.fundacion.persona.idPersona;
       this.fundacion.estado = true;
       this.fundacionService.descativarFundacion(this.fundacion, idFundacion).subscribe(data => {
         this.usuarioService.getPorIdPersona(this.isUsuarioDesactivar).subscribe(dataUsuario => {
           this.usuario = dataUsuario
           this.usuario.idUsuario = dataUsuario.idUsuario;
           this.usuario.estado = true;
-          this.usuarioService.descativarUsuario(this.usuario, this.isUsuarioDesactivar).subscribe(data => { 
+          this.usuarioService.descativarUsuario(this.usuario, this.isUsuarioDesactivar).subscribe(data => {
             this.obtenerFundaciones();
             this.toastrService.success('La fundación se ha habilitado', 'Fundación Activada', {
               timeOut: 1000,
@@ -235,87 +273,23 @@ export class ListFundacioComponent implements OnInit {
   }
 
 
-  fechaAct: Date =new Date();
+  fechaAct: Date = new Date();
 
   // PDF
-
-  generarPDF() {
-    const data = this.listaFundaciones;
-    const body = [];
-
-    body.push(["ID", "RUC", "NOMBRE FUDACIÓN", "ACRÓNIMO", "MISIÓN", "DIRECCIÓN", "CORREO", "TELÉFONO"]);
-
-    data.forEach(fundacion => {
-      body.push([fundacion.idFundacion, fundacion.ruc, fundacion.nombre_fundacion, fundacion.acronimo, fundacion.mision, fundacion.direccion, fundacion.correo, fundacion.telefono]);
-    });
-
-    const table = {
-      text: 'Tables',
-      headerRows: 1,
-      body,
-      layout: "lightHorizontalLines",
-      fillColor: '#eeffee',
-      widths: [12, 70, 70, 30, 70, 70, 60, 55]
-    };
-
-    const styles: any = {
-      header: {
-        text: 'Tables',
-        bold: true,
-        fontSize: 8,
-        color: "#a9cbff",
-        background: 'lightblue',
-        font: "Roboto-Regular.ttf",
-        margin: [0, 20, 0, 10]
-      },
-      tableHeader: {
-        bold: true,
-        fontSize: 5,
-        color: "#a9cbff",
-        background: 'lightblue',
-        fillColor: '#a9cbff',
-        font: "Roboto-Regular.ttf"
-      },
-    };
-
-    const cuerpo = [{
-      text: "Título del PDF",
-      style: "header",
-      margin: [0, 0, 0, 20]
-    },
-    ];
-
-    const content = [
-      {
-        cuerpo,
-        table,
-        style: "tableExample"
-      }];
-
-    const documentDefinition = {
-      content,
-      styles,
-      layout: 'lightHorizontalLines',
-    };
-
-    pdfMake.createPdf(documentDefinition).open();
-  }
-
-
   openPdfTables() {
     let fechaPrueba: Date = new Date();
-    let fechaFormateada = fechaPrueba.toISOString().substr(0,10);
+    let fechaFormateada = fechaPrueba.toISOString().substr(0, 10);
     console.log("es la fecha de hoy -> " + fechaFormateada);
     let tableBody = [];
     tableBody.push([
-      { text: "ID", bold: true, background: 'lightblue' },
-      { text: "RUC", bold: true, background: 'lightblue'},
-      { text: "FUNDACIÓN", bold: true, background: 'lightblue'},
-      { text: "ACRÓNIMO", bold: true, background: 'lightblue'},
-      { text: "MISIÓN", bold: true, background: 'lightblue'},
-      { text: "DIRECCIÓN", bold: true, background: 'lightblue'},
-      { text: "CORREO", bold: true, background: 'lightblue'},
-      { text: "TELÉFONO", bold: true, background: 'lightblue'},
+      { text: "ID", bold: true, background: '' },
+      { text: "RUC", bold: true, background: ''},
+      { text: "FUNDACIÓN", bold: true, background: ''},
+      { text: "ACRÓNIMO", bold: true, background: ''},
+      { text: "MISIÓN", bold: true, background: ''},
+      { text: "DIRECCIÓN", bold: true, background: ''},
+      { text: "CORREO", bold: true, background: ''},
+      { text: "TELÉFONO", bold: true, background: ''},
     ]);
     this.listaFundaciones.forEach(fundacion => {
       let fila = [];
@@ -382,7 +356,7 @@ export class ListFundacioComponent implements OnInit {
             body: tableBody
           }
         }
-        
+
       ],
       styles: {
         header: {
@@ -398,6 +372,7 @@ export class ListFundacioComponent implements OnInit {
 
     pdfMake.createPdf(documentDefinition).open();
   }
+  
   //Validar Campos
   // ValidarCampos() {
   //   console.log("ya esta activo")

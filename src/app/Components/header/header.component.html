@@ -1,3 +1,4 @@
+
 <header class="p-3 text-white">
   <div class="container">
     <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -26,7 +27,7 @@
           <a href="#second" class="nav-link text_2 px-2" routerLinkActive="active" *ngIf='isPublico && visibleSeccion == false'>FUNDACIONES</a>
         </li>
         <li>
-          <a href="#third" class="nav-link text_1" routerLinkActive="active" *ngIf='isPublico && visibleSeccion == false'>MASCOTAS</a>
+          <a href="#third" class="nav-link text_1" routerLinkActive="active" *ngIf='isPublico && visibleSeccion == false'>MASCOTAS </a>
         </li>
 
         <!-- COMPARTIDOS -->
@@ -108,7 +109,7 @@
 
       </ul>
       <div class="text-center" [hidden]="isLogin">
-        <button type="button" class="btn btn-primarys1" routerLink="login" (click)="validarPestLogin()" >Inicir sesión</button>
+        <button type="button" class="btn btn-outline-light" routerLink="login" (click)="validarPestLogin()" >Inicir sesión</button>
       </div>
       <div class="text-center" [hidden]="!isLogin">
         <button type="button" class="btn btn-outline-light me-2" (click)="cerrarSesion()">Cerrar sesión</button>

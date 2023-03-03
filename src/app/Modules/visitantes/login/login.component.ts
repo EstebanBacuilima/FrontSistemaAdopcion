@@ -110,6 +110,7 @@ export class LoginComponent implements OnInit {
       console.log('dato -> ' + this.validarEdad);
     }
   }
+//validar
 
   showSpinner: any;
   usuarioRolCapturado: any;

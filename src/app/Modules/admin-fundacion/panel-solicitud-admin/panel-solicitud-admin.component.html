@@ -27,13 +27,23 @@
                     <label class="estado" style="background-color: rgb(63, 193, 236); color: black">EN PROCESO</label>
                 </div>
 
+                <div class="col-md-" *ngIf="obtenerEstado(solicitudes.estado) === 'QUITADO'">
+                    <label class="estado" style="
+                    background-color: rgb(212, 51, 27);
+                    color: rgb(255, 255, 255);
+                    ">La adopción a sido denegada por no cumplir los seguimientos</label>
+                </div>
+
                 <div class="col-md-" *ngIf="obtenerEstado(solicitudes.estado) === 'SOLICITUD RECHAZADA'">
                     <label class="estado" style="
               background-color: rgb(212, 51, 27);
               color: rgb(255, 255, 255);
             ">SOLICITUD RECHAZADA</label>
                 </div>
-
+                <div style="text-align: center;">
+                <h5>Fecha de solicitud:  <b> {{solicitudes.fecha_solicitud_adopcion}} </b> </h5>
+                </div>
+                <br>
                 <div class="col-md-2 d-flex justify-content-center align-items-center">
                     <img [src]="
               'http://localhost:5000/imagen/images/' +
@@ -46,7 +56,7 @@
                             <tr>
                                 <td colspan="2">
                                     {{ solicitudes.usuario.persona?.nombres }}
-                                    {{ usuario.persona?.apellidos }}
+                                    {{ solicitudes.usuario.persona?.apellidos }}
                                 </td>
                             </tr>
                         </thead>
@@ -145,7 +155,7 @@
                         </form> -->
 
 
-                        <h4 class="form-title-sc text-center"><b><u>Formulario de adopción</u></b></h4>
+                        <h4 class="form-title-sc text-center"><b>Formulario de adopción</b></h4>
 
 
                         <!-- <h5>Solicitud{{solicitudCap.estado}}</h5> -->
@@ -172,6 +182,7 @@
                     Rechazar Solicitud
                 </button>
 
+
                 <div class="col-md-" *ngIf="solicitudCap.estado === 'R'">
                     <label class="estado" style="
               background-color: rgb(212, 51, 27);
@@ -182,6 +193,12 @@
                 <div class="col-md-" *ngIf="solicitudCap.estado === 'A'">
                     <label class="estado" style="background-color: greenyellow; color: black">ACEPTADO</label>
                 </div>
+                <button style="background-color: red; border: none;" *ngIf="solicitudCap.estado === 'A'" type="button"
+                class="btn btn-outline-success" (click)="rechazarSolicitudAceptada()">
+                Cancelar Proceso de Adopcion
+                </button>
+                <br><br>
+
             </div>
         </div>
     </div>

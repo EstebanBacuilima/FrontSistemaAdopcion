@@ -36,6 +36,7 @@ export class PanelSeguimientoComponent implements OnInit {
   ngOnInit(): void {
     this.obtenerUsuario();
   }
+  
 
   personas: any;
 

@@ -11,6 +11,11 @@
       
 }
 
+.modal-header{
+    background-color: #a9b7e2;
+    color: #000;
+}
+
 .btnO{
     background-color: #a9b7e2;
     color: white;

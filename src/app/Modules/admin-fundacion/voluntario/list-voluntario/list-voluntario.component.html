@@ -65,7 +65,6 @@
         <!-- <button pButton type="button" (click)="openPdfTables()"  label="Generar Reporte" icon="pi pi-file-pdf"></button> -->
     </div>
 
-    <h2 class="form-titulo text-center">.</h2>
 </div>
 
 <!-- Modal -->
@@ -73,14 +72,13 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Actualizar</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="container w-75 mt-25 me-25 mt-5 shadown">
                 <div class="rows align-items-strech">
                     <div class="col bg-white mt-25 p-25">
                         <form class="row g-2 d-flex justify-content-center">
-                            <h2 class="form text-center">Datos del Voluntario</h2>
+                            <h2 class="form text-center"><b>Datos del Voluntario</b></h2>
 
                             <div class="perfil-usuario-avatar text-center">
                                 <img [src]="
@@ -162,14 +160,14 @@
                                     <option value="otro">Otro</option>
                                 </select>
                             </div> -->
-                            <div class="col-12">
+                            <div class="separador">.</div>
+                            <div class="col-6">
                                 <label for="username" class="form-label-p"> Usuario</label>
                                 <input type="text" class="form-control" name="username"
                                 maxlength="30"  [(ngModel)]="usuario.username" />
                             </div>
-                            <div class="col-12">
-                                <label for="password" class="form-label-p">
-                                    Contraseña <i class="uil uil-eye-slash showHidePw"></i></label>
+                            <div class="col-6">
+                                <label for="password" class="form-label-p">Contraseña <i class="uil uil-eye-slash showHidePw"></i></label>
                                 <input type="password" class="password form-control" name="password"
                                     [(ngModel)]="usuario.password" />
                             </div>
@@ -192,12 +190,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                    Cancelar
-                </button>
-                <button type="button" class="btn btn-primary" (click)="actualizarVoluntarios()">
-                    Actualizar
-                </button>
+                <button type="button" class="btn btn-primarys" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primarys1" (click)="actualizarVoluntarios()">Actualizar</button>
             </div>
         </div>
     </div>

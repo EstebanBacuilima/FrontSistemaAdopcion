@@ -180,7 +180,7 @@ input:focus {
 .form-submit .form-btn {
     width:100%;
     padding: 8px;
-    background: #a9b7e2;
+    background: rgb(114, 125, 226);
     font-weight: 500;
     font-size: 14px;
     border-radius: 4px;
@@ -194,6 +194,8 @@ input:focus {
     letter-spacing: 0.5px;
     color: #FFF;
     cursor: pointer;
+    box-shadow: 0px 4px 6px 2px rgba(0, 0, 0, 0.2);
+    
 }
 
 .form-submit .form-btn:hover {
@@ -274,14 +276,20 @@ input:focus {
     margin:0px auto;
 }
 
+
 .btn-primarys {
-    background: #32507d;
+    background: #a9b7e2;
     display: block;
     color: white;
     border-radius: 0px;
     box-shadow: 0px 4px 6px 2px rgba(0, 0, 0, 0.2);
     margin-top: -5px;
     margin:0px auto;
+}
+
+.modal-header{
+    background-color: #a9b7e2;
+    color: #000;
 }
 
 .imgUp {

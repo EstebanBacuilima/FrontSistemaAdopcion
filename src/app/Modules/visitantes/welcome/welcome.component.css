@@ -343,7 +343,7 @@ body {
     -ms-transition: all 0.75s ease;
     -o-transition: all 0.75s ease;
     transition: all 0.75s ease;
-    height: 500px;
+    height: 650px;
     width: 400%;
 }
 #c-contenido {
@@ -352,7 +352,7 @@ body {
     text-align: left;
 }
 .imagenes{
-    height: 550px;
+    height: 650px;
     width: 100%;
 }
 .c-elemento {

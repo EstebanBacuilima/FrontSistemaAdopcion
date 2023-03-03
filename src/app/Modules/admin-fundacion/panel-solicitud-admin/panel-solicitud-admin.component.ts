@@ -138,6 +138,8 @@ letrasEspeciales: RegExp = /^[a-zA-Z0-9\s.,]+$/;
       estado = 'EN PROCESO';
     } else if (estados == 'R') {
       estado = 'SOLICITUD RECHAZADA';
+    } else if (estados == 'Q') {
+      estado = 'QUITADO';
     }
     return estado;
   }
@@ -164,6 +166,7 @@ letrasEspeciales: RegExp = /^[a-zA-Z0-9\s.,]+$/;
   }
 
   preguntasRespuestas: any;
+  idPreguntasCap:any
   obtenerRespuestasyPreguntasSolicitante() {
     this.solicitudAdopcionService.listarRespuestasPreguntasPorSolicitud(this.datainicialSolicitud).subscribe(
       data => {
@@ -267,6 +270,48 @@ letrasEspeciales: RegExp = /^[a-zA-Z0-9\s.,]+$/;
           this.mascota.estado_adopcion = true;
           this.solicitud.mascota = this.mascota;
           this.solicitud.usuario = this.usuario;
+          console.log("Estado mascota adopción antes " + this.idSolicitud);
+          this.solicitudAdopcionService.updateEstadoSolicitud(this.solicitud, this.idSolicitud).subscribe(
+            data => {
+              console.log("Estado mascota adopción antes " + data.mascota?.estado_adopcion);
+              this.mascotaService.updateEstadoAdopcion(this.mascota, this.mascota.idMascota).subscribe(
+                data => {
+                  console.log("Se cambio a " + data.estado_adopcion);
+                  Swal.fire({
+                    position: 'top-end',
+                    icon: 'error',
+                    text: 'Solicitud Rechazada',
+                    timer: 1500
+                  })
+                  this.obtenerSolicitudes();
+                }
+              )
+            }
+          )
+        })
+      })
+    })
+  }
+
+  capIdDueñoFundacion:any;
+
+  rechazarSolicitudAceptada() {
+    this.solicitudAdopcionService.getPorId(this.datainicialSolicitud).subscribe(data => {
+      this.solicitud = data
+      this.idSolicitud = this.solicitud.idSolicitudAdopcion;
+      this.isMascotaCap = this.solicitud.mascota?.idMascota;
+      this.idUsuarioCap = this.solicitud.usuario?.idUsuario
+      this.mascotaService.getPorId(this.idUsuarioCap).subscribe(dataP => {
+        this.mascota = dataP
+        this.capIdDueñoFundacion = this.mascota.fundacion?.persona.idPersona;
+        this.usuarioService.getPorId(this.capIdDueñoFundacion).subscribe(dataU => {
+          this.usuario = dataU
+          this.solicitud.estado = 'R';
+          this.mascota.estado_adopcion = true;
+          this.mascota.estado_seguimiento = false;
+          this.solicitud.mascota = this.mascota;
+          this.solicitud.usuario = this.usuario;
+          this.mascota.usuario = this.usuario;
           console.log("Estado mascota adopción antes " + this.idSolicitud);
           this.solicitudAdopcionService.updateEstadoSolicitud(this.solicitud, this.idSolicitud).subscribe(
             data => {

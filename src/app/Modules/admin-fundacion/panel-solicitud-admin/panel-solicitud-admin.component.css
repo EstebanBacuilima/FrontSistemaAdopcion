@@ -36,15 +36,22 @@ button {
   background-color: #32507d;
   color: white;
 }
+
+
 .col-md-{
   padding: 10px;
 }
 .btn{
-  background-color: #32507d;
+  background-color: rgb(114, 125, 226);
   color: white;
 }
+.modal-header{
+  background-color: #a9b7e2;
+  color: #000;
+}
+
 .modal-dialog {
-  max-width: 1350px !important
+  max-width: 900px !important
 }
 
 .modal-footer {
@@ -63,18 +70,19 @@ button {
 /* NEW */
 
 .forma{
-  padding: 10px;
+  padding: 6px;
+  border-radius: 30px 30px 30px 30px  
 }
 .pregunta{
-  color: #707892;
-  font-size:20px ;
-  text-align: center;
+  color: #5d5d5d;
+  font-size:15px ;
+  text-align: left;
 }
 
 .respuesta{
-  color: #000000;
-  font-size:20px ;
-  text-align: center;
+  color: #a0a6b9;
+  font-size: 15px ;
+  text-align: left;
 }
 
 .estado{

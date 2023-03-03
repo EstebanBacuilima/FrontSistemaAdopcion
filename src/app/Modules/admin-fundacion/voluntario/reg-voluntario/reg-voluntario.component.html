@@ -11,7 +11,7 @@
     
 
     <form class="row  needs-validation g-2 d-flex justify-content-center" novalidate>
-        <h2 class="form text-center">Datos del Voluntario</h2>
+        <h2 class="form text-center"><b>Datos del Voluntario</b></h2>
         <div class="col-12">
             <label for="cedula" class="form-label-p"> Cédula</label>
             <input id="cedula" type="text" class="form-control" name="cedula"
@@ -38,7 +38,7 @@
                 <option value="" disabled selected>Selecciona un género</option>
                 <option value="masculino">Masculino</option>
                 <option value="famenino">Femenino</option>
-                <option value="otro">Otro</option>
+                <option value="otro">Sin especificar</option>
             </select>
         </div>
         <div class="col-12">
@@ -67,6 +67,8 @@
                 <option value="" disabled selected>Selecciona área de trabajo</option>
                 <option value="Clinica">Clínica</option>
                 <option value="Peluqueria">Peluquería</option>
+                <option value="Limpieza">Limpieza</option>
+                <option value="Recreacional y adiestramiento">Recreacional y adiestramiento</option>
                 <option value="otro">Otro</option>
             </select>
         </div>
@@ -79,16 +81,17 @@
                 <option value="otro">Otro</option>
             </select>
         </div> -->
-        <div class="col-12">
-            <label for="username" class="form-label-p"> Username</label>
+        <div class="separador">.</div>
+        <div class="col-4">
+            <label for="username" class="form-label-p"> Usuario</label>
             <input id="username" type="text" class="form-control" name="username" 
             maxlength="30" [(ngModel)]="usuario.username" required>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
             <label for="password" class="form-label-p"> Contraseña <i class="uil uil-eye-slash showHidePw"></i></label>
             <input id="password" type="password" class="password form-control" name="password" [(ngModel)]="usuario.password" required>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
             <label for="verficarPassword" class="form-label-p"> Repita su Contraseña</label>
             <input id="verficarPassword" type="password" class="password form-control" name="verficarPassword" [(ngModel)]="verficarPassword" required>
         </div>
@@ -108,7 +111,7 @@
                         <input type="file" class="uploadFile img" value="Upload Photo" (change)="imageSelected($event)"
                           style="width: 0px;height: 0px;overflow: hidden;">
                       </label>
-                      
+                      <br><br>
 
 
 
@@ -122,7 +125,8 @@
                 </div>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary" (click)="registrarVoluntario()">Registrar Voluntario</button>
-        <button type="button" class="btn " (click)=" limpiarCampos()" style="background-color: #a9cbff; border: #a9cbff;" >Cancelar</button>
+        <br>
+        <button type="submit" class="btn btn-primarys1" (click)="registrarVoluntario()">Registrar</button>
+        <button type="button" class="btn btn-primarys" (click)=" limpiarCampos()">Cancelar</button>
     </form>
 </div>

@@ -10,4 +10,5 @@ export class Seguimiento {
     foto_evidencia?: string;
     estado?: boolean;
     mascota!: Mascota;
+    estadoInforme?:string;
 } 

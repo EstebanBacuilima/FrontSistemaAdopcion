@@ -11,15 +11,20 @@
     font-family: inherit;
 }
 
-.btnO {
-    background-color: #a9cbff;
+.modal-header{
+    background-color: #a9b7e2;
+    color: #000;
 }
 
-.btnA {
-    background-color: #32507d;
+.btnO{
+    background-color: #a9b7e2;
     color: white;
 }
 
+.btnA{
+    background-color: rgb(114, 125, 226);
+    color: white;
+}
 
 
 .nav {
@@ -57,13 +62,30 @@
 }
 
 .btn-primarys {
-    background: #32507d;
+    background: #a9b7e2;
     display: block;
     color: white;
     border-radius: 0px;
     box-shadow: 0px 4px 6px 2px rgba(0, 0, 0, 0.2);
     margin-top: -5px;
-    margin: 0px auto;
+}
+
+.btn-primarys1 {
+    background: rgb(114, 125, 226);
+    display: block;
+    color: white;
+    border-radius: 0px;
+    box-shadow: 0px 4px 6px 2px rgba(0, 0, 0, 0.2);
+    margin-top: -5px;
+}
+
+.separador{
+    background: black;
+    color: white;
+    height: 5px;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    
 }
 
 .imgUp {

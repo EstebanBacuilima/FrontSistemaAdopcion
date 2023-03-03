@@ -34,7 +34,6 @@ export class PanelSeguimientoComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.obtenerMasotas();
     this.obtenerUsuario();
   }
   
@@ -49,6 +48,7 @@ export class PanelSeguimientoComponent implements OnInit {
         this.usuario = data;
         this.personas = this.usuario.persona;
       })
+      this.obtenerMasotas();
     } else {
       console.log("Usuario no foun => ")
     }
@@ -125,8 +125,9 @@ export class PanelSeguimientoComponent implements OnInit {
     console.log("Es la fecha de hoy -> " + fechaFormateada);
     this.seguimiento.fecha_seguimiento = fechaPrueba;
     this.seguimiento.mascota = this.mascota;
-    this.seguimiento.estado = false;
+    this.seguimiento.estado = true;
     this.seguimiento.foto_evidencia = this.foto_evidencia;
+    this.seguimiento.estadoInforme = 'P'
     this.seguimientoService.verficarRegistro(this.datainicialMascota,fechaFormateada).subscribe(
       data => {
         this.seguimientos = data
@@ -175,6 +176,7 @@ export class PanelSeguimientoComponent implements OnInit {
             this.seguimiento2.foto_evidencia = result.foto_evidencia;
             this.seguimiento2.fecha_seguimiento = result.fecha_seguimiento;
             this.seguimiento2.estado = result.estado;
+            this.seguimiento2.estadoInforme = result.estadoInforme;
             this.seguimiento2.mascota = result.mascota;
             return this.seguimiento2;
           }
@@ -183,6 +185,35 @@ export class PanelSeguimientoComponent implements OnInit {
       }
     )
   }
+
+//   listaSeguimientos3: Seguimiento[] = [];
+//   seguimiento3: Seguimiento = new Seguimiento;
+
+// solir: any;
+//   listarSeguimientosInformesPorMasocta(){
+//     this.seguimientoService.getAllSeguimientosInformesPorMascota(this.datainicialMascota).subscribe(
+//       data => {
+//         this.solir=data.length;
+//         console.log("conteo -> " + this.solir);
+//         this.listaSeguimientos3 = data.map(
+//           result => {
+//             this.seguimiento3 = result
+//             this.seguimiento3.idSeguimiento = result.idSeguimiento;
+//             this.seguimiento3.descripcion_mascota = result.descripcion_mascota;
+//             this.seguimiento3.estado_comportamiento = result.estado_comportamiento;
+//             this.seguimiento3.estado_salud = result.estado_salud;
+//             this.seguimiento3.foto_evidencia = result.foto_evidencia;
+//             this.seguimiento3.fecha_seguimiento = result.fecha_seguimiento;
+//             this.seguimiento3.estado = result.estado;
+//             this.seguimiento3.estadoInforme = result.estadoInforme;
+//             this.seguimiento3.mascota = result.mascota;
+//             return this.seguimiento3;
+//           }
+//         );
+//         this.loading = false;
+//       }
+//     )
+//   }
 
 file: any;
 private selectedFile!: File;
@@ -211,30 +242,6 @@ limpiarCampos() {
   this.seguimiento.estado_salud  = '';
   this.file = '';
 }
-  // // IMAGEN
-  // file: any = '';
-  // image!: any;
-  // retrievedImage: any;
-  // foto_evidencia: string = "";
-  // cap_nombre_archivo: any;
-  // selectedFile!: File;
-  // public imageSelected(event: any) {
-  //   this.selectedFile = event.target.files[0];
-  //   // mostrar imagen seleccionada
-  //   this.image = this.selectedFile;
-  //   const reader = new FileReader();
-  //   reader.readAsDataURL(this.selectedFile);
-  //   reader.onload = () => {
-  //     this.file = reader.result;
-  //   };
-  //   this.cap_nombre_archivo = event.target.value;
-  //   this.foto_evidencia = this.cap_nombre_archivo.slice(12);
-  //   console.log("Nombre imagen original => " + this.foto_evidencia);
-  //   this.seguimiento.foto_evidencia = this.foto_evidencia;
-  // }
 
-  // cargarImagenEvidencia() {
-  //   this.fotoService.guararImagenes(this.selectedFile);
-  // }
 
 }

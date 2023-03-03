@@ -100,7 +100,7 @@ export class RegVoluntarioComponent implements OnInit {
         this.fundacion = data;
       });
     } else {
-      console.log('Fundacion no found o esta vacio esa variable=> ');
+      console.log("Fundación no encontrada o esta vacío esa variable=> ")
     }
   }
 
@@ -143,13 +143,9 @@ export class RegVoluntarioComponent implements OnInit {
       .verfUsername(this.usuario.username)
       .subscribe((data) => {
         if (data) {
-          this.toastrService.error(
-            'Username ya en uso',
-            'Digite otro username',
-            {
-              timeOut: 3000,
-            }
-          );
+          this.toastrService.error('Usuario ya en uso', 'Digite otro usuario', {
+            timeOut: 3000,
+          });
           this.usuario.username = '';
           return;
         }
@@ -258,7 +254,7 @@ export class RegVoluntarioComponent implements OnInit {
   }
 
   ValidarCampos() {
-    console.log('ya esta activo');
+    console.log("Ya esta activo")
     document.addEventListener('DOMContentLoaded', () => {
       const forms = document.querySelectorAll(
         '.needs-validation'

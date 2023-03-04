@@ -4,9 +4,11 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CargarScrpitsService } from 'src/app/cargar-scrpits.service';
 import { Persona } from 'src/app/Models/Persona';
+import { SolicitudAdopcion } from 'src/app/Models/SolicitudAdopcion';
 import { Usuario } from 'src/app/Models/Usuario';
 import { FotoService } from 'src/app/Services/imagen.service';
 import { PersonaService } from 'src/app/Services/persona.service';
+import { SolicitudAdopcionService } from 'src/app/Services/solicitud-adopcion.service';
 import { UsuarioService } from 'src/app/Services/usuario.service';
 import Swal from 'sweetalert2';
 
@@ -41,7 +43,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private fotoService: FotoService,
     private router: Router,
     private http: HttpClient,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private solicitudAdopcionService: SolicitudAdopcionService,
   ) {
     _CargarScript.Cargar(["header"]);
   }
@@ -64,8 +67,51 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
   }
 
+  listaSolicitudes: SolicitudAdopcion[] = [];
+  solicitudes: SolicitudAdopcion = new SolicitudAdopcion();
+  conteoSolicitudes: any;
+
+  obtenerSolicitudes() {
+    this.solicitudAdopcionService.getSolicitudesFundacionNotificaciones(this.idFundacion).subscribe(
+      data => {
+        console.log("Data Soli Header -> " + data)
+        this.conteoSolicitudes = data.length
+        console.log("Conteo ->" + this.conteoSolicitudes)
+        this.listaSolicitudes = data.map(
+          result => {
+            let solicitudes = new SolicitudAdopcion;
+            solicitudes = result
+            return solicitudes;
+          }
+        );
+      },
+      error => (console.log("Error -> " + error))
+    )
+  }
+
+  idSolicitudCao: any;
+
+  verNotificacion(idSolicitudAdopcion: any) {
+    console.log("entro a cambiar esta id -> " + idSolicitudAdopcion)
+    this.solicitudAdopcionService.getPorId(idSolicitudAdopcion).subscribe(data => {
+      this.solicitudes = data
+      this.idSolicitudCao = this.solicitudes.idSolicitudAdopcion;
+      this.solicitudes.estadoDos = true;
+      this.solicitudAdopcionService.updateEstadoSolicitud(this.solicitudes, this.idSolicitudCao).subscribe(
+        data => {
+          console.log("Se cambio actualizo");
+          this.toastrService.success('Vista nueva solicitud', 'Solicitud vista', {
+            timeOut: 3000,
+          });
+          this.obtenerSolicitudes();
+        }
+      )
+    }
+    )
+  }
 
   persona: Persona = new Persona;
+  idFundacion: any;
 
   obtenerUsuario() {
     this.idUsuario = localStorage.getItem('idUsuario');
@@ -73,6 +119,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.usuarioService.getPorId(this.idUsuario).subscribe(
         data => {
           this.usuario = data;
+          this.idFundacion = data.fundacion?.idFundacion;
           this.usuario.persona = data.persona;
           this.persona.idPersona = data.persona?.idPersona;
           this.persona.nombres = data.persona?.nombres;
@@ -83,6 +130,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
           this.persona.genero = data.persona?.genero;
           this.persona.telefono = data.persona?.telefono;
           this.persona.correo = data.persona?.correo;
+          this.obtenerSolicitudes();
           if (data != null) {
             this.isLogin = true;
             this.nombreUsuario = data.persona?.nombres + ' ' + data.persona?.apellidos;

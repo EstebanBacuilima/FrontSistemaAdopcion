@@ -170,9 +170,7 @@
           <div class="cover">
             <div class="perfil-usuario-avatar">
               <img *ngIf="!file" [src]="'http://localhost:5000/imagen/images/' + usuario.foto_perfil" alt="img-avatar">
-
               <img *ngIf="file" [src]="file" alt="img-avatar">
-
               <input type="file" id="fileInput" (change)="imageSelected($event)" style="display: none;">
               <button (click)="openFileInput()" type="button" class="boton-avatar">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-image"

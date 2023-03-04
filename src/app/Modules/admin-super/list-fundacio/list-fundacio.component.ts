@@ -78,7 +78,6 @@ export class ListFundacioComponent implements OnInit {
     this.obtenerFundaciones()
   }
 
-
   obtenerFundaciones() {
     this.fundacionService.getFundacion().subscribe(
       data => {
@@ -140,15 +139,14 @@ export class ListFundacioComponent implements OnInit {
   }
 
   actualizarFundacion() {
-    if (!this.fundacion.ruc || this.fundacion.ruc === null || !this.fundacion.acronimo || this.fundacion.acronimo === null || this.fundacion.telefono === null || !this.fundacion.direccion || !this.fundacion.correo || this.fundacion.correo === null || !this.fundacion.logo || this.fundacion.logo === null || !this.fundacion.mision || this.fundacion.mision === null || !this.fundacion.nombre_fundacion || this.fundacion.nombre_fundacion === null
-      || !this.persona.apellidos || this.persona.apellidos === null || !this.persona.cedula || this.persona.cedula === null || !this.persona.celular || this.persona.celular === null || !this.persona.correo || this.persona.correo === null || !this.persona.celular || this.persona.celular === null || !this.persona.correo || this.persona.correo === null || !this.persona.direccion || this.persona.direccion === null || !this.persona.nombres || this.persona.nombres === null || !this.persona.telefono || this.persona.telefono === null
+    if (!this.fundacion.ruc || this.fundacion.ruc === null || !this.fundacion.acronimo || this.fundacion.acronimo === null || !this.fundacion.direccion || !this.fundacion.mision || this.fundacion.mision === null || !this.fundacion.nombre_fundacion || this.fundacion.nombre_fundacion === null
+      || !this.persona.apellidos || this.persona.apellidos === null || !this.persona.cedula || this.persona.cedula === null || !this.persona.direccion || this.persona.direccion === null || !this.persona.nombres || this.persona.nombres === null
       || !this.usuario.username || this.usuario.username === null || !this.usuario.password || this.usuario.password === null) {
       this.toastrService.error('Uno o más campos vacios', 'Verifique los Campos de texto', {
         timeOut: 3000,
       });
     } else {
       // if (this.validarEdad == true) {
-
         this.personaService.updatePersona(this.persona, this.persona.idPersona).subscribe(data => {
           console.log(data)
           this.usuarioService.updateUsuario(this.usuario, this.usuario.idUsuario).subscribe(data => {

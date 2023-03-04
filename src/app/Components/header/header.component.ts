@@ -220,31 +220,31 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   // ACTULIZAR PERFIL DE USUARIO
   actualizarFundacion() {
-    this.usuarioService.verfUsername(this.usuario.username).subscribe(
-      data => {
-        if (!data) {
+    // this.usuarioService.verfUsername(this.usuario.username).subscribe(
+    //   data => {
+    //     if (!data) {
           this.personaService.updatePersona(this.persona, this.persona.idPersona).subscribe(data => {
             console.log(data)
             this.cargarImagenUsuario();
             this.usuarioService.updateUsuario(this.usuario, this.usuario.idUsuario).subscribe(data => {
               console.log(data)
-              Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: 'Perfil actualizado correctamente',
-                showConfirmButton: false,
-                timer: 1500
-              })
+              this.toastrService.success(
+                'Actualizado exitosamente',
+                'Su perfil a sido',
+                {
+                  timeOut: 1000,
+                }
+              );
             })
           })
-        } else {
-          this.toastrService.error('Username ya en uso', 'Digite otro username', {
-            timeOut: 1000,
-          });
-          this.usuario.username = '';
-        }
-      }
-    )
+    //     } else {
+    //       this.toastrService.error('Username ya en uso', 'Digite otro username', {
+    //         timeOut: 1000,
+    //       });
+    //       this.usuario.username = '';
+    //     }
+    //   }
+    // )
   }
 
   visibleSeccion: boolean = false;

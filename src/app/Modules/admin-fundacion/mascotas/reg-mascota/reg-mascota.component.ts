@@ -75,6 +75,7 @@ export class RegMascotaComponent implements OnInit {
               this.mascota.fundacion = this.fundacion;
               this.mascota.usuario = this.usuario;
               this.mascota.estado_seguimiento = false;
+              this.mascota.foto = this.foto_mascota;
               this.mascota.estado = true;
               this.mascotaService.postMascota(this.mascota).subscribe(
                 info => {
@@ -92,8 +93,6 @@ export class RegMascotaComponent implements OnInit {
               });
               this.mascota.chipMascota = ''
             }
-
-                 
           } else {
             this.toastrService.error('Digite un nuevo chip!', 'Chip ya Existente', {
               timeOut: 2000,
@@ -108,7 +107,7 @@ export class RegMascotaComponent implements OnInit {
   file: any = '';
   image!: any;
   retrievedImage: any;
-  foto_mascota: string = "";
+  foto_mascota: string = "nodisponible.png";
   cap_nombre_archivo: any;
   selectedFile!: File;
   public imageSelected(event: any) {
@@ -123,7 +122,6 @@ export class RegMascotaComponent implements OnInit {
     this.cap_nombre_archivo = event.target.value;
     this.foto_mascota = this.cap_nombre_archivo.slice(12);
     console.log("Nombre imagen original => " + this.foto_mascota);
-    this.mascota.foto = this.foto_mascota;
   }
 
   cargarImagenMascota() {

@@ -17,14 +17,14 @@
                     <div class="mb-4">
                         <label for="username" class="form-label"> Usuario <i class="uil uil-user"></i></label>
                         <input id="username" class="form-control" name="username" type="username"
-                            [(ngModel)]="usuario.username" [pKeyFilter]="'alphanum'" maxlength="30" minlength="3"
+                            [(ngModel)]="usuario.username"  maxlength="30" minlength="3"
                             pInputText placeholder="Ingresa tu nombre de usuario" />
                     </div>
                     <div class="mb-4 input-wrapper input-field">
                         <label for="password" class="password form-label"> Contraseña <i
                                 class="uil uil-lock icon"></i></label>
                         <input id="password" class="password form-control" name="password" type="password"
-                            [(ngModel)]="usuario.password" [pKeyFilter]="'alphanum'" maxlength="15" minlength="5"
+                            [(ngModel)]="usuario.password" maxlength="30" minlength="5"
                             placeholder="**************" />
                         <i class="input-icon uil uil-eye-slash showHidePw"></i>
 
@@ -98,7 +98,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="direccion" class="form-label-p"> Dirección</label><label for="cedula" class="form-label-p" style="color: rgb(255, 0, 0); padding-left: 2px;"> *</label>
-                                    <input id="direccion" type="text" class="form-control" name="direccion" maxlength="50" pInputText
+                                    <input id="direccion" type="text" class="form-control" name="direccion" maxlength="200" pInputText
                                         [(ngModel)]="persona.direccion" [pKeyFilter]="letrasEspaceNumbers" required>
                                 </div>
                                 <div class="col-md-6">
@@ -122,8 +122,8 @@
                                     <label for="correo" class="form-label-p"> Correo</label><label for="cedula" class="form-label-p" style="color: rgb(255, 0, 0); padding-left: 2px;"> *</label>
                                     <input id="correo" type="text" class="form-control" name="correo" maxlength="30"
                                         pInputText [(ngModel)]="persona.correo" class={{verfCorreo}}
-                                        (ngModelChange)="validarCorreo()" required> 
-
+                                        required> 
+                                        <!-- (ngModelChange)="validarCorreo()" SE QUITO DEL CORREO -->
                                 </div>
                                 <div class="col-md-6">
                                     <label for="username" class="form-label-p"> Usuario</label><label for="cedula" class="form-label-p" style="color: rgb(255, 0, 0); padding-left: 2px;"> *</label>

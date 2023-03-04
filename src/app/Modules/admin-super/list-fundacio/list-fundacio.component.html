@@ -21,7 +21,7 @@
                         <th scope="col">Ruc</th>
                         <th scope="col">Representante</th>
                         <th scope="col">Nombre</th>
-                        <th scope="col">Misión</th>
+                        <!-- <th scope="col">Misión</th> -->
                         <th scope="col">Acrónimo</th>
                         <th scope="col">Correo</th>
                         <th scope="col">Teléfono</th>
@@ -43,7 +43,7 @@
                             {{ fundacion.persona.nombres }} {{ fundacion.persona.apellidos }}
                         </td>
                         <td>{{ fundacion.nombre_fundacion }}</td>
-                        <td>{{ fundacion.mision }}</td>
+                        <!-- <td>{{ fundacion.mision }}</td> -->
                         <td>{{ fundacion.acronimo }}</td>
                         <td>{{ fundacion.correo }}</td>
                         <td>{{ fundacion.telefono }}</td>
@@ -80,7 +80,7 @@
         <!-- <button pButton type="button" (click)="openPdfTables()"  label="Generar Reporte" icon="pi pi-file-pdf"></button> -->
     </div>
 
-    <h2 class="form-titulo text-center">.</h2>
+    <h2 class="form-titulo text-center"></h2>
 </div>
 
 <!-- Modal -->
@@ -148,7 +148,7 @@
 
                             <!-- DISTINTOS -->
 
-                            <h2 class="form-titulo text-center">.</h2>
+                            <h2 class="form-titulo text-center"></h2>
                             <h2 class="form text-center"><b>Datos Representante</b></h2>
                             <div class="personal-image">
                                 <label class="label">
@@ -215,7 +215,7 @@
                                 <label for="correo" class="form-label-p"> Correo</label>
                                 <input type="email" class="form-control" name="correo" [(ngModel)]="persona.correo" />
                             </div>
-                            <h2 class="form-titulo text-center">.</h2>
+                            <h2 class="form-titulo"></h2>
                             <div class="col-md-6">
                                 <label for="username" class="form-label-p"> Usuario</label>
                                 <input type="text" class="form-control" name="username" maxlength="30"
@@ -228,6 +228,7 @@
                                     [(ngModel)]="usuario.password" />
                             </div>
                         </form>
+                        <br><br>
                     </div>
                 </div>
             </div>

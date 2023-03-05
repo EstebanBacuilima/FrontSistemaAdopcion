@@ -9,6 +9,7 @@ import { FotoService } from 'src/app/Services/imagen.service';
 import { MascotaService } from 'src/app/Services/mascota.service';
 import { UsuarioService } from 'src/app/Services/usuario.service';
 import * as pdfMake from "pdfmake/build/pdfmake";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-list-mascota',
@@ -25,9 +26,8 @@ export class ListMascotaComponent implements OnInit {
   //VALIDACIONES
 
   // letras y espacios
-  letrasEspace: RegExp = /^[a-zA-Z\s.,áéíóúÁÉÍÓÚ]+$/;
+  letrasEspace: RegExp = /^[a-zA-Z\s]+$/;
   letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\s]+$/;
-
 
   // Validar que no igrese Guion medio
   onKeyPress(event: KeyboardEvent) {
@@ -307,7 +307,7 @@ export class ListMascotaComponent implements OnInit {
           text: '\n',
         },
         {
-          text: 'Listado de mascotas registradas de la fundación ' + this.fundacion.nombre_fundacion + ' en el sistema de adopción de mascotas.',
+          text: 'Listado de mascotas registradas de la fundación ' + this.fundacion.nombre_fundacion + 'en el sistema de adopción de mascotas.',
           alignment: 'center',
           color: 'black',
         },

@@ -9,7 +9,7 @@ import { FundacionService } from 'src/app/Services/fundacion.service';
 import { FotoService } from 'src/app/Services/imagen.service';
 import { PersonaService } from 'src/app/Services/persona.service';
 import { UsuarioService } from 'src/app/Services/usuario.service';
-
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-reg-fundacion',
@@ -20,12 +20,13 @@ export class RegFundacionComponent implements OnInit {
 
 
   //VALIDACIONES
+  //  val: regex = /^[0-9]{10}$/;
 
 
   // letras y espacios
   letrasEspace: RegExp = /^[a-zA-Z\s]+$/;
   letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\s]+$/;
-  letrasEspeciales: RegExp = /^[a-zA-Z0-9\s.,&-áéíóúÁÉÍÓÚ]+$/;
+  letrasEspeciales: RegExp = /^[a-zA-Z0-9\s.,]+$/;
 
   // letrasEspace: RegExp = /^[a-zA-Z0-9\s^!#$%&*]+$/;
   // letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\s^!#$%&*-]+$/;
@@ -39,34 +40,34 @@ export class RegFundacionComponent implements OnInit {
   //Validar Edad en el Campo de De fecha
   edad: any;
   validarEdad: boolean = false;
-  //Validacion mas tarde
+//Validacion mas tarde
 
-  calcularEdad() {
-    if (this.persona && this.persona.fechaNacimiento) {
-      let fechaPrueba: any = new Date(this.persona.fechaNacimiento);
-      let fechaFormateada = fechaPrueba.toISOString().substr(0, 10);
-      let anio = parseInt(fechaFormateada.substr(0, 4));
-      console.log('fecha formateada ->' + fechaFormateada)
-      console.log('año elejido ->' + anio)
-      let fechaHoy: Date = new Date();
-      let fechaFormateadaHoy = fechaHoy.toISOString().substr(0, 10);
-      let anioA = parseInt(fechaFormateadaHoy.substr(0, 4));
-      console.log('año actual ->' + anioA)
-      let edad = anioA - anio;
-      console.log('Edad:' + edad);
-      if (edad < 18) {
-        this.toastrService.error('Prohibido el registro', 'Usted es menor de edad', {
-          timeOut: 3000,
-        });
-        this.validarEdad = false;
-        console.log("dato -> " + this.validarEdad)
-      } else {
-        console.log('El usuario es mayor de edad');
-        this.validarEdad = true;
-        console.log("dato -> " + this.validarEdad)
-      }
+calcularEdad() {
+  if (this.persona && this.persona.fechaNacimiento) {
+    let fechaPrueba: any = new Date(this.persona.fechaNacimiento);
+    let fechaFormateada = fechaPrueba.toISOString().substr(0, 10);
+    let anio = parseInt(fechaFormateada.substr(0, 4));
+    console.log('fecha formateada ->' + fechaFormateada)
+    console.log('año elejido ->' + anio)
+    let fechaHoy: Date = new Date();
+    let fechaFormateadaHoy = fechaHoy.toISOString().substr(0, 10);
+    let anioA = parseInt(fechaFormateadaHoy.substr(0, 4));
+    console.log('año actual ->' + anioA)
+    let edad = anioA - anio;
+    console.log('Edad:' + edad);
+    if (edad < 18) {
+      this.toastrService.error('Prohibido el registro', 'Usted es menor de edad', {
+        timeOut: 3000,
+      });
+      this.validarEdad = false;
+      console.log("dato -> " + this.validarEdad)
+    } else {
+      console.log('El usuario es mayor de edad');
+      this.validarEdad = true;
+      console.log("dato -> " + this.validarEdad)
     }
   }
+}
 
   //Validacion de Correo
   expCorreo: RegExp = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
@@ -124,7 +125,7 @@ export class RegFundacionComponent implements OnInit {
       form.reset();
     });
   }
-
+  
 
   fundacion: Fundacion = new Fundacion;
   usuario: Usuario = new Usuario;
@@ -142,71 +143,68 @@ export class RegFundacionComponent implements OnInit {
   //Validacion de los campos
   registrarFundacion() {
     // || !this.fundacion.logo || this.fundacion.logo === null 
-    if (!this.fundacion.ruc || this.fundacion.ruc === null || !this.fundacion.acronimo || this.fundacion.acronimo === null || !this.fundacion.direccion || !this.fundacion.mision || this.fundacion.mision === null || !this.fundacion.nombre_fundacion || this.fundacion.nombre_fundacion === null
-      || !this.persona.apellidos || this.persona.apellidos === null || !this.persona.cedula || this.persona.cedula === null || !this.persona.direccion || this.persona.direccion === null || !this.persona.nombres || this.persona.nombres === null
+    if (!this.fundacion.ruc || this.fundacion.ruc === null || !this.fundacion.acronimo || this.fundacion.acronimo === null || !this.fundacion.telefono || !this.fundacion.direccion || !this.fundacion.correo || this.fundacion.correo === null || !this.fundacion.mision || this.fundacion.mision === null || !this.fundacion.nombre_fundacion || this.fundacion.nombre_fundacion === null
+      || !this.persona.apellidos || this.persona.apellidos === null || !this.persona.cedula || this.persona.cedula === null || !this.persona.celular || this.persona.celular === null || !this.persona.correo || this.persona.correo === null || !this.persona.celular || this.persona.celular === null || !this.persona.correo || this.persona.correo === null || !this.persona.direccion || this.persona.direccion === null || !this.persona.nombres || this.persona.nombres === null || !this.persona.telefono || this.persona.telefono === null
       || !this.usuario.username || this.usuario.username === null || !this.usuario.password || this.usuario.password === null) {
-      this.toastrService.error('Verifique los campos obligatorios', 'Uno o más campos vacios', {
-        timeOut: 3000,
+      this.toastrService.error('Uno o más campos vacios', 'Verifique los Campos de texto', {
+        timeOut: 2000,
       });
     } else {
       this.fundacionService.verfRuc(this.fundacion.ruc).subscribe(
         dataFundacionRuc => {
           if (!dataFundacionRuc) {
             if (this.fundacion.ruc.length === 13) {
+
               //Validar Cedular
               // if (this.persona.cedula.length === 10) {}
+
               this.personaService.getPorCedula(this.persona.cedula).subscribe(
                 resultPersonaCedula => {
+
                   if (resultPersonaCedula === null) {
                     if (this.persona.cedula?.length === 10) {
-                      //Validar la edad
-                      if (this.validarEdad == true) {
+
+
+                      //                    Validar la edad
+                      // if (this.validarEdad == true) {
+
+
                         this.usuarioService.verfUsername(this.usuario.username).subscribe(
                           dataUsername => {
                             if (!dataUsername) {
-                              if (this.verficarPassword == this.usuario.password) {
-                                this.personaService.postPersona(this.persona).subscribe(
-                                  dataPersona => {
-                                    console.log(dataPersona);
-                                    this.persona = dataPersona;
-                                    this.persona.idPersona = this.persona.idPersona;
-                                    this.fundacion.persona = this.persona;
-                                    this.fundacion.logo = this.foto_fundacion;
-                                    this.fundacion.estado = true;
-                                    this.cargarImagenFundacion();
-                                    this.fundacionService.postFundacion(this.fundacion).subscribe(
-                                      dataFundacion => {
-                                        console.log(dataFundacion)
-                                        this.fundacion = dataFundacion;
-                                        this.fundacion.idFundacion = this.fundacion.idFundacion;
-                                        this.usuario.idUsuario;
-                                        this.usuario.persona = this.persona;
-                                        this.usuario.fundacion = this.fundacion;
-                                        this.usuario.rol = "ADMIN_FUDACION";
-                                        this.usuario.estado = true;
-                                        this.usuario.foto_perfil = this.foto_usuario;
-                                        this.cargarImagenUsuario();
-                                        this.usuarioService.postUsuario(this.usuario).subscribe(
-                                          dataUsuario => {
-                                            this.toastrService.success('Fundación registrada exitosamente', 'Registro Exitoso', {
-                                              timeOut: 1500,
-                                            });
-                                            this.limpiarCampos();
-                                          }
-                                        );
-                                      }
-                                    )
-                                  }
-                                );
-                              } else {
-                                this.toastrService.error(
-                                  'No son similares',
-                                  'Verifique su contraseña',
-                                  {
-                                    timeOut: 1000,
-                                  }
-                                );
-                              }
+                              this.personaService.postPersona(this.persona).subscribe(
+                                dataPersona => {
+                                  console.log(dataPersona);
+                                  this.persona = dataPersona;
+                                  this.persona.idPersona = this.persona.idPersona;
+                                  this.fundacion.persona = this.persona;
+                                  this.fundacion.logo = this.foto_fundacion;
+                                  this.fundacion.estado = true;
+                                  this.cargarImagenFundacion();
+                                  this.fundacionService.postFundacion(this.fundacion).subscribe(
+                                    dataFundacion => {
+                                      console.log(dataFundacion)
+                                      this.fundacion = dataFundacion;
+                                      this.fundacion.idFundacion = this.fundacion.idFundacion;
+                                      this.usuario.idUsuario;
+                                      this.usuario.persona = this.persona;
+                                      this.usuario.fundacion = this.fundacion;
+                                      this.usuario.rol = "ADMIN_FUDACION";
+                                      this.usuario.estado = true;
+                                      this.usuario.foto_perfil = this.foto_usuario;
+                                      this.cargarImagenUsuario();
+                                      this.usuarioService.postUsuario(this.usuario).subscribe(
+                                        dataUsuario => {
+                                          this.toastrService.success('Fundación registrada exitosamente', 'Registro Exitoso', {
+                                            timeOut: 1500,
+                                          });
+                                          this.limpiarCampos();
+                                        }
+                                      );
+                                    }
+                                  )
+                                }
+                              );
                             } else {
                               this.toastrService.error('username ya en uso', 'Digite otro username', {
                                 timeOut: 2000,
@@ -215,11 +213,11 @@ export class RegFundacionComponent implements OnInit {
                             }
                           }
                         )
-                      } else {
-                        this.toastrService.warning('Verifique su fecha de nacimiento!', 'Aviso!', {
-                          timeOut: 1000,
-                        });
-                      }
+                      // } else {
+                      //   this.toastrService.warning('Verifique su fecha de nacimiento!', 'Aviso!', {
+                      //     timeOut: 1000,
+                      //   });
+                      // }
                     } else {
                       this.toastrService.error('La cédula debe de tener 10 dígitos', 'cédula no procesada', {
                         timeOut: 3000,
@@ -276,13 +274,12 @@ export class RegFundacionComponent implements OnInit {
       console.error(error);
     }
   }
-  // FIN GUARDAR IMG EN BASE DE DATOS
 
   // IMAGEN USUARIO
   file: any = '';
   image!: any;
   retrievedImage: any;
-  foto_usuario: string = "fotoPorDefecto.png";
+  foto_usuario: string = "";
   cap_nombre_archivo: any;
   selectedFile!: File;
   public imageSelected(event: any) {
@@ -297,6 +294,7 @@ export class RegFundacionComponent implements OnInit {
     this.cap_nombre_archivo = event.target.value;
     this.foto_usuario = this.cap_nombre_archivo.slice(12);
     console.log("Nombre imagen original => " + this.foto_usuario);
+    this.usuario.foto_perfil = this.foto_usuario;
   }
 
   cargarImagenUsuario() {
@@ -306,7 +304,7 @@ export class RegFundacionComponent implements OnInit {
   // IMAGEN FUDACION
   imagen!: any;
   filem: any = '';
-  foto_fundacion: string = "nodisponible.png";
+  foto_fundacion: string = "";
   cap_nombre_archivo_u: any;
   selectedFiles!: File;
   public imageSelectedl(event: any) {
@@ -321,6 +319,7 @@ export class RegFundacionComponent implements OnInit {
     this.cap_nombre_archivo_u = event.target.value;
     this.foto_fundacion = this.cap_nombre_archivo_u.slice(12);
     console.log("Nombre imagen original => " + this.foto_fundacion);
+    this.fundacion.logo = this.foto_fundacion;
   }
 
   cargarImagenFundacion() {

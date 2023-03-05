@@ -14,6 +14,7 @@ import { MascotaService } from 'src/app/Services/mascota.service';
 import { PersonaService } from 'src/app/Services/persona.service';
 import { SolicitudAdopcionService } from 'src/app/Services/solicitud-adopcion.service';
 import { UsuarioService } from 'src/app/Services/usuario.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-catalgo-mascotas',
@@ -162,7 +163,6 @@ export class CatalgoMascotasComponent implements OnInit {
     this.solicitudAdopcion.fecha_solicitud_adopcion = fechaPrueba;
     this.solicitudAdopcion.mascota = this.mascota;
     this.solicitudAdopcion.usuario = this.usuario;
-    this.solicitudAdopcion.estadoDos = false;
     this.mascota.estado_adopcion = false;
     console.log("Mascota enviar -> " + this.mascota.nombre_mascota);
     console.log("Usuario enviar -> " + this.usuario.persona?.nombres);

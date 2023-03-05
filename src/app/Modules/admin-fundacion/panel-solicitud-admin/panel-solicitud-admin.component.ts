@@ -12,8 +12,6 @@ import { MascotaService } from 'src/app/Services/mascota.service';
 import { SolicitudAdopcionService } from 'src/app/Services/solicitud-adopcion.service';
 import { UsuarioService } from 'src/app/Services/usuario.service';
 import Swal from 'sweetalert2';
-import { ToastrService } from 'ngx-toastr';
-
 
 @Component({
   selector: 'app-panel-solicitud-admin',
@@ -30,7 +28,7 @@ export class PanelSolicitudAdminComponent implements OnInit {
   //
 
 
-  constructor(private solicitudAdopcionService: SolicitudAdopcionService,private toastrService: ToastrService, private mascotaService: MascotaService, private fundacionService: FundacionService, private usuarioService: UsuarioService, private router: Router, private fotoService: FotoService
+  constructor(private solicitudAdopcionService: SolicitudAdopcionService, private mascotaService: MascotaService, private fundacionService: FundacionService, private usuarioService: UsuarioService, private router: Router, private fotoService: FotoService
   ) { }
 
   ngOnInit(): void {
@@ -140,8 +138,6 @@ letrasEspeciales: RegExp = /^[a-zA-Z0-9\s.,]+$/;
       estado = 'EN PROCESO';
     } else if (estados == 'R') {
       estado = 'SOLICITUD RECHAZADA';
-    } else if (estados == 'Q') {
-      estado = 'QUITADO';
     }
     return estado;
   }
@@ -208,16 +204,13 @@ letrasEspeciales: RegExp = /^[a-zA-Z0-9\s.,]+$/;
                   this.mascotaService.updateDueñoMascota(this.mascota, this.mascota.idMascota).subscribe(
                     dataMD => {
                       console.log("Cambio de dueño")
-                      // Swal.fire({
-                      //   position: 'top-end',
-                      //   icon: 'success',
-                      //   title: 'Solicitud Aceptada',
-                      //   showConfirmButton: false,
-                      //   timer: 1500
-                      // })
-                      this.toastrService.success('Solicitud Aceptada', '', {
-                        timeOut: 1500,
-                      });
+                      Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Solicitud Aceptada',
+                        showConfirmButton: false,
+                        timer: 1500
+                      })
                       this.obtenerSolicitudes();
                     }
                   )
@@ -239,16 +232,12 @@ letrasEspeciales: RegExp = /^[a-zA-Z0-9\s.,]+$/;
           this.idSolicitud = this.solicitud.idSolicitudAdopcion
           this.solicitudAdopcionService.updateEstadoSolicitud(this.solicitud, this.idSolicitud).subscribe(
             data => {
-              // Swal.fire({
-              //   position: 'top-end',
-              //   icon: 'success',
-              //   title: 'Solicitud puesta en espera',
-              //   timer: 1500
-              // })
-              
-              this.toastrService.warning('Solicitud puesta en espera', '', {
-                timeOut: 1000,
-              });
+              Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Solicitud puesta en espera',
+                timer: 1500
+              })
               this.obtenerSolicitudes();
             },
             error => (console.log(error))
@@ -286,15 +275,12 @@ letrasEspeciales: RegExp = /^[a-zA-Z0-9\s.,]+$/;
               this.mascotaService.updateEstadoAdopcion(this.mascota, this.mascota.idMascota).subscribe(
                 data => {
                   console.log("Se cambio a " + data.estado_adopcion);
-                  // Swal.fire({
-                  //   position: 'top-end',
-                  //   icon: 'error',
-                  //   text: 'Solicitud Rechazada',
-                  //   timer: 1500
-                  // })
-                  this.toastrService.error('Solicitud Rechazada', '', {
-                    timeOut: 3000,
-                  });
+                  Swal.fire({
+                    position: 'top-end',
+                    icon: 'error',
+                    text: 'Solicitud Rechazada',
+                    timer: 1500
+                  })
                   this.obtenerSolicitudes();
                 }
               )
@@ -331,15 +317,12 @@ letrasEspeciales: RegExp = /^[a-zA-Z0-9\s.,]+$/;
               this.mascotaService.updateEstadoAdopcion(this.mascota, this.mascota.idMascota).subscribe(
                 data => {
                   console.log("Se cambio a " + data.estado_adopcion);
-                  // Swal.fire({
-                  //   position: 'top-end',
-                  //   icon: 'error',
-                  //   text: 'Solicitud Rechazada',
-                  //   timer: 1500
-                  // })
-                  this.toastrService.error('Solicitud Rechazada', '', {
-                    timeOut: 3000,
-                  });
+                  Swal.fire({
+                    position: 'top-end',
+                    icon: 'error',
+                    text: 'Solicitud Rechazada',
+                    timer: 1500
+                  })
                   this.obtenerSolicitudes();
                 }
               )

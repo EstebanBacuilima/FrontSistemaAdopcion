@@ -9,6 +9,7 @@ import { FundacionService } from 'src/app/Services/fundacion.service';
 import { FotoService } from 'src/app/Services/imagen.service';
 import { MascotaService } from 'src/app/Services/mascota.service';
 import { UsuarioService } from 'src/app/Services/usuario.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-reg-mascota',
@@ -75,7 +76,6 @@ export class RegMascotaComponent implements OnInit {
               this.mascota.fundacion = this.fundacion;
               this.mascota.usuario = this.usuario;
               this.mascota.estado_seguimiento = false;
-              this.mascota.foto = this.foto_mascota;
               this.mascota.estado = true;
               this.mascotaService.postMascota(this.mascota).subscribe(
                 info => {
@@ -93,6 +93,8 @@ export class RegMascotaComponent implements OnInit {
               });
               this.mascota.chipMascota = ''
             }
+
+                 
           } else {
             this.toastrService.error('Digite un nuevo chip!', 'Chip ya Existente', {
               timeOut: 2000,
@@ -107,7 +109,7 @@ export class RegMascotaComponent implements OnInit {
   file: any = '';
   image!: any;
   retrievedImage: any;
-  foto_mascota: string = "nodisponible.png";
+  foto_mascota: string = "";
   cap_nombre_archivo: any;
   selectedFile!: File;
   public imageSelected(event: any) {
@@ -122,6 +124,7 @@ export class RegMascotaComponent implements OnInit {
     this.cap_nombre_archivo = event.target.value;
     this.foto_mascota = this.cap_nombre_archivo.slice(12);
     console.log("Nombre imagen original => " + this.foto_mascota);
+    this.mascota.foto = this.foto_mascota;
   }
 
   cargarImagenMascota() {
@@ -144,12 +147,9 @@ export class RegMascotaComponent implements OnInit {
   //VALIDACIONES
 
   // letras y espacios
-  letrasEspace: RegExp = /^[a-zA-Z\s.,áéíóúÁÉÍÓÚ]+$/;
+  letrasEspace: RegExp = /^[a-zA-Z\s]+$/;
   letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\s]+$/;
-  // letrasEspeciales: RegExp = /^[a-zA-Z0-9\s.,]+$/;
-  letrasEspeciales: RegExp = /^[a-zA-Z0-9\s.,áéíóúÁÉÍÓÚ]+$/;
-
-
+  letrasEspeciales: RegExp = /^[a-zA-Z0-9\s.,]+$/;
 
 
   // Validar que no igrese Guion medio

@@ -3,24 +3,25 @@
 }
 
 .form-titulo {
-    background: #a9b7e2;
-    color: #a9b7e2;
-    height: 5px;
-    margin-top: 3%;
-    margin-bottom: 3%;
+        background: black;
+        color: white;
+        height: 5px;
+        margin-top: 3%;
+        margin-bottom: 3%;
+      
 }
 
-.modal-header {
+.modal-header{
     background-color: #a9b7e2;
     color: #000;
 }
 
-.btnO {
+.btnO{
     background-color: #a9b7e2;
     color: white;
 }
 
-.btnA {
+.btnA{
     background-color: rgb(114, 125, 226);
     color: white;
 }
@@ -83,58 +84,18 @@
 }
 
 
-/* IMAGEN */
 
-.personal-image {
-    text-align: center;
+/* NEW */
+.perfil-usuario-avatar {
+    align-items: center;
+    align-content: center;
+}
+.perfil-usuario-avatar img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
 }
 
-.personal-image input[type="file"] {
-    display: none;
+input[readonly] {
+    background-color: transparent;
 }
-
-.personal-figure {
-    position: relative;
-    width: 150px;
-    height: 150px;
-}
-
-.personal-avatar {
-    cursor: pointer;
-    width: 150px;
-    height: 150px;
-    box-sizing: border-box;
-    border-radius: 100%;
-    border: 2px solid transparent;
-    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
-    transition: all ease-in-out .3s;
-}
-
-.personal-avatar:hover {
-    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.5);
-}
-
-.personal-figcaption {
-    cursor: pointer;
-    position: absolute;
-    top: 0px;
-    width: inherit;
-    height: inherit;
-    border-radius: 100%;
-    opacity: 0;
-    background-color: rgba(0, 0, 0, 0);
-    transition: all ease-in-out .3s;
-}
-
-.personal-figcaption:hover {
-    opacity: 1;
-    background-color: rgba(0, 0, 0, .5);
-}
-
-.personal-figcaption>img {
-    margin-top: 45px;
-    width: 50px;
-    height: 50px;
-}
-
-/* FIN */

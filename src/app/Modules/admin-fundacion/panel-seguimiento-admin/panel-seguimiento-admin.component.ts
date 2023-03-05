@@ -14,6 +14,7 @@ import { PersonaService } from 'src/app/Services/persona.service';
 import { SeguimientoService } from 'src/app/Services/seguimiento.service';
 import { SolicitudAdopcionService } from 'src/app/Services/solicitud-adopcion.service';
 import { UsuarioService } from 'src/app/Services/usuario.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-panel-seguimiento-admin',
@@ -121,16 +122,13 @@ export class PanelSeguimientoAdminComponent implements OnInit {
     this.seguimiento.estadoInforme = 'A';
     this.seguimientoService.updateEstadoSeguimiento(this.seguimiento, this.seguimiento.idSeguimiento).subscribe(data => {
       console.log(data)
-      // Swal.fire({
-      //   position: 'top-end',
-      //   icon: 'success',
-      //   title: 'Seguimiento Aprobado',
-      //   showConfirmButton: false,
-      //   timer: 1500
-      // })
-      this.toastrService.success('Seguimiento Aprobado', '', {
-        timeOut: 1500,
-      });
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Seguimiento Aprobado',
+        showConfirmButton: false,
+        timer: 1500
+      })
       this.optenerDatosSeguimiento();
     })
   }
@@ -140,16 +138,13 @@ export class PanelSeguimientoAdminComponent implements OnInit {
     this.seguimiento.estadoInforme = 'P';
     this.seguimientoService.updateEstadoSeguimiento(this.seguimiento, this.seguimiento.idSeguimiento).subscribe(data => {
       console.log(data)
-      // Swal.fire({
-      //   position: 'top-end',
-      //   icon: 'success',
-      //   title: 'Seguimiento Aprobado',
-      //   showConfirmButton: false,
-      //   timer: 1500
-      // })
-      this.toastrService.success('Seguimiento Aprobado', '', {
-        timeOut: 1500,
-      });
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Seguimiento Aprobado',
+        showConfirmButton: false,
+        timer: 1500
+      })
       this.optenerDatosSeguimiento();
     })
   }
@@ -209,11 +204,10 @@ export class PanelSeguimientoAdminComponent implements OnInit {
   capIdDueñoFundacion: any;
   capIdDueñoActual: any;
   solicitud: SolicitudAdopcion = new SolicitudAdopcion;
-  idSolicitudCap: any;
+  idSolicitud: any;
   idSeguimiento: any;
   listaSolicitudInvalidados: SolicitudAdopcion[] = [];
   listaSeguimientosInvalidados: Seguimiento[] = [];
-  solicitudAdopcion: SolicitudAdopcion = new SolicitudAdopcion;
 
   invalidarAdopcionDeMascota() {
     this.mascotaService.getPorId(this.datainicialMascota).subscribe(dataP => {
@@ -235,28 +229,6 @@ export class PanelSeguimientoAdminComponent implements OnInit {
             this.seguimientoService.updateEstadoSeguimiento(seg, seg.idSeguimiento).subscribe();
           });
           console.log("Cambio los estados de seguimiento ->")
-          this.solicitudAdopcionService.getSolicitudesUsuarioAndMascota(this.datainicialMascota, this.capIdDueñoActual).subscribe(
-            dataSL => {
-              this.listaSolicitudInvalidados = dataSL.map(
-                result => {
-                  this.solicitudAdopcion = result;
-                  this.solicitudAdopcion = this.solicitudAdopcion;
-                  this.idSolicitudCap = result.idSolicitudAdopcion;
-                  return this.solicitudAdopcion;
-                }
-              );
-              console.log("id de la soli " + this.idSolicitudCap)
-              this.listaSolicitudInvalidados.forEach((solicitud: SolicitudAdopcion) => { 
-                solicitud.estado = 'Q';
-                this.solicitudAdopcionService.updateEstadoSolicitud(solicitud,solicitud.idSolicitudAdopcion).subscribe();
-              })
-              // this.solicitudAdopcion.estado = 'RR';
-              // console.log("es la id DOSS -> " + this.solicitudAdopcion.idSolicitudAdopcion)
-              // this.solicitudAdopcionService.updateEstadoSolicitud(this.idSolicitudCap, this.solicitudAdopcion).subscribe(
-              //   dataUSI => {
-              //   })
-            })
-
           this.capIdDueñoFundacion = this.mascota.fundacion?.persona.idPersona;
           this.usuarioService.getPorIdPersona(this.capIdDueñoFundacion).subscribe(dataU => {
             this.usuario = dataU

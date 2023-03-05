@@ -47,38 +47,6 @@ export class RegVoluntarioComponent implements OnInit {
     this.ValidarCampos();
     this.limpiarCampos();
   }
-
-
-  //Validar Edad en el Campo de De fecha
-  edad: any;
-  validarEdad: boolean = false;
-  //Validar Edad
-  calcularEdad() {
-    if (this.persona && this.persona.fechaNacimiento) {
-      let fechaPrueba: any = new Date(this.persona.fechaNacimiento);
-      let fechaFormateada = fechaPrueba.toISOString().substr(0, 10);
-      let anio = parseInt(fechaFormateada.substr(0, 4));
-      console.log('fecha formateada ->' + fechaFormateada)
-      console.log('año elejido ->' + anio)
-      let fechaHoy: Date = new Date();
-      let fechaFormateadaHoy = fechaHoy.toISOString().substr(0, 10);
-      let anioA = parseInt(fechaFormateadaHoy.substr(0, 4));
-      console.log('año actual ->' + anioA)
-      let edad = anioA - anio;
-      console.log('Edad:' + edad);
-      if (edad < 18) {
-        this.toastrService.error('Prohibido el registro', 'Usted es menor de edad', {
-          timeOut: 3000,
-        });
-        this.validarEdad = false;
-        console.log("dato -> " + this.validarEdad)
-      } else {
-        console.log('El usuario es mayor de edad');
-        this.validarEdad = true;
-        console.log("dato -> " + this.validarEdad)
-      }
-    }
-  }
   obtenerUsuario() {
     this.idUsuario = localStorage.getItem('idUsuario');
     if (this.idUsuario != '' && this.idUsuario != undefined) {
@@ -154,8 +122,6 @@ export class RegVoluntarioComponent implements OnInit {
           .getPorCedula(this.persona.cedula)
           .subscribe((result) => {
             if (this.persona.cedula?.length === 10) {
-              if (this.validarEdad == true) {
-
               if (result != null) {
                 this.toastrService.error(
                   'Digite otra cedula',
@@ -197,12 +163,7 @@ export class RegVoluntarioComponent implements OnInit {
                         });
                     });
                 });
-              } else {
-                this.toastrService.warning('Verifique su fecha de nacimiento!', 'Aviso!', {
-                  timeOut: 1000,
-                });
-              }
-            } else {
+            }else {
               this.toastrService.error('La cédula debe de tener 10 dígitos', 'cédula no procesada', {
                 timeOut: 3000,
               });
@@ -241,10 +202,8 @@ export class RegVoluntarioComponent implements OnInit {
   //VALIDACIONES
 
   // letras y espacios
-  letrasEspace: RegExp = /^[a-zA-Z\s.,áéíóúÁÉÍÓÚ]+$/;
+  letrasEspace: RegExp = /^[a-zA-Z\s]+$/;
   letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\s]+$/;
-  letrasEspeciales: RegExp = /^[a-zA-Z0-9\s.,áéíóúÁÉÍÓÚ]+$/;
-
 
   // Validar que no igrese Guion medio
   onKeyPress(event: KeyboardEvent) {

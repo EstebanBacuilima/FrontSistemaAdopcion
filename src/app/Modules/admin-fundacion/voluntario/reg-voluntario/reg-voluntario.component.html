@@ -28,9 +28,8 @@
             maxlength="30"  [(ngModel)]="persona.apellidos" [pKeyFilter]="letrasEspace"  required>
         </div>
         <div class="col-6">
-            <label for="fechaNacimiento" class="form-label-p"> Fecha De Nacimiento</label>
-            <input id="fechaNacimiento" type="date" class="form-control" name="fechaNacimiento" [(ngModel)]="persona.fechaNacimiento"
-            (ngModelChange)="calcularEdad()" required>
+            <label for="fechaNacimiento" class="form-label-p"> Fecha de nacimiento</label>
+            <input id="fechaNacimiento" type="date" class="form-control" name="fechaNacimiento" [(ngModel)]="persona.fechaNacimiento" required>
         </div>
         <div class="col-6">
             <label for="genero" class="form-label-p"> Género</label>
@@ -44,7 +43,7 @@
         <div class="col-12">
             <label for="direccion" class="form-label-p"> Dirección</label>
             <input id="direccion" type="text" class="form-control" name="direccion" 
-            maxlength="30"  [(ngModel)]="persona.direccion" [pKeyFilter]="letrasEspeciales" required>
+            maxlength="30"  [(ngModel)]="persona.direccion" [pKeyFilter]="letrasEspaceNumbers" required>
         </div>
         <div class="col-md-6">
             <label for="telefono" class="form-label-p"> Teléfono</label>
@@ -111,7 +110,7 @@
                         <input type="file" class="uploadFile img" value="Upload Photo" (change)="imageSelected($event)"
                           style="width: 0px;height: 0px;overflow: hidden;">
                       </label>
-                      <br><br>
+                      
 
 
 
@@ -127,6 +126,8 @@
         </div>
         <br>
         <button type="submit" class="btn btn-primarys1" (click)="registrarVoluntario()">Registrar</button>
-        <button type="button" class="btn btn-primarys" (click)=" limpiarCampos()">Cancelar</button>
+        <br>
+        <br>
+        <button type="button" class="btn btn-primarys" (click)=" limpiarCampos()" >Cancelar</button>
     </form>
 </div>

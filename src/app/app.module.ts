@@ -31,7 +31,6 @@ import { PanelSeguimientoAdminComponent } from './Modules/admin-fundacion/panel-
 // NUEVOS
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
-
 // PRIMENG
 import {InputMaskModule} from 'primeng/inputmask';
 import {KeyFilterModule } from 'primeng/keyfilter';
@@ -40,7 +39,6 @@ import {InputTextModule} from 'primeng/inputtext';
 import {DropdownModule} from 'primeng/dropdown';
 import {MatTabsModule} from '@angular/material/tabs';
 import {CalendarModule} from 'primeng/calendar';
-import {BadgeModule} from 'primeng/badge';
 
 //PDF
 import { PdfMakeWrapper } from 'pdfmake-wrapper';
@@ -93,8 +91,8 @@ PdfMakeWrapper.setFonts(pdfFonts);
     DropdownModule,
     MatTabsModule,
     CalendarModule,
-    ReactiveFormsModule,
-    BadgeModule
+    ReactiveFormsModule
+
   ],
   providers: [
     CargarScrpitsService

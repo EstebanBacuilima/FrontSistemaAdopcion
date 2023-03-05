@@ -31,10 +31,11 @@
                     </tr>
                 </thead>
                 <tbody>
-
-                    <tr style="text-align: center" *ngFor="let voluntario of listaVoluntarios
-                | paginate : { itemsPerPage: 5, currentPage: pageActual }; index as i">
-
+                    <tr style="text-align: center" *ngFor="
+              let voluntario of listaVoluntarios
+                | paginate : { itemsPerPage: 10, currentPage: pageActual };
+              index as i
+            ">
                         <th scope="row">{{ i + 1 }}</th>
                         <td>{{ voluntario.usuario!.persona!.cedula}}</td>
                         <td>{{ voluntario.usuario!.persona!.nombres }} {{ voluntario.usuario?.persona?.apellidos }}</td>
@@ -144,10 +145,8 @@
                                         Selecciona área de trabajo
                                     </option>
                                     <option value="Clinica">Clínica</option>
-                <option value="Peluqueria">Peluquería</option>
-                <option value="Limpieza">Limpieza</option>
-                <option value="Recreacional y adiestramiento">Recreacional y adiestramiento</option>
-                <option value="otro">Otro</option>
+                                    <option value="Peluqueria">Peluquería</option>
+                                    <option value="otro">Otro</option>
                                 </select>
                             </div>
                             <!-- <div class="col-md-6">

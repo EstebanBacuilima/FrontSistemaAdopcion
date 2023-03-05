@@ -17,14 +17,14 @@
                     <div class="mb-4">
                         <label for="username" class="form-label"> Usuario <i class="uil uil-user"></i></label>
                         <input id="username" class="form-control" name="username" type="username"
-                            [(ngModel)]="usuario.username"  maxlength="30" minlength="3"
+                            [(ngModel)]="usuario.username" [pKeyFilter]="'alphanum'" maxlength="30" minlength="3"
                             pInputText placeholder="Ingresa tu nombre de usuario" />
                     </div>
                     <div class="mb-4 input-wrapper input-field">
                         <label for="password" class="password form-label"> Contraseña <i
                                 class="uil uil-lock icon"></i></label>
                         <input id="password" class="password form-control" name="password" type="password"
-                            [(ngModel)]="usuario.password" maxlength="30" minlength="5"
+                            [(ngModel)]="usuario.password" [pKeyFilter]="'alphanum'" maxlength="15" minlength="5"
                             placeholder="**************" />
                         <i class="input-icon uil uil-eye-slash showHidePw"></i>
 
@@ -72,7 +72,7 @@
                 </div>
                 <div class="container w-75 mt-25 me-25 mt-5 shadown">
                     <div class="row align-items-strech">
-                        <div class="col  mt-25 p-25 grid p-fluid ">
+                        <div class="col bg-white mt-25 p-25 grid p-fluid ">
 
                             <h5 class="titulo" id="titulo"  style="text-align: center; padding: 25px;" ><b>FORMULARIO DE REGISTRO</b></h5>
                             <form class="row g-2">
@@ -80,6 +80,9 @@
                                     <label for="cedula" class="form-label-p">Cédula</label> <label for="cedula" class="form-label-p" style="color: rgb(255, 0, 0); padding-left: 2px;"> *</label>
                                     <input id="cedula" class="form-control" type="text" name="cedula" maxlength="10" pInputText [(ngModel)]="persona.cedula" [pKeyFilter]="'int'" required>
                                 </div>
+
+                                
+
                                 <div class="col-md-6">
                                     <label for="nombres" class="form-label-p">Nombres</label><label for="cedula" class="form-label-p" style="color: rgb(255, 0, 0); padding-left: 2px;"> *</label>
                                     <input id="nombres" type="text" class="form-control" name="nombres" maxlength="30" pInputText [(ngModel)]="persona.nombres" [pKeyFilter]="letrasEspace"(keyup)="formatInput(persona.nombres)" required>
@@ -98,7 +101,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="direccion" class="form-label-p"> Dirección</label><label for="cedula" class="form-label-p" style="color: rgb(255, 0, 0); padding-left: 2px;"> *</label>
-                                    <input id="direccion" type="text" class="form-control" name="direccion" maxlength="200" pInputText
+                                    <input id="direccion" type="text" class="form-control" name="direccion" maxlength="50" pInputText
                                         [(ngModel)]="persona.direccion" [pKeyFilter]="letrasEspaceNumbers" required>
                                 </div>
                                 <div class="col-md-6">
@@ -122,8 +125,8 @@
                                     <label for="correo" class="form-label-p"> Correo</label><label for="cedula" class="form-label-p" style="color: rgb(255, 0, 0); padding-left: 2px;"> *</label>
                                     <input id="correo" type="text" class="form-control" name="correo" maxlength="30"
                                         pInputText [(ngModel)]="persona.correo" class={{verfCorreo}}
-                                        required> 
-                                        <!-- (ngModelChange)="validarCorreo()" SE QUITO DEL CORREO -->
+                                        (ngModelChange)="validarCorreo()" required> 
+
                                 </div>
                                 <div class="col-md-6">
                                     <label for="username" class="form-label-p"> Usuario</label><label for="cedula" class="form-label-p" style="color: rgb(255, 0, 0); padding-left: 2px;"> *</label>
@@ -163,11 +166,9 @@
                                 </div>
                                 
                                 <div class="modal-footer">
-
                                     <button type="button" class="btn btn-primaryss" data-bs-dismiss="modal"
                                         (click)=" limpiarCampos()">Cancelar</button>
                                     <button type="submit" class="btn btn-primarys1" (click)="registrarUsuario()">Registrarse</button>
-
                                 </div>
 
                             </form>

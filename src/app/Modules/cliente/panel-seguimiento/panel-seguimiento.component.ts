@@ -13,6 +13,7 @@ import { PersonaService } from 'src/app/Services/persona.service';
 import { SeguimientoService } from 'src/app/Services/seguimiento.service';
 import { SolicitudAdopcionService } from 'src/app/Services/solicitud-adopcion.service';
 import { UsuarioService } from 'src/app/Services/usuario.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-panel-seguimiento',
@@ -35,7 +36,6 @@ export class PanelSeguimientoComponent implements OnInit {
   ngOnInit(): void {
     this.obtenerUsuario();
   }
-  
 
   personas: any;
 
@@ -136,7 +136,7 @@ export class PanelSeguimientoComponent implements OnInit {
           this.cargarImagenEvidencia();
           this.seguimientoService.postSeguimiento(this.seguimiento).subscribe(
             info => {
-              this.toastrService.success('Seguimiento realizado con éxito', 'Enviado', {
+              this.toastrService.success('Seguimiento realizado con exito', 'Enviado', {
                 timeOut: 1500,
               });
               this.listarSeguimientosPorMasocta();
@@ -145,14 +145,11 @@ export class PanelSeguimientoComponent implements OnInit {
           );
         } else{
           console.log("Si hay datos")
-          // Swal.fire({
-          //   icon: 'error',
-          //   title: 'Registro del día completado',
-          //   text: 'Ya se realizo el seguimiento diario'
-          // })
-          this.toastrService.error('Registro del día completado', 'Ya se realizó el seguimiento diario', {
-            timeOut: 3000,
-          });
+          Swal.fire({
+            icon: 'error',
+            title: 'Registro del día completado',
+            text: 'Ya se realizo el seguimiento diario'
+          })
         }
       }
     );

@@ -28,44 +28,13 @@ export class ListFundacioComponent implements OnInit {
   // letrasEspace: RegExp = /^[a-zA-Z0-9\s^!#$%&*]+$/;
   // letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\s^!#$%&*-]+$/;
 
-  // Validar que no igrese Guion medio
-  onKeyPress(event: KeyboardEvent) {
-    if (event.key === '-') {
-      event.preventDefault();
-    }
-  }
-  //Validar Edad en el Campo de De fecha
-  edad: any;
-  validarEdad: boolean = false;
-  //Validar Edad
-
-  calcularEdad() {
-    if (this.persona && this.persona.fechaNacimiento) {
-      let fechaPrueba: any = new Date(this.persona.fechaNacimiento);
-      let fechaFormateada = fechaPrueba.toISOString().substr(0, 10);
-      let anio = parseInt(fechaFormateada.substr(0, 4));
-      console.log('fecha formateada ->' + fechaFormateada)
-      console.log('año elejido ->' + anio)
-      let fechaHoy: Date = new Date();
-      let fechaFormateadaHoy = fechaHoy.toISOString().substr(0, 10);
-      let anioA = parseInt(fechaFormateadaHoy.substr(0, 4));
-      console.log('año actual ->' + anioA)
-      let edad = anioA - anio;
-      console.log('Edad:' + edad);
-      if (edad < 18) {
-        this.toastrService.error('Prohibido el registro', 'Usted es menor de edad', {
-          timeOut: 3000,
-        });
-        this.validarEdad = false;
-        console.log("dato -> " + this.validarEdad)
-      } else {
-        console.log('El usuario es mayor de edad');
-        this.validarEdad = true;
-        console.log("dato -> " + this.validarEdad)
+// Validar que no igrese Guion medio
+    onKeyPress(event: KeyboardEvent) {
+      if (event.key === '-') {
+        event.preventDefault();
       }
     }
-  }
-
+    
 
   pageActual: number = 1;
   public myCounter: number = 0;
@@ -77,6 +46,7 @@ export class ListFundacioComponent implements OnInit {
   ngOnInit(): void {
     this.obtenerFundaciones()
   }
+
 
   obtenerFundaciones() {
     this.fundacionService.getFundacion().subscribe(
@@ -139,36 +109,28 @@ export class ListFundacioComponent implements OnInit {
   }
 
   actualizarFundacion() {
-    if (!this.fundacion.ruc || this.fundacion.ruc === null || !this.fundacion.acronimo || this.fundacion.acronimo === null || !this.fundacion.direccion || !this.fundacion.mision || this.fundacion.mision === null || !this.fundacion.nombre_fundacion || this.fundacion.nombre_fundacion === null
-      || !this.persona.apellidos || this.persona.apellidos === null || !this.persona.cedula || this.persona.cedula === null || !this.persona.direccion || this.persona.direccion === null || !this.persona.nombres || this.persona.nombres === null
+    if (!this.fundacion.ruc || this.fundacion.ruc === null || !this.fundacion.acronimo || this.fundacion.acronimo === null || this.fundacion.telefono === null || !this.fundacion.direccion || !this.fundacion.correo || this.fundacion.correo === null || !this.fundacion.logo || this.fundacion.logo === null || !this.fundacion.mision || this.fundacion.mision === null || !this.fundacion.nombre_fundacion || this.fundacion.nombre_fundacion === null
+      || !this.persona.apellidos || this.persona.apellidos === null || !this.persona.cedula || this.persona.cedula === null || !this.persona.celular || this.persona.celular === null || !this.persona.correo || this.persona.correo === null || !this.persona.celular || this.persona.celular === null || !this.persona.correo || this.persona.correo === null || !this.persona.direccion || this.persona.direccion === null || !this.persona.nombres || this.persona.nombres === null || !this.persona.telefono || this.persona.telefono === null
       || !this.usuario.username || this.usuario.username === null || !this.usuario.password || this.usuario.password === null) {
       this.toastrService.error('Uno o más campos vacios', 'Verifique los Campos de texto', {
         timeOut: 3000,
       });
     } else {
-      // if (this.validarEdad == true) {
-        this.personaService.updatePersona(this.persona, this.persona.idPersona).subscribe(data => {
+      this.personaService.updatePersona(this.persona, this.persona.idPersona).subscribe(data => {
+        console.log(data)
+        this.usuarioService.updateUsuario(this.usuario, this.usuario.idUsuario).subscribe(data => {
           console.log(data)
-          this.usuarioService.updateUsuario(this.usuario, this.usuario.idUsuario).subscribe(data => {
+          this.fundacionService.updateFundacion(this.fundacion, this.fundacion.idFundacion).subscribe(data => {
             console.log(data)
-            this.fundacionService.updateFundacion(this.fundacion, this.fundacion.idFundacion).subscribe(data => {
-              console.log(data)
-              this.obtenerFundaciones();
-              this.cargarImagenFundacion();
-              this.cargarImagenUsuario();
-              this.toastrService.success('Cambios realizados con exito', 'Actualizado Correctamente', {
-                timeOut: 1000,
-              });
-              const miModal: any = document.getElementById('modalUpdate');
-              miModal?.modal('hide');
-            })
+            this.obtenerFundaciones();
+            this.toastrService.success('Cambios realizados con exito', 'Actualizado Correctamente', {
+              timeOut: 1000,
+            });
+            const miModal: any = document.getElementById('modalUpdate');
+            miModal?.modal('hide');
           })
         })
-      // } else {
-      //   this.toastrService.warning('Verifique su fecha de nacimiento!', 'Aviso!', {
-      //     timeOut: 1000,
-      //   });
-      // }
+      })
     }
   }
 
@@ -180,14 +142,14 @@ export class ListFundacioComponent implements OnInit {
       this.fundacion = data
       this.idFundacionDelete = this.fundacion.idFundacion;
       console.log("ES LA ID -> " + this.idFundacionDelete);
-      this.isUsuarioDesactivar = this.fundacion.persona.idPersona;
+      this.isUsuarioDesactivar =  this.fundacion.persona.idPersona;
       this.fundacion.estado = false;
       this.fundacionService.descativarFundacion(this.fundacion, idFundacion).subscribe(data => {
         this.usuarioService.getPorIdPersona(this.isUsuarioDesactivar).subscribe(dataUsuario => {
           this.usuario = dataUsuario
           this.usuario.idUsuario = dataUsuario.idUsuario;
           this.usuario.estado = false;
-          this.usuarioService.descativarUsuario(this.usuario, this.isUsuarioDesactivar).subscribe(data => {
+          this.usuarioService.descativarUsuario(this.usuario, this.isUsuarioDesactivar).subscribe(data => { 
             this.obtenerFundaciones();
             this.toastrService.warning('La fundación ha sido desactivada!', 'Fundación Desactivada!', {
               timeOut: 4000,
@@ -203,14 +165,14 @@ export class ListFundacioComponent implements OnInit {
       this.fundacion = data
       this.idFundacionDelete = this.fundacion.idFundacion;
       console.log("ES LA ID -> " + this.idFundacionDelete);
-      this.isUsuarioDesactivar = this.fundacion.persona.idPersona;
+      this.isUsuarioDesactivar =  this.fundacion.persona.idPersona;
       this.fundacion.estado = true;
       this.fundacionService.descativarFundacion(this.fundacion, idFundacion).subscribe(data => {
         this.usuarioService.getPorIdPersona(this.isUsuarioDesactivar).subscribe(dataUsuario => {
           this.usuario = dataUsuario
           this.usuario.idUsuario = dataUsuario.idUsuario;
           this.usuario.estado = true;
-          this.usuarioService.descativarUsuario(this.usuario, this.isUsuarioDesactivar).subscribe(data => {
+          this.usuarioService.descativarUsuario(this.usuario, this.isUsuarioDesactivar).subscribe(data => { 
             this.obtenerFundaciones();
             this.toastrService.success('La fundación se ha habilitado', 'Fundación Activada', {
               timeOut: 1000,
@@ -273,12 +235,12 @@ export class ListFundacioComponent implements OnInit {
   }
 
 
-  fechaAct: Date = new Date();
+  fechaAct: Date =new Date();
 
   // PDF
   openPdfTables() {
     let fechaPrueba: Date = new Date();
-    let fechaFormateada = fechaPrueba.toISOString().substr(0, 10);
+    let fechaFormateada = fechaPrueba.toISOString().substr(0,10);
     console.log("es la fecha de hoy -> " + fechaFormateada);
     let tableBody = [];
     tableBody.push([
@@ -356,7 +318,7 @@ export class ListFundacioComponent implements OnInit {
             body: tableBody
           }
         }
-
+        
       ],
       styles: {
         header: {

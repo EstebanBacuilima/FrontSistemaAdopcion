@@ -1,12 +1,14 @@
 <div class="container px-1 py-5 mx-auto p-8 rounded border-gray-200">
-
     <ul class="nav justify-content-center">
         <li class="col-md-6">
-            <button type="button" class="btn btnO form-control" routerLink="/register-fundacion">Registrar
-                Fundación</button>
+            <button type="button" class="btn btnO form-control" routerLink="/register-fundacion">
+                Registrar Fundación
+            </button>
         </li>
         <li class="col-md-6">
-            <button type="button" class="btn btnA form-control">Listar Fundaciones</button>
+            <button type="button" class="btn btnA form-control">
+                Listar Fundaciones
+            </button>
         </li>
     </ul>
 
@@ -19,7 +21,7 @@
                         <th scope="col">Ruc</th>
                         <th scope="col">Representante</th>
                         <th scope="col">Nombre</th>
-                        <th scope="col">Misión</th>
+                        <!-- <th scope="col">Misión</th> -->
                         <th scope="col">Acrónimo</th>
                         <th scope="col">Correo</th>
                         <th scope="col">Teléfono</th>
@@ -30,24 +32,39 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let fundacion of listaFundaciones | paginate: {itemsPerPage: 5, currentPage: pageActual}; index as i">
-                        <th scope="row"> {{i+1}}</th>
-                        <td>{{fundacion.ruc}}</td>
-                        <td>{{fundacion.persona.nombres}} {{fundacion.persona.apellidos}}</td>
-                        <td>{{fundacion.nombre_fundacion}}</td>
-                        <td>{{fundacion.mision}}</td>
-                        <td>{{fundacion.acronimo}}</td>
-                        <td>{{fundacion.correo}}</td>
-                        <td>{{fundacion.telefono}}</td>
-                        <td>{{fundacion.direccion}}</td>
+                    <tr *ngFor="
+              let fundacion of listaFundaciones
+                | paginate : { itemsPerPage: 5, currentPage: pageActual };
+              index as i
+            ">
+                        <th scope="row">{{ i + 1 }}</th>
+                        <td>{{ fundacion.ruc }}</td>
+                        <td>
+                            {{ fundacion.persona.nombres }} {{ fundacion.persona.apellidos }}
+                        </td>
+                        <td>{{ fundacion.nombre_fundacion }}</td>
+                        <!-- <td>{{ fundacion.mision }}</td> -->
+                        <td>{{ fundacion.acronimo }}</td>
+                        <td>{{ fundacion.correo }}</td>
+                        <td>{{ fundacion.telefono }}</td>
+                        <td>{{ fundacion.direccion }}</td>
                         <!--<td><input type="checkbox" id="cbox1" value="first_checkbox" [(ngModel)]="fundacion.estado">
                         </td> -->
                         <td>
-                            <button (click)="capParaEdicion(fundacion.idFundacion)" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalUpdate"><i class="pi pi-pencil"></i></button>
+                            <button (click)="capParaEdicion(fundacion.idFundacion)" class="btn btn-primary"
+                                data-bs-toggle="modal" data-bs-target="#modalUpdate">
+                                <i class="pi pi-pencil"></i>
+                            </button>
                         </td>
                         <td>
-                            <button *ngIf='fundacion.estado == true' (click)=" descativarFundacion(fundacion.idFundacion)"  class="btn btn-danger"><i class="pi pi-times"></i></button>
-                            <button *ngIf='fundacion.estado == false' (click)=" ativarFundacion(fundacion.idFundacion)"  class="btn btn-success"><i class="pi pi-power-off"></i></button>
+                            <button *ngIf="fundacion.estado == true"
+                                (click)="descativarFundacion(fundacion.idFundacion)" class="btn btn-danger">
+                                <i class="pi pi-times"></i>
+                            </button>
+                            <button *ngIf="fundacion.estado == false" (click)="ativarFundacion(fundacion.idFundacion)"
+                                class="btn btn-success">
+                                <i class="pi pi-power-off"></i>
+                            </button>
                         </td>
                     </tr>
                 </tbody>
@@ -55,111 +72,128 @@
             <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
         </div>
     </div>
-    <div class="contendor p-25" style="text-align: center; padding-bottom: 8px;">
+    <div class="contendor p-25" style="text-align: center; padding-bottom: 8px">
         <!-- <button pButton type="button" (click)="generarPDF()" style="background-color: red;" label="Generar Reporte" icon="pi pi-file-pdf"></button> -->
-        <button type="button" style="background-color: red;" class="btn btn-primary" (click)="openPdfTables()"><i class="pi pi-file-pdf"></i> Generar Reporte</button>
+        <button type="button" style="background-color: red" class="btn btn-primary" (click)="openPdfTables()">
+            <i class="pi pi-file-pdf"></i> Generar Reporte
+        </button>
         <!-- <button pButton type="button" (click)="openPdfTables()"  label="Generar Reporte" icon="pi pi-file-pdf"></button> -->
     </div>
 
-    <h2 class="form-titulo text-center">.</h2>
-
+    <h2 class="form-titulo text-center"></h2>
 </div>
 
 <!-- Modal -->
-<div class="modal " id="modalUpdate" tabindex="-5" aria-labelledby="modalUpdateLabel" aria-hidden="true">
+<div class="modal" id="modalUpdate" tabindex="-5" aria-labelledby="modalUpdateLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="container w-75 mt-25 me-25 mt-5 shadown">
                 <div class="rows align-items-strech">
-                    <div class="col bg-white mt-25 p-25 ">
-
+                    <div class="col bg-white mt-25 p-25">
                         <form class="row g-2">
                             <h2 class="form text-center"><b>Datos Fundación</b></h2>
+                            <div class="personal-image">
+                                <label class="label">
+                                    <input type="file" (change)="imageSelectedl($event)"/>
+                                    <figure class="personal-figure">
+                                        <img class="personal-avatar" *ngIf="!filem" [src]="'http://localhost:5000/imagen/images/' + fundacion.logo" alt="fundacion.logo">
+                                        <img class="personal-avatar"  *ngIf="filem" [src]="filem" alt="img-avatar">
+                                        <figcaption class="personal-figcaption">
+                                            <img src="https://raw.githubusercontent.com/ThiagoLuizNunes/angular-boilerplate/master/src/assets/imgs/camera-white.png" />
+                                        </figcaption>
+                                    </figure>
+                                </label>
+                            </div>
+
                             <div class="col-md-6">
                                 <label for="ruc" class="form-label-p"> Ruc</label>
-                                <input type="text" class="form-control" name="ruc" [(ngModel)]="fundacion.ruc" readonly onmousedown="return false" onkeydown="return false">
+                                <input type="text" class="form-control" name="ruc" [(ngModel)]="fundacion.ruc" readonly
+                                    onmousedown="return false" onkeydown="return false" />
                             </div>
                             <div class="col-md-6">
-
-                                <label for="nombre_fundacion" class="form-label-p"> Nombre Fundación</label>
-                                <input type="text" class="form-control" name="nombre_fundacion"
-                                maxlength="25" [(ngModel)]="fundacion.nombre_fundacion" [pKeyFilter]="letrasEspace"> 
+                                <label for="nombre_fundacion" class="form-label-p">
+                                    Nombre Fundación</label>
+                                <input type="text" class="form-control" name="nombre_fundacion" maxlength="25"
+                                    [(ngModel)]="fundacion.nombre_fundacion" [pKeyFilter]="letrasEspace" />
                             </div>
                             <div class="col-md-6">
                                 <label for="acronimo" class="form-label-p"> Acrónimo</label>
-                                <input type="text" class="form-control" name="acronimo"
-                                maxlength="8" [(ngModel)]="fundacion.acronimo" [pKeyFilter]="letrasEspace">
-
+                                <input type="text" class="form-control" name="acronimo" maxlength="8"
+                                    [(ngModel)]="fundacion.acronimo" [pKeyFilter]="letrasEspace" />
                             </div>
                             <div class="col-md-6">
                                 <label for="mision" class="form-label-p"> Misión</label>
-                                <input type="text" class="form-control" name="mision" 
-                                maxlength="150" [(ngModel)]="fundacion.mision" [pKeyFilter]="letrasEspace">
+                                <input type="text" class="form-control" name="mision" maxlength="150"
+                                    [(ngModel)]="fundacion.mision" [pKeyFilter]="letrasEspace" />
                             </div>
                             <div class="col-12">
                                 <label for="direccion" class="form-label-p"> Dirección</label>
-                                <input type="text" class="form-control" name="direccions"
-                                maxlength="30" [(ngModel)]="fundacion.direccion" [pKeyFilter]="letrasEspaceNumbers">
+                                <input type="text" class="form-control" name="direccions" maxlength="200"
+                                    [(ngModel)]="fundacion.direccion" [pKeyFilter]="letrasEspaceNumbers" />
                             </div>
                             <div class="col-md-6">
                                 <label for="telefono" class="form-label-p"> Teléfono</label>
-                                <input type="text" class="form-control" name="telefono"
-                                maxlength="10" [(ngModel)]="fundacion.telefono" [pKeyFilter]="'int'" (keypress)="onKeyPress($event)" >
+                                <input type="text" class="form-control" name="telefono" maxlength="10"
+                                    [(ngModel)]="fundacion.telefono" [pKeyFilter]="'int'"
+                                    (keypress)="onKeyPress($event)" />
                             </div>
                             <div class="col-md-6">
                                 <label for="correo" class="form-label-p"> Correo</label>
-                                <input type="email" class="form-control" name="correoo" 
-                                maxlength="30" [(ngModel)]="fundacion.correo">
-                            </div>
-                            <div class="col-md-12">
-                                <label for="logo" class="form-label-p">Logo</label>
-                                <span class="p-float-label">
-                                    <input (change)="imageSelectedl($event)" name="logo" type="file"
-                                        class="form-control" id="float-input2" required />
-                                    <label for="float-input"></label>
-                                </span>
-                                <div *ngIf="filem" class="mt-3 text-center">
-                                    <img [src]="filem" class="rounded" alt="..." style="max-width: 10%;" />
-                                </div>
+                                <input type="email" class="form-control" name="correoo" maxlength="30"
+                                    [(ngModel)]="fundacion.correo" />
                             </div>
 
                             <!-- DISTINTOS -->
 
-                            <h2 class="form-titulo text-center">.</h2>
+                            <h2 class="form-titulo text-center"></h2>
                             <h2 class="form text-center"><b>Datos Representante</b></h2>
+                            <div class="personal-image">
+                                <label class="label">
+                                    <input type="file" (change)="imageSelected($event)"/>
+                                    <figure class="personal-figure">
+                                        <img class="personal-avatar" *ngIf="!file" [src]="'http://localhost:5000/imagen/images/' + usuario.foto_perfil" alt="fundacion.logo">
+                                        <img class="personal-avatar"  *ngIf="file" [src]="file" alt="img-avatar">
+                                        <figcaption class="personal-figcaption">
+                                            <img src="https://raw.githubusercontent.com/ThiagoLuizNunes/angular-boilerplate/master/src/assets/imgs/camera-white.png" />
+                                        </figcaption>
+                                    </figure>
+                                </label>
+                            </div>
                             <div class="col-md-6">
                                 <label for="cedula" class="form-label-p"> Cédula</label>
                                 <input type="text" class="form-control" name="cedula" readonly
-                                    [(ngModel)]="persona.cedula">
+                                    [(ngModel)]="persona.cedula" />
                             </div>
                             <div class="col-md-6">
                                 <label for="nombres" class="form-label-p"> Nombres</label>
-                                <input type="text" class="form-control" name="nombres" 
-                                maxlength="30" [(ngModel)]="persona.nombres" [pKeyFilter]="letrasEspace" >
+                                <input type="text" class="form-control" name="nombres" maxlength="30"
+                                    [(ngModel)]="persona.nombres" [pKeyFilter]="letrasEspace" />
                             </div>
                             <div class="col-6">
                                 <label for="apellidos" class="form-label-p"> Apellidos</label>
-                                <input type="text" class="form-control" name="apellidos"
-                                maxlength="30" [(ngModel)]="persona.apellidos" [pKeyFilter]="letrasEspace" >
+                                <input type="text" class="form-control" name="apellidos" maxlength="30"
+                                    [(ngModel)]="persona.apellidos" [pKeyFilter]="letrasEspace" />
                             </div>
                             <div class="col-6">
-                                <label for="fechaNacimiento" class="form-label-p"> Fecha de nacimiento</label>
+                                <label for="fechaNacimiento" class="form-label-p">
+                                    Fecha de nacimiento</label>
                                 <input type="date" class="form-control" name="fechaNacimiento"
-                                    [(ngModel)]="persona.fechaNacimiento">
+                                    [(ngModel)]="persona.fechaNacimiento" />
                             </div>
                             <div class="col-md-12">
                                 <label for="direccion" class="form-label-p"> Dirección</label>
-                                <input type="text" class="form-control" name="direccion"
-                                maxlength="30" [(ngModel)]="persona.direccion" [pKeyFilter]="letrasEspaceNumbers">
+                                <input type="text" class="form-control" name="direccion" maxlength="200"
+                                    [(ngModel)]="persona.direccion" [pKeyFilter]="letrasEspaceNumbers" />
                             </div>
                             <div class="col-md-6">
                                 <label for="genero" class="form-label-p"> Género</label>
                                 <select id="genero" class="form-control" name="genero" [(ngModel)]="persona.genero">
-                                    <option value="" disabled selected>Selecciona un género</option>
+                                    <option value="" disabled selected>
+                                        Selecciona un género
+                                    </option>
                                     <option value="masculino">Masculino</option>
                                     <option value="famenino">Femenino</option>
                                     <option value="otro">Sin especificar</option>
@@ -167,50 +201,44 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="telefono" class="form-label-p"> Teléfono</label>
-                                <input type="text" class="form-control" name="telefonos" 
-                                maxlength="7" [(ngModel)]="persona.telefono" [pKeyFilter]="'int'" (keypress)="onKeyPress($event)">
+                                <input type="text" class="form-control" name="telefonos" maxlength="7"
+                                    [(ngModel)]="persona.telefono" [pKeyFilter]="'int'"
+                                    (keypress)="onKeyPress($event)" />
                             </div>
                             <div class="col-md-6">
                                 <label for="celular" class="form-label-p"> Celular</label>
-                                <input type="text" class="form-control" name="celular" 
-                                maxlength="10" [(ngModel)]="persona.celular" [pKeyFilter]="'int'" (keypress)="onKeyPress($event)">
+                                <input type="text" class="form-control" name="celular" maxlength="10"
+                                    [(ngModel)]="persona.celular" [pKeyFilter]="'int'"
+                                    (keypress)="onKeyPress($event)" />
                             </div>
                             <div class="col-md-6">
                                 <label for="correo" class="form-label-p"> Correo</label>
-                                <input type="email" class="form-control" name="correo" [(ngModel)]="persona.correo">
+                                <input type="email" class="form-control" name="correo" [(ngModel)]="persona.correo" />
                             </div>
-                            <h2 class="form-titulo text-center">.</h2>
+                            <h2 class="form-titulo"></h2>
                             <div class="col-md-6">
                                 <label for="username" class="form-label-p"> Usuario</label>
-                                <input type="text" class="form-control" name="username" 
-                                maxlength="30" [(ngModel)]="usuario.username">
+                                <input type="text" class="form-control" name="username" maxlength="30"
+                                    [(ngModel)]="usuario.username" />
                             </div>
                             <div class="col-md-6">
-                                <label for="password" class="form-label-p"> Contraseña <i
-                                        class="uil uil-eye-slash showHidePw"></i></label>
-                                <input type="password"  id="password" class="password form-control" name="password"
-                                    [(ngModel)]="usuario.password">
+                                <label for="password" class="form-label-p">
+                                    Contraseña <i class="uil uil-eye-slash showHidePw"></i></label>
+                                <input type="password" id="password" class="password form-control" name="password"
+                                    [(ngModel)]="usuario.password" />
                             </div>
-                            <div class="col-md-12">
-                                <label for="fotoPerfil" class="form-label-p"> Foto de Perfil</label>
-                                <span class="p-float-label">
-                                    <input (change)="imageSelected($event)" name="fotoPerfil" type="file"
-                                        class="form-control" id="float-input" required />
-                                    <label for="float-input"></label>
-                                </span>
-                                <div *ngIf="file" class="mt-3 text-center">
-                                    <img [src]="file" class="rounded" alt="..." style="max-width: 10%;" />
-                                </div>
-                            </div>
-
                         </form>
-
+                        <br><br>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primarys" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primarys1" (click)="actualizarFundacion()">Actualizar</button>
+                <button type="button" class="btn btn-primarys" data-bs-dismiss="modal">
+                    Cancelar
+                </button>
+                <button type="button" class="btn btn-primarys1" (click)="actualizarFundacion()">
+                    Actualizar
+                </button>
             </div>
         </div>
     </div>

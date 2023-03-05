@@ -18,6 +18,10 @@ export class SolicitudAdopcionService {
     return this.http.get<SolicitudAdopcion[]>(this.URL+'listarSolicitudesPorFundacion/' + idFundacion);
   }
 
+  getSolicitudesFundacionNotificaciones(idFundacion: any){
+    return this.http.get<SolicitudAdopcion[]>(this.URL+'listarSolicitudesPorFundacionNotificaciones/' + idFundacion);
+  }
+
   getSolicitudesFiltrado(estado: any,idFundacion:any){
     return this.http.get<SolicitudAdopcion[]>(this.URL+'listarPorEstados/' + estado + '/'+ idFundacion);
   }
@@ -26,8 +30,8 @@ export class SolicitudAdopcionService {
     return this.http.get<SolicitudAdopcion[]>(this.URL+'listarSolicitudesPorUsuario/' + idUsuario);
   }
 
-  getSolicitudesUsuarioDos(idUsuario: any){
-    return this.http.get<SolicitudAdopcion[]>(this.URL+'listarSolicitudesPorUsuario/' + idUsuario);
+  getSolicitudesUsuarioAndMascota(idMascota:any, idUsuario: any){
+    return this.http.get<SolicitudAdopcion[]>(this.URL+'listarSolicitudesPorMascotaUsuario/' + idMascota +'/' + idUsuario);
   }
 
   listarPreguntas(){
@@ -43,6 +47,7 @@ export class SolicitudAdopcionService {
   }
 
   updateEstadoSolicitud(solicitud: SolicitudAdopcion, idSolicitudAdopcion: any){
+    console.log("ruta a enovar -> " + this.URL+`actualizarEstadoSolicitud/${idSolicitudAdopcion}`, solicitud);
     return this.http.put<SolicitudAdopcion>(this.URL+`actualizarEstadoSolicitud/${idSolicitudAdopcion}`, solicitud);
   }
   postSolicitud(solicitudAdopcion: SolicitudAdopcion){

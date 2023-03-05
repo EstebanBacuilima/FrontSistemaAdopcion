@@ -12,49 +12,52 @@
         </li>
     </ul>
 
-
     <form class="row needs-validation g-2 d-flex justify-content-center" novalidate>
-        <br>
+        <br />
 
         <!--div class="separador">.</div-->
 
         <h2 class="form text-center"><b>Datos Fundación</b></h2>
         <div class="col-md-6">
-            <label for="ruc" class="form-label-p"> RUC</label>
+            <label for="ruc" class="form-label-p"> RUC</label><label style="color: rgb(255, 0, 0); padding-left: 2px">*</label>
             <input type="text" class="form-control" id="ruc" name="ruc" maxlength="13" [(ngModel)]="fundacion.ruc"
                 [pKeyFilter]="'int'" (keypress)="onKeyPress($event)" required />
         </div>
         <div class="col-md-6">
-            <label for="nombre_fundacion" class="form-label-p">Nombre Fundación</label>
-            <input type="text" class="form-control" id="nombre_fundacion" name="nombre_fundacion" maxlength="25"
-                [(ngModel)]="fundacion.nombre_fundacion" [pKeyFilter]="letrasEspace" required />
+            <label for="nombre_fundacion" class="form-label-p">Nombre Fundación</label><label
+                style="color: rgb(255, 0, 0); padding-left: 2px"> *</label>
+            <input type="text" class="form-control" id="nombre_fundacion" name="nombre_fundacion" maxlength="50"
+                [(ngModel)]="fundacion.nombre_fundacion" [pKeyFilter]="letrasEspeciales" required />
         </div>
         <div class="col-md-6">
-            <label for="acronimo" class="form-label-p"> Acrónimo</label>
-            <input id="acronimo" type="text" class="form-control" name="acronimo" maxlength="8"
-                [(ngModel)]="fundacion.acronimo" [pKeyFilter]="letrasEspace" required />
+            <label for="acronimo" class="form-label-p"> Acrónimo</label><label
+                style="color: rgb(255, 0, 0); padding-left: 2px"> *</label>
+            <input id="acronimo" type="text" class="form-control" name="acronimo" maxlength="45"
+                [(ngModel)]="fundacion.acronimo" [pKeyFilter]="letrasEspeciales" required />
         </div>
         <div class="col-md-6">
-            <label for="mision" class="form-label-p"> Misión</label>
+            <label for="mision" class="form-label-p">Misión</label><label
+                style="color: rgb(255, 0, 0); padding-left: 2px"> *</label>
             <input id="mision" type="text" class="form-control" name="mision" maxlength="150"
                 [(ngModel)]="fundacion.mision" [pKeyFilter]="letrasEspeciales" required />
         </div>
         <div class="col-12">
-            <label for="direccion" class="form-label-p"> Dirección</label>
-            <input id="direccion" type="text" class="form-control" name="direccion" maxlength="30"
-                [(ngModel)]="fundacion.direccion" [pKeyFilter]="letrasEspaceNumbers" required />
+            <label for="direccion" class="form-label-p">Dirección</label><label
+                style="color: rgb(255, 0, 0); padding-left: 2px"> *</label>
+            <input id="direccion" type="text" class="form-control" name="direccion" maxlength="200"
+                [(ngModel)]="fundacion.direccion" [pKeyFilter]="letrasEspeciales" required />
         </div>
         <div class="col-md-6">
-            <label for="telefono" class="form-label-p"> Teléfono</label>
+            <label for="telefono" class="form-label-p">Teléfono</label>
             <input id="telefono" type="text" class="form-control" name="telefono" maxlength="10"
-                [(ngModel)]="fundacion.telefono" [pKeyFilter]="'int'" (keypress)="onKeyPress($event)" required />
+                [(ngModel)]="fundacion.telefono" [pKeyFilter]="'int'" (keypress)="onKeyPress($event)" />
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6" style="margin-bottom: 15px;">
             <label for="correo" class="form-label-p"> Correo</label>
-            <input id="correo" type="email" class="form-control" name="correo" maxlength="30"
-                [(ngModel)]="fundacion.correo" class={{verfCorreo}} (ngModelChange)="validarCorreo()" required />
+            <input id="correo" type="email" class="form-control" name="correo" maxlength="50"
+                [(ngModel)]="fundacion.correo" class="{{ verfCorreo }}" (ngModelChange)="validarCorreo()" />
         </div>
-        <div class="foto">
+        <!-- <div class="foto">
             <div class="roww">
                 <div class="col-md-2 imgUp">
                     <div class="imagePreview" *ngIf="filem">
@@ -68,53 +71,48 @@
                             style="width: 0px; height: 0px; overflow: hidden" />
                     </label>
                 </div>
-
-
-
-
-
-
-                <!-- <div class="col-md-2 imgUp">
-                    <div class="imagePreview" *ngIf="filem">
-                        <img [src]="filem" class="imagePreview" alt="..." />
-                    </div>
-                    <label class="btn2 btn-primarys rounded-mid">Logo fundación
-
-                        <input type="file" class="uploadFile img" value="Upload Photo" (change)="imageSelectedl($event)" style="width: 0px; height: 0px; overflow: hidden" />
-                    </label>
-                </div> -->
             </div>
+        </div> -->
+        <br><br>
+        <label for="logoFundacion" class="form-label-p" style="text-align: center;">Seleccione un logo</label>
+        <div class="personal-image">
+            <label class="label">
+                <input type="file" (change)="imageSelectedl($event)"/>
+                <figure class="personal-figure">
+                    <!-- <img class="personal-avatar"  *ngIf="filem" [src]="file" alt="img-avatar"> -->
+                    <img *ngIf="filem" [src]="filem" class="personal-avatar" alt="logoFundacion" />
+                    <img *ngIf="!filem" src="./assets/Imagenes/nodisponible.png" class="personal-avatar" alt="Logo Fundación" />
+                    <figcaption class="personal-figcaption">
+                        <img src="https://raw.githubusercontent.com/ThiagoLuizNunes/angular-boilerplate/master/src/assets/imgs/camera-white.png" />
+                    </figcaption>
+                </figure>
+            </label>
         </div>
 
         <div class="separador">.</div>
 
         <!-- DISTINTOS -->
 
-
         <h2 class="form text-center"><b>Datos Representante</b></h2>
         <div class="col-md-6">
-            <label for="cedula" class="form-label-p"> Cédula</label>
+            <label for="cedula" class="form-label-p"> Cédula</label><label style="color: rgb(255, 0, 0); padding-left: 2px"> *</label>
             <input id="cedula" type="text" class="form-control" name="cedula" maxlength="10"
-               [(ngModel)]="persona.cedula" [pKeyFilter]="'int'" (keypress)="onKeyPress($event)" required />
+                [(ngModel)]="persona.cedula" [pKeyFilter]="'int'" (keypress)="onKeyPress($event)" required />
         </div>
 
-
-
-
-
         <div class="col-md-6">
-            <label for="nombres" class="form-label-p"> Nombres</label>
-            <input id="nombres" type="text" class="form-control" name="nombres" maxlength="30"
+            <label for="nombres" class="form-label-p"> Nombres</label><label style="color: rgb(255, 0, 0); padding-left: 2px"> *</label>
+            <input id="nombres" type="text" class="form-control" name="nombres" maxlength="50"
                 [(ngModel)]="persona.nombres" [pKeyFilter]="letrasEspace" required />
         </div>
         <div class="col-12">
-            <label for="apellidos" class="form-label-p"> Apellidos</label>
-            <input id="apellidos" type="text" class="form-control" name="apellidos" maxlength="30"
+            <label for="apellidos" class="form-label-p"> Apellidos</label><label style="color: rgb(255, 0, 0); padding-left: 2px"> *</label>
+            <input id="apellidos" type="text" class="form-control" name="apellidos" maxlength="50"
                 [(ngModel)]="persona.apellidos" [pKeyFilter]="letrasEspace" required />
         </div>
 
         <!-- El que voy A usar para validar -->
-        
+
         <!-- <div class="col-md-6">
             <label for="fechaNacimiento" class="form-label-p"> Fecha De Nacimiento</label>
             <p-calendar type="date" class="fecha" name="fechaNacimiento"
@@ -124,22 +122,19 @@
 
         <!-- *EL que voy a validar -->
         <div class="col-12">
-
-            <label for="fechaNacimiento" class="form-label-p">Fecha De Nacimiento</label>
+            <label for="fechaNacimiento" class="form-label-p">Fecha De Nacimiento</label><label style="color: rgb(255, 0, 0); padding-left: 2px"> *</label>
             <input id="fechaNacimiento" type="date" class="form-control" name="fechaNacimiento"
-                [(ngModel)]="persona.fechaNacimiento" (ngModelChange)="calcularEdad()" required />
+                [(ngModel)]="persona.fechaNacimiento" (ngModelChange)="calcularEdad()" required/>
         </div>
-
 
         <!-- !No meter -->
         <div class="col-md-6">
-            <label for="direccion" class="form-label-p"> Dirección</label>
-
-            <input id="direccion" type="text" class="form-control" name="direccion" maxlength="30"
-                [(ngModel)]="persona.direccion" [pKeyFilter]="letrasEspaceNumbers" required />
+            <label for="direccion" class="form-label-p"> Dirección</label><label style="color: rgb(255, 0, 0); padding-left: 2px"> *</label>
+            <input id="direccion" type="text" class="form-control" name="direccion" maxlength="200"
+                [(ngModel)]="persona.direccion" [pKeyFilter]="letrasEspeciales" required/>
         </div>
         <div class="col-md-6">
-            <label for="genero" class="form-label-p"> Género</label>
+            <label for="genero" class="form-label-p">Género</label><label style="color: rgb(255, 0, 0); padding-left: 2px"> *</label>
             <select id="genero" class="form-control" name="genero" [(ngModel)]="persona.genero" required>
                 <option value="" disabled selected>Selecciona un género</option>
                 <option value="masculino">Masculino</option>
@@ -150,40 +145,37 @@
         <div class="col-md-6">
             <label for="telefono" class="form-label-p"> Teléfono</label>
             <input id="telefono" type="text" class="form-control" name="telefono" maxlength="7"
-                [(ngModel)]="persona.telefono" [pKeyFilter]="'int'" (keypress)="onKeyPress($event)" required />
-
+                [(ngModel)]="persona.telefono" [pKeyFilter]="'int'" (keypress)="onKeyPress($event)"  />
         </div>
         <div class="col-md-6">
             <label for="celular" class="form-label-p"> Celular</label>
             <input id="cedular" type="text" class="form-control" name="celular" maxlength="10"
-                [(ngModel)]="persona.celular" [pKeyFilter]="'int'" (keypress)="onKeyPress($event)" required />
+                [(ngModel)]="persona.celular" [pKeyFilter]="'int'" (keypress)="onKeyPress($event)"  />
         </div>
         <div class="col-md-12">
             <label for="correo" class="form-label-p"> Correo</label>
             <input id="correo" type="email" class="form-control" name="correo" [(ngModel)]="persona.correo"
-                class={{verfCorreo2}} (ngModelChange)="validarCorreo2()" required />
+                class="{{ verfCorreo2 }}" (ngModelChange)="validarCorreo2()" />
         </div>
         <div class="separador">.</div>
         <div class="col-md-4">
-            <label for="username" class="form-label-p"> Usuario</label>
-            <input id="username" type="text" class="form-control " name="username" maxlength="30" [(ngModel)]="usuario.username" required/>
+            <label for="username" class="form-label-p"> Usuario</label><label style="color: rgb(255, 0, 0); padding-left: 2px"> *</label>
+            <input id="username" type="text" class="form-control" name="username" maxlength="30"
+                [(ngModel)]="usuario.username" required />
         </div>
         <div class="col-md-4">
-            <label for="password" class="form-label-p"> Contraseña <i class="uil uil-eye-slash showHidePw"></i></label>
-
-            <input id="password" type="password" class="password form-control datosUser" name="password" [(ngModel)]="usuario.password" required/>
-
+            <label for="password" class="form-label-p">
+                Contraseña <i class="uil uil-eye-slash showHidePw"></i></label><label style="color: rgb(255, 0, 0); padding-left: 2px"> *</label>
+            <input id="password" type="password" class="password form-control datosUser" name="password"
+                [(ngModel)]="usuario.password" required />
         </div>
         <div class="col-md-4">
-            <label for="password" class="form-label-p"> Repita su Contraseña</label>
-
-            <input id="password" type="password" class="password form-control datosUser" name="password" [(ngModel)]="verficarPassword" required/>
-
+            <label for="password" class="form-label-p"> Repita su Contraseña</label><label style="color: rgb(255, 0, 0); padding-left: 2px"> *</label>
+            <input id="password" type="password" class="password form-control datosUser" name="password"
+                [(ngModel)]="verficarPassword" required />
         </div>
-        <div class="foto">
+        <!-- <div class="foto">
             <div class="roww">
-
-
                 <div class="col-md-2 imgUp">
                     <div class="imagePreview" *ngIf="file">
                         <img [src]="file" class="imagePreview" alt="Foto de perfil" />
@@ -191,30 +183,33 @@
                     <div class="imagePreview" *ngIf="!file">
                         <img src="./assets/Imagenes/usuario_2.jpg" class="imagePreview" alt="Foto de perfil" />
                     </div>
-                    <label class="btn2 btn-primarys rounded-mid">Foto de Perfil
+                    <label class="btn2 btn-primaryss rounded-mid">Foto de Perfil
                         <input type="file" class="uploadFile img" value="Upload Photo" (change)="imageSelected($event)"
                             style="width: 0px; height: 0px; overflow: hidden" />
                     </label>
                 </div>
-
-
-                <!-- <div class="col-md-2 imgUp">
-                    <div class="imagePreview" *ngIf="file">
-                        <img [src]="file" class="imagePreview" alt="..." />
-                    </div>
-                    <label class="btn btn-primarys rounded-mid">Foto de Perfil
-                        <input type="file" class="uploadFile img" value="Upload Photo" (change)="imageSelected($event)"
-                            style="width: 0px; height: 0px; overflow: hidden" />
-                    </label>
-                </div> -->
             </div>
+        </div> -->
+        <br><br><br>
+        <label for="logoFundacion" class="form-label-p" style="text-align: center;">Seleccione una foto</label>
+        <div class="personal-image">
+            <label class="label">
+                <input type="file" (change)="imageSelected($event)"/>
+                <figure class="personal-figure">
+                    <!-- <img class="personal-avatar"  *ngIf="filem" [src]="file" alt="img-avatar"> -->
+                    <img *ngIf="file" [src]="file" class="personal-avatar" alt="Foto Usuario" />
+                    <img *ngIf="!file" src="./assets/Imagenes/usuario_2.jpg" class="personal-avatar" alt="Foto Usuario" />
+                    <figcaption class="personal-figcaption">
+                        <img src="https://raw.githubusercontent.com/ThiagoLuizNunes/angular-boilerplate/master/src/assets/imgs/camera-white.png" />
+                    </figcaption>
+                </figure>
+            </label>
         </div>
-
-        <br>
-        <br>
-            <button type="submit" class="btn btn-primarys1" (click)="registrarFundacion()">Registrarse</button>
-            <br>
-            <br>
-            <button type="button" class="btn btn-primarys" (click)=" limpiarCampos()">Cancelar</button>
+        <button type="submit" class="btn btn-primarys1" (click)="registrarFundacion()">
+            Registrarse
+        </button>
+        <button type="button" class="btn btn-primarys" (click)="limpiarCampos()">
+            Cancelar
+        </button>
     </form>
 </div>

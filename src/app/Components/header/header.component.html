@@ -2,7 +2,7 @@
   <div class="container">
     <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
       <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-        <div [hidden]="isLogin"  style="margin-right: 20px" >
+        <div [hidden]="isLogin" style="margin-right: 20px">
           <img class="circular--square" src="./assets/Imagenes/logoFundacionesMascotas.png" style="margin: 0 auto"
             routerLink="/welcome" />
         </div>
@@ -16,17 +16,19 @@
         </div>
         <i class="bi bi-house"></i>
       </a>
-      
+
       <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
         <li>
           <a href="#" class="nav-link text_0 px-2 text-white" routerLink="welcome" routerLinkActive="active"
-            *ngIf='isPublico' (click)="home()" >INICIO</a>
+            *ngIf='isPublico' (click)="home()">INICIO</a>
         </li>
         <li>
-          <a href="#second" class="nav-link text_2 px-2" routerLinkActive="active" *ngIf='isPublico && visibleSeccion == false'>FUNDACIONES</a>
+          <a href="#second" class="nav-link text_2 px-2" routerLinkActive="active"
+            *ngIf='isPublico && visibleSeccion == false'>FUNDACIONES</a>
         </li>
         <li>
-          <a href="#third" class="nav-link text_1" routerLinkActive="active" *ngIf='isPublico && visibleSeccion == false'>MASCOTAS</a>
+          <a href="#third" class="nav-link text_1" routerLinkActive="active"
+            *ngIf='isPublico && visibleSeccion == false'>MASCOTAS </a>
         </li>
 
         <!-- COMPARTIDOS -->
@@ -76,20 +78,20 @@
 
         <!-- Datos a voluntario -->
 
-        
+
         <!-- <li>
           <a href="#" class="nav-link text_0 px-2 text-whitee" routerLink="/reg-mascota" routerLinkActive="active"
             *ngIf='isVoluntario'>Mascota</a>
         </li> -->
 
         <li>
-          <a href="#" class="nav-link text_0 px-2 text-whitee" routerLink="/panel-solicitudes-admin" routerLinkActive="active"
-            *ngIf='isVoluntario'>Solictudes de adopciones</a>
+          <a href="#" class="nav-link text_0 px-2 text-whitee" routerLink="/panel-solicitudes-admin"
+            routerLinkActive="active" *ngIf='isVoluntario'>Solictudes de adopciones</a>
         </li>
 
         <li>
-          <a href="#" class="nav-link text_0 px-2 text-whitee" routerLink="/panel-seguimiento-admin" routerLinkActive="active"
-            *ngIf='isVoluntario'>Mascotas en seguimiento</a>
+          <a href="#" class="nav-link text_0 px-2 text-whitee" routerLink="/panel-seguimiento-admin"
+            routerLinkActive="active" *ngIf='isVoluntario'>Mascotas en seguimiento</a>
         </li>
 
         <!-- CLIENTE -->
@@ -98,25 +100,55 @@
             *ngIf='isClient'>Catálogo</a>
         </li>
         <li>
-          <a href="#" class="nav-link text_0 px-2 text-whitee" routerLink="/panel-solicitudes-cliente" routerLinkActive="active"
-            *ngIf='isClient'>Solicitudes</a>
+          <a href="#" class="nav-link text_0 px-2 text-whitee" routerLink="/panel-solicitudes-cliente"
+            routerLinkActive="active" *ngIf='isClient'>Solicitudes</a>
         </li>
         <li>
-          <a href="#" class="nav-link text_0 px-2 text-whitee" routerLink="/panel-seguimiento-cliente" routerLinkActive="active"
-            *ngIf='isClient'>Mis mascotas</a>
+          <a href="#" class="nav-link text_0 px-2 text-whitee" routerLink="/panel-seguimiento-cliente"
+            routerLinkActive="active" *ngIf='isClient'>Mis mascotas</a>
         </li>
 
       </ul>
       <div class="text-center" [hidden]="isLogin">
-        <button type="button" class="btn btn-primarys1" routerLink="login" (click)="validarPestLogin()" >Inicir sesión</button>
+        <button type="button" class="btn btn-outline-light" routerLink="login" (click)="validarPestLogin()">Iniciar
+          sesión</button>
       </div>
       <div class="text-center" [hidden]="!isLogin">
-        <button type="button" class="btn btn-outline-light me-2" (click)="cerrarSesion()"><b>Cerrar sesión</b></button>
-        <svg href="#" data-bs-toggle="modal" data-bs-target="#examplePerfil" xmlns="http://www.w3.org/2000/svg"
-          width="20" height="20" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
-          <path
-            d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z" />
+
+        <div class="notification" *ngIf='isVoluntario'>
+          <!-- <a href="#"> -->
+            <div class="notBtn" href="#">
+              <!--Number supports double digets and automaticly hides itself when there is nothing between divs -->
+              <i class="fas pi pi-bell p-text-secondary" pBadge style="font-size: 1.5rem; padding-left: 5px;" [value]="conteoSolicitudes"></i>
+              <!-- <i class="pi pi-bell mr-4 p-text-secondary" pBadge value="2"></i> -->
+              <div class="box">
+                <div class="display">
+                  <div class="cont"><!-- Fold this div and try deleting evrything inbetween -->
+                    <div class="sec" *ngFor="let solicitudes of listaSolicitudes | filtradoFechas">
+                      <a  routerLink="/panel-solicitudes-admin" (click)="verNotificacion(solicitudes.idSolicitudAdopcion)">
+                        <div class="profCont">
+                          <img class="profile" [src]="'http://localhost:5000/imagen/images/' + solicitudes.usuario?.foto_perfil">
+                        </div>
+                        <div class="txt">{{solicitudes.usuario.persona?.nombres}} {{solicitudes.usuario.persona?.apellidos}} <br> "A solicitado una nueva solicitud de adopción"</div>
+                        <div class="txt sub">{{solicitudes.fecha_solicitud_adopcion}}</div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <!-- </a> -->
+        </div>
+
+        <div class="confi">
+        <svg href="#" data-bs-toggle="modal" data-bs-target="#examplePerfil" xmlns="http://www.w3.org/2000/svg" 
+        width="20" height="20" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+        <path
+          d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z" />
         </svg>
+        </div>
+
+        <button type="button" class="btn btn-outline-light me-2" (click)="cerrarSesion()">Cerrar sesión</button>
       </div>
     </div>
   </div>
@@ -137,86 +169,89 @@
         <div class="header">
           <div class="cover">
             <div class="perfil-usuario-avatar">
-              <img *ngIf="!file" [src]="'http://localhost:5000/imagen/images/' + usuario.foto_perfil"  alt="img-avatar">
-
-              <img *ngIf="file" [src]="file"  alt="img-avatar">
-
+              <img *ngIf="!file" [src]="'http://localhost:5000/imagen/images/' + usuario.foto_perfil" alt="img-avatar">
+              <img *ngIf="file" [src]="file" alt="img-avatar">
               <input type="file" id="fileInput" (change)="imageSelected($event)" style="display: none;">
-              <button  (click)="openFileInput()"  type="button" class="boton-avatar">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-image" viewBox="0 0 16 16">
-                  <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
-                  <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/>
+              <button (click)="openFileInput()" type="button" class="boton-avatar">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-image"
+                  viewBox="0 0 16 16">
+                  <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                  <path
+                    d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z" />
                 </svg>
               </button>
             </div>
           </div>
         </div>
-        
+
         <div class="user-profile-body">
           <div class="user-profile-bio">
-              <div class="mb-3">
-                <form class="row g-2">
-                  <div class="col-md-6">
-                      <label for="cedula" class="form-label-p"> Cédula</label>
-                      <input type="text" class="form-control" name="cedula" [(ngModel)]="persona.cedula" onmousedown="return false" onkeydown="return false">
-                  </div>
-                  <div class="col-md-6">
-                      <label for="nombres" class="form-label-p"> Nombres</label>
-                      <input type="text" class="form-control" name="nombres" [(ngModel)]="persona.nombres">
-                  </div>
-                  <div class="col-12">
-                      <label for="apellidos" class="form-label-p"> Apellidos</label>
-                      <input type="text" class="form-control" name="apellidos" [(ngModel)]="persona.apellidos">
-                  </div>
-                  <div class="col-12">
-                      <label for="fechaNacimiento" class="form-label-p"> Fecha de nacimiento</label>
-                      <input type="date" class="form-control" name="fechaNacimiento" [(ngModel)]="persona.fechaNacimiento">
-                  </div>
-                  <div class="col-md-6">
-                      <label for="direccion" class="form-label-p"> Dirección</label>
-                      <input type="text" class="form-control" name="direccion" [(ngModel)]="persona.direccion">
-                  </div>
-                  <div class="col-md-6">
-                      <label for="genero" class="form-label-p"> Género</label>
-                      <select id="genero" class="form-control" name="genero" [(ngModel)]="persona.genero">
-                          <option value="" disabled selected>Selecciona un género</option>
+            <div class="mb-3">
+              <form class="row g-2">
+                <div class="col-md-6">
+                  <label for="cedula" class="form-label-p"> Cédula</label>
+                  <input type="text" class="form-control" name="cedula" [(ngModel)]="persona.cedula"
+                    onmousedown="return false" onkeydown="return false">
+                </div>
+                <div class="col-md-6">
+                  <label for="nombres" class="form-label-p"> Nombres</label>
+                  <input type="text" class="form-control" name="nombres" [(ngModel)]="persona.nombres">
+                </div>
+                <div class="col-12">
+                  <label for="apellidos" class="form-label-p"> Apellidos</label>
+                  <input type="text" class="form-control" name="apellidos" [(ngModel)]="persona.apellidos">
+                </div>
+                <div class="col-12">
+                  <label for="fechaNacimiento" class="form-label-p"> Fecha de nacimiento</label>
+                  <input type="date" class="form-control" name="fechaNacimiento" [(ngModel)]="persona.fechaNacimiento">
+                </div>
+                <div class="col-md-6">
+                  <label for="direccion" class="form-label-p"> Dirección</label>
+                  <input type="text" class="form-control" name="direccion" [(ngModel)]="persona.direccion">
+                </div>
+                <div class="col-md-6">
+                  <label for="genero" class="form-label-p"> Género</label>
+                  <select id="genero" class="form-control" name="genero" [(ngModel)]="persona.genero">
+                    <option value="" disabled selected>Selecciona un género</option>
 
-                          <option value="Masculino">Masculino</option>
-                          <option value="Femenino">Femenino</option>
-                          <option value="Otro">Sin especificar</option>
+                    <option value="Masculino">Masculino</option>
+                    <option value="Femenino">Femenino</option>
+                    <option value="Otro">Sin especificar</option>
 
-                      </select>
-                  </div>
-                  <div class="col-md-6">
-                      <label for="telefono" class="form-label-p"> Teléfono</label>
-                      <input type="text" class="form-control" name="telefono" [(ngModel)]="persona.telefono">
-                  </div>
-                  <div class="col-md-6">
-                      <label for="celular" class="form-label-p"> Celular</label>
-                      <input type="text" class="form-control" name="celular" [(ngModel)]="persona.celular">
-                  </div>
-                  <div class="col-md-6">
-                      <label for="correo" class="form-label-p"> Correo</label>
-                      <input type="email" class="form-control" name="correo" [(ngModel)]="persona.correo">
-                  </div>
-                  <div class="col-md-6">
-                      <label for="username" class="form-label-p"> Usuario</label>
-                      <input type="text" class="form-control" name="username" [(ngModel)]="usuario.username">
-                  </div>
-                  <div class="col-md-12">
-                      <label for="password" class="form-label-p"> Contraseña <i class="uil uil-eye-slash showHidePw"></i></label>
-                      <input type="password" class="password form-control" name="password" [(ngModel)]="usuario.password">
-                  </div>
-                  <br><br><br>
-                  <button type="submit" value="Atualizar" class="btnU btn-outline-dark p-5" class="btn btn-primarys" (click)="actualizarFundacion()">Atualizar</button>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label for="telefono" class="form-label-p"> Teléfono</label>
+                  <input type="text" class="form-control" name="telefono" [(ngModel)]="persona.telefono">
+                </div>
+                <div class="col-md-6">
+                  <label for="celular" class="form-label-p"> Celular</label>
+                  <input type="text" class="form-control" name="celular" [(ngModel)]="persona.celular">
+                </div>
+                <div class="col-md-6">
+                  <label for="correo" class="form-label-p"> Correo</label>
+                  <input type="email" class="form-control" name="correo" [(ngModel)]="persona.correo">
+                </div>
+                <div class="col-md-6">
+                  <label for="username" class="form-label-p"> Usuario</label>
+                  <input type="text" class="form-control" name="username" [(ngModel)]="usuario.username">
+                </div>
+                <div class="col-md-12">
+                  <label for="password" class="form-label-p"> Contraseña <i
+                      class="uil uil-eye-slash showHidePw"></i></label>
+                  <input type="password" class="password form-control" name="password" [(ngModel)]="usuario.password">
+                </div>
+                <br><br><br>
+                <button type="submit" value="Atualizar" class="btnU btn-outline-dark p-5" class="btn btn-primarys"
+                  (click)="actualizarFundacion()">Atualizar</button>
               </form>
-              </div>
+            </div>
 
           </div>
           <br><br><br>
         </div>
-      <div class="modal-footer">
+        <div class="modal-footer">
+        </div>
       </div>
     </div>
   </div>
-</div>

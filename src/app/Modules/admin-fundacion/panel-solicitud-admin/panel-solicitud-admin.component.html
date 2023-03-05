@@ -27,6 +27,13 @@
                     <label class="estado" style="background-color: rgb(63, 193, 236); color: black">EN PROCESO</label>
                 </div>
 
+                <div class="col-md-" *ngIf="obtenerEstado(solicitudes.estado) === 'QUITADO'">
+                    <label class="estado" style="
+                    background-color: rgb(212, 51, 27);
+                    color: rgb(255, 255, 255);
+                    ">La adopción a sido denegada por no cumplir los seguimientos</label>
+                </div>
+
                 <div class="col-md-" *ngIf="obtenerEstado(solicitudes.estado) === 'SOLICITUD RECHAZADA'">
                     <label class="estado" style="
               background-color: rgb(212, 51, 27);
@@ -38,10 +45,7 @@
                 </div>
                 <br>
                 <div class="col-md-2 d-flex justify-content-center align-items-center">
-                    <img [src]="
-              'http://localhost:5000/imagen/images/' +
-              solicitudes.usuario.foto_perfil
-            " alt="Profile Image" class="profile" />
+                    <img [src]="'http://localhost:5000/imagen/images/' + solicitudes.usuario.foto_perfil" alt="Profile Image" class="profile" />
                 </div>
                 <div class="col-md">
                     <table class="table table-hover mx-auto">
@@ -49,7 +53,7 @@
                             <tr>
                                 <td colspan="2">
                                     {{ solicitudes.usuario.persona?.nombres }}
-                                    {{ usuario.persona?.apellidos }}
+                                    {{ solicitudes.usuario.persona?.apellidos }}
                                 </td>
                             </tr>
                         </thead>

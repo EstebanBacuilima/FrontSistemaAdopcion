@@ -33,7 +33,7 @@
                     <table class="table table-hover mx-auto">
                         <thead class="text-center fs-5 text-secondary">
                             <tr>
-                                <td colspan="2">{{solicitudes.usuario.persona?.nombres}} {{usuario.persona?.apellidos}}
+                                <td colspan="2">{{solicitudes.usuario.persona?.nombres}} {{solicitudes.usuario.persona?.apellidos}}
                                 </td>
                             </tr>
                         </thead>
@@ -101,7 +101,9 @@
                     <label class="mensaje" style="background-color: rgb(177, 255, 132); color: black;">La solicitud tiene una validez de 24 horas</label>
                     <label class="mensaje" style="background-color: rgb(177, 255, 132);color: black;">Gracias por tu adopción de parte de {{solicitudes.mascota.fundacion.nombre_fundacion}}</label>
                     <label class="mensaje" style="background-color: rgb(177, 255, 132); color: black;">Puedes acercarte a nuestras instalaciones ubicadas en  {{solicitudes.mascota.fundacion.direccion}} </label>
-                    <label class="mensaje" style="background-color: rgb(177, 255, 132); color: black;"> Telf: {{solicitudes.mascota.fundacion.telefono}} Correo: {{solicitudes.mascota.fundacion.correo}}</label>
+                    <label class="mensaje" style="background-color: rgb(177, 255, 132); color: black;"> Telf: {{solicitudes.mascota.fundacion.telefono}} Celular: {{solicitudes.mascota.fundacion.persona.celular}} Correo: {{solicitudes.mascota.fundacion.correo}}</label>
+                    <br>
+                    <label class="mensaje" style="background-color: rgb(177, 255, 132); color: black;"><b>A continuación diríjase al apartado de Mi Mascota, para continuar con el proceso de adopción</b></label>
                 </div>
                 <div class="col-md-" *ngIf='obtenerEstado(solicitudes.estado) === "EN PROCESO"'> 
                     <label class="mensaje" style="background-color: rgb(252, 255, 56);">Su solicitud está en proceso de revisión</label>
@@ -109,6 +111,12 @@
                 <div class="col-md-" *ngIf='obtenerEstado(solicitudes.estado) === "SOLICITUD RECHAZADA"'> 
 
                     <label class="mensaje" style="background-color: rgb(255, 44, 44); color: rgb(255, 255, 255);">Su solicitud de adopción fue rechazada por la fundación {{solicitudes.mascota.fundacion.nombre_fundacion}} </label>
+
+                </div>
+
+                <div class="col-md-" *ngIf='solicitudes.estado === "Q"'> 
+
+                    <label class="mensaje" style="background-color: rgb(255, 44, 44); color: rgb(255, 255, 255);">Su adopción a sido denegada por no cumplir los seguimientos <br> Por la fundación:{{solicitudes.mascota.fundacion.nombre_fundacion}} </label>
 
                 </div>
             </div>

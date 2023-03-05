@@ -89,6 +89,9 @@
                             <button class="form-btn" type="button" style="background-color: rgb(227, 2, 2);"
                             *ngIf='conteoMalas ===  2' (click)="invalidarAdopcionDeMascota()">Invalidar Adopción</button>
                         </div>
+                        <!-- <button class="form-btn" type="button" style="background-color: rgb(227, 2, 2);"
+                             (click)="invalidarAdopcionDeMascota()">Invalidar Adopción</button> 
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -130,9 +133,9 @@
                                         <textarea type="text" name="descripcion_visita" id="descripcion_visita"
                                             [(ngModel)]="seguimiento.descripcion_visita" onmousedown="return false"
                                             onkeydown="return false"></textarea>
-                                        <label for="descripcion_visita"
-                                            (keypress)="validarCaracteresEspeciales($event)">Descripción general
-                                        </label>
+                                        
+                                        <label for="descripcion_visita"  (keypress)="validarCaracteresEspeciales($event)">¿Cómo se encuentra el apetito de la
+                                            mascota? </label>
                                     </div>
                                 </div>
 
@@ -142,8 +145,7 @@
                                         <textarea type="text" name="descripcion_mascota" id="descripcion_mascota"
                                             [(ngModel)]="seguimiento.descripcion_mascota" onmousedown="return false"
                                             onkeydown="return false"></textarea>
-                                        <label for="descripcion_mascota">Descripción de la mascota</label>
-                                    </div>
+                                            <label for="descripcion_mascota">¿Está la mascota tomando algún medicamento actualmente?</label>                                    </div>
                                 </div>
 
                                 <div class="form-controll">
@@ -152,8 +154,8 @@
                                         <textarea type="text" name="estado_comportamiento" id="estado_comportamiento"
                                             [(ngModel)]="seguimiento.estado_comportamiento" onmousedown="return false"
                                             onkeydown="return false"></textarea>
-                                        <label for="estado_comportamiento">Comportamiento de la mascota</label>
-                                    </div>
+                                            <label for="estado_comportamiento">¿Ha notado algún cambio en el comportamiento de la mascota?</label>
+                            </div>
                                 </div>
 
                                 <div class="form-controll">
@@ -161,8 +163,7 @@
                                         <textarea type="text" name="estado_salud" id="estado_salud"
                                             [(ngModel)]="seguimiento.estado_salud" onmousedown="return false"
                                             onkeydown="return false"></textarea>
-                                        <label for="estado_salud">Estado de salud de la mascota</label>
-                                    </div>
+                                            <label for="estado_salud">¿Ha tenido la mascota algún problema de salud reciente?</label>                                    </div>
                                 </div>
 
                                 <div class="form-submit">

@@ -34,6 +34,23 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isLogin: boolean = false;
   verficarPassword: any;
 
+  verOcultar() {
+    const showHidePw = document.querySelector('.togglePwVisibility');
+    if (showHidePw) {
+      showHidePw.addEventListener('click', function (this: HTMLElement) {
+        const passwordField = document.getElementById('password') as HTMLInputElement;
+        if (passwordField.type === 'password') {
+          passwordField.type = 'text';
+          this.classList.remove('pi-eye-slash');
+          this.classList.add('pi-eye');
+        } else {
+          passwordField.type = 'password';
+          this.classList.remove('pi-eye');
+          this.classList.add('pi-eye-slash');
+        }
+      });
+    }
+  }
 
 
   constructor(
@@ -47,12 +64,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private solicitudAdopcionService: SolicitudAdopcionService,
   ) {
     _CargarScript.Cargar(["header"]);
+    this.verOcultar();
   }
 
   ngOnInit(): void {
     this.visibleSeccion = false
     this.isPublico = true;
     this.obtenerUsuario();
+    this.verOcultar();
     this.nombreFoto = localStorage.getItem('nameImagen');
     this.nombreLogo = localStorage.getItem('nameLogo') || "admin.png";
   }
@@ -130,6 +149,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
           this.persona.genero = data.persona?.genero;
           this.persona.telefono = data.persona?.telefono;
           this.persona.correo = data.persona?.correo;
+          this.persona.fechaNacimiento = data.persona?.fechaNacimiento;
           this.obtenerSolicitudes();
           if (data != null) {
             this.isLogin = true;

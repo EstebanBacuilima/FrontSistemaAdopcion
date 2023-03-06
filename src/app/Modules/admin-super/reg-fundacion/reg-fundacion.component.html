@@ -49,7 +49,7 @@
         </div>
         <div class="col-md-6">
             <label for="telefono" class="form-label-p">Teléfono</label>
-            <input id="telefono" type="text" class="form-control" name="telefono" maxlength="10"
+            <input id="telefono" type="text" class="form-control" name="telefono" maxlength="7"
                 [(ngModel)]="fundacion.telefono" [pKeyFilter]="'int'" (keypress)="onKeyPress($event)" />
         </div>
         <div class="col-md-6" style="margin-bottom: 15px;">
@@ -155,7 +155,7 @@
         <div class="col-md-12">
             <label for="correo" class="form-label-p"> Correo</label>
             <input id="correo" type="email" class="form-control" name="correo" [(ngModel)]="persona.correo"
-                class="{{ verfCorreo2 }}" (ngModelChange)="validarCorreo2()" />
+                class="{{verfCorreo2}}" (ngModelChange)="validarCorreo2()" />
         </div>
         <div class="separador">.</div>
         <div class="col-md-4">
@@ -164,15 +164,16 @@
                 [(ngModel)]="usuario.username" required />
         </div>
         <div class="col-md-4">
-            <label for="password" class="form-label-p">
-                Contraseña <i class="uil uil-eye-slash showHidePw"></i></label><label style="color: rgb(255, 0, 0); padding-left: 2px"> *</label>
-            <input id="password" type="password" class="password form-control datosUser" name="password"
-                [(ngModel)]="usuario.password" required />
+            <label for="password" class="form-label-p">Contraseña</label>
+            <label style="color: rgb(255, 0, 0); padding-left:2px; padding-right:3px;">*</label>
+            <i class="pi pi-eye-slash togglePwVisibility"></i>
+            <input id="password" type="password" class="password form-control datosUser" name="password" [(ngModel)]="usuario.password" required />
         </div>
         <div class="col-md-4">
-            <label for="password" class="form-label-p"> Repita su Contraseña</label><label style="color: rgb(255, 0, 0); padding-left: 2px"> *</label>
-            <input id="password" type="password" class="password form-control datosUser" name="password"
-                [(ngModel)]="verficarPassword" required />
+            <label for="password" class="form-label-p">Repita su Contraseña</label>
+            <label style="color: rgb(255, 0, 0); padding-left: 2px; padding-right:3px;">*</label>
+            <i class="pi pi-eye-slash togglePwVisibility2"></i>
+            <input id="password2" type="password" class="password form-control datosUser" name="verficarPassword" [(ngModel)]="verficarPassword" required />
         </div>
         <!-- <div class="foto">
             <div class="roww">

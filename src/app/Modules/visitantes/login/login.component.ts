@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
   }
   //
 
-  generos: string[] = ['Masculino', 'Femenino', 'Otro'];
+  generos: string[] = ['Masculino', 'Femenino', 'otro'];
 
   persona: Persona = new Persona();
   usuario: Usuario = new Usuario();
@@ -226,15 +226,14 @@ export class LoginComponent implements OnInit {
       !this.persona.nombres ||
       !this.persona.apellidos ||
       !this.persona.cedula ||
-      !this.persona.correo ||
+      // !this.persona.correo ||
       !this.usuario.username ||
       !this.usuario.password ||
       !this.persona.fechaNacimiento ||
-      !this.persona.telefono ||
-      !this.persona.celular ||
-      !this.usuario.username ||
-      !this.verficarPassword ||
-      !this.persona.genero
+      // !this.persona.telefono ||
+      // !this.persona.celular ||
+      !this.verficarPassword 
+      // || !this.persona.genero
     ) {
       this.toastrService.error(
         'Uno o más campos vacios',
@@ -484,14 +483,12 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  // VALIDAR CAMPOS
+  //Validacion de Campos vacios 
   ValidarCampos() {
-    console.log('ya esta activo');
+    console.log("ya esta activo")
     document.addEventListener('DOMContentLoaded', () => {
-      const forms = document.querySelectorAll(
-        '.needs-validation'
-      ) as NodeListOf<HTMLFormElement>;
-      Array.from(forms).forEach((form) => {
+      const forms = document.querySelectorAll('.needs-validation') as NodeListOf<HTMLFormElement>;
+      Array.from(forms).forEach(form => {
         form.addEventListener('submit', (event: Event) => {
           if (!form.checkValidity()) {
             event.preventDefault();
@@ -502,12 +499,10 @@ export class LoginComponent implements OnInit {
       });
     });
   }
-
+  //Vaidacion de Campos Vacios 
   limpiarFormulario() {
-    const forms = document.querySelectorAll(
-      '.needs-validation'
-    ) as NodeListOf<HTMLFormElement>;
-    Array.from(forms).forEach((form) => {
+    const forms = document.querySelectorAll('.needs-validation') as NodeListOf<HTMLFormElement>;
+    Array.from(forms).forEach(form => {
       form.classList.remove('was-validated');
       form.querySelectorAll('.ng-invalid, .ng-dirty').forEach((input) => {
         input.classList.remove('ng-invalid', 'ng-dirty');
@@ -515,4 +510,5 @@ export class LoginComponent implements OnInit {
       form.reset();
     });
   }
+
 }

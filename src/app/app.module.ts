@@ -49,7 +49,8 @@ import { FiltradoFechasPipe } from './Components/Pipes/filtrado-fechas.pipe';
 import { FiltroMascotasPipe } from './Components/Pipes/filtro-mascotas.pipe';
 PdfMakeWrapper.setFonts(pdfFonts);
 
-
+// LOADER
+// import { NgxUiLoaderModule } from 'ngx-ui-loader';
 
 @NgModule({
   declarations: [
@@ -94,7 +95,9 @@ PdfMakeWrapper.setFonts(pdfFonts);
     MatTabsModule,
     CalendarModule,
     ReactiveFormsModule,
-    BadgeModule
+    BadgeModule,
+    // NGX
+    // NgxUiLoaderModule
   ],
   providers: [
     CargarScrpitsService

@@ -216,7 +216,7 @@
 
                     <option value="Masculino">Masculino</option>
                     <option value="Femenino">Femenino</option>
-                    <option value="Otro">Sin especificar</option>
+                    <option value="otro">Sin especificar</option>
 
                   </select>
                 </div>
@@ -234,12 +234,11 @@
                 </div>
                 <div class="col-md-6">
                   <label for="username" class="form-label-p"> Usuario</label>
-                  <input type="text" class="form-control" name="username" [(ngModel)]="usuario.username">
+                  <input type="text" class="form-control" name="username" [(ngModel)]="usuario.username" onmousedown="return false" onkeydown="return false">
                 </div>
                 <div class="col-md-12">
-                  <label for="password" class="form-label-p"> Contraseña <i
-                      class="uil uil-eye-slash showHidePw"></i></label>
-                  <input type="password" class="password form-control" name="password" [(ngModel)]="usuario.password">
+                  <label for="password" class="form-label-p"> Contraseña <i class="pi pi-eye-slash togglePwVisibility"></i></label>
+                  <input type="password" id="password" class="password form-control" name="password" [(ngModel)]="usuario.password">
                 </div>
                 <br><br><br>
                 <button type="submit" value="Atualizar" class="btnU btn-outline-dark p-5" class="btn btn-primarys"

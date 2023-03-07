@@ -34,6 +34,23 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isLogin: boolean = false;
   verficarPassword: any;
 
+  verOcultar() {
+    const showHidePw = document.querySelector('.togglePwVisibility');
+    if (showHidePw) {
+      showHidePw.addEventListener('click', function (this: HTMLElement) {
+        const passwordField = document.getElementById('password') as HTMLInputElement;
+        if (passwordField.type === 'password') {
+          passwordField.type = 'text';
+          this.classList.remove('pi-eye-slash');
+          this.classList.add('pi-eye');
+        } else {
+          passwordField.type = 'password';
+          this.classList.remove('pi-eye');
+          this.classList.add('pi-eye-slash');
+        }
+      });
+    }
+  }
 
 
   constructor(
@@ -47,12 +64,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private solicitudAdopcionService: SolicitudAdopcionService,
   ) {
     _CargarScript.Cargar(["header"]);
+    this.verOcultar();
   }
 
   ngOnInit(): void {
     this.visibleSeccion = false
     this.isPublico = true;
     this.obtenerUsuario();
+    this.verOcultar();
     this.nombreFoto = localStorage.getItem('nameImagen');
     this.nombreLogo = localStorage.getItem('nameLogo') || "admin.png";
   }
@@ -72,7 +91,25 @@ export class HeaderComponent implements OnInit, OnDestroy {
   conteoSolicitudes: any;
 
   obtenerSolicitudes() {
-    this.solicitudAdopcionService.getSolicitudesFundacionNotificaciones(this.idFundacion).subscribe(
+      this.solicitudAdopcionService.getSolicitudesFundacionNotificaciones(this.idFundacion).subscribe(
+        data => {
+          console.log("Data Soli Header -> " + data)
+          this.conteoSolicitudes = data.length
+          console.log("Conteo ->" + this.conteoSolicitudes)
+          this.listaSolicitudes = data.map(
+            result => {
+              let solicitudes = new SolicitudAdopcion;
+              solicitudes = result
+              return solicitudes;
+            }
+          );
+        },
+        error => (console.log("Error -> " + error))
+      )
+  }
+
+  obtenerSolicitudesUsuario() {
+    this.solicitudAdopcionService.getSolicitudesUsuarioNotificaciones(this.idUsuario).subscribe(
       data => {
         console.log("Data Soli Header -> " + data)
         this.conteoSolicitudes = data.length
@@ -96,14 +133,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.solicitudAdopcionService.getPorId(idSolicitudAdopcion).subscribe(data => {
       this.solicitudes = data
       this.idSolicitudCao = this.solicitudes.idSolicitudAdopcion;
-      this.solicitudes.estadoDos = true;
+      this.solicitudes.estadoDos = 'L';
       this.solicitudAdopcionService.updateEstadoSolicitud(this.solicitudes, this.idSolicitudCao).subscribe(
         data => {
           console.log("Se cambio actualizo");
           this.toastrService.success('Vista nueva solicitud', 'Solicitud vista', {
-            timeOut: 3000,
+            timeOut: 2000,
           });
           this.obtenerSolicitudes();
+          this.obtenerSolicitudesUsuario();
         }
       )
     }
@@ -130,6 +168,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
           this.persona.genero = data.persona?.genero;
           this.persona.telefono = data.persona?.telefono;
           this.persona.correo = data.persona?.correo;
+          this.persona.fechaNacimiento = data.persona?.fechaNacimiento;
           this.obtenerSolicitudes();
           if (data != null) {
             this.isLogin = true;
@@ -148,6 +187,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
                 this.isClient = true;
                 this.isVoluntario = false;
                 this.isPublico = false;
+                this.obtenerSolicitudesUsuario();
                 break;
               case 'ADMIN_FUDACION':
                 this.isSuperAdmin = false;

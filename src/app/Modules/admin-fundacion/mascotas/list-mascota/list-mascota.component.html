@@ -15,6 +15,7 @@
         <thead>
           <tr style="text-align: center;">
             <th scope="col">ID</th>
+            <th scope="col"></th>
             <th scope="col">Chip</th>
             <th scope="col">Nombre</th>
             <th scope="col">Color</th>
@@ -31,10 +32,9 @@
           <tr style="text-align: center;"
             *ngFor="let mascota of listaMascotas | paginate: {itemsPerPage: 5, currentPage: pageActual}; index as i ">
             <th scope="row">{{i+1}}</th>
+            <td> <img class="circular--square" [src]="'http://localhost:5000/imagen/images/' + mascota.foto"style="margin: 0 auto;  width: 70px; height: 70px;"></td>
             <td>{{mascota.chipMascota}}</td>
-            <td>
-              {{mascota.nombre_mascota}}
-            </td>
+            <td>{{mascota.nombre_mascota}}</td>
             <td>{{mascota.color}}</td>
             <td>{{mascota.sexo}}</td>
             <td>{{mascota.raza}}</td>
@@ -47,7 +47,7 @@
             <td>
               <button (click)="capParaEdicion(mascota.idMascota)" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalUpdate"><i class="pi pi-pencil"></i></button>
             </td>
-            <td>
+            <td *ngIf='mascota.estado_adopcion == true'>
               <button *ngIf='mascota.estado == true' (click)=" descativarMascota(mascota.idMascota)"  class="btn btn-danger"><i class="pi pi-times"></i></button>
               <button *ngIf='mascota.estado == false' (click)=" ativarMascota(mascota.idMascota)"  class="btn btn-success"><i class="pi pi-power-off"></i></button>
             </td>
@@ -59,7 +59,7 @@
 
   <div class="contendor p-25" style="text-align: center; padding-bottom: 8px;">
     <!-- <button pButton type="button" (click)="generarPDF()" style="background-color: red;" label="Generar Reporte" icon="pi pi-file-pdf"></button> -->
-    <button type="button" style="background-color: red;" class="btn btn-primary" (click)="openPdfTables()"><i class="pi pi-file-pdf"></i> Generar Reporte</button>
+    <button type="button" style="background-color: red; border: none;" class="btn btn-primary" (click)="openPdfTables()"><i class="pi pi-file-pdf"></i> Generar Reporte</button>
     <!-- <button pButton type="button" (click)="openPdfTables()"  label="Generar Reporte" icon="pi pi-file-pdf"></button> -->
   </div>
 </div>
@@ -76,32 +76,48 @@
         <div class="rows align-items-strech">
           <div class="col bg-white mt-25 p-25 ">
 
-            <form class="row g-2 d-flex justify-content-center">
+            <form class="row g-2 d-flex justify-content-center needs-validation" novalidate>
 
               <h2 class="form-label-p text-center"><b>Datos Mascota</b></h2>
 
-              <div class="perfil-usuario-avatar text-center">
+              <!-- <div class="perfil-usuario-avatar text-center">
                 <img [src]="'http://localhost:5000/imagen/images/' + mascota.foto" alt="img-avatar">
-              </div>
+              </div> -->
+
+              <div class="personal-image">
+                <label class="label">
+                    <input type="file" (change)="imageSelected($event)"/>
+                    <figure class="personal-figure">
+                        <img class="personal-avatar" *ngIf="!file" [src]="'http://localhost:5000/imagen/images/' + mascota.foto" alt="mascota">
+                        <img class="personal-avatar"  *ngIf="file" [src]="file" alt="img-avatar">
+                        <figcaption class="personal-figcaption">
+                            <img src="./assets/Imagenes/camer.png" />
+                        </figcaption>
+                    </figure>
+                </label>
+            </div>
 
               <div class="col-md-6">
-                <label for="chip" class="form-label-p"> Chip</label>
+                <label for="chip" class="form-label-p"> Chip</label><label style="color: rgb(255, 0, 0); padding-left: 2px"> *</label>
                 <input type="text" class="form-control" name="chip_mascota" 
-                [(ngModel)]="mascota.chipMascota" readonly onmousedown="return false" onkeydown="return false">
+                [(ngModel)]="mascota.chipMascota" readonly onmousedown="return false" onkeydown="return false" required>
               </div>
               <div class="col-md-6">
-                <label for="nombreM" class="form-label-p"> Nombre</label>
+                <label for="nombreM" class="form-label-p"> Nombre</label><label style="color: rgb(255, 0, 0); padding-left: 2px"> *</label>
                 <input type="text" class="form-control" name="nombre_mascota"
-                maxlength="30"  [(ngModel)]="mascota.nombre_mascota" [pKeyFilter]="letrasEspace">
+                maxlength="50"  [(ngModel)]="mascota.nombre_mascota" [pKeyFilter]="letrasEspace" required>
               </div>
               <div class="col-md-6">
-                <label for="color" class="form-label-p"> Color</label>
-                <input type="text" class="form-control" name="color"
-                maxlength="20" [(ngModel)]="mascota.color" [pKeyFilter]="letrasEspace">
+                <label for="especie" class="form-label-p"> Especie</label><label style="color: rgb(255, 0, 0); padding-left: 2px"> *</label>
+                <select id="especie" class="form-control" name="especie" [(ngModel)]="mascota.especie" required>
+                  <option value="" disabled selected>Selecciona una especie</option>
+                  <option value="canino">Canino</option>
+                  <option value="felino">Felino</option>
+                </select>
               </div>
               <div class="col-md-6">
-                <label for="sexo" class="form-label-p"> Sexo</label>
-                <select id="sexo" class="form-control" name="sexo" [(ngModel)]="mascota.sexo">
+                <label for="sexo" class="form-label-p"> Sexo</label><label style="color: rgb(255, 0, 0); padding-left: 2px"> *</label>
+                <select id="sexo" class="form-control" name="sexo" [(ngModel)]="mascota.sexo" required> 
                   <option value="" disabled selected>Selecciona un sexo</option>
                   <option value="Macho">Macho</option>
                   <option value="Hembra">Hembra</option>
@@ -110,15 +126,12 @@
               <div class="col-md-6">
                 <label for="raza" class="form-label-p"> Raza</label>
                 <input type="text" class="form-control" name="raza"
-                maxlength="30" [(ngModel)]="mascota.raza" [pKeyFilter]="letrasEspace">
+                maxlength="100" [(ngModel)]="mascota.raza" [pKeyFilter]="letrasEspace">
               </div>
               <div class="col-md-6">
-                <label for="especie" class="form-label-p"> Especie</label>
-                <select id="especie" class="form-control" name="especie" [(ngModel)]="mascota.especie">
-                  <option value="" disabled selected>Selecciona una especie</option>
-                  <option value="canino">Canino</option>
-                  <option value="felino">Felino</option>
-                </select>
+                <label for="color" class="form-label-p"> Color</label>
+                <input type="text" class="form-control" name="color"
+                maxlength="50" [(ngModel)]="mascota.color" [pKeyFilter]="letrasEspace">
               </div>
               <div class="col-md-12">
                 <label for="especie" class="form-label-p"> Esterelizado</label>
@@ -128,14 +141,14 @@
                   <option value="false">No</option>
                 </select>
               </div>
-              <div class="col-md-12">
+              <div class="col-md-12" style="padding-bottom: 25px;" >
                 <label for="descripcion" class="form-label-p"> Descripción</label>
                 <textarea class="form-control" aria-label="With textarea" name="descripcion"
-                maxlength="30"   [(ngModel)]="mascota.descripcion" [pKeyFilter]="letrasEspaceNumbers" ></textarea>
+                maxlength="500" [(ngModel)]="mascota.descripcion" [pKeyFilter]="letrasEspaceNumbers" ></textarea>
               </div>
 
-              <br>
-              <div class="foto">
+              <br><br><br>
+              <!-- <div class="foto">
                 <div class="roww">
                   <div class="col-md-2 imgUp">
                     <div class="imagePreview" *ngIf="file">
@@ -147,7 +160,7 @@
                     </label>
                   </div>
                 </div>
-              </div>
+              </div> -->
             </form>
 
           </div>
@@ -155,7 +168,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primarys" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" (click)="actualizarMascota()" class="btn btn-primarys1">Actualizar</button>
+        <button type="submit" (click)="actualizarMascota()" class="btn btn-primarys1">Actualizar</button>
       </div>
     </div>
   </div>

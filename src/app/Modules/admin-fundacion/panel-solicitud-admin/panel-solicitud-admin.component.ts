@@ -95,6 +95,12 @@ letrasEspeciales: RegExp = /^[a-zA-Z0-9\s.,]+$/;
     this.obtenerSocitudesFiltrado(this.capEstado);
   }
 
+  Denegadas() {
+    this.capEstado = 'Q'
+    console.log("El usuario hizo clic en el botón 'Denegadas'", this.capEstado);
+    this.obtenerSocitudesFiltrado(this.capEstado);
+  }
+
 
 
   obtenerSocitudesFiltrado(capEstadoSelecionado:any){
@@ -194,6 +200,7 @@ letrasEspeciales: RegExp = /^[a-zA-Z0-9\s.,]+$/;
           this.solicitud.estado = 'A';
           this.mascota.estado_adopcion = false;
           this.mascota.estado_seguimiento = true;
+          this.solicitud.estadoDos = 'A';
           this.solicitud.mascota = this.mascota;
           this.solicitud.usuario = this.usuario;
           console.log("Estado mascota adopción antes " + this.idSolicitud);
@@ -208,13 +215,6 @@ letrasEspeciales: RegExp = /^[a-zA-Z0-9\s.,]+$/;
                   this.mascotaService.updateDueñoMascota(this.mascota, this.mascota.idMascota).subscribe(
                     dataMD => {
                       console.log("Cambio de dueño")
-                      // Swal.fire({
-                      //   position: 'top-end',
-                      //   icon: 'success',
-                      //   title: 'Solicitud Aceptada',
-                      //   showConfirmButton: false,
-                      //   timer: 1500
-                      // })
                       this.toastrService.success('Solicitud Aceptada', '', {
                         timeOut: 1500,
                       });
@@ -237,15 +237,9 @@ letrasEspeciales: RegExp = /^[a-zA-Z0-9\s.,]+$/;
           this.solicitud = result;
           this.solicitud.estado = 'E';
           this.idSolicitud = this.solicitud.idSolicitudAdopcion
+          this.solicitud.estadoDos = 'E';
           this.solicitudAdopcionService.updateEstadoSolicitud(this.solicitud, this.idSolicitud).subscribe(
             data => {
-              // Swal.fire({
-              //   position: 'top-end',
-              //   icon: 'success',
-              //   title: 'Solicitud puesta en espera',
-              //   timer: 1500
-              // })
-              
               this.toastrService.warning('Solicitud puesta en espera', '', {
                 timeOut: 1000,
               });
@@ -276,6 +270,7 @@ letrasEspeciales: RegExp = /^[a-zA-Z0-9\s.,]+$/;
         this.usuarioService.getPorId(this.idUsuarioCap).subscribe(dataU => {
           this.usuario = dataU
           this.solicitud.estado = 'R';
+          this.solicitud.estadoDos = 'R';
           this.mascota.estado_adopcion = true;
           this.solicitud.mascota = this.mascota;
           this.solicitud.usuario = this.usuario;
@@ -286,12 +281,6 @@ letrasEspeciales: RegExp = /^[a-zA-Z0-9\s.,]+$/;
               this.mascotaService.updateEstadoAdopcion(this.mascota, this.mascota.idMascota).subscribe(
                 data => {
                   console.log("Se cambio a " + data.estado_adopcion);
-                  // Swal.fire({
-                  //   position: 'top-end',
-                  //   icon: 'error',
-                  //   text: 'Solicitud Rechazada',
-                  //   timer: 1500
-                  // })
                   this.toastrService.error('Solicitud Rechazada', '', {
                     timeOut: 3000,
                   });
@@ -319,6 +308,7 @@ letrasEspeciales: RegExp = /^[a-zA-Z0-9\s.,]+$/;
         this.usuarioService.getPorId(this.capIdDueñoFundacion).subscribe(dataU => {
           this.usuario = dataU
           this.solicitud.estado = 'R';
+          this.solicitud.estadoDos = 'R';
           this.mascota.estado_adopcion = true;
           this.mascota.estado_seguimiento = false;
           this.solicitud.mascota = this.mascota;
@@ -331,12 +321,6 @@ letrasEspeciales: RegExp = /^[a-zA-Z0-9\s.,]+$/;
               this.mascotaService.updateEstadoAdopcion(this.mascota, this.mascota.idMascota).subscribe(
                 data => {
                   console.log("Se cambio a " + data.estado_adopcion);
-                  // Swal.fire({
-                  //   position: 'top-end',
-                  //   icon: 'error',
-                  //   text: 'Solicitud Rechazada',
-                  //   timer: 1500
-                  // })
                   this.toastrService.error('Solicitud Rechazada', '', {
                     timeOut: 3000,
                   });

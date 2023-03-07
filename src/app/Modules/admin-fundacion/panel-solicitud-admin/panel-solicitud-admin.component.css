@@ -146,6 +146,14 @@ background: #E74C3C;
 background: #C0392B;
 }
 
+.rojoD{
+  background: #fa7878;
+}
+  
+.rojoD:hover{
+  background: #df5141;
+}
+
 .naranja{
 background: #E67E22;
 }

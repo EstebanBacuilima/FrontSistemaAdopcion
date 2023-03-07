@@ -115,7 +115,7 @@ header {
   position: relative;
   width: 90%;
   height: 16rem;
-  background-image: url('/assets/Imagenes/login-form.jpg');
+  background-color: #a9b7e2;
   border-radius: 0 0 20px 20px;
 }
 .user-profile .user-profile-body {
@@ -355,7 +355,7 @@ h1{
 
 .txt{
   vertical-align: top;
-  font-size: 1.2rem;
+  font-size: 1rem;
   padding: 5px 10px 0px 115px;
 }
 

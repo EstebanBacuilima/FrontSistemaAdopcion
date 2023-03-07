@@ -88,6 +88,7 @@ export class ListMascotaComponent implements OnInit {
             mascota.descripcion = result.descripcion;
             mascota.estado_mascota = result.estado_mascota;
             mascota.estado_adopcion = result.estado_adopcion;
+            mascota.foto = result.foto;
             mascota.estado = result.estado
             return mascota;
           }
@@ -134,14 +135,13 @@ export class ListMascotaComponent implements OnInit {
   }
 
   actualizarMascota() {
-    if (!this.mascota.chipMascota || this.mascota.chipMascota === null || !this.mascota.nombre_mascota || !this.mascota.sexo || !this.mascota.raza || !this.mascota.color || !this.mascota.especie || !this.mascota.descripcion || !this.mascota.estado_mascota) {
+    if (!this.mascota.chipMascota  || !this.mascota.nombre_mascota || !this.mascota.sexo ||  !this.mascota.especie  ) {
       this.toastrService.error('Uno o más campos vacíos', 'Verifique los campos de texto', {
         timeOut: 2000,
       });
     } else {
       this.cargarImagenMascota();
       this.mascotaService.updateMascota(this.mascota, this.mascota.idMascota).subscribe(data => {
-        this.obtenerMasotas();
         this.toastrService.success('Se han guardado los cambios', 'Actualizado', {
           timeOut: 1500,
         });
@@ -186,15 +186,12 @@ export class ListMascotaComponent implements OnInit {
 
   // IMAGEN
   file: any = '';
-  image!: any;
-  retrievedImage: any;
   foto_mascota: string = "";
   cap_nombre_archivo: any;
   selectedFile!: File;
   public imageSelected(event: any) {
     this.selectedFile = event.target.files[0];
     // mostrar imagen seleccionada
-    this.image = this.selectedFile;
     const reader = new FileReader();
     reader.readAsDataURL(this.selectedFile);
     reader.onload = () => {
@@ -339,4 +336,33 @@ export class ListMascotaComponent implements OnInit {
     };
     pdfMake.createPdf(documentDefinition).open();
   }
+
+  // VALIDAR CAMPOS
+  ValidarCampos() {
+    console.log("ya esta activo")
+    document.addEventListener('DOMContentLoaded', () => {
+      const forms = document.querySelectorAll('.needs-validation') as NodeListOf<HTMLFormElement>;
+      Array.from(forms).forEach(form => {
+        form.addEventListener('submit', (event: Event) => {
+          if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        });
+      });
+    });
+  }
+
+  limpiarFormulario() {
+    const forms = document.querySelectorAll('.needs-validation') as NodeListOf<HTMLFormElement>;
+    Array.from(forms).forEach(form => {
+      form.classList.remove('was-validated');
+      form.querySelectorAll('.ng-invalid, .ng-dirty').forEach((input) => {
+        input.classList.remove('ng-invalid', 'ng-dirty');
+      });
+      form.reset();
+    });
+  }
+  //
 }

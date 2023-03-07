@@ -2,23 +2,14 @@
 
 
 <section>
-  <div id="c-contenido">
-    <div id="c-caja">
-      <div class="c-elemento">
-        <img class="imagenes" src="./assets/Imagenes/mascotas.png">
-      </div>
-      <div class="c-elemento">
-        <img class="imagenes" src="./assets/Imagenes/Adopcionmascota.jpg">
-      </div>
-      <div class="c-elemento">
-        <img class="imagenes" src="./assets/Imagenes/BMascota.jpg">
-      </div>
-      <div class="c-elemento">
-        <img class="imagenes" src="./assets/Imagenes/MascotaN.jpg">
-      </div>
-    </div>
+  <div class="slider">
+    <ul>
+      <img class="imagenes" src="./assets/Imagenes/mascotas.png">
+      <img class="imagenes" src="./assets/Imagenes/Adopcionmascota.jpg">
+      <img class="imagenes" src="./assets/Imagenes/BMascota.jpg">
+      <img class="imagenes" src="./assets/Imagenes/MascotaN.jpg">
+    </ul>
   </div>
-
 </section>
 
 <!--End Section-->
@@ -32,17 +23,17 @@
     <div class="info">
       <h2>PROCESO PARA ADOPTAR UNA MASCOTA</h2>
       <br>
-      <p>> Entrar al listado para ver las mascotas disponibles y escoger al que quisieran adoptar.</p>
+      <p><i class="pi pi-check"></i> Entrar al listado para ver las mascotas disponibles y escoger al que quisieran adoptar.</p>
       <br>
-      <p>> Una vez escogido, llenar el formulario de adopción.</p>
+      <p><i class="pi pi-check"></i>  Una vez escogido, llenar el formulario de adopción.</p>
       <br>
-      <p>> Después de llenar el formulario y haber mandado llegará directamente a la fundación, quienes analizarán cada
+      <p><i class="pi pi-check"></i>  Después de llenar el formulario y haber mandado llegará directamente a la fundación, quienes analizarán cada
         caso.</p>
       <br>
-      <p>> Después de haber sido aprobado, recibirá una respuesta para coordinar con la fundación para los papeles de la
+      <p><i class="pi pi-check"></i> Después de haber sido aprobado, recibirá una respuesta para coordinar con la fundación para los papeles de la
         mascota.</p>
       <br>
-      <h6>Finalizamos con una nueva mascota :)</h6>
+      <h6>Y finalmente tendras un nuevo amigo en casa !</h6>
     </div>
   </div>
 </section>
@@ -61,7 +52,6 @@
       <div class="col-md-12">
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
           <div class="carousel-inner">
-
             <div class="container">
               <!-- Item-1 -->
               <div *ngFor="let fundacion of listaFundaciones; let first = first" class="carousel-item  text-center"
@@ -100,65 +90,31 @@
 
 <hr style="color: rgb(113, 10, 209); height: 10px;">
 <!---Section--->
-<!-- <section id="third" href="#mascota">
-  <div class="conta">
-    <div class="heading text-center">
-      <h2>Mascotas en Adopción</h2><br>
-    </div>
-    <div class="container-fluid">
-      <div class="px-lg-5">
-        <div class="row">
-          <div class="cards">
-            <div class="carde" *ngFor="let mascotas of listaMascotas">
-              <div class="box">
-              <h2 class="card-title">{{mascotas.nombre_mascota}}</h2>
-              <img [src]="'http://localhost:5000/imagen/images/' + mascotas.foto" [alt]="mascotas.foto"
-                class="mascotas_foto" />
-              <p class="card-desc">
-                Sexo: {{mascotas.sexo}}<br>
-                Especie: {{mascotas.especie}}<br>
-                Raza: {{mascotas.raza}}<br>
-                Descripción: {{mascotas.descripcion}}<br>
-              </p>
-              <div class="co">
-                <a class="details" href="login" routerLink="/login">ADOPTAR</a>
-              </div>
-            </div>
+<section id="third" href="#mascota" style="background-color: rgb(228, 255, 255);">
+  <h2 style="text-align: center; padding: 20px">MASCOTAS EN ADOPCIÓN</h2>
+  <!-- Card-->
+  <div class="px-lg-5">
+    <div class="row">
+      <div class="carta col-xl-3 col-lg-4 col-md-6 mb-4 p-25" *ngFor="let mascotas of listaMascotas">
+        <div class="container-mascota rounded ">
+          <div class="box">
+            <img [src]="'http://localhost:5000/imagen/images/' + mascotas.foto" [alt]="mascotas.foto"
+              class="mascotas_foto" />
+            <div class="content p-4">
+              <h3>{{mascotas.nombre_mascota}}</h3>
+              <p>{{mascotas.sexo}}</p>
+              <p>{{mascotas.especie}}</p>
+              <p>{{mascotas.raza}}</p>
+              <p>{{mascotas.descripcion}}</p>   
+              <p>Fundacion: {{mascotas.fundacion?.nombre_fundacion}}</p>   
+              <p><a class="details" href="login" routerLink="/login">ADOPTAR</a></p>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</section> -->
-
-<!---Section--->
-<section id="third" href="#mascota" style="background-color: rgb(228, 255, 255);">
-  <h1>MASCOTAS EN ADOPCIÓN</h1>
-  <!-- <div class="container-fluid"> -->
-    <div class="px-lg-5">
-      <div class="row">
-        <div class="carta col-xl-3 col-lg-4 col-md-6 mb-4 p-25" *ngFor="let mascotas of listaMascotas">
-          <div class="container-mascota rounded ">
-            <div class="box">
-              <img [src]="'http://localhost:5000/imagen/images/' + mascotas.foto" [alt]="mascotas.foto"
-                class="mascotas_foto" />
-              <div class="content p-4">
-                <h3>{{mascotas.nombre_mascota}}</h3>
-                <p>{{mascotas.sexo}}</p>
-                <p>{{mascotas.especie}}</p>
-                <p>{{mascotas.raza}}</p>
-                <p>{{mascotas.descripcion}}</p>
-                <a class="details" href="login" routerLink="/login">ADOPTAR</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      <!-- </div> -->
-    </div>
-
-  </div>
-
+  <!-- card end-->
 </section>
 
 

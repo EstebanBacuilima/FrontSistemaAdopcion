@@ -121,36 +121,26 @@ export class PanelSeguimientoAdminComponent implements OnInit {
     this.seguimiento.estadoInforme = 'A';
     this.seguimientoService.updateEstadoSeguimiento(this.seguimiento, this.seguimiento.idSeguimiento).subscribe(data => {
       console.log(data)
-      // Swal.fire({
-      //   position: 'top-end',
-      //   icon: 'success',
-      //   title: 'Seguimiento Aprobado',
-      //   showConfirmButton: false,
-      //   timer: 1500
-      // })
       this.toastrService.success('Seguimiento Aprobado', '', {
         timeOut: 1500,
       });
       this.optenerDatosSeguimiento();
+      this.listarSeguimientosPorMasocta();
+      this.listarSeguimientosInformesPorMasocta();
     })
   }
 
   actualizarEstadoSeguimientoRechazado() {
     this.seguimiento.estado = true;
-    this.seguimiento.estadoInforme = 'P';
+    this.seguimiento.estadoInforme = 'R';
     this.seguimientoService.updateEstadoSeguimiento(this.seguimiento, this.seguimiento.idSeguimiento).subscribe(data => {
       console.log(data)
-      // Swal.fire({
-      //   position: 'top-end',
-      //   icon: 'success',
-      //   title: 'Seguimiento Aprobado',
-      //   showConfirmButton: false,
-      //   timer: 1500
-      // })
-      this.toastrService.success('Seguimiento Aprobado', '', {
+      this.toastrService.error('Seguimiento Rechazado', '', {
         timeOut: 1500,
       });
       this.optenerDatosSeguimiento();
+      this.listarSeguimientosPorMasocta();
+      this.listarSeguimientosInformesPorMasocta();
     })
   }
   //

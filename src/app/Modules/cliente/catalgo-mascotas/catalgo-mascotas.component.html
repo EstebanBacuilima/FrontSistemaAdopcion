@@ -183,14 +183,14 @@
                                         <h4 class="form-title-sc">Datos Mascota</h4>
 
                                         <div class="perfil-usuario-avatar text-center">
-                                            <img [src]="'http://localhost:5000/imagen/images/' + mascota.foto"
+                                            <img [src]="'http://localhost:5000/imagen/images/' + mascota2.foto"
                                                 alt="img-avatar">
                                         </div>
 
                                         <div class="form-controll">
                                             <div class="form-input">
                                                 <input type="text" name="chipMascota" id="chipMascota"
-                                                    [(ngModel)]="mascota.chipMascota" onmousedown="return false"
+                                                    [(ngModel)]="mascota2.chipMascota" onmousedown="return false"
                                                     onkeydown="return false">
                                                 <label for="chipMascota">Chip</label>
                                             </div>
@@ -200,7 +200,7 @@
                                             <div class="form-controll">
                                                 <div class="form-input">
                                                     <input type="text" name="nombre_mascota" id="nombre_mascota"
-                                                        [(ngModel)]="mascota.nombre_mascota" onmousedown="return false"
+                                                        [(ngModel)]="mascota2.nombre_mascota" onmousedown="return false"
                                                         onkeydown="return false">
                                                     <label for="nombre_mascota">Nombre</label>
                                                 </div>
@@ -208,7 +208,7 @@
 
                                             <div class="form-controll">
                                                 <div class="form-input">
-                                                    <input type="text" name="raza" id="raza" [(ngModel)]="mascota.raza"
+                                                    <input type="text" name="raza" id="raza" [(ngModel)]="mascota2.raza"
                                                         onmousedown="return false" onkeydown="return false">
                                                     <label for="raza">Raza</label>
                                                 </div>
@@ -218,7 +218,7 @@
 
                                         <div class="form-controll">
                                             <div class="form-input">
-                                                <input type="text" name="sexo" id="sexo" [(ngModel)]="mascota.sexo"
+                                                <input type="text" name="sexo" id="sexo" [(ngModel)]="mascota2.sexo"
                                                     onmousedown="return false" onkeydown="return false">
                                                 <label for="sexo">Sexo</label>
                                             </div>
@@ -227,7 +227,7 @@
                                         <div class="form-controll">
                                             <div class="form-input">
                                                 <input type="text" name="descripcion" id="descripcion"
-                                                    [(ngModel)]="mascota.descripcion" onmousedown="return false"
+                                                    [(ngModel)]="mascota2.descripcion" onmousedown="return false"
                                                     onkeydown="return false">
                                                 <label for="descripcion">Descripción</label>
                                             </div>
@@ -237,34 +237,34 @@
 
 
                                         <div class="perfil-usuario-avatar text-center">
-                                            <img [src]="'http://localhost:5000/imagen/images/' + fundacion.logo"
+                                            <img [src]="'http://localhost:5000/imagen/images/' + fundacion2.logo"
                                                 alt="img-avatar">
                                         </div>
                                         <br>
                                         <div class="grid-2">
                                             <div class="form-controll">
                                                 <div class="form-input">
-                                                    <input type="text" name="nombre_mascota" id="nombre_mascota"
-                                                        [(ngModel)]="persona.nombres + ' ' + persona.apellidos"  onmousedown="return false"
+                                                    <input type="text" name="representante" id="representante"
+                                                        [(ngModel)]="persona2.nombres + ' ' + persona2.apellidos"  onmousedown="return false"
                                                         onkeydown="return false">
-                                                    <label for="nombre_mascota">Representante</label>
+                                                    <label for="representante">Representante</label>
                                                 </div>
                                             </div>
 
                                             <div class="form-controll">
                                                 <div class="form-input">
-                                                    <input type="text" name="raza" id="raza" [(ngModel)]="fundacion.nombre_fundacion"
+                                                    <input type="text" name="nombre_fundacion" id="nombre_fundacion" [(ngModel)]="fundacion2.nombre_fundacion"
                                                         onmousedown="return false" onkeydown="return false">
-                                                    <label for="raza">Nombre de la Fundación</label>
+                                                    <label for="nombre_fundacion">Nombre de la Fundación</label>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-controll">
                                             <div class="form-input">
-                                                <input type="text" name="descripcion" id="descripcion" style="text-align: center;"
-                                                    [(ngModel)]="'Telf: ' + fundacion.telefono + '      Correo: ' + fundacion.correo" onmousedown="return false"
+                                                <input type="text" name="descripcionas" id="descripcionas" style="text-align: center;"
+                                                    [(ngModel)]="'Telf: ' + fundacion2.telefono + '      Correo: ' + fundacion2.correo" onmousedown="return false"
                                                     onkeydown="return false">
-                                                <label for="descripcion"> Contactos</label>
+                                                <label for="descripcionas"> Contactos</label>
                                             </div>
                                         </div>
 

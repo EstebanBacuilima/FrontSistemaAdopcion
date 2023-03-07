@@ -66,16 +66,36 @@ export class ListFundacioComponent implements OnInit {
     }
   }
 
+  verOcultar() {
+    const showHidePw = document.querySelector('.togglePwVisibility');
+    if (showHidePw) {
+      showHidePw.addEventListener('click', function (this: HTMLElement) {
+        const passwordField = document.getElementById('password') as HTMLInputElement;
+        if (passwordField.type === 'password') {
+          passwordField.type = 'text';
+          this.classList.remove('pi-eye-slash');
+          this.classList.add('pi-eye');
+        } else {
+          passwordField.type = 'password';
+          this.classList.remove('pi-eye');
+          this.classList.add('pi-eye-slash');
+        }
+      });
+    }
+  }
 
   pageActual: number = 1;
   public myCounter: number = 0;
   listaFundaciones: Fundacion[] = [];
   loading: boolean = true;
 
-  constructor(private toastrService: ToastrService, private fundacionService: FundacionService, private personaService: PersonaService, private usuarioService: UsuarioService, private router: Router, private fotoService: FotoService) { }
+  constructor(private toastrService: ToastrService, private fundacionService: FundacionService, private personaService: PersonaService, private usuarioService: UsuarioService, private router: Router, private fotoService: FotoService) { 
+    this.verOcultar()
+  }
 
   ngOnInit(): void {
     this.obtenerFundaciones()
+    this.verOcultar();
   }
 
   obtenerFundaciones() {
@@ -94,6 +114,7 @@ export class ListFundacioComponent implements OnInit {
             fundacion.correo = result.correo;
             fundacion.telefono = result.telefono;
             fundacion.estado = result.estado;
+            fundacion.logo = result.logo;
             return fundacion;
           }
         );
@@ -286,7 +307,7 @@ export class ListFundacioComponent implements OnInit {
       { text: "RUC", bold: true, background: ''},
       { text: "FUNDACIÓN", bold: true, background: ''},
       { text: "ACRÓNIMO", bold: true, background: ''},
-      { text: "MISIÓN", bold: true, background: ''},
+      // { text: "MISIÓN", bold: true, background: ''},
       { text: "DIRECCIÓN", bold: true, background: ''},
       { text: "CORREO", bold: true, background: ''},
       { text: "TELÉFONO", bold: true, background: ''},
@@ -297,7 +318,7 @@ export class ListFundacioComponent implements OnInit {
       fila.push(fundacion.ruc);
       fila.push(fundacion.nombre_fundacion);
       fila.push(fundacion.acronimo);
-      fila.push(fundacion.mision);
+      // fila.push(fundacion.mision);
       fila.push(fundacion.direccion);
       fila.push(fundacion.correo);
       fila.push(fundacion.telefono);
@@ -352,7 +373,7 @@ export class ListFundacioComponent implements OnInit {
             layout: 'landscape',
             fontSize: 5,
             headerRows: 1,
-            widths: [12, 65, 70, 65, 67, 65, 65, 60],
+            widths: [12, 80, 80, 67, 100, 65, 60],
             body: tableBody
           }
         }

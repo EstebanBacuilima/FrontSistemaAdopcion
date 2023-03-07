@@ -125,6 +125,42 @@ export class RegFundacionComponent implements OnInit {
     });
   }
 
+  // Ver/Ocultar password
+  verOcultarDos(){
+    const showHidePw = document.querySelector('.togglePwVisibility');
+    if (showHidePw) {
+      showHidePw.addEventListener('click', function (this: HTMLElement) {
+        const passwordField = document.getElementById('password') as HTMLInputElement;
+        if (passwordField.type === 'password') {
+          passwordField.type = 'text';
+          this.classList.remove('pi-eye-slash');
+          this.classList.add('pi-eye');
+        } else {
+          passwordField.type = 'password';
+          this.classList.remove('pi-eye');
+          this.classList.add('pi-eye-slash');
+        }
+      });
+    }
+  }
+  verOcultar() {
+    const showHidePw2 = document.querySelector('.togglePwVisibility2');
+    if (showHidePw2) {
+      showHidePw2.addEventListener('click', function (this: HTMLElement) {
+        const passwordField = document.getElementById('password2') as HTMLInputElement;
+        if (passwordField.type === 'password') {
+          passwordField.type = 'text';
+          this.classList.remove('pi-eye-slash');
+          this.classList.add('pi-eye');
+        } else {
+          passwordField.type = 'password';
+          this.classList.remove('pi-eye');
+          this.classList.add('pi-eye-slash');
+        }
+      });
+    }
+  }
+
 
   fundacion: Fundacion = new Fundacion;
   usuario: Usuario = new Usuario;
@@ -138,6 +174,8 @@ export class RegFundacionComponent implements OnInit {
 
   ngOnInit(): void {
     this.ValidarCampos();
+    this.verOcultar();
+    this.verOcultarDos()
   }
   //Validacion de los campos
   registrarFundacion() {

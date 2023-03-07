@@ -46,7 +46,8 @@
                                 <th>Fecha</th>
                                 <th>Chip</th>
                                 <th>Mascota</th>
-                                <th>Estado</th>
+                                <th>Adoptante</th>
+                                <th>Aprobación de Informe</th>
                                 <th scope="col">&nbsp;</th>
                             </tr>
 
@@ -56,6 +57,7 @@
                                 <td>{{seguimiento.fecha_seguimiento | date: 'dd-MM-yyyy' }}</td>
                                 <td>{{seguimiento.mascota.chipMascota}}</td>
                                 <td>{{seguimiento.mascota.nombre_mascota}}</td>
+                                <td>{{seguimiento.mascota.usuario?.persona?.nombres}}  {{seguimiento.mascota.usuario?.persona?.apellidos}}</td>
                                 <td style="text-align: center;">
                                     <div *ngIf='seguimiento.estadoInforme === "P"'><b
                                             style="text-align: center; color: orange;"><svg
@@ -109,7 +111,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="optenerDatosSeguimiento()" aria-label="Close"></button>
             </div>
             <div class="container w-75 mt-25 me-20 mt-5 ">
                 <div class="rows align-items-strech">
@@ -118,7 +120,7 @@
 
                         <form action="#" method="POST" class="row">
                             <h3 class="form-title">Detalle del seguimiento</h3>
-                            <h3 *ngIf='seguimiento.estadoInforme ===  "P"' class="form-title">Se rechazo este informe de
+                            <h3 *ngIf='seguimiento.estadoInforme ===  "R"' class="form-title" style="color: brown;">Se rechazo este informe de
                                 seguimiento</h3>
                             <div class="steps">
 

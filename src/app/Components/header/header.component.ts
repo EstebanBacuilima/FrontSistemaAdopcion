@@ -91,7 +91,25 @@ export class HeaderComponent implements OnInit, OnDestroy {
   conteoSolicitudes: any;
 
   obtenerSolicitudes() {
-    this.solicitudAdopcionService.getSolicitudesFundacionNotificaciones(this.idFundacion).subscribe(
+      this.solicitudAdopcionService.getSolicitudesFundacionNotificaciones(this.idFundacion).subscribe(
+        data => {
+          console.log("Data Soli Header -> " + data)
+          this.conteoSolicitudes = data.length
+          console.log("Conteo ->" + this.conteoSolicitudes)
+          this.listaSolicitudes = data.map(
+            result => {
+              let solicitudes = new SolicitudAdopcion;
+              solicitudes = result
+              return solicitudes;
+            }
+          );
+        },
+        error => (console.log("Error -> " + error))
+      )
+  }
+
+  obtenerSolicitudesUsuario() {
+    this.solicitudAdopcionService.getSolicitudesUsuarioNotificaciones(this.idUsuario).subscribe(
       data => {
         console.log("Data Soli Header -> " + data)
         this.conteoSolicitudes = data.length
@@ -115,14 +133,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.solicitudAdopcionService.getPorId(idSolicitudAdopcion).subscribe(data => {
       this.solicitudes = data
       this.idSolicitudCao = this.solicitudes.idSolicitudAdopcion;
-      this.solicitudes.estadoDos = true;
+      this.solicitudes.estadoDos = 'L';
       this.solicitudAdopcionService.updateEstadoSolicitud(this.solicitudes, this.idSolicitudCao).subscribe(
         data => {
           console.log("Se cambio actualizo");
           this.toastrService.success('Vista nueva solicitud', 'Solicitud vista', {
-            timeOut: 3000,
+            timeOut: 2000,
           });
           this.obtenerSolicitudes();
+          this.obtenerSolicitudesUsuario();
         }
       )
     }
@@ -168,6 +187,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
                 this.isClient = true;
                 this.isVoluntario = false;
                 this.isPublico = false;
+                this.obtenerSolicitudesUsuario();
                 break;
               case 'ADMIN_FUDACION':
                 this.isSuperAdmin = false;

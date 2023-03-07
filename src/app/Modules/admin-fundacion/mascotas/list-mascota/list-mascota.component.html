@@ -88,10 +88,10 @@
                 <label class="label">
                     <input type="file" (change)="imageSelected($event)"/>
                     <figure class="personal-figure">
-                        <img class="personal-avatar" *ngIf="!file" [src]="'http://localhost:5000/imagen/images/' + mascota.foto" alt="fundacion.logo">
+                        <img class="personal-avatar" *ngIf="!file" [src]="'http://localhost:5000/imagen/images/' + mascota.foto" alt="mascota">
                         <img class="personal-avatar"  *ngIf="file" [src]="file" alt="img-avatar">
                         <figcaption class="personal-figcaption">
-                            <img src="https://raw.githubusercontent.com/ThiagoLuizNunes/angular-boilerplate/master/src/assets/imgs/camera-white.png" />
+                            <img src="./assets/Imagenes/camer.png" />
                         </figcaption>
                     </figure>
                 </label>
@@ -105,7 +105,7 @@
               <div class="col-md-6">
                 <label for="nombreM" class="form-label-p"> Nombre</label><label style="color: rgb(255, 0, 0); padding-left: 2px"> *</label>
                 <input type="text" class="form-control" name="nombre_mascota"
-                maxlength="30"  [(ngModel)]="mascota.nombre_mascota" [pKeyFilter]="letrasEspace" required>
+                maxlength="50"  [(ngModel)]="mascota.nombre_mascota" [pKeyFilter]="letrasEspace" required>
               </div>
               <div class="col-md-6">
                 <label for="especie" class="form-label-p"> Especie</label><label style="color: rgb(255, 0, 0); padding-left: 2px"> *</label>
@@ -126,12 +126,12 @@
               <div class="col-md-6">
                 <label for="raza" class="form-label-p"> Raza</label>
                 <input type="text" class="form-control" name="raza"
-                maxlength="30" [(ngModel)]="mascota.raza" [pKeyFilter]="letrasEspace">
+                maxlength="100" [(ngModel)]="mascota.raza" [pKeyFilter]="letrasEspace">
               </div>
               <div class="col-md-6">
                 <label for="color" class="form-label-p"> Color</label>
                 <input type="text" class="form-control" name="color"
-                maxlength="20" [(ngModel)]="mascota.color" [pKeyFilter]="letrasEspace">
+                maxlength="50" [(ngModel)]="mascota.color" [pKeyFilter]="letrasEspace">
               </div>
               <div class="col-md-12">
                 <label for="especie" class="form-label-p"> Esterelizado</label>
@@ -144,7 +144,7 @@
               <div class="col-md-12" style="padding-bottom: 25px;" >
                 <label for="descripcion" class="form-label-p"> Descripción</label>
                 <textarea class="form-control" aria-label="With textarea" name="descripcion"
-                maxlength="30"   [(ngModel)]="mascota.descripcion" [pKeyFilter]="letrasEspaceNumbers" ></textarea>
+                maxlength="500" [(ngModel)]="mascota.descripcion" [pKeyFilter]="letrasEspaceNumbers" ></textarea>
               </div>
 
               <br><br><br>

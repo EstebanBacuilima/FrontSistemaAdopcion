@@ -186,15 +186,12 @@ export class ListMascotaComponent implements OnInit {
 
   // IMAGEN
   file: any = '';
-  image!: any;
-  retrievedImage: any;
   foto_mascota: string = "";
   cap_nombre_archivo: any;
   selectedFile!: File;
   public imageSelected(event: any) {
     this.selectedFile = event.target.files[0];
     // mostrar imagen seleccionada
-    this.image = this.selectedFile;
     const reader = new FileReader();
     reader.readAsDataURL(this.selectedFile);
     reader.onload = () => {

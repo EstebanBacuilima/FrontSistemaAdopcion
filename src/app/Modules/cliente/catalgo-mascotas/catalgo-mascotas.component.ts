@@ -166,7 +166,7 @@ export class CatalgoMascotasComponent implements OnInit {
     this.solicitudAdopcion.fecha_solicitud_adopcion = fechaPrueba;
     this.solicitudAdopcion.mascota = this.mascota2;
     this.solicitudAdopcion.usuario = this.usuario;
-    this.solicitudAdopcion.estadoDos = false;
+    this.solicitudAdopcion.estadoDos = 'N';
     this.mascota2.estado_adopcion = false;
     console.log("Mascota enviar -> " + this.mascota2.nombre_mascota);
     console.log("Usuario enviar -> " + this.usuario.persona?.nombres);

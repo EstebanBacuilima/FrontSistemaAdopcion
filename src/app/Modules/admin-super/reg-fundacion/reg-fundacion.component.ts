@@ -23,9 +23,9 @@ export class RegFundacionComponent implements OnInit {
 
 
   // letras y espacios
-  letrasEspace: RegExp = /^[a-zA-Z\s]+$/;
-  letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\s]+$/;
-  letrasEspeciales: RegExp = /^[a-zA-Z0-9\s.,&-áéíóúÁÉÍÓÚ]+$/;
+  letrasEspace: RegExp = /^[a-zA-Z\sÑñáéíóúÁÉÍÓÚ]+$/;
+  letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\sÑñáéíóúÁÉÍÓÚ]+$/;
+  letrasEspeciales: RegExp = /^[a-zA-Z0-9\s.,&-ÑñáéíóúÁÉÍÓÚ]+$/;
 
   // letrasEspace: RegExp = /^[a-zA-Z0-9\s^!#$%&*]+$/;
   // letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\s^!#$%&*-]+$/;

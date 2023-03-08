@@ -2,45 +2,39 @@
 <div class="col-md-10 text-center">
     <!-- <span class="name">Solicitudes de los Adoptantes</span> -->
 </div>
+
 <div class="container-fluid g-0 p-2">
     <div class="text-center">
-    <a class="btn boton all" (click)="todos()" >Todos</a>
-    <a class="btn boton naranja" (click)="pendientes()">Pendientes</a>
-    <a class="btn boton azul" (click)="Proceso()">En Proceso</a>
-    <a class="btn boton verde"(click)="Aceptadas()">Aceptadas</a>
-    <a class="btn boton rojo"(click)="Rechazadas()">Rechazadas</a>
-    <a class="btn boton rojoD"(click)="Denegadas()">Denegadas</a>
-
+        <a class="btn boton all" (click)="todos()" >Todos</a>
+        <a class="btn boton naranja" (click)="pendientes()">Pendientes</a>
+        <a class="btn boton azul" (click)="Proceso()">En Proceso</a>
+        <a class="btn boton verde"(click)="Aceptadas()">Aceptadas</a>
+        <a class="btn boton rojo"(click)="Rechazadas()">Rechazadas</a>
+        <a class="btn boton rojoD"(click)="Denegadas()">Denegadas</a>
     </div>
-    
+
     <div class="row g-0">
         <div class="col ps-2">
             <div class="row g-0"></div>
             <div class="row cards g-0 mt-3" *ngFor="let solicitudes of listaSolicitudes | filtradoFechas">
-                <div class="col-md-" *ngIf="obtenerEstado(solicitudes.estado) === 'PENDIENTE'">
+                <div class="col-md-12" *ngIf="obtenerEstado(solicitudes.estado) === 'PENDIENTE'">
                     <label class="estado" style="background-color: orange">PENDIENTE</label>
                 </div>
 
-                <div class="col-md-" *ngIf="obtenerEstado(solicitudes.estado) === 'ACEPTADO'">
+                <div class="col-md-12" *ngIf="obtenerEstado(solicitudes.estado) === 'ACEPTADO'">
                     <label class="estado" style="background-color: greenyellow; color: black">ACEPTADO</label>
                 </div>
 
-                <div class="col-md-" *ngIf="obtenerEstado(solicitudes.estado) === 'EN PROCESO'">
+                <div class="col-md-12" *ngIf="obtenerEstado(solicitudes.estado) === 'EN PROCESO'">
                     <label class="estado" style="background-color: rgb(63, 193, 236); color: black">EN PROCESO</label>
                 </div>
 
-                <div class="col-md-" *ngIf="obtenerEstado(solicitudes.estado) === 'QUITADO'">
-                    <label class="estado" style="
-                    background-color: rgb(212, 51, 27);
-                    color: rgb(255, 255, 255);
-                    ">La adopción a sido denegada por no cumplir los seguimientos</label>
+                <div class="col-md-12" *ngIf="obtenerEstado(solicitudes.estado) === 'QUITADO'">
+                    <label class="estado" style="background-color: rgb(212, 51, 27);color: rgb(255, 255, 255); ">La adopción a sido denegada por no cumplir los seguimientos</label>
                 </div>
 
-                <div class="col-md-" *ngIf="obtenerEstado(solicitudes.estado) === 'SOLICITUD RECHAZADA'">
-                    <label class="estado" style="
-              background-color: rgb(212, 51, 27);
-              color: rgb(255, 255, 255);
-            ">SOLICITUD RECHAZADA</label>
+                <div class="col-md-12" *ngIf="obtenerEstado(solicitudes.estado) === 'SOLICITUD RECHAZADA'">
+                    <label class="estado" style="background-color: rgb(212, 51, 27);color: rgb(255, 255, 255);">SOLICITUD RECHAZADA</label>
                 </div>
                 <div style="text-align: center;">
                 <h5>Fecha de solicitud:  <b> {{solicitudes.fecha_solicitud_adopcion}} </b> </h5>
@@ -49,8 +43,8 @@
                 <div class="col-md-2 d-flex justify-content-center align-items-center">
                     <img [src]="'http://localhost:5000/imagen/images/' + solicitudes.usuario.foto_perfil" alt="Profile Image" class="profile" />
                 </div>
-                <div class="col-md">
-                    <table class="table table-hover mx-auto">
+                <div class="col-md-4">
+                    <table class="table mx-auto">
                         <thead class="text-center fs-5 text-secondary">
                             <tr>
                                 <td colspan="2">
@@ -81,13 +75,11 @@
                 </div>
 
                 <div class="col-md-2 mascota d-flex justify-content-center align-items-center">
-                    <img [src]="
-              'http://localhost:5000/imagen/images/' + solicitudes.mascota.foto
-            " alt="Profile Image" class="profile" />
+                    <img [src]="'http://localhost:5000/imagen/images/' + solicitudes.mascota.foto" alt="Profile Image" class="profile" />
                 </div>
 
                 <div class="col">
-                    <table class="table table-hover mx-auto">
+                    <table class="table mx-auto">
                         <thead class="text-center fs-5 text-secondary">
                             <tr>
                                 <td colspan="2">{{ solicitudes.mascota.nombre_mascota }}</td>
@@ -98,7 +90,6 @@
                                 <td>Chip</td>
                                 <td>{{ solicitudes.mascota.chipMascota }}</td>
                             </tr>
-
                             <tr>
                                 <td>Sexo</td>
                                 <td>{{ solicitudes.mascota.sexo }}</td>
@@ -115,8 +106,7 @@
                     </table>
                 </div>
                 <button (click)="capParaLitar(solicitudes.idSolicitudAdopcion)" type="button" class="btn"
-                    data-bs-toggle="modal" data-bs-target="#modal-detalle">
-                    Detalles
+                    data-bs-toggle="modal" data-bs-target="#modal-detalle"> Ver Formulario de adopción
                 </button>
             </div>
         </div>

@@ -27,7 +27,7 @@
             <label for="nombre_fundacion" class="form-label-p">Nombre Fundación</label><label
                 style="color: rgb(255, 0, 0); padding-left: 2px"> *</label>
             <input type="text" class="form-control" id="nombre_fundacion" name="nombre_fundacion" maxlength="50"
-                [(ngModel)]="fundacion.nombre_fundacion" [pKeyFilter]="letrasEspeciales" required />
+                [(ngModel)]="fundacion.nombre_fundacion" [pKeyFilter]="letrasEspaceNumbers" required />
         </div>
         <div class="col-md-6">
             <label for="acronimo" class="form-label-p"> Acrónimo</label><label
@@ -38,14 +38,14 @@
         <div class="col-md-6">
             <label for="mision" class="form-label-p">Misión</label><label
                 style="color: rgb(255, 0, 0); padding-left: 2px"> *</label>
-            <input id="mision" type="text" class="form-control" name="mision" maxlength="150"
-                [(ngModel)]="fundacion.mision" [pKeyFilter]="letrasEspeciales" required />
+            <input id="mision" type="text" class="form-control" name="mision" maxlength="500"
+                [(ngModel)]="fundacion.mision"  required />
         </div>
         <div class="col-12">
             <label for="direccion" class="form-label-p">Dirección</label><label
                 style="color: rgb(255, 0, 0); padding-left: 2px"> *</label>
             <input id="direccion" type="text" class="form-control" name="direccion" maxlength="200"
-                [(ngModel)]="fundacion.direccion" [pKeyFilter]="letrasEspeciales" required />
+                [(ngModel)]="fundacion.direccion"  required />
         </div>
         <div class="col-md-6">
             <label for="telefono" class="form-label-p">Teléfono</label>
@@ -83,7 +83,7 @@
                     <img *ngIf="filem" [src]="filem" class="personal-avatar" alt="logoFundacion" />
                     <img *ngIf="!filem" src="./assets/Imagenes/nodisponible.png" class="personal-avatar" alt="Logo Fundación" />
                     <figcaption class="personal-figcaption">
-                        <img src="https://raw.githubusercontent.com/ThiagoLuizNunes/angular-boilerplate/master/src/assets/imgs/camera-white.png" />
+                        <img src="./assets/Imagenes/camer.png"/>                                        
                     </figcaption>
                 </figure>
             </label>
@@ -201,7 +201,7 @@
                     <img *ngIf="file" [src]="file" class="personal-avatar" alt="Foto Usuario" />
                     <img *ngIf="!file" src="./assets/Imagenes/usuario_2.jpg" class="personal-avatar" alt="Foto Usuario" />
                     <figcaption class="personal-figcaption">
-                        <img src="https://raw.githubusercontent.com/ThiagoLuizNunes/angular-boilerplate/master/src/assets/imgs/camera-white.png" />
+                        <img src="./assets/Imagenes/camer.png"/>                                        
                     </figcaption>
                 </figure>
             </label>

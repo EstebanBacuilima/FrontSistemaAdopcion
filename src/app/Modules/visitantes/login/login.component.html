@@ -82,11 +82,11 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="nombres" class="form-label-p">Nombres</label><label for="cedula" class="form-label-p" style="color: rgb(255, 0, 0); padding-left: 2px;"> *</label>
-                                    <input id="nombres" type="text" class="form-control" name="nombres" maxlength="30" pInputText [(ngModel)]="persona.nombres" [pKeyFilter]="letrasEspace"(keyup)="formatInput(persona.nombres)" required>
+                                    <input id="nombres" type="text" class="form-control" name="nombres" maxlength="50" pInputText [(ngModel)]="persona.nombres" [pKeyFilter]="letrasEspace"(keyup)="formatInput(persona.nombres)" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="apellidos" class="form-label-p"> Apellidos</label><label for="cedula" class="form-label-p" style="color: rgb(255, 0, 0); padding-left: 2px;"> *</label>
-                                    <input id="apellidos" type="text" class="form-control" name="apellidos" maxlength="30" pInputText [(ngModel)]="persona.apellidos" [pKeyFilter]="letrasEspace" required>
+                                    <input id="apellidos" type="text" class="form-control" name="apellidos" maxlength="50" pInputText [(ngModel)]="persona.apellidos" [pKeyFilter]="letrasEspace" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="fechaNacimiento" class="form-label-p"> Fecha de nacimiento</label><label for="cedula" class="form-label-p" style="color: rgb(255, 0, 0); padding-left: 2px;"> *</label>
@@ -97,7 +97,7 @@
                                 <div class="col-md-6">
                                     <label for="direccion" class="form-label-p"> Dirección</label><label for="cedula" class="form-label-p" style="color: rgb(255, 0, 0); padding-left: 2px;"> *</label>
                                     <input id="direccion" type="text" class="form-control" name="direccion" maxlength="200" pInputText
-                                        [(ngModel)]="persona.direccion" [pKeyFilter]="letrasEspaceNumbers" required>
+                                        [(ngModel)]="persona.direccion"  required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="genero" class="form-label-p"> Género</label>
@@ -118,7 +118,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="correo" class="form-label-p"> Correo</label>
-                                    <input id="correo" type="text" class="form-control" name="correo" maxlength="30"
+                                    <input id="correo" type="text" class="form-control" name="correo" maxlength="50"
                                         pInputText [(ngModel)]="persona.correo"
                                         > 
                                         <!-- (ngModelChange)="validarCorreo()"  class={{verfCorreo}} SE QUITO DEL CORREO -->
@@ -146,15 +146,9 @@
                                             <div class="imagePreview" *ngIf="file">
                                                 <img [src]="file" class="imagePreview" alt="..." />
                                             </div>
-
-                                            <!--label class="btn btn-primarys rounded-mid">Foto de Perfil
-                                                <input id="file" type="file" class="uploadFile img" value="Upload Photo"
-                                                    (change)="imageSelected($event)"
-                                                    style="width: 0px;height: 0px;overflow: hidden;" required-->
                                                 <label class="btn btn-primarys rounded-mid">Foto de perfil
                                                 <input type="file" class="uploadFile img" value="Upload Photo" (change)="imageSelected($event)"
                                                     style="width: 0px;height: 0px;overflow: hidden;">
-
                                             </label>
                                         </div>
                                     </div>

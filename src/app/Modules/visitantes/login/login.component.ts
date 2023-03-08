@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
   }
 
   // letras y espacios
-  letrasEspace: RegExp = /^[a-zA-Z\sñáéíóúÁÉÍÓÚ]+$/;
+  letrasEspace: RegExp = /^[a-zA-Z\sñÑáéíóúÁÉÍÓÚ]+$/;
   letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\sñáéíóúÁÉÍÓÚ]+$/;
   expCorreo: RegExp =
     /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
@@ -110,7 +110,7 @@ export class LoginComponent implements OnInit {
       console.log('dato -> ' + this.validarEdad);
     }
   }
-//validar
+  //validar
 
   showSpinner: any;
   usuarioRolCapturado: any;
@@ -195,6 +195,22 @@ export class LoginComponent implements OnInit {
   file: any = '';
 
   public imageSelected(event: any) {
+    // VALIDAR SOLO IMAGENES
+    const allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+    const file = event.target.files[0];
+    const extension = file.name.split('.').pop().toLowerCase();
+
+    if (!allowedExtensions.includes(extension)) {
+      this.toastrService.error(
+        'Solo se permiten imágenes en formato JPG, PNG o GIF.',
+        'Formato de archivo no válido!',
+        {
+          timeOut: 3000,
+        }
+      );
+      return;
+    }
+
     this.selectedFiles = event.target.files[0];
     // mostrar imagen seleccionada
     this.imagen = this.selectedFiles;
@@ -232,7 +248,7 @@ export class LoginComponent implements OnInit {
       !this.persona.fechaNacimiento ||
       // !this.persona.telefono ||
       // !this.persona.celular ||
-      !this.verficarPassword 
+      !this.verficarPassword
       // || !this.persona.genero
     ) {
       this.toastrService.error(

@@ -239,11 +239,13 @@
                 </div>
                 <div class="col-md-6">
                   <label for="nombres" class="form-label-p"> Nombres</label>
-                  <input type="text" class="form-control" name="nombres" [(ngModel)]="persona.nombres">
+                  <input type="text" class="form-control" name="nombres"  [(ngModel)]="persona.nombres" [pKeyFilter]="letrasEspace"
+                  maxlength="50" >
                 </div>
                 <div class="col-12">
                   <label for="apellidos" class="form-label-p"> Apellidos</label>
-                  <input type="text" class="form-control" name="apellidos" [(ngModel)]="persona.apellidos">
+                  <input type="text" class="form-control" name="apellidos" [(ngModel)]="persona.apellidos" [pKeyFilter]="letrasEspace"
+                  maxlength="50" >
                 </div>
                 <div class="col-12">
                   <label for="fechaNacimiento" class="form-label-p"> Fecha de nacimiento</label>
@@ -251,7 +253,8 @@
                 </div>
                 <div class="col-md-6">
                   <label for="direccion" class="form-label-p"> Dirección</label>
-                  <input type="text" class="form-control" name="direccion" [(ngModel)]="persona.direccion">
+                  <input type="text" class="form-control" name="direccion" [(ngModel)]="persona.direccion"
+                  maxlength="200">
                 </div>
                 <div class="col-md-6">
                   <label for="genero" class="form-label-p"> Género</label>
@@ -266,26 +269,30 @@
                 </div>
                 <div class="col-md-6">
                   <label for="telefono" class="form-label-p"> Teléfono</label>
-                  <input type="text" class="form-control" name="telefono" [(ngModel)]="persona.telefono">
+                  <input type="text" class="form-control" name="telefono" [(ngModel)]="persona.telefono"
+                  maxlength="7"/>
                 </div>
                 <div class="col-md-6">
                   <label for="celular" class="form-label-p"> Celular</label>
-                  <input type="text" class="form-control" name="celular" [(ngModel)]="persona.celular">
+                  <input type="text" class="form-control" name="celular" [(ngModel)]="persona.celular"
+                  maxlength="10"/>
                 </div>
                 <div class="col-md-6">
                   <label for="correo" class="form-label-p"> Correo</label>
-                  <input type="email" class="form-control" name="correo" [(ngModel)]="persona.correo">
+                  <input type="email" class="form-control" name="correo" [(ngModel)]="persona.correo"
+                  maxlength="50"/>
                 </div>
                 <div class="col-md-6">
                   <label for="username" class="form-label-p"> Usuario</label>
                   <input type="text" class="form-control" name="username" [(ngModel)]="usuario.username"
-                    onmousedown="return false" onkeydown="return false">
+                    onmousedown="return false" onkeydown="return false"
+                    maxlength="50">
                 </div>
                 <div class="col-md-12">
                   <label for="password" class="form-label-p"> Contraseña <i
                       class="pi pi-eye-slash togglePwVisibility"></i></label>
                   <input type="password" id="password" class="password form-control" name="password"
-                    [(ngModel)]="usuario.password">
+                    [(ngModel)]="usuario.password"  maxlength="50"/>
                 </div>
                 <br><br><br>
                 <button type="submit" value="Atualizar" class="btnU btn-outline-dark p-5" class="btn btn-primarys"

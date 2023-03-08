@@ -34,6 +34,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isLogin: boolean = false;
   verficarPassword: any;
 
+  // Validaciones
+  letrasEspace: RegExp = /^[a-zA-Z\sñÑáéíóúÁÉÍÓÚ]+$/;
+  letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\s]+$/;
+  letrasEspeciales: RegExp = /^[a-zA-Z0-9\s.,áéíóúÁÉÍÓÚ]+$/;
+
+
   verOcultar() {
     const showHidePw = document.querySelector('.togglePwVisibility');
     if (showHidePw) {

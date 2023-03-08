@@ -114,18 +114,18 @@
                             <div class="col-md-6">
                                 <label for="nombre_fundacion" class="form-label-p">
                                     Nombre Fundación</label>
-                                <input type="text" class="form-control" name="nombre_fundacion" maxlength="25"
+                                <input type="text" class="form-control" name="nombre_fundacion" maxlength="50"
                                     [(ngModel)]="fundacion.nombre_fundacion" [pKeyFilter]="letrasEspace" />
                             </div>
                             <div class="col-md-6">
                                 <label for="acronimo" class="form-label-p"> Acrónimo</label>
-                                <input type="text" class="form-control" name="acronimo" maxlength="8"
+                                <input type="text" class="form-control" name="acronimo" maxlength="50"
                                     [(ngModel)]="fundacion.acronimo" [pKeyFilter]="letrasEspace" />
                             </div>
                             <div class="col-md-6">
                                 <label for="mision" class="form-label-p"> Misión</label>
-                                <input type="text" class="form-control" name="mision" maxlength="150"
-                                    [(ngModel)]="fundacion.mision" [pKeyFilter]="letrasEspace" />
+                                <input type="text" class="form-control" name="mision" maxlength="500"
+                                    [(ngModel)]="fundacion.mision" />
                             </div>
                             <div class="col-12">
                                 <label for="direccion" class="form-label-p"> Dirección</label>
@@ -167,12 +167,12 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="nombres" class="form-label-p"> Nombres</label>
-                                <input type="text" class="form-control" name="nombres" maxlength="30"
+                                <input type="text" class="form-control" name="nombres" maxlength="50"
                                     [(ngModel)]="persona.nombres" [pKeyFilter]="letrasEspace" />
                             </div>
                             <div class="col-6">
                                 <label for="apellidos" class="form-label-p"> Apellidos</label>
-                                <input type="text" class="form-control" name="apellidos" maxlength="30"
+                                <input type="text" class="form-control" name="apellidos" maxlength="50"
                                     [(ngModel)]="persona.apellidos" [pKeyFilter]="letrasEspace" />
                             </div>
                             <div class="col-6">
@@ -184,7 +184,7 @@
                             <div class="col-md-12">
                                 <label for="direccion" class="form-label-p"> Dirección</label>
                                 <input type="text" class="form-control" name="direccion" maxlength="200"
-                                    [(ngModel)]="persona.direccion" [pKeyFilter]="letrasEspaceNumbers" />
+                                    [(ngModel)]="persona.direccion"  />
                             </div>
                             <div class="col-md-6">
                                 <label for="genero" class="form-label-p"> Género</label>
@@ -216,7 +216,7 @@
                             <h2 class="form-titulo"></h2>
                             <div class="col-md-6">
                                 <label for="username" class="form-label-p"> Usuario</label>
-                                <input type="text" class="form-control" name="username" maxlength="30"
+                                <input type="text" class="form-control" name="username" maxlength="50"
                                     [(ngModel)]="usuario.username" />
                             </div>
                             <div class="col-md-6">

@@ -45,7 +45,7 @@ export class ListVoluntarioComponent implements OnInit {
    //VALIDACIONES
 
   // letras y espacios
-  letrasEspace: RegExp = /^[a-zA-Z\s.,áéíóúÁÉÍÓÚ]+$/;
+  letrasEspace: RegExp = /^[a-zA-Z\sñÑáéíóúÁÉÍÓÚ]+$/;
   letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\s]+$/;
 
   // Validar que no igrese Guion medio

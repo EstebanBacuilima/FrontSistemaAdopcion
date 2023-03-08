@@ -27,6 +27,8 @@ export class ListMascotaComponent implements OnInit {
   // letras y espacios
   letrasEspace: RegExp = /^[a-zA-Z\s.,áéíóúÁÉÍÓÚ]+$/;
   letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\s]+$/;
+  letrasEspeciales: RegExp = /^[a-zA-Z0-9\s.,ñÑáéíóúÁÉÍÓÚ]+$/;
+
 
 
   // Validar que no igrese Guion medio

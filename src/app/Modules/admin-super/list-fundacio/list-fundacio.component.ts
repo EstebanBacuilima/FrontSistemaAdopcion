@@ -23,8 +23,8 @@ export class ListFundacioComponent implements OnInit {
   fundacion: Fundacion = new Fundacion;
   // Validacion de Campos de Caracteres
   // letras y espacios
-  letrasEspace: RegExp = /^[a-zA-Z\s]+$/;
-  letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\s]+$/;
+  letrasEspace: RegExp = /^[a-zA-Z\s@ÑñáéíóúÁÉÍÓÚ]+$/;
+  letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\s@ÑñáéíóúÁÉÍÓÚ]+$/;
   // letrasEspace: RegExp = /^[a-zA-Z0-9\s^!#$%&*]+$/;
   // letrasEspaceNumbers: RegExp = /^[a-zA-Z0-9\s^!#$%&*-]+$/;
 

@@ -1,7 +1,7 @@
-<div class="container-fluid">
-
-    <div class="grid p-fluid" style="padding-bottom: 25px;">
-        <div class="col-12 md:col-4">
+<!-- <div class="container-fluid"> -->
+    <div class="containerInput">
+    <div class="p-fluid" style="padding-bottom: 25px;">
+        <div class="col-12">
             <h4 style="color: cornflowerblue;">Buscar por razas o tipos</h4>
             <div class="">
                 <span class="p-input-icon-left">
@@ -9,10 +9,9 @@
                     <input type="text" pInputText placeholder="Buscar..." name="filtroPost" [(ngModel)]="filtroPost">
                 </span>
             </div>
-
         </div>
     </div>
-
+</div>
 
     <div class="container">
         <div *ngIf="(listaMascotas | filtroMascotas:filtroPost).length === 0" style="text-align: center;" >
@@ -70,7 +69,7 @@
             </div>
         </div>
     </div> -->
-</div>
+<!-- </div> -->
 
 
 

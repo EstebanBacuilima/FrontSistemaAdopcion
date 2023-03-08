@@ -117,8 +117,8 @@
 
         <div class="notification" *ngIf='isVoluntario'>
           <div class="notBtn" href="#">
-            <i class="fas pi pi-bell p-text-secondary" pBadge style="font-size: 1.5rem; padding-left: 5px;"
-              [value]="conteoSolicitudes"></i>
+            <i class="fas pi pi-bell p-text-secondary" pBadge style="font-size: 1.5rem; padding-left: 5px;" [value]="conteoSolicitudes ? conteoSolicitudes : 0"></i>
+            <!-- <i class="fas pi pi-bell p-text-secondary" pBadge style="font-size: 1.5rem; padding-left: 5px;" [value]="conteoSolicitudes"></i> -->
             <div class="box">
               <div class="display">
                 <div class="cont">
@@ -142,8 +142,10 @@
 
         <div class="notification" *ngIf='isClient'>
           <div class="notBtn" href="#">
-            <i class="fas pi pi-bell p-text-secondary" pBadge style="font-size: 1.5rem; padding-left: 5px;"
-              [value]="conteoSolicitudes"></i>
+            <!-- <i class="fas pi pi-bell p-text-secondary" pBadge style="font-size: 1.5rem; padding-left: 5px;"
+              [value]="conteoSolicitudes"></i> -->
+              <i class="fas pi pi-bell p-text-secondary" pBadge style="font-size: 1.5rem; padding-left: 5px;"
+            [value]="conteoSolicitudes ? conteoSolicitudes : 0"></i>
             <div class="box">
               <div class="display">
                 <div class="cont">

@@ -39,11 +39,11 @@ export class SolicitudAdopcionService {
   }
 
   listarPreguntas(){
-    return this.http.get<Pregunta[]>(this.URL+'listarPreguntas');
+    return this.http.get<Pregunta[]>(this.URL+'listarPreguntasOrdenadas');
   }
 
   listarRespuestasPreguntasPorSolicitud(idSolicitudAdopcion: number){
-    return this.http.get<Respuesta[]>(this.URL+'listarRespuestasSolicitante/' + idSolicitudAdopcion);
+    return this.http.get<Respuesta[]>(this.URL+'listarRespuestasSolicitanteOrdenadas/' + idSolicitudAdopcion);
   }
 
   getPorId(idSolicitudAdopcion: number){
@@ -51,7 +51,7 @@ export class SolicitudAdopcionService {
   }
 
   updateEstadoSolicitud(solicitud: SolicitudAdopcion, idSolicitudAdopcion: any){
-    console.log("ruta a enovar -> " + this.URL+`actualizarEstadoSolicitud/${idSolicitudAdopcion}`, solicitud);
+    // console.log("ruta a enovar -> " + this.URL+`actualizarEstadoSolicitud/${idSolicitudAdopcion}`, solicitud);
     return this.http.put<SolicitudAdopcion>(this.URL+`actualizarEstadoSolicitud/${idSolicitudAdopcion}`, solicitud);
   }
   postSolicitud(solicitudAdopcion: SolicitudAdopcion){

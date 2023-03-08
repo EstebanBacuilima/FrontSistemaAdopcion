@@ -78,6 +78,7 @@ export class WelcomeComponent implements OnInit {
             mascota.descripcion = result.descripcion;
             mascota.estado_mascota = result.estado_mascota;
             mascota.estado_adopcion = result.estado_adopcion;
+            mascota.fundacion = result.fundacion;
             return mascota;
           }
         );

@@ -50,7 +50,6 @@ import { FiltroMascotasPipe } from './Components/Pipes/filtro-mascotas.pipe';
 PdfMakeWrapper.setFonts(pdfFonts);
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -94,7 +93,8 @@ PdfMakeWrapper.setFonts(pdfFonts);
     MatTabsModule,
     CalendarModule,
     ReactiveFormsModule,
-    BadgeModule
+    BadgeModule,
+
   ],
   providers: [
     CargarScrpitsService

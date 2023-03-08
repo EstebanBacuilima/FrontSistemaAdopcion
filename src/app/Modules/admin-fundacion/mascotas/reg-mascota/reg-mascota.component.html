@@ -14,22 +14,26 @@
     <h2 class="form-label-p text-center"><b>Datos Mascota</b></h2>
 
     <div class="col-md-6">
-      <label for="chipMascota" class="form-label-p"> Chip</label>
+      <label for="chipMascota" class="form-label-p"> Chip</label><label style="color: rgb(255, 0, 0); padding-left: 2px"> *</label>
       <input id="chipMascota" type="text" class="form-control" name="chipMascota" maxlength="10" 
       [(ngModel)]="mascota.chipMascota" [pKeyFilter]="'int'" (keypress)="onKeyPress($event)" required/>
     </div>
     <div class="col-md-6">
-      <label for="nombre_mascota" class="form-label-p"> Nombre</label>
+      <label for="nombre_mascota" class="form-label-p"> Nombre</label><label style="color: rgb(255, 0, 0); padding-left: 2px"> *</label>
       <input id="nombre_mascota" type="text" class="form-control" name="nombre_mascota" maxlength="30"
         [(ngModel)]="mascota.nombre_mascota" [pKeyFilter]="letrasEspace" required/>
     </div>
     <div class="col-md-6">
-      <label for="color" class="form-label-p"> Color</label>
-      <input id="color" type="text" class="form-control" name="color" maxlength="20"
-        [(ngModel)]="mascota.color" [pKeyFilter]="letrasEspace" required />
+      <label for="especie" class="form-label-p"> Especie</label><label style="color: rgb(255, 0, 0); padding-left: 2px"> *</label>
+      <select id="especie" class="form-control" name="especie" placeholder="Selecciona una especie"
+        [(ngModel)]="mascota.especie" required>
+        <option value="" disabled selected>Selecciona una especie</option>
+        <option value="canino">Canino</option>
+        <option value="felino">Felino</option>
+      </select>
     </div>
     <div class="col-md-6">
-      <label for="sexo" class="form-label-p"> Sexo</label>
+      <label for="sexo" class="form-label-p"> Sexo</label><label style="color: rgb(255, 0, 0); padding-left: 2px"> *</label>
       <select id="sexo" class="form-control" name="sexo"
         [(ngModel)]="mascota.sexo" required >
         <option value="" disabled selected>Selecciona un sexo</option>
@@ -41,21 +45,17 @@
     <div class="col-md-6">
       <label for="raza" class="form-label-p"> Raza</label>
       <input id="raza" type="text" class="form-control" name="raza" maxlength="30"
-        [(ngModel)]="mascota.raza" [pKeyFilter]="letrasEspace" required/>
+        [(ngModel)]="mascota.raza" [pKeyFilter]="letrasEspace"/>
     </div>
     <div class="col-md-6">
-      <label for="especie" class="form-label-p"> Especie</label>
-      <select id="especie" class="form-control" name="especie" placeholder="Selecciona una especie"
-        [(ngModel)]="mascota.especie" required>
-        <option value="" disabled selected>Selecciona una especie</option>
-        <option value="canino">Canino</option>
-        <option value="felino">Felino</option>
-      </select>
+      <label for="color" class="form-label-p"> Color</label>
+      <input id="color" type="text" class="form-control" name="color" maxlength="20"
+        [(ngModel)]="mascota.color" [pKeyFilter]="letrasEspace" />
     </div>
     <div class="col-md-12">
       <label for="especie" class="form-label-p"> Esterelizado</label>
       <select id="especie" class="form-control" name="estado_mascota" placeholder="Selecciona una opcion"
-        [(ngModel)]="mascota.estado_mascota" required>
+        [(ngModel)]="mascota.estado_mascota">
         <option value="" disabled selected>Selecciona una opción</option>
         <option value="true">Si</option>
         <option value="false">No</option>
@@ -64,25 +64,30 @@
     <div class="col-md-12">
       <label for="descripcion" class="form-label-p"> Descripción</label>
       <textarea id="descripcion" pInputTextarea class="form-control" aria-label="With textarea"
-        name="descripcion" maxlength="250" [(ngModel)]="mascota.descripcion" [pKeyFilter]="letrasEspeciales" required></textarea>
+        name="descripcion" maxlength="250" [(ngModel)]="mascota.descripcion" [pKeyFilter]="letrasEspeciales" ></textarea>
     </div>
 
-    <br />
+    <br><br><br>
+        <label for="logoFundacion" class="form-label-p" style="text-align: center;">Seleccione una foto</label>
+        <div class="personal-image">
+            <label class="label">
+                <input type="file" (change)="imageSelected($event)"/>
+                <figure class="personal-figure">
+                    <!-- <img class="personal-avatar"  *ngIf="filem" [src]="file" alt="img-avatar"> -->
+                    <img *ngIf="file" [src]="file" class="personal-avatar" alt="Foto mascota" />
+                    <img *ngIf="!file" src="./assets/Imagenes/perro_gato_usuario.png" class="personal-avatar" alt="Foto mascota" />
+                    <figcaption class="personal-figcaption">
+                        <img src="https://raw.githubusercontent.com/ThiagoLuizNunes/angular-boilerplate/master/src/assets/imgs/camera-white.png" />
+                    </figcaption>
+                </figure>
+            </label>
+        </div>
+
+<!-- 
+    <br/>
     <div class="foto">
       <div class="roww">
         <div class="col-md-2 imgUp">
-
-            <!-- <div class="imagePreview" *ngIf="filem">
-                <img [src]="filem" class="imagePreview" alt="Logo Fundación" />
-            </div>
-            <div class="imagePreview" *ngIf="!filem">
-                <img src="./assets/Imagenes/usuario_2.jpg" class="imagePreview" alt="Logo Fundación" />
-            </div>
-            <label class="btn btn-primarys rounded-mid">Logo Fundación
-                <input type="file" class="uploadFile img" value="Upload Photo" (change)="imageSelectedl($event)"
-                    style="width: 0px; height: 0px; overflow: hidden" />
-            </label> -->
-
             <ng-container *ngIf="!file">
                 <img src="./assets/Imagenes/perro_gato_usuario.png" class="imagePreview" alt="..." />
               </ng-container>
@@ -96,25 +101,11 @@
                 <input type="file" class="uploadFile img" (change)="imageSelected($event)"
                   style="width: 0px; height: 0px; overflow: hidden" required />
               </label><br><br>
-<!--            
-          <div class="imagePreview" *ngIf="file">
-            <img [src]="file" class="imagePreview" alt="Imagen de Mascota" />
-          </div>
-          <label class="btn btn-primarys rounded-mid"
-            >Foto
-            <input
-              type="file"
-              class="uploadFile img"
-              value="Upload Photo"
-              (change)="imageSelected($event)"
-              style="width: 0px; height: 0px; overflow: hidden"
-              required
-            />
-          </label> -->
+              
           </div>
         </div>
-    </div>
-        <br>
+      </div>
+        <br> -->
 
         <button type="submit" class="btn btn-primarys1" (click)="registraMascota()">Registrar</button>
         <br>

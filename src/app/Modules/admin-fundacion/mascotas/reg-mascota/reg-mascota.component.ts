@@ -58,7 +58,7 @@ export class RegMascotaComponent implements OnInit {
   }
 
   registraMascota() {
-    if (!this.mascota.chipMascota || this.mascota.chipMascota === null || !this.mascota.nombre_mascota || !this.mascota.sexo || !this.mascota.raza || !this.mascota.color || !this.mascota.especie || !this.mascota.descripcion || !this.mascota.estado_mascota) {
+    if (!this.mascota.chipMascota || this.mascota.chipMascota === null || !this.mascota.nombre_mascota || !this.mascota.sexo || !this.mascota.especie) {
       this.toastrService.error('Uno o más campos vacios', 'Verifique los Campos de texto', {
         timeOut: 2000,
       });

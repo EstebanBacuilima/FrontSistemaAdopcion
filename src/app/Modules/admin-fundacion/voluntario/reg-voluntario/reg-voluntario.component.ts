@@ -108,16 +108,12 @@ export class RegVoluntarioComponent implements OnInit {
     if (
       !this.persona.cedula ||
       !this.persona.apellidos ||
-      !this.persona.correo ||
-      !this.persona.direccion ||
-      !this.persona.telefono ||
-      !this.persona.celular ||
-      !this.voluntario.area_trabajo ||
       !this.persona.nombres ||
+      !this.voluntario.area_trabajo ||
       !this.persona.fechaNacimiento ||
-      !this.persona.genero ||
       !this.usuario.username ||
-      !this.usuario.password
+      !this.usuario.password ||
+      !this.verficarPassword
     ) {
       this.toastrService.error(
         'Uno o más campos vacios',
@@ -176,6 +172,7 @@ export class RegVoluntarioComponent implements OnInit {
                   this.usuario.fundacion = this.fundacion;
                   this.usuario.estado = true;
                   this.usuario.rol = 'VOLUNTARIO';
+                  this.usuario.foto_perfil = this.foto_usuario;
                   this.voluntario.estado = true;
                   this.usuarioService
                     .postUsuario(this.usuario)
@@ -216,7 +213,7 @@ export class RegVoluntarioComponent implements OnInit {
   file: any = '';
   image!: any;
   retrievedImage: any;
-  foto_mascota: string = '';
+  foto_usuario: string = "nodisponible.png";
   cap_nombre_archivo: any;
   selectedFile!: File;
   public imageSelected(event: any) {
@@ -229,9 +226,8 @@ export class RegVoluntarioComponent implements OnInit {
       this.file = reader.result;
     };
     this.cap_nombre_archivo = event.target.value;
-    this.foto_mascota = this.cap_nombre_archivo.slice(12);
-    console.log('Nombre imagen original => ' + this.foto_mascota);
-    this.usuario.foto_perfil = this.foto_mascota;
+    this.foto_usuario = this.cap_nombre_archivo.slice(12);
+    console.log('Nombre imagen original => ' + this.foto_usuario);
   }
 
   cargarImagenVoluntario() {

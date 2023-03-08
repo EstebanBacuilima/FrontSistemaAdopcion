@@ -103,32 +103,36 @@ export class CatalgoMascotasComponent implements OnInit {
 
   capIdFundacion:any;
   capIdRepresentante:any;
+  fundacion2: Fundacion = new Fundacion;
+  persona2: Persona = new Persona;
+  mascota2: Mascota = new Mascota;
+  
   optenerDatos() {
-    this.mascotaService.getPorId(this.datainicialMascota).subscribe(data => {
-      this.mascota = data
-      this.mascota.idMascota = this.mascota.idMascota
-      this.mascota.chipMascota
-      this.mascota.nombre_mascota;
-      this.mascota.color;
-      this.mascota.sexo;
-      this.mascota.raza;
-      this.mascota.especie;
-      this.mascota.descripcion;
-      this.mascota.estado_mascota;
-      this.mascota.estado_adopcion;
-      this.mascota.foto;
-      this.mascota.usuario;
-      this.capIdFundacion = this.mascota.fundacion?.idFundacion;
+    this.mascotaService.getPorId(this.datainicialMascota).subscribe(dataM => {
+      this.mascota2 = dataM
+      this.mascota2.idMascota = dataM.idMascota
+      this.mascota2.chipMascota = dataM.chipMascota 
+      this.mascota2.nombre_mascota= dataM.nombre_mascota
+      this.mascota2.color= dataM.color
+      this.mascota2.sexo= dataM.sexo
+      this.mascota2.raza= dataM.raza
+      this.mascota2.especie= dataM.especie
+      this.mascota2.descripcion= dataM.descripcion
+      this.mascota2.estado_mascota= dataM.estado_mascota
+      this.mascota2.estado_adopcion= dataM.estado_adopcion
+      this.mascota2.foto;
+      this.capIdFundacion = this.mascota2.fundacion?.idFundacion;
       this.fundacionService.getPorId(this.capIdFundacion).subscribe(data =>{
-        this.fundacion = data;
-        this.fundacion.nombre_fundacion;
-        this.fundacion.logo;
-        this.capIdRepresentante = this.fundacion.persona.idPersona;
+        this.fundacion2 = data;
+        this.fundacion2.nombre_fundacion;
+        this.fundacion2.logo;
+        this.capIdRepresentante = this.fundacion2.persona.idPersona;
         this.personaService.getPorId(this.capIdRepresentante).subscribe(dataP =>{
-          this.persona = dataP;
+          this.persona2 = dataP;
+          this.persona2.nombres = dataP.nombres;;
+          this.persona2.apellidos = dataP.apellidos;
         })
       })
-      console.log("img = " + this.mascota.foto)
     })
   }
 
@@ -160,15 +164,15 @@ export class CatalgoMascotasComponent implements OnInit {
     let fechaPrueba: Date = new Date();
     this.solicitudAdopcion.estado = 'P';
     this.solicitudAdopcion.fecha_solicitud_adopcion = fechaPrueba;
-    this.solicitudAdopcion.mascota = this.mascota;
+    this.solicitudAdopcion.mascota = this.mascota2;
     this.solicitudAdopcion.usuario = this.usuario;
-    this.solicitudAdopcion.estadoDos = false;
-    this.mascota.estado_adopcion = false;
-    console.log("Mascota enviar -> " + this.mascota.nombre_mascota);
+    this.solicitudAdopcion.estadoDos = 'N';
+    this.mascota2.estado_adopcion = false;
+    console.log("Mascota enviar -> " + this.mascota2.nombre_mascota);
     console.log("Usuario enviar -> " + this.usuario.persona?.nombres);
     this.solicitudService.postSolicitud(this.solicitudAdopcion).subscribe(
       info => {
-        this.mascotaService.updateEstadoAdopcion(this.mascota, this.mascota.idMascota).subscribe(
+        this.mascotaService.updateEstadoAdopcion(this.mascota2, this.mascota2.idMascota).subscribe(
           data => {
             console.log("Se cambio a " + data.estado_adopcion);
             this.capIdSolicitud = info.idSolicitudAdopcion;

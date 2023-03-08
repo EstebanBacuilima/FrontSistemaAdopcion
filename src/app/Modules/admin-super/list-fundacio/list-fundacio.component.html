@@ -18,6 +18,7 @@
                 <thead>
                     <tr>
                         <th scope="col">N</th>
+                        <th scope="col"></th>
                         <th scope="col">Ruc</th>
                         <th scope="col">Representante</th>
                         <th scope="col">Nombre</th>
@@ -32,12 +33,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="
-              let fundacion of listaFundaciones
-                | paginate : { itemsPerPage: 5, currentPage: pageActual };
-              index as i
-            ">
+                    <tr *ngFor="let fundacion of listaFundaciones| paginate : { itemsPerPage: 5, currentPage: pageActual };index as i">
                         <th scope="row">{{ i + 1 }}</th>
+                        <td> <img class="circular--square" [src]="'http://localhost:5000/imagen/images/' + fundacion.logo"style="margin: 0 auto;  width: 70px; height: 70px;"></td>
                         <td>{{ fundacion.ruc }}</td>
                         <td>
                             {{ fundacion.persona.nombres }} {{ fundacion.persona.apellidos }}
@@ -102,7 +100,7 @@
                                         <img class="personal-avatar" *ngIf="!filem" [src]="'http://localhost:5000/imagen/images/' + fundacion.logo" alt="fundacion.logo">
                                         <img class="personal-avatar"  *ngIf="filem" [src]="filem" alt="img-avatar">
                                         <figcaption class="personal-figcaption">
-                                            <img src="https://raw.githubusercontent.com/ThiagoLuizNunes/angular-boilerplate/master/src/assets/imgs/camera-white.png" />
+                                            <img src="./assets/Imagenes/camer.png"/>                                        
                                         </figcaption>
                                     </figure>
                                 </label>
@@ -110,7 +108,7 @@
 
                             <div class="col-md-6">
                                 <label for="ruc" class="form-label-p"> Ruc</label>
-                                <input type="text" class="form-control" name="ruc" [(ngModel)]="fundacion.ruc" readonly
+                                <input type="text" class="form-control" name="ruc" [(ngModel)]="fundacion.ruc" 
                                     onmousedown="return false" onkeydown="return false" />
                             </div>
                             <div class="col-md-6">
@@ -157,14 +155,14 @@
                                         <img class="personal-avatar" *ngIf="!file" [src]="'http://localhost:5000/imagen/images/' + usuario.foto_perfil" alt="fundacion.logo">
                                         <img class="personal-avatar"  *ngIf="file" [src]="file" alt="img-avatar">
                                         <figcaption class="personal-figcaption">
-                                            <img src="https://raw.githubusercontent.com/ThiagoLuizNunes/angular-boilerplate/master/src/assets/imgs/camera-white.png" />
+                                            <img src="./assets/Imagenes/camer.png"/>  
                                         </figcaption>
                                     </figure>
                                 </label>
                             </div>
                             <div class="col-md-6">
                                 <label for="cedula" class="form-label-p"> Cédula</label>
-                                <input type="text" class="form-control" name="cedula" readonly
+                                <input type="text" class="form-control" name="cedula" onmousedown="return false" onkeydown="return false"
                                     [(ngModel)]="persona.cedula" />
                             </div>
                             <div class="col-md-6">
@@ -223,7 +221,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="password" class="form-label-p">
-                                    Contraseña <i class="uil uil-eye-slash showHidePw"></i></label>
+                                    Contraseña <i class="pi pi-eye-slash togglePwVisibility"></i></label>
                                 <input type="password" id="password" class="password form-control" name="password"
                                     [(ngModel)]="usuario.password" />
                             </div>

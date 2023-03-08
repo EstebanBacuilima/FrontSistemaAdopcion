@@ -153,6 +153,7 @@ export class PanelSeguimientoComponent implements OnInit {
           this.toastrService.error('Registro del día completado', 'Ya se realizó el seguimiento diario', {
             timeOut: 3000,
           });
+          this.limpiarCampos();
         }
       }
     );

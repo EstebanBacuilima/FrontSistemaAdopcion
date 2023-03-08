@@ -37,6 +37,16 @@
     margin-right: 20px;
     margin-bottom: 12px;
 }
+/*imagen tabla*/
+.circular--square {
+    width: 50px;
+    height: 50px;
+    border-top-left-radius: 100% 100%;
+    border-top-right-radius: 100% 100%;
+    border-bottom-right-radius: 100% 100%;
+    border-bottom-left-radius: 100% 100%;
+}
+/*FIN*/
 
 /* NUEVO */
 

@@ -26,16 +26,16 @@ export class PanelSolicitudAdminComponent implements OnInit {
 
   // PIPE
   fechaActual = new Date;
-  fechaFormateada= this.fechaActual.toISOString().substr(0,10);
+  fechaFormateada = this.fechaActual.toISOString().substr(0, 10);
   //
 
 
-  constructor(private solicitudAdopcionService: SolicitudAdopcionService,private toastrService: ToastrService, private mascotaService: MascotaService, private fundacionService: FundacionService, private usuarioService: UsuarioService, private router: Router, private fotoService: FotoService
+  constructor(private solicitudAdopcionService: SolicitudAdopcionService, private toastrService: ToastrService, private mascotaService: MascotaService, private fundacionService: FundacionService, private usuarioService: UsuarioService, private router: Router, private fotoService: FotoService
   ) { }
 
   ngOnInit(): void {
     this.obtenerUsuario();
-    console.log("FECHA DE HOY ->" +  this.fechaFormateada)
+    console.log("FECHA DE HOY ->" + this.fechaFormateada)
   }
 
   mascota: Mascota = new Mascota;
@@ -45,7 +45,7 @@ export class PanelSolicitudAdminComponent implements OnInit {
   idUsuario: any;
   idFundacion: any;
   //Validacion
-letrasEspeciales: RegExp = /^[a-zA-Z0-9\s.,]+$/;
+  letrasEspeciales: RegExp = /^[a-zA-Z0-9\s.,]+$/;
 
   obtenerUsuario() {
     this.idUsuario = localStorage.getItem('idUsuario');
@@ -69,7 +69,7 @@ letrasEspeciales: RegExp = /^[a-zA-Z0-9\s.,]+$/;
     this.obtenerSolicitudes();
   }
 
-  capEstado:any;
+  capEstado: any;
 
   pendientes() {
     this.capEstado = 'P'
@@ -103,8 +103,8 @@ letrasEspeciales: RegExp = /^[a-zA-Z0-9\s.,]+$/;
 
 
 
-  obtenerSocitudesFiltrado(capEstadoSelecionado:any){
-    this.solicitudAdopcionService.getSolicitudesFiltrado(capEstadoSelecionado,this.idFundacion).subscribe( 
+  obtenerSocitudesFiltrado(capEstadoSelecionado: any) {
+    this.solicitudAdopcionService.getSolicitudesFiltrado(capEstadoSelecionado, this.idFundacion).subscribe(
       data => {
         this.listaSolicitudes = data.map(
           result => {
@@ -174,7 +174,7 @@ letrasEspeciales: RegExp = /^[a-zA-Z0-9\s.,]+$/;
   }
 
   preguntasRespuestas: any;
-  idPreguntasCap:any
+  idPreguntasCap: any
   obtenerRespuestasyPreguntasSolicitante() {
     this.solicitudAdopcionService.listarRespuestasPreguntasPorSolicitud(this.datainicialSolicitud).subscribe(
       data => {
@@ -294,37 +294,36 @@ letrasEspeciales: RegExp = /^[a-zA-Z0-9\s.,]+$/;
     })
   }
 
-  capIdDueñoFundacion:any;
+  capIdDueñoFundacion: any;
 
   rechazarSolicitudAceptada() {
     this.solicitudAdopcionService.getPorId(this.datainicialSolicitud).subscribe(data => {
       this.solicitud = data
       this.idSolicitud = this.solicitud.idSolicitudAdopcion;
       this.isMascotaCap = this.solicitud.mascota?.idMascota;
-      this.idUsuarioCap = this.solicitud.usuario?.idUsuario
-      this.mascotaService.getPorId(this.idUsuarioCap).subscribe(dataP => {
+      this.capIdDueñoFundacion = this.solicitud.mascota?.fundacion?.persona.idPersona;
+      console.log("ID dueño de la fundacion ->" + this.capIdDueñoFundacion);
+      this.mascotaService.getPorId(this.isMascotaCap).subscribe(dataP => {
         this.mascota = dataP
-        this.capIdDueñoFundacion = this.mascota.fundacion?.persona.idPersona;
-        this.usuarioService.getPorId(this.capIdDueñoFundacion).subscribe(dataU => {
-          this.usuario = dataU
+        this.usuarioService.getPorIdPersona(this.capIdDueñoFundacion).subscribe(dataU => {
+          this.usuario = dataU;
           this.solicitud.estado = 'R';
           this.solicitud.estadoDos = 'R';
-          this.mascota.estado_adopcion = true;
-          this.mascota.estado_seguimiento = false;
-          this.solicitud.mascota = this.mascota;
-          this.solicitud.usuario = this.usuario;
-          this.mascota.usuario = this.usuario;
-          console.log("Estado mascota adopción antes " + this.idSolicitud);
           this.solicitudAdopcionService.updateEstadoSolicitud(this.solicitud, this.idSolicitud).subscribe(
             data => {
-              console.log("Estado mascota adopción antes " + data.mascota?.estado_adopcion);
+              this.mascota.estado_adopcion = true;
+              this.mascota.estado_seguimiento = false;
               this.mascotaService.updateEstadoAdopcion(this.mascota, this.mascota.idMascota).subscribe(
                 data => {
-                  console.log("Se cambio a " + data.estado_adopcion);
-                  this.toastrService.error('Solicitud Rechazada', '', {
-                    timeOut: 3000,
-                  });
-                  this.obtenerSolicitudes();
+                  this.mascota.usuario = this.usuario;
+                  this.mascotaService.updateDueñoMascota(this.mascota, this.mascota.idMascota).subscribe(
+                    dataMD => {
+                      console.log("Se cambio dueño de vuelta");
+                      this.toastrService.error('Solicitud Invalidada', '', {
+                        timeOut: 3000,
+                      });
+                      this.obtenerSolicitudes();
+                    })
                 }
               )
             }

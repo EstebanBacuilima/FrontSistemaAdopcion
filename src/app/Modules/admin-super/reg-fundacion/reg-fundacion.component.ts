@@ -127,10 +127,10 @@ export class RegFundacionComponent implements OnInit {
 
   // Ver/Ocultar password
   verOcultarDos() {
-    const showHidePw = document.querySelector('.togglePwVisibility');
+    const showHidePw = document.querySelector('.togglePwVisibility1');
     if (showHidePw) {
       showHidePw.addEventListener('click', function (this: HTMLElement) {
-        const passwordField = document.getElementById('password') as HTMLInputElement;
+        const passwordField = document.getElementById('password1') as HTMLInputElement;
         if (passwordField.type === 'password') {
           passwordField.type = 'text';
           this.classList.remove('pi-eye-slash');
@@ -143,6 +143,7 @@ export class RegFundacionComponent implements OnInit {
       });
     }
   }
+  
   verOcultar() {
     const showHidePw2 = document.querySelector('.togglePwVisibility2');
     if (showHidePw2) {

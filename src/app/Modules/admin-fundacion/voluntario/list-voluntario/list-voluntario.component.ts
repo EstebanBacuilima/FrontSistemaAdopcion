@@ -215,6 +215,35 @@ export class ListVoluntarioComponent implements OnInit {
   selectedFile!: File;
   
   public imageSelected(event: any) {
+     // VALIDAR SOLO IMAGENES
+     const allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+     const file = event.target.files[0];
+     const extension = file.name.split('.').pop().toLowerCase();
+     const fileSize = file.size / 1024; // tamaño en KB
+ 
+     if (!allowedExtensions.includes(extension)) {
+       // código para manejar archivos no válidos
+     } else if (fileSize > 1000) {
+       this.toastrService.error(
+         'La imagen seleccionada es demasiado grande. El tamaño máximo permitido es de 1000 KB.',
+         'Tamaño de archivo no válido!',
+         {
+           timeOut: 3000,
+         }
+       );
+       return;
+     }
+ 
+     if (!allowedExtensions.includes(extension)) {
+       this.toastrService.error(
+         'Solo se permiten imágenes en formato JPG, PNG o GIF.',
+         'Formato de archivo no válido!',
+         {
+           timeOut: 3000,
+         }
+       );
+       return;
+     }
     this.selectedFile = event.target.files[0];
     // mostrar imagen seleccionada
     this.image = this.selectedFile;

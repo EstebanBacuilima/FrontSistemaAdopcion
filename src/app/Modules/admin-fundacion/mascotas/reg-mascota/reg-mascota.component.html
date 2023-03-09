@@ -20,7 +20,7 @@
     </div>
     <div class="col-md-6">
       <label for="nombre_mascota" class="form-label-p"> Nombre</label><label style="color: rgb(255, 0, 0); padding-left: 2px"> *</label>
-      <input id="nombre_mascota" type="text" class="form-control" name="nombre_mascota" maxlength="30"
+      <input id="nombre_mascota" type="text" class="form-control" name="nombre_mascota" maxlength="50"
         [(ngModel)]="mascota.nombre_mascota" [pKeyFilter]="letrasEspace" required/>
     </div>
     <div class="col-md-6">
@@ -44,12 +44,12 @@
     </div>
     <div class="col-md-6">
       <label for="raza" class="form-label-p"> Raza</label>
-      <input id="raza" type="text" class="form-control" name="raza" maxlength="30"
+      <input id="raza" type="text" class="form-control" name="raza" maxlength="50"
         [(ngModel)]="mascota.raza" [pKeyFilter]="letrasEspace"/>
     </div>
     <div class="col-md-6">
       <label for="color" class="form-label-p"> Color</label>
-      <input id="color" type="text" class="form-control" name="color" maxlength="20"
+      <input id="color" type="text" class="form-control" name="color" maxlength="50"
         [(ngModel)]="mascota.color" [pKeyFilter]="letrasEspace" />
     </div>
     <div class="col-md-12">
@@ -64,7 +64,7 @@
     <div class="col-md-12">
       <label for="descripcion" class="form-label-p"> Descripción</label>
       <textarea id="descripcion" pInputTextarea class="form-control" aria-label="With textarea"
-        name="descripcion" maxlength="500" [(ngModel)]="mascota.descripcion" [pKeyFilter]="letrasEspeciales" ></textarea>
+        name="descripcion" maxlength="500" [(ngModel)]="mascota.descripcion"  ></textarea>
     </div>
 
     <br><br><br>

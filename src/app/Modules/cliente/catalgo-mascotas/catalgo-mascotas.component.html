@@ -274,24 +274,18 @@
                                     </div>
                                     <div class="step-tab" id="step-03">
                                         <h4 class="form-title-sc">Queremos saber de usted</h4>
-
                                         <div class="form-controll" *ngFor="let pregunta of listaPreguntas">
                                             <div class="form-input">
                                                 <input type="text" name="respuesta" id="respuesta"
                                                     [(ngModel)]="pregunta.respuesta">
-
                                                 <label for="company" style="color: black;" >{{ pregunta.pregunta }}</label>
-
                                             </div>
                                         </div>
-
                                         <div class="form-submit grid-2">
-
                                             <button type="button" class="form-btn" tab-target="step-02">Atrás</button>
                                             <button type="submit" class="form-btn"
                                                 (click)="enviarSolicitud()">Enviar</button>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>

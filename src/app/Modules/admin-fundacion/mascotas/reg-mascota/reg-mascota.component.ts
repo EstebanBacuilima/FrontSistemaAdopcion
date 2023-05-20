@@ -42,7 +42,7 @@ export class RegMascotaComponent implements OnInit {
         this.obtenerFundacionDelUsuario(this.idFundacion);
       })
     } else {
-      console.log("Usuario no foun => ")
+      console.log("Usuario not found => ")
     }
   }
 
@@ -140,6 +140,7 @@ export class RegMascotaComponent implements OnInit {
       );
       return;
     }
+    
     this.selectedFile = event.target.files[0];
     // mostrar imagen seleccionada
     this.image = this.selectedFile;
